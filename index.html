@@ -1,47 +1,38 @@
 <!doctype html>
 <html>
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
-    <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
-    <title>Hello APP</title>
-    <link rel="stylesheet" type="text/css" href="./css/api.css" />
-    <link rel="stylesheet" type="text/css" href="./css/common.css" />
-</head>
-<body>
-    <div id="wrap">
-        <div id="header">
-            <h1>APICloud</h1>
-        </div>
-        
-        <div id="footer">
-            <h5>Copyright &copy;2015 </h5>
-        </div>
-    </div>
-</body>
-<script type="text/javascript" src="./script/api.js"></script>
-<script type="text/javascript">
-
-    apiready = function(){
-		console.log("Hello APICloud");
-
-        var header = $api.byId('header');
-        $api.fixStatusBar(header); 
-        var headerPos = $api.offset(header);
-        var main = $api.byId('main');
-        var mainPos = $api.offset(main);
-
-        api.openFrame({
-            name: 'main',
-            url: 'html/main.html',
-            bounces: true,
-            rect: {
-                x: 0,
-                y: 0,
-                w: api.frameWidth,
-                h: api.frameHeight
-            }
-        });
-    };
-</script>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+		<meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+		<title>Hello APP</title>
+		<link rel="stylesheet" type="text/css" href="./css/api.css" />
+		<link rel="stylesheet" type="text/css" href="./css/common.css" />
+	</head>
+	<body>
+		<!--   <div id="wrap">
+		<div id="header">
+		<h1>APICloud</h1>
+		</div>
+		<div id="footer">
+		<h5>Copyright &copy;2015 </h5>
+		</div>
+		</div>-->
+	</body>
+	<script type="text/javascript" src="./script/api.js"></script>
+	<script type="text/javascript">
+		apiready = function() {
+			
+			
+			api.openFrame({
+	            name: 'main',
+	            url: 'html/main.html',
+	            rect: {
+		           x : 0, //（可选项）数字类型；模块左上角的 x 坐标（相对于所属的 Window 或 Frame）；默认：0
+					y : 0, //（可选项）数字类型；模块左上角的 y 坐标（相对于所属的 Window 或 Frame）；默认：0
+					w : api.winWidth, //（可选项）数字类型；模块的宽度；默认：所属的 Window 或 Frame 的宽度
+					h : api.winHeight //
+	            }
+            });
+		};
+	</script>
 </html>
