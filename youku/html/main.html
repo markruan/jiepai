@@ -9,37 +9,63 @@
 		<link rel="stylesheet" type="text/css" href="../css/common.css" />
 		<style>
 			#con {
-				margin: 10px;
-				font-size: 28px;
-			}
-			ul {
-				margin-bottom: 10px;
-			}
-			.txt {
-				margin: 5px 10px;
-				padding: 5px;
-				color: #000;
-				word-wrap: break-word;
 			}
 		</style>
 	</head>
-	<body>
-		<label id="con">Hello APP</label>
-		<div id='sys-info'></div>
-	</body>
+	<body></body>
 	<script type="text/javascript" src="../script/api.js"></script>
 	<script type="text/javascript">
 		apiready = function() {
+			
 			var videoPlayer = api.require('videoPlayer');
-			videoPlayer.open({
-				path : 'http://7xi3r6.com1.z0.glb.clouddn.com/movie.mp4'
+			videoPlayer.play({
+				texts : {
+					head : {
+						title : '测试'
+					}
+				},
+				styles : {
+					head : {
+						bg : 'rgba(0.5,0.5,0.5,0.7)',
+						height : 30,
+						titleSize : 20,
+						titleColor : '#fff',
+						backSize : 26,
+						backImg : 'fs://img/back.png',
+						setSize : 26,
+						setImg : 'fs://img/set.png'
+					},
+					foot : {
+						bg : 'rgba(0.5,0.5,0.5,0.7)',
+						height : 30,
+						playSize : 26,
+						playImg : 'fs://img/back.png',
+						pauseImg : 'fs://img/back.png',
+						nextSize : 26,
+						nextImg : 'fs://img/back.png',
+						timeSize : 22,
+						timeColor : '#fff',
+						sliderImg : 'fs://img/slder.png',
+						progressColor : '#696969',
+						progressSelected : '#E91E63'
+					}
+				},
+				path : 'http://7xi3r6.com1.z0.glb.clouddn.com/movie.mp4', //（可选项）字符串类型；文档的路径，支持网络和本地（fs://）路径；默认：未传值时不播放
+				//在 android 平台上不支持 widget://
+				autoPlay : true ,//（可选项）布尔类型；打开时是否自动播放；默认：true（自动播放）,
+//				autorotation:false
 			}, function(ret, err) {
-				if (ret.status) {
+				if (ret) {
+				 api.setScreenOrientation({
+				orientation : 'landscape_right'
+			});
 					alert(JSON.stringify(ret));
 				} else {
 					alert(JSON.stringify(err));
 				}
 			});
+		 
+			
 		};
 	</script>
 </html>
