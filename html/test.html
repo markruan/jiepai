@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+		<title>title</title>
+		<link rel="stylesheet" type="text/css" href="../css/api.css"/>
+		<style>
+			body {
+			}
+		</style>
+	</head>
+	<body></body>
+	<script type="text/javascript" src="../script/api.js"></script>
+	<script type="text/javascript">
+		apiready = function() {
+		var photoBrowser = api.require('photoBrowser');
+photoBrowser.open({
+    images: [ 
+        'widget://image/1.jpg', 
+        'widget://image/2.jpg'
+    ]
+});
+		
+//			var tabBarMenu = api.require('tabBarMenu'), theme = 'simple';
+//			tabBarMenu.open({
+//				defaultBarSelect : 0,
+//				autoLayout : true,
+//				barConfig : {
+//					bgImg : 'widget://image/xia.png'
+//				},
+//				barItemConfig : {
+//					titleColor : '#fff',
+//					titleSelectColor : '#fff',
+//					fontSize : 11.0,
+//					textMarginTop : 41.0,
+////					primaryItem : 2
+//				},
+//				barItems : [{
+//					title : '精选',
+//					bgImg : 'widget://image/jingxuan_off.png',
+//					bgImgClick : 'widget://image/jingxuan_on.png'
+//				}, {
+//					title : '收藏',
+//					bgImg : 'widget://image/shoucang_off.png',
+//					bgImgClick : 'widget://image/shoucang_on.png'
+//				}, {
+//					title : '历史',
+//					bgImg : 'widget://image/lishi_off.png',
+//					bgImgClick : 'widget://image/lishi_on.png'
+//				}, {
+//					title : '我',
+//					bgImg : 'widget://image/wo_off.png',
+//					bgImgClick : 'widget://image/wo_on.png'
+//				},  ],
+//				menuConfig : {
+//					coverBgColor : '#000000',
+//					coverAlpha : 0.8,
+//					rows : 4
+//				},
+//				menuItemConfig : {
+//					titleColor : '#fff',
+//					titleSelectColor : '#fff',
+//					fontSize : 11.0,
+//					textMarginTop : 90.0
+//				},
+//				menuItems : [{
+//					title : '说说',
+//					bgImg : 'widget://image/1.jpg',
+//					bgImgClick : 'widget://image/tabBarMenu/' + theme + '/tabbar_btn_popup_talk_click.png'
+//				}, {
+//					title : '照片',
+//					bgImg : 'widget://image/2.jpg',
+//					bgImgClick : 'widget://image/tabBarMenu/' + theme + '/tabbar_btn_popup_transferphotos_click.png'
+//				}, {
+//					title : '水印相机',
+//					bgImg : 'widget://image/3.jpg',
+//					bgImgClick : 'widget://image/tabBarMenu/' + theme + '/tabbar_btn_popup_watermarkcamera_click.png'
+//				}, {
+//					title : '视频',
+//					bgImg : 'widget://image/4.jpg',
+//					bgImgClick : 'widget://image/tabBarMenu/' + theme + '/tabbar_btn_popup_video_click.png'
+//				}]
+//			}, function(ret, err) {
+//				if (ret) {
+//					//					alert(JSON.stringify(ret));/
+//					switch (ret.item.index) {
+//						case 0:
+//						  	api.openFrame({
+//	                              name: '1',
+//	                              url: 'history/index.html',
+//	                              rect: {
+//		                              x:0,
+//		                              y:0,
+//		                              w:api.frameWidth,
+//		                              h:500
+//	                              }
+//                            });;
+//							break;
+//						case 1:
+//						  	x = "Today it's Monday";
+//							break;
+//						case 2:
+//							x = "Today it's Tuesday";
+//							break;
+//						case 3:
+//							x = "Today it's Wednesday";
+//							break;
+//						case 4:
+//							x = "Today it's Thursday";
+//							break;
+//						case 5:
+//							x = "Today it's Friday";
+//							break;
+//						case 6:
+//							x = "Today it's Saturday";
+//							break;
+//					}
+//					 
+//					 
+//				} else {
+//					alert(JSON.stringify(err));
+//				}
+//			});
+		};
+	</script>
+</html>
