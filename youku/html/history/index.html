@@ -39,6 +39,7 @@
 				</div>
 			</div>
 		</header>
+		<div class="H-padding-vertical-bottom-3"></div>
 		<script type="text/javascript" src="../../script/api.js"></script>
 		<script type="text/javascript">
 			function setPage(index, frame) {
@@ -61,19 +62,20 @@
 					scrollEnabled : true,
 					rect : {
 						x : 0,
-						y : hight1,
+						y : hight1+25,
 						w : 'auto',
-						h : api.winHeight - footer - hight1
+						h : api.winHeight - footer - hight1-25
 					},
 					index : 0,
 					 
 					frames : [{
 						name : 'frame1',
-						url : '../../html/index/index.html',
+						url : 'page.html',
+						
 						bgColor : '#fff'
 					}, {
 						name : 'frame2',
-						url : 'page.html',
+						url : '../../html/index/index.html',
 						bgColor : '#fff'
 					}]
 				}, function(ret, err) {
