@@ -35,7 +35,7 @@
 			<div class="H-header-title H-vertical-middle H-font-size-18 H-text-show-row-1 H-theme-font-color-999 H-position-absolute H-width-100-percent H-box-sizing-border-box" style="padding-left:38px;">
 				<div class="H-header-title H-center-all H-font-size-18 H-text-show-row-1 H-theme-font-color-white H-position-absolute H-width-100-percent" >
 					<div class="H-flexbox-horizontal H-theme-background-color-zhuti H-padding-horizontal-both-30" style="height: 40px;">
-						<div class="H-flex-item H-center-all H-padding-vertical-both-9   H-touch-active H-font-size-16 H-theme-border-color-yellow H-theme-font-color-white" style="border-width: 0 0 2px  0">
+						<div onclick="openJingxuan()" class="H-flex-item H-center-all H-padding-vertical-both-9   H-touch-active H-font-size-16  H-theme-font-color-white" style="border-width: 0 0 2px  0">
 							精选
 						</div>
 						<div class="H-flex-item H-center-all H-padding-vertical-both-9   H-touch-active H-font-size-16 H-theme-font-color-white" style="border-width: 0 0 2px  0">
@@ -138,7 +138,15 @@
 					name : 'group1'
 				});
 			}
-
+             function openJingxuan(){
+              api.openWin({
+	              name: 'jinjgxuan',
+	              url: 'page/header.html'
+              });
+             
+             }
+            
+            
 			function openMe(button) {
 				$api.addCls(hh1, 'H-display-none');
 				$api.addCls(hhh, 'H-display-none');

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+		<title>title</title>
+		<link rel="stylesheet" type="text/css" href="../../css/api.css"/>
+		<style>
+			body {
+			}
+		</style>
+	</head>
+	<body></body>
+	<script type="text/javascript" src="../../script/api.js"></script>
+	<script type="text/javascript">
+		apiready = function() {
+			var videoPlayer = api.require('videoPlayer');
+			videoPlayer.open({
+				path : 'http://7xi3r6.com1.z0.glb.clouddn.com/03000813005628F1DE5D4001647D8CA75B72B4-3338-3AFE-CD76-A269147F692E.mp4',
+				rect : {
+					x : 0,
+					y : 0,
+					w : api.frameWidth,
+					h : 200
+				},
+				fixedOn:'top'
+			}, function(ret, err) {
+				if (ret.status) {
+//					alert(JSON.stringify(ret));
+				} else {
+					alert(JSON.stringify(err));
+				}
+			});
+		};
+	</script>
+</html>

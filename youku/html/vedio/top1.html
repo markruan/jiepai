@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+    <title>title</title>
+    <link rel="stylesheet" type="text/css" href="../../css/Hui.css"/>
+    <style>
+    	html,body{
+            background-color: transparent !important;
+        }
+    </style>
+</head>
+<body>
+	<header class="H-header H-theme-background-color-transparent" id="header">
+       
+        <span class="H-icon H-center-all   H-border-radius-circle H-margin-horizontal-auto H-float-left H-font-size-26 H-font-weight-600 H-theme-font-color-white H-margin-horizontal-left-5 H-margin-vertical-top-2" style="height: 35px; width: 35px; line-height:35px;"> <span onclick="back()" class="H-position-relative H-display-inline-block  H-vertical-middle H-theme-font-color-white  H-z-index-100"><i class="H-iconfont H-icon-arrow-left H-font-size-18 H-center-all"></i><label class="H-display-block H-vertical-middle H-font-size-18"></label></span></span>
+    </header>
+	
+</body>
+<script type="text/javascript" src="../../script/api.js"></script>
+<script type="text/javascript">
+   function back(){
+     api.closeWin({
+     });
+    
+   }
+	apiready = function(){
+	    var header=$api.byId('header');
+		$api.fixStatusBar(header);
+	};
+</script>
+</html>

@@ -1,0 +1,57 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0" />
+		<meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+		<title>Hui</title>
+		<link href="../../css/Hui.css" rel="stylesheet" type="text/css" />
+		<link href="http://at.alicdn.com/t/font_1467933867_9703503.css" rel="stylesheet" type="text/css" />
+		<style type="text/css">
+			.iconfont {
+				font-size: 25px;
+			}
+			.H-theme-background-color-zhuti {
+				background-color: #ff6606;
+			}
+			.H-font-size-20 {
+				font-size: 25px;
+			}
+			.H-padding-horizontal-both-30 {
+				padding-left: 50px;
+				padding-right: 50px;
+			}
+			.H-theme-font-color-hui {
+				color: #9E9E9E;
+			}
+			.H-theme-font-color-zhuti {
+				color: #ff6606;
+			}
+			.xiaotu {
+				margin-top: 10px;
+				margin-left: 10px;
+				float: left;
+			}
+		</style>
+	</head>
+	<body class="H-flexbox-vertical">
+		<header class="H-header H-theme-background-color-zhuti" id="header">
+			<span tapmode="" onclick="H.closeWin();" class="H-icon H-position-relative H-display-inline-block H-float-left H-vertical-middle H-theme-font-color-white H-padding-horizontal-left-5 H-z-index-100"><i class="H-iconfont H-icon-arrow-left H-font-size-18 H-vertical-middle"></i><label class="H-display-block H-vertical-middle H-font-size-18 H-padding-horizontal-left-5">精选</label></span>
+			<span class="xiaotu H-padding-vertical-top-3"><img  src="../../image/xi.png" style="height: 10px;" /></span>
+			<div class="H-header-title H-center-all H-font-size-18 H-text-show-row-1 H-theme-font-color-white H-position-absolute H-width-100-percent"></div>
+			<span tapmode="" id="drop-menu" data-open="false" class="H-icon H-position-relative H-display-block H-float-right H-vertical-middle H-theme-font-color-white H-padding-horizontal-both-5 H-z-index-1000"><i class="iconfont icon-shoubing H-font-size-18 H-vertical-middle H-margin-horizontal-right-10"></i></span>
+		</header>
+		<script src="../../script/H.js" type="text/javascript"></script>
+		<script src="../../script/api.js" type="text/javascript"></script>
+	 
+		<script>
+		   var headerJ = $api.byId('header');
+			var headerJ2 = $api.offset(headerJ).h;
+			$api.setStorage('headerJ',headerJ2);
+		  
+			H.ready(function() {
+			  H.openFrameNavOrFoot("body", "body.html", "#header");
+			});
+		</script>
+	</body>
+</html>
