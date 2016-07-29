@@ -13,6 +13,63 @@
 	<body></body>
 	<script type="text/javascript" src="../../script/api.js"></script>
 	<script type="text/javascript">
+		function pause1() {
+			var videoPlayer = api.require('videoPlayer');
+			videoPlayer.pause();
+		}
+
+		function play1() {
+			var videoPlayer = api.require('videoPlayer');
+			videoPlayer.start();
+		}
+
+		function full1() {
+			var videoPlayer = api.require('videoPlayer');
+videoPlayer.play({
+    texts: {
+        head: {
+            title: '测试视频'
+        }
+    },
+    styles: {
+        head: { 
+            bg: 'rgba(0.5,0.5,0.5,0.7)', 
+            height: 35,
+            titleSize: 16,
+            titleColor: '#fff',
+            backSize: 22,
+            backImg: 'fs://img/back.png', 
+            setSize: 22,
+            setImg: 'fs://img/set.png' 
+        },
+        foot: {
+            bg: 'rgba(0.5,0.5,0.5,0.7)',
+            height: 25,
+            playSize: 22,
+            playImg: 'fs://img/back.png',
+            pauseImg: 'fs://img/back.png', 
+            nextSize: 22,
+            nextImg: 'fs://img/back.png', 
+            timeSize: 14,
+            timeColor: '#fff',
+            sliderImg: 'fs://img/slder.png', 
+            progressColor: '#696969', 
+            progressSelected: '#76EE00'
+        }
+    },
+    path: 'http://7xi3r6.com1.z0.glb.clouddn.com/03000813005628F1DE5D4001647D8CA75B72B4-3338-3AFE-CD76-A269147F692E.mp4', //（可选项）字符串类型；文档的路径，支持网络和本地（fs://）路径；默认：未传值时不播放
+    //在 android 平台上不支持 widget://
+    autoPlay:true //（可选项）布尔类型；打开时是否自动播放；默认：true（自动播放）
+    
+},function(ret, err) {
+    if (ret) {
+//      alert(JSON.stringify(ret));
+    } else {
+        alert(JSON.stringify(err));
+    }
+});
+		}
+
 		apiready = function() {
 			var videoPlayer = api.require('videoPlayer');
 			videoPlayer.open({
@@ -23,10 +80,15 @@
 					w : api.frameWidth,
 					h : 200
 				},
-				fixedOn:'top'
+				fixedOn : 'top'
 			}, function(ret, err) {
 				if (ret.status) {
-//					alert(JSON.stringify(ret));
+					var pro = ret.duration
+					api.setPrefs({
+						key : 'duration',
+						value : pro
+					});
+					//					alert(JSON.stringify(ret));
 				} else {
 					alert(JSON.stringify(err));
 				}

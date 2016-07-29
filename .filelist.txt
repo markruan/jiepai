@@ -54,6 +54,7 @@
 /A6990407827122/image/ic.jpg
 /A6990407827122/image/5.jpg
 /A6990407827122/css/Hui.ttf
+/A6990407827122/image/xian.png
 /A6990407827122/image/xia1.png
 /A6990407827122/html/main.html
 /A6990407827122/image/wo_off.png

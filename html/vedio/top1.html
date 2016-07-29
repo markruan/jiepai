@@ -1,33 +1,126 @@
 <!DOCTYPE html>
 <html>
-<head>
-	<meta charset="utf-8">
-    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
-    <title>title</title>
-    <link rel="stylesheet" type="text/css" href="../../css/Hui.css"/>
-    <style>
-    	html,body{
-            background-color: transparent !important;
-        }
-    </style>
-</head>
-<body>
-	<header class="H-header H-theme-background-color-transparent" id="header">
-       
-        <span class="H-icon H-center-all   H-border-radius-circle H-margin-horizontal-auto H-float-left H-font-size-26 H-font-weight-600 H-theme-font-color-white H-margin-horizontal-left-5 H-margin-vertical-top-2" style="height: 35px; width: 35px; line-height:35px;"> <span onclick="back()" class="H-position-relative H-display-inline-block  H-vertical-middle H-theme-font-color-white  H-z-index-100"><i class="H-iconfont H-icon-arrow-left H-font-size-18 H-center-all"></i><label class="H-display-block H-vertical-middle H-font-size-18"></label></span></span>
-    </header>
-	
-</body>
-<script type="text/javascript" src="../../script/api.js"></script>
-<script type="text/javascript">
-   function back(){
-     api.closeWin({
-     });
-    
-   }
-	apiready = function(){
-	    var header=$api.byId('header');
-		$api.fixStatusBar(header);
-	};
-</script>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+		<title>title</title>
+		<link rel="stylesheet" type="text/css" href="../../css/Hui.css"/>
+		<link rel="stylesheet" type="text/css" href="http://at.alicdn.com/t/font_1469797624_888869.css"/>
+		<style>
+			html, body {
+				background-color: transparent !important;
+				margin: 0;
+				padding: 0;
+			}
+			.bottom_footer {
+				position: fixed; /*or前面的是absolute就可以用*/
+				bottom: 0px;
+			}
+		</style>
+	</head>
+	<body >
+		<header class="H-header H-theme-background-color-transparent" id="header">
+			<span class="H-icon H-center-all   H-border-radius-circle H-margin-horizontal-auto H-float-left H-font-size-26 H-font-weight-600 H-theme-font-color-white H-margin-horizontal-left-5 H-margin-vertical-top-2" style="height: 35px; width: 35px; line-height:35px;"> <span onclick="back()" class="H-position-relative H-display-inline-block  H-vertical-middle H-theme-font-color-white  H-z-index-100"><i class="H-iconfont H-icon-arrow-left H-font-size-18 H-center-all"></i><label class="H-display-block H-vertical-middle H-font-size-18"></label></span></span>
+		</header>
+		<div class="H-center-all">
+			<i id="play" onclick="play()" class="iconfont icon-bofang H-display-none  H-theme-font-color-eee H-padding-vertical-both-25 "style="font-size:50px;"></i>
+		</div>
+		<div class="bottom_footer " style="background-image: url(../../image/xian.png); height: 30px; line-height: 30px;  width: 100%; ">
+			<div>
+				<i onclick="pause()" class="iconfont icon-zanting H-theme-font-color-white H-margin-horizontal-left-10 H-line-height-normal " style="  font-size:22px;line-height: 30px"  ></i>
+				<span class="H-theme-font-color-white H-margin-horizontal-left-1" style="width: 10%;">18:20:32</span>
+				<div class="   bottom_footer  H-margin-vertical-bottom-12 H-progress H-theme-background-color-eee   H-border-radius-5 H-line-height-0 H-overflow-hidden    " style=" margin-left:110px;  height:1px;width: 42%;">
+					<div class="   H-height-100-percent H-theme-background-color-red" style="width: 30%; "></div>
+				</div>
+				<i onclick="full()"  class="iconfont icon-quanping H-theme-font-color-white   H-line-height-normal H-float-right " style="  font-size:22px; margin-right: 10px;line-height: 30px; "></i>
+				<span id="time1" class="H-theme-font-color-white H-float-right "style="margin-right: 6px;  ">18:20:32</span>
+			</div>
+	</body>
+	<script type="text/javascript" src="../../script/api.js"></script>
+	<script type="text/javascript">
+		var playid = $api.byId('play');
+		function back() {
+			api.closeWin({
+			});
+		}
+
+		function pause() {
+			var jsfun = 'pause1();';
+			api.execScript({
+				frameName : 'top',
+				script : jsfun
+			});
+			$api.removeCls(playid, 'H-display-none');
+		}
+		function full() {
+			var jsfun = 'full1();';
+			api.execScript({
+				frameName : 'top',
+				script : jsfun
+			});
+			 
+		}
+		
+
+		function play() {
+			var jsfun = 'play1();';
+			api.execScript({
+				frameName : 'top',
+				script : jsfun
+			});
+			$api.addCls(playid, 'H-display-none');
+		}
+
+		apiready = function() {
+			var header = $api.byId('header');
+			$api.fixStatusBar(header);
+			api.getPrefs({
+				//			sync:true,
+				key : 'duration'
+			}, function(ret, err) {
+				var time1 = formatSeconds(ret.value)
+				$api.text($api.byId('time1'), time1);
+			});
+		};
+		function formatSeconds(value) {
+			var theTime = parseInt(value);
+			// 秒
+			var theTime1 = 0;
+			// 分
+			var theTime2 = 0;
+			// 小时 // alert(theTime);
+			if (theTime > 60) {
+				theTime1 = parseInt(theTime / 60);
+				theTime = parseInt(theTime % 60);
+				// alert(theTime1+"-"+theTime);
+				if (theTime1 > 60) {
+					theTime2 = parseInt(theTime1 / 60);
+					theTime1 = parseInt(theTime1 % 60);
+				}
+			}
+			var result = "" + parseInt(theTime) + "";
+			if (result < 10) {
+				var result = "0" + parseInt(theTime) + "";
+				if (10 > theTime1 > 0) {
+					result = "0" + parseInt(theTime1) + ":" + result;
+				} else {
+					result = "" + parseInt(theTime1) + ":" + result;
+				}
+				if (theTime2 > 0) {
+					result = "" + parseInt(theTime2) + ":" + result;
+				}
+				return result;
+			} else {
+				if (10 > theTime1 > 0) {
+					result = "0" + parseInt(theTime1) + ":" + result;
+				} else {
+					result = "" + parseInt(theTime1) + ":" + result;
+				}
+				if (theTime2 > 0) {
+					result = "" + parseInt(theTime2) + ":" + result;
+				}
+				return result;
+			}
+		}
+	</script>
 </html>
