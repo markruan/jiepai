@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+		<title>title</title>
+		<link rel="stylesheet" type="text/css" href="../../css/Hui.css"/>
+		<link href="http://at.alicdn.com/t/font_1469889460_3988683.css" rel="stylesheet" type="text/css" />
+		<style>
+			html, body {
+				background-color: transparent !important;
+				margin: 0;
+				padding: 0;
+			}
+			.bottom_footer {
+				position: fixed; /*or前面的是absolute就可以用*/
+				bottom: 0px;
+				width: 100%;
+			}
+		</style>
+	</head>
+	<body>
+		<header class="H-header H-theme-background-color-transparent" id="header" style="min-height: 34px">
+			<span class="H-icon H-center-all   H-border-radius-circle H-margin-horizontal-auto H-float-left H-font-size-26 H-font-weight-600 H-theme-font-color-white H-margin-horizontal-left-5 H-margin-vertical-top-2" style="height: 35px; width: 35px; line-height:35px;"> <span  class="H-position-relative H-display-inline-block  H-vertical-middle H-theme-font-color-white  H-z-index-100"><i onclick="back()" class="H-iconfont H-icon-arrow-left H-font-size-18 H-center-all"></i><label class="H-display-block H-vertical-middle H-font-size-18"></label></span></span>
+		</header>
+		<div id='list' style="margin-left: 10px; font-size: 35px; color: white ; line-height: 35px;">
+			<!--<span id="" style="color: red;">05</span><span>/</span>03</span>-->
+		</div>
+		<div class="bottom_footer "style=" background-color: rgba(0, 0, 0, 0.45)">
+			<div class="share-menu H-z-index-1000000   H-margin-vertical-bottom-0"  >
+				<div class="H-flexbox-horizontal H-text-align-center H-padding-vertical-both-10">
+					<div class="H-flex-item" onclick="kaifa()">
+						<span class="H-icon H-center-all H-theme-background-transparent H-border-radius-circle H-theme-border-color-white H-margin-horizontal-auto" style="height: 40px; width: 40px; "><i class="iconfont icon-fenxiang H-font-size-26 H-theme-font-color-white"style="font-size: 26px"></i></span>
+						<label class="H-display-block H-font-size-13 H-margin-vertical-top-5 H-theme-font-color-white">分享到</label>
+					</div>
+					<div class="H-flex-item"  onclick="kaifa()">
+						<span class="H-icon H-center-all H-theme-background-transparent H-border-radius-circle H-theme-border-color-white H-margin-horizontal-auto" style="height: 40px; width: 40px; "><i class="iconfont icon-heart H-font-size-22 H-theme-font-color-white"style="font-size: 26px"></i></span>
+						<label class="H-display-block H-font-size-13 H-margin-vertical-top-5 H-theme-font-color-white">收藏</label>
+					</div>
+					<div class="H-flex-item" onclick="kaifa() ">
+						<span class="H-icon H-center-all H-theme-background-transparent H-border-radius-circle H-theme-border-color-white H-margin-horizontal-auto" style="height: 40px; width: 40px; "><i class="iconfont icon-yunduanxiazai H-font-size-22 H-theme-font-color-white"style="font-size: 28px"></i></span>
+						<label class="H-display-block H-font-size-13 H-margin-vertical-top-5 H-theme-font-color-white">保存</label>
+					</div>
+				</div>
+			</div>
+	</body>
+	<script type="text/javascript" src="../../script/api.js"></script>
+	<script type="text/javascript">
+		function kaifa() {
+			alert('开发中...')
+		}
+
+		function back() {
+			api.closeWin({
+			});
+		}
+
+		apiready = function() {
+			api.addEventListener({
+				name : 'keyback'
+			}, function(ret, err) {
+				back()
+			});
+			api.addEventListener({
+				name : 'tap'
+			}, function(ret, err) {
+				api.sendFrameToBack({
+					from : 'img2'
+				});
+			});
+			api.addEventListener({
+				name : 'swiperight'
+			}, function(ret, err) {
+				var jsfun = 'bpic();';
+				setTimeout(api.execScript({
+					name : 'img1',
+					script : jsfun
+				}), 2000);
+			});
+			api.addEventListener({
+				name : 'swipeleft'
+			}, function(ret, err) {
+				var jsfun = 'npic();';
+				setTimeout(api.execScript({
+					name : 'img1',
+					script : jsfun
+				}), 2000);
+			});
+			api.addEventListener({
+				name : 'imglist'
+			}, function(ret, err) {
+				var total = ret.value.imglenth
+				var imgindex = ret.value.imgindex
+				$api.html($api.byId('list'), '<span id="" style="color: red;">' + imgindex + '</span><span>/</span>' + total + '</span>');
+			});
+		};
+	</script>
+</html>
