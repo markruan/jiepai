@@ -5,6 +5,7 @@
 		<meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
 		<title>登陆</title>
 		<link rel="stylesheet" type="text/css" href="../css/Hui.css"/>
+		<link href="http://at.alicdn.com/t/font_1469889460_3988683.css" rel="stylesheet" type="text/css" />
 		<style>
 			body {
 				background: url(../image/login_bg.jpg) no-repeat left top;
@@ -32,6 +33,10 @@
 		</style>
 	</head>
 	<body class="H-height-100-percent H-box-sizing-border-box H-overflow-hidden">
+	<header class="H-header H-theme-background-transparent H-padding-vertical-top-20 H-padding-horizontal-left-15" id="header">
+        <span tapmode="" onclick="H.closeWin();" class="H-icon H-position-relative H-display-inline-block H-float-left H-vertical-middle H-theme-font-color-white H-padding-horizontal-left-5 H-z-index-100"><i class="iconfont icon-icon1   H-vertical-middle"style="font-size: 24px;"></i><label class="H-display-block H-vertical-middle H-font-size-15 H-margin-horizontal-left-5">返回登录</label></span>
+        <!--<div class="H-header-title H-center-all H-font-size-18 H-text-show-row-1 H-theme-font-color-white H-position-absolute H-width-100-percent">分类标题</div>-->
+    </header>
 		<div class="fix">
 			<div class="H-horizontal-center H-padding-vertical-both-25">
 			 
@@ -40,28 +45,28 @@
 				<div class="from_1 H-theme-background-color-red ">
 					<div class="H-flexbox-horizontal  H-border-vertical-bottom-margin-both-10-after">
 						<span class="H-icon H-vertical-middle H-padding-horizontal-left-10"> </i></span>
-						<input type="text" value="" id="name" class="H-textbox H-vertical-align-middle H-vertical-middle H-font-size-18 H-flex-item H-box-sizing-border-box H-border-none H-outline-none H-padding-15 H-theme-background-color-transparent H-horizontal-center H-theme-font-color-white H-text-align-center " placeholder="请输入账号" />
+						<input type="text" value="" id="name" class="H-textbox H-vertical-align-middle H-vertical-middle H-font-size-18 H-flex-item H-box-sizing-border-box H-border-none H-outline-none H-padding-15 H-theme-background-color-transparent H-horizontal-center H-theme-font-color-white H-text-align-center " placeholder="配置账号" />
 					</div>
 					<div class="H-flexbox-horizontal ">
 						<span class="H-icon H-vertical-middle H-padding-horizontal-left-10"> </span>
-						<input type="password" id="password" class="H-textbox H-vertical-align-middle H-vertical-middle H-font-size-18 H-flex-item H-box-sizing-border-box H-border-none H-outline-none H-padding-15 H-theme-background-color-transparent H-horizontal-center  H-theme-font-color-white H-text-align-center" placeholder="请输入密码" />
+						<input type="password" id="password" class="H-textbox H-vertical-align-middle H-vertical-middle H-font-size-18 H-flex-item H-box-sizing-border-box H-border-none H-outline-none H-padding-15 H-theme-background-color-transparent H-horizontal-center  H-theme-font-color-white H-text-align-center" placeholder="配置密码" />
 					</div>
 				</div>
 				<div class="H-width-90-percent H-margin-vertical-top-10">
-					<button id="login" class="H-button H-width-100-percent  H-font-size-35 H-outline-none H-padding-vertical-both-15 H-padding-horizontal-both-20 H-theme-background-color9 H-theme-font-btn H-theme-border-color9 H-theme-border-yellow-click H-theme-background-yellow-click H-theme-font-color9-click H-border-radius-3">
-						登录
+					<button id="login" class="H-button H-width-100-percent  H-font-size-25 H-outline-none H-padding-vertical-both-15 H-padding-horizontal-both-20 H-theme-background-color9 H-theme-font-btn H-theme-border-color9 H-theme-border-yellow-click H-theme-background-yellow-click H-theme-font-color9-click H-border-radius-3">
+						<span class="H-font-size-22" >立即注册</span>
 					</button>
 				</div>
 				<div class="H-padding-vertical-bottom-10"></div>
-				<div class="H-margin-horizontal-both-15">
+				<!--<div class="H-margin-horizontal-both-15">
 					<span tapmode="" onclick="reg()" class="H-theme-font-white H-float-left H-font-size-14">注册</span><span class="H-theme-font-white H-float-right H-font-size-14">忘记密码？</span>
-				</div>
+				</div>-->
 			</div>
 		</div>
 		<div class="H-padding-vertical-bottom-10"></div>
-		<div class="H-theme-font-white H-text-align-center H-padding-vertical-both-10 H-font-size-14">
+		<!--<div class="H-theme-font-white H-text-align-center H-padding-vertical-both-10 H-font-size-14">-->
 		<div class="H-padding-vertical-bottom-10"></div>
-			其他方式登录
+	
 		</div>
 		<div class="H-flexbox-horizontal H-text-align-center  H-padding-vertical-both-15">
 			<div class="H-flex-item">
@@ -81,13 +86,7 @@
 	<script type="text/javascript" src="../script/api.js"></script>
 	<script type="text/javascript">
 	
-	  function reg(){
-	    api.openWin({
-	        name: 'reg',
-	        url: 'reg.html'
-        });
-	   
-	  }
+	 
  
 		apiready = function() {
  
@@ -109,7 +108,7 @@
 						var nameVal =  $api.val($api.byId('name'));
 						var passwordVal = $api.byId('password').value;
 						api.ajax({
-							url : 'http://114.55.98.130/index.php/api/login.html',
+							url : 'http://114.55.98.130/index.php/api/reg.html',
 							method : 'post',
 							timeout : 30,
 							dataType : 'text',
@@ -121,9 +120,9 @@
 								},
 							}
 						}, function(ret, err) {
-							if (ret == 1) {
+							if (ret == 0) {
 								api.toast({
-									msg : '登陆成功'
+									msg : '注册成功'
 								});
 								api.setPrefs({
 									key : 'user',
@@ -142,7 +141,7 @@
 							 
 								 
 							} else {
-								alert("用户名或密码错误 ");
+								alert("用户名已被注册 ");
 							}
 						});
 					}
