@@ -25,7 +25,9 @@
 			videoPlayer.start();
 		}
 
-		function full1(vurl) {
+		function full1( ) {
+		
+		var vurl=api.pageParam.name
 			var videoPlayer = api.require('videoPlayer');
 			videoPlayer.play({
 				texts : {
@@ -64,7 +66,7 @@
 				autoPlay : true, //（可选项）布尔类型；打开时是否自动播放；默认：true（自动播放）,
 			}, function(ret, err) {
 				if (ret) {
-					      alert(JSON.stringify(ret));
+//					      alert(JSON.stringify(ret));
 				} else {
 					alert(JSON.stringify(err));
 				}
