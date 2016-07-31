@@ -14,7 +14,7 @@
 	<script type="text/javascript" src="../../script/api.js"></script>
 	<script type="text/javascript" src="../../script/jie.js"></script>
 	<script type="text/javascript">
-		var mp4Url = 'http://7xi3r6.com1.z0.glb.clouddn.com/030008010052561F7E7FF5029E55E9832C5D2B-AEE3-8944-FF4C-9E778580E3E6.mp4';
+//		var mp4Url = 'http://7xi3r6.com1.z0.glb.clouddn.com/030008010052561F7E7FF5029E55E9832C5D2B-AEE3-8944-FF4C-9E778580E3E6.mp4';
 		function pause1() {
 			var videoPlayer = api.require('videoPlayer');
 			videoPlayer.pause();
@@ -25,7 +25,7 @@
 			videoPlayer.start();
 		}
 
-		function full1() {
+		function full1(vurl) {
 			var videoPlayer = api.require('videoPlayer');
 			videoPlayer.play({
 				texts : {
@@ -59,7 +59,7 @@
 						progressSelected : '#f44336'
 					}
 				},
-				path : mp4Url,
+				path : vurl,
 				//在 android 平台上不支持 widget://
 				autoPlay : true, //（可选项）布尔类型；打开时是否自动播放；默认：true（自动播放）,
 			}, function(ret, err) {
@@ -79,8 +79,9 @@
 
 		apiready = function() {
 			var videoPlayer = api.require('videoPlayer');
+			var vurl=api.pageParam.name
 			videoPlayer.open({
-				path : mp4Url,
+				path : vurl,
 				rect : {
 					x : 0,
 					y : 0,
