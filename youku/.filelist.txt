@@ -28,6 +28,7 @@
 /A6990407827122/html/vedio/index.html
 /A6990407827122/html/index/index.html
 /A6990407827122/html/info/index.html
+/A6990407827122/html/page/menu.html
 /A6990407827122/config.xml
 /A6990407827122/image/login_bg.jpg
 /A6990407827122/html/history/index.html
@@ -44,8 +45,8 @@
 /A6990407827122/image/suo.png
 /A6990407827122/image/lishi_on.png
 /A6990407827122/image/6.jpg
-/A6990407827122/image/shoucang_on.png
 /A6990407827122/html/shoucang/index.html
+/A6990407827122/image/shoucang_on.png
 /A6990407827122/image/1.jpg
 /A6990407827122/html/reg.html
 /A6990407827122/image/shoucang_off.png

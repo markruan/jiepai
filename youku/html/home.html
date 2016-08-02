@@ -38,7 +38,7 @@
 		</style>
 	</head>
 	<body class="H-flexbox-vertical">
-		<header class="H-header H-theme-background-color-zhuti H-border-vertical-bottom-after " id="common_header" >
+		<header class="H-header H-theme-background-color-zhuti  " id="common_header" >
 			<span tapmode="" onclick="H.openSlidPane();" class="H-icon H-position-relative H-display-block H-float-left H-vertical-middle H-theme-font-color-white H-padding-horizontal-both-10 H-z-index-1000"><i class="iconfont icon-fankui H-font-size-20 H-vertical-middle"></i></span>
 			<div class="H-header-title H-vertical-middle H-font-size-18 H-text-show-row-1 H-theme-font-color-999 H-position-absolute H-width-100-percent H-box-sizing-border-box" style="padding-left:38px;">
 				<div class="H-header-title H-center-all H-font-size-18 H-text-show-row-1 H-theme-font-color-white H-position-absolute H-width-100-percent" >
@@ -72,13 +72,10 @@
 			<div class="H-header-title H-center-all H-font-size-18 H-text-show-row-1 H-theme-font-color-white H-position-absolute H-width-100-percent">
 				收藏
 			</div>
-			 
 		</header>
-		<header class="H-header H-theme-background-color-zhuti H-display-none" id="about_me">
+		<header class=" H-header  H-theme-background-color-zhuti H-display-none" id="about_me" >
 			<!--<span tapmode="" onclick="openh()" class="H-icon H-position-relative H-display-block H-float-left H-vertical-middle H-theme-font-color-999 H-padding-horizontal-both-10 H-z-index-1000"><i class="H-iconfont H-icon-more-menu H-font-size-18 H-vertical-middle H-theme-font-color-white"></i></span>-->
-			<div class="H-header-title H-center-all H-font-size-18 H-text-show-row-1 H-theme-font-color-white H-position-absolute H-width-100-percent">
-				我
-			</div>
+			 
 		</header>
 		<div class="H-main H-flex-item H-position-relative H-overflow-hidden H-overflow-scrolling"></div>
 		<footer id="footer" class="H-footer H-flexbox-horizontal H-theme-background-color-white H-border-vertical-top-after" id="footer">
@@ -107,6 +104,7 @@
 				</div>
 			</div>
 		</footer>
+	
 		<script src="../script/H.js" type="text/javascript"></script>
 		<script src="../script/api.js" type="text/javascript"></script>
 		<script type="text/javascript">
@@ -165,14 +163,14 @@
 				}
 				$api.addCls(button, 'H-theme-font-color-zhuti');
 				api.openFrame({
-					name : 'shoucang',
+					name : 'me',
 					url : '../html/me/index.html',
 					reload : true,
 					rect : {
 						x : 0,
-						y : header2 + 25,
+						y : 25,
 						w : api.frameWidth,
-						h : api.frameHeight - offset - header2 - 25
+						h : api.frameHeight-offset-25
 					}
 				});
 				api.closeFrame({
@@ -204,6 +202,9 @@
 				api.closeFrame({
 					name : 'common_index'
 				});
+				api.closeFrame({
+	                name: 'me'
+                });
 				api.closeFrameGroup({
 					name : 'group1'
 				});
@@ -231,12 +232,20 @@
 				api.closeFrame({
 					name : 'history'
 				});
+				api.closeFrame({
+	                name: 'me'
+                });
+                api.closeFrame({
+	                name: 'shoucang'
+                });
 			}
 
 
 			H.ready(function() {
-				//			 var aa=  $api.domAll($api.byId('footer'), '.swipe-item');
-				//			  $api.addCls(aa[1], 'H-theme-font-color-zhuti');
+				 
+				api.setStatusBarStyle({
+					style : 'light'
+				});
 				var header1 = $api.byId('common_header');
 				var header2 = $api.offset(header1).h;
 				$api.setStorage('h1', header2);

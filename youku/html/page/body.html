@@ -14,6 +14,15 @@
 	<script type="text/javascript" src="../../script/api.js"></script>
 	<script type="text/javascript">
 		var headerh = $api.getStorage('headerJ');
+//		function hidden() {
+//			api.setFrameAttr({
+//				name : 'zipai',
+//				hidden : true
+//			});
+//			var MNNavigationMenu = api.require('MNNavigationMenu');
+//			MNNavigationMenu.hide();
+//		}
+
 		apiready = function() {
 			api.openFrame({
 				name : 'zipai',
@@ -25,6 +34,7 @@
 					h : api.frameHeight - 44
 				}
 			});
+			 
 			var MNNavigationMenu = api.require('MNNavigationMenu');
 			MNNavigationMenu.open({
 				rect : {
@@ -34,7 +44,7 @@
 					h : 44
 				},
 				index : 0,
-				animation : true,
+				animation : false,
 				styles : {
 					column : 5,
 					bg : '#eee',
@@ -101,20 +111,13 @@
 					highlight : 'fs://menu/4.highlight.png'
 				}],
 				fixedOn : 'body',
-				fixed : false
+				fixed : true
 			}, function(ret, err) {
 				if (ret) {
 					switch (ret.index) {
 						case 0:
 							api.openFrame({
 								name : 'zipai',
-								url : '../../html/index/index.html',
-								rect : {
-									x : 0,
-									y : parseInt(headerh) + 44 + 25,
-									w : api.frameWidth,
-									h : api.frameHeight - 44
-								}
 							});
 							break;
 						case 1:
