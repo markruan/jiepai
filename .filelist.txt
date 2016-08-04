@@ -10,15 +10,15 @@
 /A6990407827122/html/search/header.html
 /A6990407827122/html/history/page.html
 /A6990407827122/css/Hui.css
-/A6990407827122/index.html
 /A6990407827122/html/page/body.html
+/A6990407827122/index.html
 /A6990407827122/image/loading_more.gif
 /A6990407827122/html/shoucang/page.html
 /A6990407827122/image/xi.png
 /A6990407827122/html/img/index.html
 /A6990407827122/script/H.js
-/A6990407827122/html/home.html
 /A6990407827122/html/vedio/top1.html
+/A6990407827122/html/home.html
 /A6990407827122/image/xia.png
 /A6990407827122/html/info/edit.html
 /A6990407827122/css/common.css
@@ -45,8 +45,8 @@
 /A6990407827122/image/suo.png
 /A6990407827122/image/lishi_on.png
 /A6990407827122/image/6.jpg
-/A6990407827122/html/shoucang/index.html
 /A6990407827122/image/shoucang_on.png
+/A6990407827122/html/shoucang/index.html
 /A6990407827122/image/1.jpg
 /A6990407827122/html/reg.html
 /A6990407827122/image/shoucang_off.png
@@ -62,5 +62,5 @@
 /A6990407827122/css/Hui.ttf
 /A6990407827122/image/xian.png
 /A6990407827122/image/xia1.png
-/A6990407827122/html/main.html
 /A6990407827122/image/wo_off.png
+/A6990407827122/html/main.html

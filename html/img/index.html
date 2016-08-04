@@ -54,37 +54,30 @@
 
 		apiready = function() {
 			var photoBrowser = api.require('photoBrowser');
-			api.ajax({
-				url : 'http://114.55.98.130/index.php/Api/outimg.html',
-				cache : true,
-				dataType : 'json',
-				method : 'post',
+			var pics = api.pageParam.name
+			var img = pics.split(' ');
+			photoBrowser.open({
+				images : img,
+				activeIndex : 0,
+				placeholderImg : 'widget://image/6.jpg',
+				bgColor : '#000'
 			}, function(ret, err) {
-				var imglenth = ret.length
-				var imgarr = ret
-				photoBrowser.open({
-					images : imgarr,
-					activeIndex : 0,
-					placeholderImg : 'widget://image/6.jpg',
-					bgColor : '#000'
-				}, function(ret, err) {
-					if (ret.eventType == 'click') {
-						openH()
-					} else {
-					}
-					if (ret.eventType == 'change') {
-						var index = ret.index + 1;
-						api.sendEvent({
-							name : 'imglist',
-							extra : {
-								imglenth : imglenth,
-								imgindex : index
-							}
-						});
-					} else {
-						//						alert(JSON.stringify(err));
-					}
-				});
+				if (ret.eventType == 'click') {
+					openH()
+				} else {
+				}
+				if (ret.eventType == 'change') {
+					var index = ret.index + 1;
+					api.sendEvent({
+						name : 'imglist',
+						extra : {
+							imglenth : img.length,
+							imgindex : index
+						}
+					});
+				} else {
+					//						alert(JSON.stringify(err));
+				}
 			});
 			api.addEventListener({
 				name : 'keyback'
