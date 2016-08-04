@@ -52,6 +52,36 @@
 			});
 		}
 
+		function download() {
+			var photoBrowser = api.require('photoBrowser');
+			photoBrowser.getIndex(function(ret, err) {
+				if (ret) {
+					var index = ret.index
+					photoBrowser.getImage({
+						index : index
+					}, function(ret, err) {
+						if (ret) {
+							var path = ret.path
+							 
+							api.saveMediaToAlbum({
+								path : path
+							}, function(ret, err) {
+								if (ret && ret.status) {
+									alert('保存成功');
+								} else {
+									alert('保存失败');
+								}
+							});
+						} else {
+							alert(JSON.stringify(err));
+						}
+					});
+				} else {
+					alert(JSON.stringify(err));
+				}
+			});
+		}
+
 		apiready = function() {
 			var photoBrowser = api.require('photoBrowser');
 			var pics = api.pageParam.name
