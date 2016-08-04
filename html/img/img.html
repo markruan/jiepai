@@ -20,12 +20,13 @@
 		</style>
 	</head>
 	<body>
-		<header class="H-header H-theme-background-color-transparent" id="header" style="min-height: 34px">
+		<header class="H-header " id="header" style="min-height: 89px;background-image: url('../../image/shangbeijing.png')">
 			<span class="H-icon H-center-all   H-border-radius-circle H-margin-horizontal-auto H-float-left H-font-size-26 H-font-weight-600 H-theme-font-color-white H-margin-horizontal-left-5 H-margin-vertical-top-2" style="height: 35px; width: 35px; line-height:35px;"> <span  class="H-position-relative H-display-inline-block  H-vertical-middle H-theme-font-color-white  H-z-index-100"><i onclick="back()" class="H-iconfont H-icon-arrow-left H-font-size-18 H-center-all"></i><label class="H-display-block H-vertical-middle H-font-size-18"></label></span></span>
+			<br />
+			<div id='list' style=" font-size: 35px; color: white ; line-height: 35px; ">
+				<span   style="color: red;margin-left: 10px;"> </span><span> </span></span>
+			</div>
 		</header>
-		<div id='list' style="margin-left: 10px; font-size: 35px; color: white ; line-height: 35px;">
-			<!--<span id="" style="color: red;">05</span><span>/</span>03</span>-->
-		</div>
 		<div class="bottom_footer "style=" background-color: rgba(0, 0, 0, 0.45)">
 			<div class="share-menu H-z-index-1000000   H-margin-vertical-bottom-0"  >
 				<div class="H-flexbox-horizontal H-text-align-center H-padding-vertical-both-10">
@@ -37,9 +38,9 @@
 						<span class="H-icon H-center-all H-theme-background-transparent H-border-radius-circle H-theme-border-color-white H-margin-horizontal-auto" style="height: 40px; width: 40px; "><i class="iconfont icon-heart H-font-size-22 H-theme-font-color-white"style="font-size: 26px"></i></span>
 						<label class="H-display-block H-font-size-13 H-margin-vertical-top-5 H-theme-font-color-white">收藏</label>
 					</div>
-					<div id="download" class="H-flex-item" onclick="kaifa() ">
+					<div id="download" class="H-flex-item"  onclick="imgdownload()"  >
 						<span class="H-icon H-center-all H-theme-background-transparent H-border-radius-circle H-theme-border-color-white H-margin-horizontal-auto" style="height: 40px; width: 40px; "><i class="iconfont icon-yunduanxiazai H-font-size-22 H-theme-font-color-white"style="font-size: 28px"></i></span>
-						
+						<label class="H-display-block H-font-size-13 H-margin-vertical-top-5 H-theme-font-color-white">保存</label>
 					</div>
 				</div>
 			</div>
@@ -55,18 +56,11 @@
 			});
 		}
 
-		function download(photo) {
-			api.download({
-				url : url,
-				savePath : photo,
-				report : true,
-				cache : true,
-				allowResume : true
-			}, function(ret, err) {
-				if (ret.state == 1) {
-					//下载成功
-				} else {
-				}
+		function imgdownload() {
+			var jsfun = 'download()'
+			api.execScript({
+				name : 'img1',
+				script : jsfun
 			});
 		}
 
@@ -106,8 +100,8 @@
 			}, function(ret, err) {
 				var total = ret.value.imglenth
 				var imgindex = ret.value.imgindex
-				$api.html($api.byId('list'), '<span id="" style="color: red;">' + imgindex + '</span><span>/</span>' + total + '</span>');
-				$api.html($api.byId('download'), '<label class="H-display-block H-font-size-13 H-margin-vertical-top-5 H-theme-font-color-white">保存</label>');
+				$api.html($api.byId('list'), '<span id="" style="color: red;margin-left: 10px;">' + imgindex + '</span><span>/</span>' + total + '</span>');
+				//				$api.html($api.byId('download'), '<label onclick="download()" class="H-display-block H-font-size-13 H-margin-vertical-top-5 H-theme-font-color-white">保存</label>');
 			});
 		};
 	</script>

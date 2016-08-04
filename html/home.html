@@ -78,9 +78,9 @@
 		</header>
 		<div class="H-main H-flex-item H-position-relative H-overflow-hidden H-overflow-scrolling"></div>
 		<footer id="footer" class="H-footer H-flexbox-horizontal H-theme-background-color-white H-border-vertical-top-after" id="footer">
-			<div onclick="openIndex(this)" class="H-flex-item H-center-all H-text-align-center H-theme-font-color-999 H-touch-active swipe-item">
+			<div  onclick="openIndex(this)" class="H-flex-item H-center-all H-text-align-center H-theme-font-color-999 H-touch-active swipe-item">
 				<div>
-					<span class="H-icon H-display-block H-line-height-normal"><i id="jingxuan_footer" class="footer_i iconfont icon-jingxuan  "  ></i></span>
+					<span class="H-icon H-display-block H-line-height-normal"><i id="jingxuan_footer"   class="footer_i iconfont icon-jingxuan H-theme-font-color-zhuti  "  ></i></span>
 					<strong class="H-font-size-12 H-display-block H-font-weight-normal H-margin-vertical-top-3">精选</strong>
 				</div>
 			</div>
@@ -117,6 +117,7 @@
 			var hh1 = $api.byId('common_header');
 			var shouId = $api.byId('add_header');
 			var meId = $api.byId('about_me');
+			var jingxuan_footer=$api.byId('jingxuan_footer');
 			function openJingxuan() {
 				api.openWin({
 					name : 'jinxuan',
@@ -138,6 +139,7 @@
 				$api.addCls(hh1, 'H-display-none');
 				$api.addCls(hhh, 'H-display-none');
 				$api.removeCls(shouId, 'H-display-none');
+				$api.removeCls(jingxuan_footer, 'H-theme-font-color-zhuti');
 				for ( i = 0; i < aa.length; i++) {
 					$api.removeCls(aa[i], 'H-theme-font-color-zhuti');
 				}
@@ -172,6 +174,7 @@
 				$api.addCls(hhh, 'H-display-none');
 				$api.addCls(shouId, 'H-display-none');
 				$api.removeCls(meId, 'H-display-none');
+				$api.removeCls(jingxuan_footer, 'H-theme-font-color-zhuti');
 				for ( i = 0; i < aa.length; i++) {
 					$api.removeCls(aa[i], 'H-theme-font-color-zhuti');
 				}
@@ -209,6 +212,7 @@
 				$api.addCls(button, 'H-theme-font-color-zhuti');
 				$api.addCls(hh1, 'H-display-none');
 				$api.removeCls(hhh, 'H-display-none');
+				$api.removeCls(jingxuan_footer, 'H-theme-font-color-zhuti');
 				api.openFrame({
 					name : 'history ',
 					url : '../html/history/index.html',
@@ -274,19 +278,21 @@
 				$api.fixStatusBar($api.byId('tui_header'));
 				$api.fixStatusBar($api.byId('add_header'));
 				$api.fixStatusBar($api.byId('about_me'));
-				api.getPrefs({
-					key : 'user'
-				}, function(ret, err) {
-					var val = ret.value;
-					if (val && val != "") {
+				 
+		 
+//				api.getPrefs({
+//					key : 'user'
+//				}, function(ret, err) {
+//					var val = ret.value;
+//					if (val && val != "") {
 						openIndex(this)
-					} else {
-						api.openWin({
-							name : 'login',
-							url : 'login.html'
-						});
-					}
-				});
+//					} else {
+//						api.openWin({
+//							name : 'login',
+//							url : 'login.html'
+//						});
+//					}
+//				});
 			});
 		</script>
 	</body>
