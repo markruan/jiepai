@@ -75,7 +75,6 @@
 		</header>
 		<header class=" H-header  H-theme-background-color-zhuti H-display-none" id="about_me" >
 			<!--<span tapmode="" onclick="openh()" class="H-icon H-position-relative H-display-block H-float-left H-vertical-middle H-theme-font-color-999 H-padding-horizontal-both-10 H-z-index-1000"><i class="H-iconfont H-icon-more-menu H-font-size-18 H-vertical-middle H-theme-font-color-white"></i></span>-->
-			 
 		</header>
 		<div class="H-main H-flex-item H-position-relative H-overflow-hidden H-overflow-scrolling"></div>
 		<footer id="footer" class="H-footer H-flexbox-horizontal H-theme-background-color-white H-border-vertical-top-after" id="footer">
@@ -104,7 +103,6 @@
 				</div>
 			</div>
 		</footer>
-	
 		<script src="../script/H.js" type="text/javascript"></script>
 		<script src="../script/api.js" type="text/javascript"></script>
 		<script type="text/javascript">
@@ -119,7 +117,24 @@
 			var hh1 = $api.byId('common_header');
 			var shouId = $api.byId('add_header');
 			var meId = $api.byId('about_me');
+			function openJingxuan() {
+				api.openWin({
+					name : 'jinxuan',
+					url : '../html/page/header.html'
+				});
+			}
+
 			function openS(button) {
+				api.closeFrame({
+					name : 'history'
+				});
+				api.closeFrame({
+					name : 'me'
+				});
+				api.closeFrameGroup({
+					name : 'history_group'
+				});
+				api.hideProgress();
 				$api.addCls(hh1, 'H-display-none');
 				$api.addCls(hhh, 'H-display-none');
 				$api.removeCls(shouId, 'H-display-none');
@@ -138,22 +153,21 @@
 						h : api.frameHeight - offset - header2 - 25
 					}
 				});
-				api.closeFrame({
-					name : 'common_index'
-				});
-				api.closeFrameGroup({
-					name : 'group1'
-				});
-			}
-
-			function openJingxuan() {
-				api.openWin({
-					name : 'jinjgxuan',
-					url : 'page/header.html'
-				});
 			}
 
 			function openMe(button) {
+				api.closeFrame({
+					name : 'common_index'
+				});
+				api.closeFrame({
+					name : 'shoucang'
+				});
+				api.closeFrameGroup({
+					name : 'history_group'
+				});
+				api.closeFrame({
+					name : 'history'
+				});
 				$api.addCls(hh1, 'H-display-none');
 				$api.addCls(hhh, 'H-display-none');
 				$api.addCls(shouId, 'H-display-none');
@@ -170,18 +184,25 @@
 						x : 0,
 						y : 25,
 						w : api.frameWidth,
-						h : api.frameHeight-offset-25
+						h : api.frameHeight - offset - 25
 					}
-				});
-				api.closeFrame({
-					name : 'common_index'
-				});
-				api.closeFrameGroup({
-					name : 'group1'
 				});
 			}
 
 			function openh(button) {
+				api.closeFrame({
+					name : 'common_index'
+				});
+				api.closeFrame({
+					name : 'me'
+				});
+				api.closeFrame({
+					name : 'shoucang'
+				});
+				api.closeFrameGroup({
+					name : 'shoucang_group'
+				});
+				api.hideProgress();
 				for ( i = 0; i < aa.length; i++) {
 					$api.removeCls(aa[i], 'H-theme-font-color-zhuti');
 				}
@@ -189,7 +210,7 @@
 				$api.addCls(hh1, 'H-display-none');
 				$api.removeCls(hhh, 'H-display-none');
 				api.openFrame({
-					name : 'common ',
+					name : 'history ',
 					url : '../html/history/index.html',
 					reload : true,
 					rect : {
@@ -199,18 +220,24 @@
 						h : api.frameHeight - offset - header2 - 25
 					}
 				});
-				api.closeFrame({
-					name : 'common_index'
-				});
-				api.closeFrame({
-	                name: 'me'
-                });
-				api.closeFrameGroup({
-					name : 'group1'
-				});
 			}
 
 			function openIndex(button) {
+				api.closeFrame({
+					name : 'history'
+				});
+				api.closeFrame({
+					name : 'me'
+				});
+				api.closeFrame({
+					name : 'shoucang'
+				});
+				api.closeFrameGroup({
+					name : 'history_group'
+				});
+				api.closeFrameGroup({
+					name : 'shoucang_group'
+				});
 				for ( i = 0; i < aa.length; i++) {
 					$api.removeCls(aa[i], 'H-theme-font-color-zhuti');
 				}
@@ -229,20 +256,11 @@
 						h : api.frameHeight - offset - header2 - 25
 					}
 				});
-				api.closeFrame({
-					name : 'history'
-				});
-				api.closeFrame({
-	                name: 'me'
-                });
-                api.closeFrame({
-	                name: 'shoucang'
-                });
+				api.hideProgress();
 			}
 
 
 			H.ready(function() {
-				 
 				api.setStatusBarStyle({
 					style : 'light'
 				});

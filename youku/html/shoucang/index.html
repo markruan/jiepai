@@ -50,13 +50,16 @@
 			}
 
 			apiready = function() {
+			
+			    api.showProgress({
+                });
 				var header2 = $api.byId('header');
 				var header3 = $api.offset(header2).h;
 				var header4 = $api.getStorage('h1');
 				var footer = parseInt($api.getStorage('f1'));
 				var hight1 = parseInt(header3) + parseInt(header4)
 				api.openFrameGroup({
-					name : 'group1',
+					name : 'shoucang_group',
 					background : '#fff',
 					scrollEnabled : true,
 					rect : {
