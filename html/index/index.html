@@ -56,12 +56,14 @@
 	<script type="text/javascript" src="../../script/api.js"></script>
 	<script type="text/javascript" src="../../script/echo.min.js"></script>
 	<script type="text/javascript">
-		function openV(url) {
+		function openV(url, varr) {
 			api.openWin({
 				name : 'veido',
 				url : '../../html/vedio/index.html',
 				pageParam : {
-					name : url
+					name : url,
+					varr:varr
+					
 				}
 			});
 		}
@@ -71,7 +73,7 @@
 				name : 'img1',
 				url : '../../html/img/index.html',
 				pageParam : {
-					name : arr
+					name : arr,
 				}
 			});
 		}
@@ -93,9 +95,13 @@
 				for (var i = 0; i < myobj.length; i++) {
 					var title = myobj[i].vname;
 					var pic = myobj[i].vpic;
-					var vurl = myobj[i].vurl
-					html += '<div onclick="openV(\'' + vurl + '\')" class="H-display-table-cell H-theme-background-color-white H-float-left  H-box-sizing-border-box H-width-avg-3 H-padding-horizontal-right-4 H-margin-vertical-bottom-10   " style="margin-bottom: 10px; ">';
-					html += '<img src="../../image/default.jpg"    data-echo="' + pic + '" class=" H-float-right H-margin-vertical-top-8 H-margin-horizontal-both-2 H-display-block" alt="" title="" style="width: 96%" ;height:200>';
+					var img = pic.split(' ');
+					var picc = img[0]
+					var varr=eval(myobj[i].vurl )
+					var vurl = eval(myobj[i].vurl)[0]
+				 
+					html += '<div onclick="openV(\'' + vurl + '\' ,\'' + varr+ '\' )" class="H-display-table-cell H-theme-background-color-white H-float-left  H-box-sizing-border-box H-width-avg-3 H-padding-horizontal-right-4 H-margin-vertical-bottom-10   " style="margin-bottom: 10px; ">';
+					html += '<img src="../../image/default.jpg"    data-echo="' + picc + '" class=" H-float-right H-margin-vertical-top-8 H-margin-horizontal-both-2 H-display-block" alt="" title="" style="width: 96%" ;height:200>';
 					html += '<img src="../../image/xia.png " class=" H-float-right  H-margin-vertical-top-8 H-margin-horizontal-both-2 H-display-block" style="margin-top: -200px; height: 200px ; width: 96%" alt="" title="">';
 					html += '<div  class=" " style=" margin-right:8px; margin-top:-30px;line-height: 30px; float: right; color:white ;">12:20</div>';
 					html += '<div class="H-text-align-center H-font-size-14 H-padding-vertical-top-10    " style="line-height: 35px">' + title.substr(0, 7) + '</div>';

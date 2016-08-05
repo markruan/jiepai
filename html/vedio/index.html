@@ -14,8 +14,8 @@
 	<script type="text/javascript" src="../../script/api.js"></script>
 	<script type="text/javascript">
 		apiready = function() {
-		 var vurl=api.pageParam.name
-		 
+			var vurl = api.pageParam.name
+			var varr = api.pageParam.varr
 			api.openFrame({
 				name : 'top',
 				url : 'top.html',
@@ -26,7 +26,8 @@
 					h : 200
 				},
 				pageParam : {
-					name : vurl
+					name : vurl,
+					varr : varr
 				}
 			});
 			api.openFrame({
@@ -47,6 +48,9 @@
 					y : 201,
 					w : api.frameWidth,
 					h : api.frameHeight - 200
+				},
+				pageParam : {
+					varr : varr
 				}
 			});
 		};
