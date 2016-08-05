@@ -50,10 +50,15 @@
 		}
 
 		function full1() {
-			api.getPrefs({
-				key : 'vurl'
-			}, function(ret, err) {
-				var url = ret.value
+//			api.getPrefs({
+//				key : 'vurl'
+//			}, function(ret, err) {
+//				var url = ret.value
+
+     var url = api.getPrefs({
+    sync: true,
+    key: 'vurl'
+});
 				var videoPlayer = api.require('videoPlayer');
 				videoPlayer.play({
 					texts : {
@@ -97,7 +102,7 @@
 						alert(JSON.stringify(err));
 					}
 				});
-			});
+//		/
 		}
 
 		function sendback() {
