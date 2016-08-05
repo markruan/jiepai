@@ -14,7 +14,7 @@
 	<script type="text/javascript" src="../../script/api.js"></script>
 	<script type="text/javascript" src="../../script/jie.js"></script>
 	<script type="text/javascript">
-//		var mp4Url = 'http://7xi3r6.com1.z0.glb.clouddn.com/030008010052561F7E7FF5029E55E9832C5D2B-AEE3-8944-FF4C-9E778580E3E6.mp4';
+		//		var mp4Url = 'http://7xi3r6.com1.z0.glb.clouddn.com/030008010052561F7E7FF5029E55E9832C5D2B-AEE3-8944-FF4C-9E778580E3E6.mp4';
 		function pause1() {
 			var videoPlayer = api.require('videoPlayer');
 			videoPlayer.pause();
@@ -25,51 +25,78 @@
 			videoPlayer.start();
 		}
 
-		function full1( ) {
-		
-		var vurl=api.pageParam.name
-			var videoPlayer = api.require('videoPlayer');
-			videoPlayer.play({
-				texts : {
-					head : {
-						title : '测试视频'
-					}
-				},
-				styles : {
-					head : {
-						bg : 'rgba(0.5,0.5,0.5,0.7)',
-						height : 35,
-						titleSize : 16,
-						titleColor : '#fff',
-						backSize : 22,
-						backImg : 'fs://img/back.png',
-						setSize : 22,
-						setImg : 'fs://img/set.png'
-					},
-					foot : {
-						bg : 'rgba(0.5,0.5,0.5,0.7)',
-						height : 44,
-						playSize : 22,
-						playImg : 'fs://img/back.png',
-						pauseImg : 'fs://img/back.png',
-						nextSize : 22,
-						nextImg : 'fs://img/back.png',
-						timeSize : 14,
-						timeColor : '#fff',
-						sliderImg : 'fs://img/slder.png',
-						progressColor : '#696969',
-						progressSelected : '#f44336'
-					}
-				},
-				path : vurl,
-				//在 android 平台上不支持 widget://
-				autoPlay : true, //（可选项）布尔类型；打开时是否自动播放；默认：true（自动播放）,
+		function setv() {
+			api.getPrefs({
+				key : 'vurl'
 			}, function(ret, err) {
-				if (ret) {
-//					      alert(JSON.stringify(ret));
-				} else {
-					alert(JSON.stringify(err));
-				}
+				var url = ret.value
+				var videoPlayer = api.require('videoPlayer');
+				videoPlayer.setPath({
+					path : url,
+				}, function(ret, err) {
+					if (ret.status) {
+						 var total=ret.duration
+						 api.sendEvent({
+						name : 'duration',
+						extra : {
+							duration : total,
+						}
+					});
+					} else {
+						alert(JSON.stringify(err));
+					}
+				});
+			});
+		}
+
+		function full1() {
+			api.getPrefs({
+				key : 'vurl'
+			}, function(ret, err) {
+				var url = ret.value
+				var videoPlayer = api.require('videoPlayer');
+				videoPlayer.play({
+					texts : {
+						head : {
+							title : ''
+						}
+					},
+					styles : {
+						head : {
+							bg : 'rgba(0.5,0.5,0.5,0.7)',
+							height : 35,
+							titleSize : 16,
+							titleColor : '#fff',
+							backSize : 22,
+							backImg : 'fs://img/back.png',
+							setSize : 22,
+							setImg : 'fs://img/set.png'
+						},
+						foot : {
+							bg : 'rgba(0.5,0.5,0.5,0.7)',
+							height : 44,
+							playSize : 22,
+							playImg : 'fs://img/back.png',
+							pauseImg : 'fs://img/back.png',
+							nextSize : 22,
+							nextImg : 'fs://img/back.png',
+							timeSize : 14,
+							timeColor : '#fff',
+							sliderImg : 'fs://img/slder.png',
+							progressColor : '#696969',
+							progressSelected : '#f44336'
+						}
+					},
+					path : url,
+					//在 android 平台上不支持 widget://
+					autoPlay : true, //（可选项）布尔类型；打开时是否自动播放；默认：true（自动播放）,
+				}, function(ret, err) {
+					if (ret) {
+						//					      alert(JSON.stringify(ret));
+					} else {
+						alert(JSON.stringify(err));
+					}
+				});
 			});
 		}
 
@@ -81,7 +108,9 @@
 
 		apiready = function() {
 			var videoPlayer = api.require('videoPlayer');
-			var vurl=api.pageParam.name
+			var vurl = api.pageParam.name
+			var varr = api.pageParam.varr
+			var vlist = varr.split(',');
 			videoPlayer.open({
 				path : vurl,
 				rect : {
@@ -94,9 +123,15 @@
 			}, function(ret, err) {
 				if (ret.status) {
 					var pro = ret.duration
-					api.setPrefs({
-						key : 'duration',
-						value : pro
+					//					api.setPrefs({
+					//						key : 'duration',
+					//						value : pro
+					//					});
+					api.sendEvent({
+						name : 'duration',
+						extra : {
+							duration : pro,
+						}
 					});
 					//					alert(JSON.stringify(ret));
 				} else {
