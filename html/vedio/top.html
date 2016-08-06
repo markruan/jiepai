@@ -16,11 +16,9 @@
 	<script type="text/javascript">
 		//		var mp4Url = 'http://7xi3r6.com1.z0.glb.clouddn.com/030008010052561F7E7FF5029E55E9832C5D2B-AEE3-8944-FF4C-9E778580E3E6.mp4';
 		$api.addEvt($api.byId('body'), 'click', function() {
-		alert(0)
-		 api.bringFrameToFront({
-					from : 'top1'
-				});
-			 
+			api.bringFrameToFront({
+				from : 'top1'
+			});
 		});
 		function pause1() {
 			var videoPlayer = api.require('videoPlayer');
@@ -33,34 +31,31 @@
 		}
 
 		function setv() {
-			api.getPrefs({
+			var url = api.getPrefs({
+				sync : true,
 				key : 'vurl'
+			});
+			//coding...
+			var videoPlayer = api.require('videoPlayer');
+			videoPlayer.setPath({
+				path : url,
 			}, function(ret, err) {
-				var url = ret.value
-				var videoPlayer = api.require('videoPlayer');
-				videoPlayer.setPath({
-					path : url,
-				}, function(ret, err) {
-					if (ret.status) {
-						var total = ret.duration
-						api.sendEvent({
-							name : 'duration',
-							extra : {
-								duration : total,
-							}
-						});
-					} else {
-						alert(JSON.stringify(err));
-					}
-				});
+				if (ret.status) {
+					var total = ret.duration
+					api.sendEvent({
+						name : 'duration',
+						extra : {
+							duration : total,
+						}
+					});
+				} else {
+					alert(JSON.stringify(err));
+				}
 			});
 		}
 
 		function full1() {
-			//			api.getPrefs({
-			//				key : 'vurl'
-			//			}, function(ret, err) {
-			//				var url = ret.value
+		 
 			var url = api.getPrefs({
 				sync : true,
 				key : 'vurl'
@@ -116,8 +111,8 @@
 				from : 'top1'
 			});
 			api.bringFrameToFront({
-					from : 'top2'
-				});
+				from : 'top2'
+			});
 		}
 
 		apiready = function() {
@@ -125,6 +120,10 @@
 			var vurl = api.pageParam.name
 			var varr = api.pageParam.varr
 			var vlist = varr.split(',');
+			api.setPrefs({
+				key : 'vurl',
+				value : vurl
+			});
 			videoPlayer.open({
 				path : vurl,
 				rect : {
@@ -137,10 +136,7 @@
 			}, function(ret, err) {
 				if (ret.status) {
 					var pro = ret.duration
-					//					api.setPrefs({
-					//						key : 'duration',
-					//						value : pro
-					//					});
+				 
 					api.sendEvent({
 						name : 'duration',
 						extra : {
@@ -169,14 +165,14 @@
 				}
 			});
 			setTimeout('sendback()', 20000)
-//			api.addEventListener({
-//				name : 'tap'
-//			}, function(ret, err) {
-//				api.bringFrameToFront({
-//					from : 'top1'
-//				});
-//				setTimeout('sendback()', 20000)
-//			});
+			//			api.addEventListener({
+			//				name : 'tap'
+			//			}, function(ret, err) {
+			//				api.bringFrameToFront({
+			//					from : 'top1'
+			//				});
+			//				setTimeout('sendback()', 20000)
+			//			});
 		};
 	</script>
 </html>
