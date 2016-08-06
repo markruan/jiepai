@@ -38,7 +38,7 @@
 				<div>
 					<span class=" H-padding-horizontal-right-10 H-display-block H-font-size-16 H-float-right    "  >
 						<div class="H-text-align-center ">
-							<span class="animated infinite rotate H-icon H-center-all H-theme-background-color-white H-border-radius-circle H-margin-horizontal-auto H-font-size-26 H-font-weight-600 " style="height: 30px; width: 30px; line-height:30px;"><i class="H-iconfont H-icon-msg H-font-size-25 H-vertical-middle" style="color: #ff6606 "></i></span>
+							<span onclick="H.openWin('fankui','../../html/fankui/fankui_head.html')" class="animated infinite rotate H-icon H-center-all H-theme-background-color-white H-border-radius-circle H-margin-horizontal-auto H-font-size-26 H-font-weight-600 " style="height: 30px; width: 30px; line-height:30px;"><i class="H-iconfont H-icon-msg H-font-size-25 H-vertical-middle" style="color: #ff6606 "></i></span>
 							<label class="H-display-block H-font-size-11 H-margin-vertical-top-5 H-theme-font-color-white">反馈</label>
 						</div></span>
 				</div>
@@ -115,6 +115,7 @@
 		</div>
 	</body>
 	<script type="text/javascript" src="../../script/api.js"></script>
+	<script type="text/javascript" src="../../script/H.js"></script>
 	<script type="text/javascript">
 		function logout() {
 			api.removePrefs({
