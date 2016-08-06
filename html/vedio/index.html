@@ -16,6 +16,9 @@
 		apiready = function() {
 			var vurl = api.pageParam.name
 			var varr = api.pageParam.varr
+			var vtitle = api.pageParam.title
+			var vbianhao = api.pageParam.vbianhao
+			
 			api.openFrame({
 				name : 'top',
 				url : 'top.html',
@@ -64,7 +67,9 @@
 					h : api.frameHeight - 200
 				},
 				pageParam : {
-					varr : varr
+					varr : varr,
+					title:vtitle,
+					vbianhao:vbianhao
 				}
 			});
 		};

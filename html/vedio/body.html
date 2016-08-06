@@ -20,15 +20,7 @@
 		</style>
 	</head>
 	<body>
-		<div class="H-text-list H-flexbox-horizontal  H-theme-background-color-white H-border-vertical-bottom-after H-vertical-middle H-touch-active">
-			<div class="H-flex-item H-padding-horizontal-both-10 H-font-size-16 H-font-weight-600 H-padding-vertical-both-12">
-				熊出没之熊心归来 <span class="H-margin-horizontal-left-5 H-font-size-14 H-theme-font-color-999">编号：12470</span>
-				<button class="H-margin-horizontal-left-1 H-button-1 H-font-size-15 H-outline-none H-padding-vertical-both-4 H-padding-horizontal-both-5 H-theme-background-color-zhuti H-theme-font-color-white H-theme-border-color8 H-theme-border-color8-click H-theme-background-color8-click H-theme-font-color8-click H-border-radius-3">
-					购买全集
-				</button>
-			</div>
-			<span class="H-icon H-padding-horizontal-right-5 H-display-block"><i class="H-iconfont H-icon-star-null H-theme-font-color-zhuti H-font-size-18  H-vertical-middle"></i><span class="H-font-size-12 H-margin-horizontal-right-10 H-margin-vertical-top-2"style="margin-top: -10px"> 收藏</span></span>
-		</div>
+		<div id="title" class="H-text-list H-flexbox-horizontal  H-theme-background-color-white H-border-vertical-bottom-after H-vertical-middle H-touch-active"></div>
 		<!--		<div class="H-padding-vertical-bottom-10"></div>-->
 		<div class="result"></div>
 		<script type="text/html" id="tppl">
@@ -129,6 +121,8 @@
 		H.tppl_flag = ["<%", "%>"];
 		apiready = function() {
 			var varr = api.pageParam.varr
+			var vtitle = api.pageParam.title
+			var vbianhao = api.pageParam.vbianhao
 			var vlist = varr.split(',');
 			var playlist = vlist
 			var data = {
@@ -136,6 +130,17 @@
 			};
 			var render = H.tppl(H.D("#tppl").innerHTML);
 			H.D(".result").innerHTML = render(data);
+			////title模版
+			api.ajax({
+				url : ''
+			}, function(ret, err) {
+				//coding...
+			});
+			var html = '';
+			html += '<div class="H-flex-item H-padding-horizontal-both-10 H-font-size-15 H-font-weight-600 H-padding-vertical-both-12">' + vtitle + '<span class="H-margin-horizontal-left-5 H-font-size-14 H-theme-font-color-999">编号：<span>' + vbianhao + '</span></span>';
+			html += '<button class="H-margin-horizontal-left-1 H-button-1 H-font-size-15 H-outline-none H-padding-vertical-both-4 H-padding-horizontal-both-5 H-theme-background-color-zhuti H-theme-font-color-white H-theme-border-color8 H-theme-border-color8-click H-theme-background-color8-click H-theme-font-color8-click H-border-radius-3">购买全集 </button> </div>';
+			html += '<span class="H-icon H-padding-horizontal-right-5 H-display-block"><i class="H-iconfont H-icon-star-null H-theme-font-color-zhuti H-font-size-18  H-vertical-middle"></i><span class="H-font-size-12 H-margin-horizontal-right-10 H-margin-vertical-top-2"style="margin-top: -10px"> 收藏</span></span>';
+			$api.html($api.byId('title'), html);
 		};
 		function setpath(button, url) {
 			var dd = document.getElementsByClassName('fangkuang');
@@ -143,11 +148,10 @@
 				$api.attr(dd[i], 'class', 'fangkuang H-margin-horizontal-both-2   H-margin-vertical-both-5 H-theme-font-color-zhuti    H-padding-horizontal-both-10 H-display-table-cell H-float-left H-box-sizing-border-box H-width-avg-9 H-center-all H-theme-background-color-white H-border-horizontal-right-after H-border-vertical-bottom-after H-padding-vertical-both-10');
 			}
 			$api.attr(button, 'class', 'fangkuang H-margin-horizontal-both-2 H-theme-border-color8 H-margin-vertical-both-5 H-theme-font-color-zhuti    H-padding-horizontal-both-10 H-display-table-cell H-float-left H-box-sizing-border-box H-width-avg-9 H-center-all H-theme-background-color-white H-border-horizontal-right-after H-border-vertical-bottom-after H-padding-vertical-both-10');
-						api.setPrefs({
-							key : 'vurl',
-							value : url
-						});
-		 
+			api.setPrefs({
+				key : 'vurl',
+				value : url
+			});
 			var jsfun = 'setv()'
 			api.execScript({
 				name : 'veido',
