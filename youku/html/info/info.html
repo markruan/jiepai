@@ -12,9 +12,10 @@
 			.H-theme-background-color-zhuti {
 				background-color: #ff6606;
 			}
-			hr{
-			border-color:#e6e6e6;border:1;border-top:1px;
-			  
+			hr {
+				border-color: #e6e6e6;
+				border: 1;
+				border-top: 1px;
 			}
 			.H-theme-border-color8 {
 				border: 1px solid #ff6606;
@@ -25,24 +26,134 @@
 		<hr />
 		<div class="H-flexbox-horizontal H-border-vertical-bottom-margin-left-10-after">
 			<span class="H-vertical-middle H-padding-horizontal-left-10 H-theme-background-color-white H-font-size-16">手&nbsp机：</span>
-			<input type="text" class="H-textbox H-vertical-align-middle H-vertical-middle H-font-size-16 H-flex-item H-box-sizing-border-box H-border-none H-outline-none H-padding-12" placeholder="总得写点什么...">
+			<input id="phone" type="text" class="H-textbox H-vertical-align-middle H-vertical-middle H-font-size-16 H-flex-item H-box-sizing-border-box H-border-none H-outline-none H-padding-12" placeholder="手机号码">
 			<span class="H-icon H-vertical-middle H-padding-horizontal-right-10 H-theme-background-color-white">
-				<button class="H-button H-font-size-15 H-outline-none H-padding-vertical-both-8 H-padding-horizontal-both-5 H-theme-background-color-zhuti H-theme-font-color-white H-theme-border-color8 H-theme-border-color8-click H-theme-background-color8-click H-theme-font-color8-click H-border-radius-3">
+				<button onclick="sms()" class="H-button H-font-size-15 H-outline-none H-padding-vertical-both-8 H-padding-horizontal-both-5 H-theme-background-color-zhuti H-theme-font-color-white H-theme-border-color8 H-theme-border-color8-click H-theme-background-color8-click H-theme-font-color8-click H-border-radius-3">
 					获取验证码
 				</button></span>
 		</div>
 		<div class="H-flexbox-horizontal H-border-vertical-bottom-margin-left-10-after">
 			<span class="H-vertical-middle H-padding-horizontal-left-10 H-theme-background-color-white H-font-size-16">验证码：</span>
-			<input type="text" class="H-textbox H-vertical-align-middle H-vertical-middle H-font-size-16 H-flex-item H-box-sizing-border-box H-border-none H-outline-none H-padding-12" placeholder="总得写点什么...">
+			<input type="text" id="code"  class="H-textbox H-vertical-align-middle H-vertical-middle H-font-size-16 H-flex-item H-box-sizing-border-box H-border-none H-outline-none H-padding-12" placeholder="">
 			<span class="H-icon H-vertical-middle H-padding-horizontal-right-10 H-theme-background-color-white"> </span>
 		</div>
 		<div class="H-header-title  H-border-vertical-bottom-margin-left-10-after H-theme-background-color-white H-center-all">
-			<span class="  H-theme-background-color-white H-font-size-20 H-padding-12  " style="font-weight: 900">确定</span>
+			<span onclick="verify()" class="  H-theme-background-color-white H-font-size-20 H-padding-12  " style="font-weight: 900">确定</span>
 		</div>
 	</body>
 	<script type="text/javascript" src="../../script/api.js"></script>
+	<script type="text/javascript" src="../../script/jie.js"></script>
 	<script type="text/javascript">
+		var smsVerify = null;
 		apiready = function() {
+			smsVerify = api.require('smsVerify');
+			// 初始化
+			register();
 		};
+		// 注册，初始化
+		function register() {
+			smsVerify.register(function(ret, err) {
+				if (ret.status) {
+					//api.alert({msg: '注册成功'});
+					console.log('注册成功');
+				} else {
+					api.alert({
+						msg : err.code + ' 注册失败'
+					});
+				}
+			});
+		}
+
+		// 发短信验证码
+		function sms() {
+			var phone = document.getElementById("phone").value;
+			smsVerify.sms({
+				phone : phone,
+			}, function(ret, err) {
+				if (ret.status) {
+					// 新增的安卓智能验证功能
+					if (ret.smart == true) {// 安卓版特有功能 智能验证成功
+						api.getPrefs({
+							key : 'user'
+						}, function(ret, err) {
+							var user = ret.value
+							api.ajax({
+								url : Api + 'addphone.html',
+								method : 'post',
+								timeout : 30,
+								dataType : 'json',
+								data : {
+									values : {
+										username : user,
+										phone : phone
+									},
+								}
+							}, function(ret, err) {
+								if (ret == 0) {
+									alert('绑定成功')
+									api.closeWin({
+									});
+								} else
+									(
+										alert('绑定失败')
+									)
+							});
+						});
+					} else {
+						api.alert({
+							msg : '短信发送成功'
+						});
+					}
+				} else {
+					api.alert({
+						msg : err.code + ' 短信发送失败'
+					});
+				}
+			});
+		}
+
+		// 发语音验证码
+		// 校验验证码
+		function verify() {
+			var phone = document.getElementById("phone").value;
+			var code = document.getElementById("code").value;
+			smsVerify.verify({
+				phone : phone,
+				code : code,
+			}, function(ret, err) {
+				if (ret.status) {
+					api.getPrefs({
+						key : 'user'
+					}, function(ret, err) {
+						var user = ret.value
+						api.ajax({
+							url : Api + 'addphone.html',
+							method : 'post',
+							timeout : 30,
+							dataType : 'text',
+							data : {
+								values : {
+									username : user,
+									phone : phone
+								},
+							}
+						}, function(ret, err) {
+							if (ret == 0) {
+								alert('绑定成功')
+								api.closeWin({
+								});
+							} else
+								(
+									alert('绑定失败')
+								)
+						});
+					});
+				} else {
+					api.alert({
+						msg : err.code + ' 验证失败'
+					});
+				}
+			});
+		}
 	</script>
 </html>

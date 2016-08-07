@@ -43,22 +43,22 @@
 			<div class="H-header-title H-vertical-middle H-font-size-18 H-text-show-row-1 H-theme-font-color-999 H-position-absolute H-width-100-percent H-box-sizing-border-box" style="padding-left:38px;">
 				<div class="H-header-title H-center-all H-font-size-18 H-text-show-row-1 H-theme-font-color-white H-position-absolute H-width-100-percent" >
 					<div class="H-flexbox-horizontal H-theme-background-color-zhuti H-padding-horizontal-both-30" style="height: 40px;">
-						<div onclick="openM('jingxuan')" class="H-flex-item H-center-all H-padding-vertical-both-9  H-touch-active1  H-font-size-16  H-theme-font-color-white" style="border-width: 0 0 2px  0">
+						<div onclick="openM('jingxuan','精选')" class="H-flex-item H-center-all H-padding-vertical-both-9  H-touch-active1  H-font-size-16  H-theme-font-color-white" style="border-width: 0 0 2px  0">
 							精选
 						</div>
-						<div onclick="openM('dianying')"  class="H-flex-item H-center-all H-padding-vertical-both-9   H-touch-active1 H-font-size-16 H-theme-font-color-white" style="border-width: 0 0 2px  0">
+						<div onclick="openM('dianying','电影')"  class="H-flex-item H-center-all H-padding-vertical-both-9   H-touch-active1 H-font-size-16 H-theme-font-color-white" style="border-width: 0 0 2px  0">
 							电影
 						</div>
-						<div onclick="openM('shipin')"  class="H-flex-item H-center-all H-padding-vertical-both-9   H-touch-active1 H-font-size-16 H-theme-font-color-white" style="border-width: 0 0 2px  0">
+						<div onclick="openM('shipin','视频')"  class="H-flex-item H-center-all H-padding-vertical-both-9   H-touch-active1 H-font-size-16 H-theme-font-color-white" style="border-width: 0 0 2px  0">
 							视频
 						</div>
-						<div onclick="openM('shishang')"  class="H-flex-item H-center-all H-padding-vertical-both-9   H-touch-active1 H-font-size-16 H-theme-font-color-white" style="border-width: 0 0 2px  0">
+						<div onclick="openM('shishang','时尚')"  class="H-flex-item H-center-all H-padding-vertical-both-9   H-touch-active1 H-font-size-16 H-theme-font-color-white" style="border-width: 0 0 2px  0">
 							时尚
 						</div>
 					</div>
 				</div>
 			</div>
-			<span tapmode="" id="drop-menu" data-open="false" class="H-icon H-position-relative H-display-block H-float-right H-vertical-middle H-theme-font-color-white H-padding-horizontal-both-5 H-z-index-1000"><i class="iconfont icon-shoubing H-font-size-18 H-vertical-middle"></i></span>
+			<span tapmode="" id="drop-menu" data-open="false" class="H-icon H-position-relative H-display-block H-float-right H-vertical-middle H-theme-font-color-white H-padding-horizontal-both-5 H-z-index-1000"><i onclick="opensearch()" class="iconfont icon-shoubing H-font-size-18 H-vertical-middle"></i></span>
 		</header>
 		<header class=" fabuColor H-display-none" id="fabu_header"></header>
 		<header class="H-header H-theme-background-color-zhuti H-display-none" id="tui_header">
@@ -117,15 +117,15 @@
 			var hh1 = $api.byId('common_header');
 			var shouId = $api.byId('add_header');
 			var meId = $api.byId('about_me');
-			var jingxuan_footer=$api.byId('jingxuan_footer');
-			function openM(title) {
+			var jingxuan_footer = $api.byId('jingxuan_footer');
+			function openM(title, mingzi) {
 				api.openWin({
 					name : title,
-					url : '../html/'+title+'/header.html',
+					url : '../html/jingxuan/header.html',
 					pageParam : {
-					name : title,
- 	
-				}
+						name : title,
+						mingzi : mingzi
+					}
 				});
 			}
 
@@ -267,7 +267,14 @@
 				api.hideProgress();
 			}
 
-
+          function opensearch(){
+            api.openWin({
+	            name: 'search',
+	            url: '../html/search/header.html'
+            });
+          
+            
+          }
 			H.ready(function() {
 				api.setStatusBarStyle({
 					style : 'light'
@@ -282,21 +289,7 @@
 				$api.fixStatusBar($api.byId('tui_header'));
 				$api.fixStatusBar($api.byId('add_header'));
 				$api.fixStatusBar($api.byId('about_me'));
-				 
-		 
-//				api.getPrefs({
-//					key : 'user'
-//				}, function(ret, err) {
-//					var val = ret.value;
-//					if (val && val != "") {
-						openIndex(this)
-//					} else {
-//						api.openWin({
-//							name : 'login',
-//							url : 'login.html'
-//						});
-//					}
-//				});
+				openIndex(this)
 			});
 		</script>
 	</body>
