@@ -44,6 +44,7 @@
 		</div>
 	</body>
 	<script type="text/javascript" src="../../script/api.js"></script>
+	<script type="text/javascript" src="../../script/jie.js"></script>
 	<script type="text/javascript" src="../../script/echo.min.js"></script>
 	<script type="text/javascript">
 		function openV(url, varr,title,vbianhao) {
@@ -79,7 +80,7 @@
 				modal : false
 			});
 			api.ajax({
-				url : 'http://114.55.98.130/index.php/api/vout.html',
+				url : Api+'vout.html',
 			}, function(ret, err) {
 				var html = '';
 				var list = $api.byId('list');
@@ -124,7 +125,7 @@
 				modal : false
 			});
 			api.ajax({
-				url : 'http://114.55.98.130/index.php/api/outimg.html',
+				url : Api+'outimg.html',
 			}, function(ret, err) {
 				var html = '';
 				var list = $api.byId('imglist');

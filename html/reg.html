@@ -45,7 +45,7 @@
 				<div class="from_1 H-theme-background-color-red ">
 					<div class="H-flexbox-horizontal  H-border-vertical-bottom-margin-both-10-after">
 						<span class="H-icon H-vertical-middle H-padding-horizontal-left-10"> </i></span>
-						<input type="text" value="" id="name" class="H-textbox H-vertical-align-middle H-vertical-middle H-font-size-18 H-flex-item H-box-sizing-border-box H-border-none H-outline-none H-padding-15 H-theme-background-color-transparent H-horizontal-center H-theme-font-color-white H-text-align-center " placeholder="配置账号" />
+						<input type="text" value="" id="name" class="H-textbox H-vertical-align-middle H-vertical-middle H-font-size-18 H-flex-item H-box-sizing-border-box H-border-none H-outline-none H-padding-15 H-theme-background-color-transparent H-horizontal-center H-theme-font-color-white H-text-align-center " placeholder="配置账号或手机号" />
 					</div>
 					<div class="H-flexbox-horizontal ">
 						<span class="H-icon H-vertical-middle H-padding-horizontal-left-10"> </span>
@@ -85,6 +85,7 @@
 	</body>
 	<script type="text/javascript" src="../script/api.js"></script>
 	<script type="text/javascript" src="../script/H.js"></script>
+	<script type="text/javascript" src="../script/jie.js"></script>
 	<script type="text/javascript">
 	
 	 
@@ -109,7 +110,7 @@
 						var nameVal =  $api.val($api.byId('name'));
 						var passwordVal = $api.byId('password').value;
 						api.ajax({
-							url : 'http://114.55.98.130/index.php/api/reg.html',
+							url : Api+'reg.html',
 							method : 'post',
 							timeout : 30,
 							dataType : 'text',

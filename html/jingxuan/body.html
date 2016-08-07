@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+		<title>title</title>
+		<link rel="stylesheet" type="text/css" href="../css/api.css"/>
+		<style>
+			body {
+			}
+		</style>
+	</head>
+	<body></body>
+	<script type="text/javascript" src="../../script/api.js"></script>
+	<script type="text/javascript" src="../../script/jie.js"></script>
+	<script type="text/javascript">
+		var headerh = $api.getStorage('headerJ');
+		apiready = function() {
+			var mlist = api.pageParam.name
+			//			api.openFrame({
+			//				name : 'zipai',
+			//				url : '../../html/index/index.html',
+			//				rect : {
+			//					x : 0,
+			//					y : parseInt(headerh) + 44 + 25,
+			//					w : api.frameWidth,
+			//					h : api.frameHeight - 44
+			//				}
+			//			});
+			api.ajax({
+				url : Api+'fenleiList/search/',
+				method : 'post',
+				timeout : 30,
+				dataType : 'text',
+				returnAll : false,
+				data : {
+					values : {
+						title : mlist[0].title,
+						txpt : api.pageParam.mingzi,
+					},
+				}
+			}, function(ret, err) {
+				var data = eval(ret)
+				if (ret == '[]') {
+					api.toast({
+						msg : '暂无数据'
+					});
+					return
+				} else {
+					api.openFrame({
+						name : 'zipai',
+						url : '../../html/tppl/index.html',
+						rect : {
+							x : 0,
+							y : parseInt(headerh) + 44 + 25,
+							w : api.frameWidth,
+							h : api.frameHeight - 44
+						},
+						reload : true,
+						pageParam : {
+							name : ret,
+							type : data[0].type
+						},
+					});
+				}
+			});
+			var MNNavigationMenu = api.require('MNNavigationMenu');
+			MNNavigationMenu.open({
+				rect : {
+					x : 0,
+					y : 0,
+					w : api.winWidth,
+					h : 44
+				},
+				index : 0,
+				animation : false,
+				styles : {
+					column : 5,
+					bg : '#eee',
+					item : {
+						width : api.winWidth / 5,
+						bg : '#fff',
+						active : '#eee',
+						highlight : '#eee',
+						title : {
+							marginB : 14,
+							size : 14,
+							height : 14,
+							color : '#888',
+							active : '#f00',
+							highlight : '#f00'
+						},
+						icon : {
+							marginT : 0,
+							width : 30,
+							height : 30,
+							corner : 2
+						}
+					}
+				},
+				items : mlist,
+				fixedOn : 'body',
+				fixed : true
+			}, function(ret, err) {
+				if (ret) {
+					var index = ret.index
+					//					alert(mlist[index].title)
+					api.ajax({
+						url : Api+'fenleiList/search/',
+						method : 'post',
+						timeout : 30,
+						dataType : 'text',
+						returnAll : false,
+						data : {
+							values : {
+								title : mlist[index].title,
+								txpt : api.pageParam.mingzi,
+							},
+						}
+					}, function(ret, err) {
+						var data = eval(ret)
+						if (ret == '[]') {
+							api.toast({
+								msg : '暂无数据'
+							});
+							return
+						} else {
+							api.openFrame({
+								name : 'zipai',
+								url : '../../html/tppl/index.html',
+								rect : {
+									x : 0,
+									y : parseInt(headerh) + 44 + 25,
+									w : api.frameWidth,
+									h : api.frameHeight - 44
+								},
+								reload : true,
+								pageParam : {
+									name : ret,
+									type : data[0].type
+								},
+							});
+						}
+					});
+				} else {
+					alert(JSON.stringify(err));
+				}
+			});
+		};
+	</script>
+</html>
