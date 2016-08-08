@@ -16,7 +16,7 @@
   <preference name="fullScreen" value="false"/>  
   <preference name="autoUpdate" value="true"/>  
   <preference name="smartUpdate" value="false"/>  
-  <preference name="debug" value="false"/>  
+  <preference name="debug" value="true"/>  
   <preference name="statusBarAppearance" value="true"/>  
   <permission name="readPhoneState"/>  
   <permission name="camera"/>  
@@ -26,5 +26,11 @@
   <permission name="internet"/>  
   <permission name="bootCompleted"/>  
   <permission name="hardware"/>  
+  <feature name="smsVerify"> 
+    <param name="android_app_key" value="15d467322b222"/>  
+    <param name="android_app_secret" value="4983bb49ed7eec5f6ded82442af4e60d"/>  
+    <param name="ios_app_key" value="15d46cb90f97d"/>  
+    <param name="ios_app_secret" value="94a043547edde2dd638efc0de22d1404"/> 
+  </feature>  
   <access origin="*"/> 
 </widget>
