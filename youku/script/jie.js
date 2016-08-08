@@ -38,3 +38,8 @@ function formatSeconds(value) {
 		return result;
 	}
 }
+ 
+ uploadUrl='http://114.55.98.130/Public/admin/images/';
+ Api='http://114.55.98.130/index.php/api/'
+ 
+ 
