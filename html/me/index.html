@@ -27,9 +27,9 @@
 	</head>
 	<body>
 		<div class="H-text-list H-flexbox-horizontal  H-theme-background-color-zhuti   H-vertical-middle  " style="height: 160px;">
-			<span class=" H-padding-horizontal-right-5 H-display-block"style="margin-top: 0px;"> <img onclick="openme()" src="../../image/ic.jpg" style="width: 70px; height: 70px;border-radius: 35px;margin-left:30px; margin-top: -28px;margin-right:30px;" / ></span>
+			<span class=" H-padding-horizontal-right-5 H-display-block"style="margin-top: 0px;"> <img onclick="openme()" id="img" src="../../image/ic.jpg" style="width: 70px; height: 70px;border-radius: 35px;margin-left:30px; margin-top: -28px;margin-right:30px;" / ></span>
 			<div class="H-flex-item H-padding-horizontal-both-10 H-font-size-24 H-padding-vertical-bottom-12 ">
-				<span class="H-font-weight-600 H-theme-font-color-white">再回首恍然如梦</span>
+				<span class="H-font-weight-600 H-theme-font-color-white" id="username">再回首恍然如梦</span>
 				<br>
 				<button class="H-margin-horizontal-left-0 H-button-1 H-font-size-15 H-outline-none H-padding-vertical-both-1 H-padding-horizontal-both-1 H-theme-background-color-white H-theme-font-color-white H-theme-border-color-white H-theme-border-color8-click H-theme-background-color8-click H-theme-font-color8-click H-border-radius-3"style="color: #ff6606 ">
 					铜牌VIP
@@ -108,6 +108,7 @@
 	</body>
 	<script type="text/javascript" src="../../script/api.js"></script>
 	<script type="text/javascript" src="../../script/H.js"></script>
+	<script type="text/javascript" src="../../script/jie.js"></script>
 	<script type="text/javascript">
 		function openme() {
 			api.getPrefs({
@@ -120,7 +121,10 @@
 						url : '../../html/info/info_head.html'
 					});
 				} else {
-					alert("登陆后方可评论");
+					alert("请先登录，谢谢");
+					api.sendFrameToBack({
+						from : 'me'
+					});
 					api.openWin({
 						name : 'login',
 						url : '../../html/login.html',
@@ -131,6 +135,28 @@
 		}
 
 		apiready = function() {
+			api.getPrefs({
+				key : 'user'
+			}, function(ret, err) {
+				var val = ret.value;
+				if (val && val != "") {
+					var nameVal = ret.value
+					api.ajax({
+						url : Api + 'userinfo.html',
+						method : 'post',
+						timeout : 30,
+						dataType : 'json',
+						data : {
+							values : {
+								username : nameVal,
+							},
+						}
+					}, function(ret, err) {
+						$api.text($api.byId('username'), ret.username);
+						$api.attr($api.byId('img'), 'src', uploadUrl + ret.icon);
+					});
+				};
+			});
 		};
 	</script>
 </html>
