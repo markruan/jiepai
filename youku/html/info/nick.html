@@ -23,7 +23,6 @@
 		</style>
 	</head>
 	<body>
- 
 		<div class=" form   ">
 			<div class="H-flexbox-horizontal H-border-vertical-bottom-margin-left-10-after">
 				<span   class="H-vertical-middle H-padding-horizontal-left-10 H-theme-background-color-white H-font-size-16">新昵称：</span>
@@ -37,10 +36,10 @@
 	</body>
 	<script type="text/javascript" src="../../script/api.js"></script>
 	<script type="text/javascript" src="../../script/jie.js"></script>
+	<script type="text/javascript" src="../../script/H.js"></script>
 	<script type="text/javascript">
 		function update() {
 			var nick = $api.val($api.byId('nick'));
-		 
 			if (nick.length == 0) {
 				alert('输入不能为空')
 				return
@@ -67,8 +66,7 @@
 								api.toast({
 									msg : '修改成功'
 								});
-								api.closeWin({
-								});
+								setTimeout(refresh(), 280)
 							} else {
 								api.toast({
 									msg : '修改失败'
@@ -78,6 +76,18 @@
 					};
 				});
 			}
+		}
+
+		function refresh() {
+			var jsfun = 'intt()'
+			api.execScript({
+				script : jsfun,
+				name : 'info',
+				frameName : 'edit',
+			});
+			api.closeWin({
+				name : 'nick_head'
+			});
 		}
 
 		apiready = function() {
