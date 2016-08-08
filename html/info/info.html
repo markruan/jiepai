@@ -151,12 +151,7 @@
 						}, function(ret, err) {
 							if (ret == 0) {
 								alert('绑定成功')
-								api.closeWin({
-								});
-								api.openFrame({
-									name : 'edit',
-									reload : true
-								});
+								setTimeout(refresh(), 280)
 							} else
 								(
 									alert('绑定失败')
