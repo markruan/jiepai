@@ -23,7 +23,7 @@
 		</style>
 	</head>
 	<body>
-		<hr />
+ 
 		<div class="H-flexbox-horizontal H-border-vertical-bottom-margin-left-10-after">
 			<span class="H-vertical-middle H-padding-horizontal-left-10 H-theme-background-color-white H-font-size-16">手&nbsp机：</span>
 			<input id="phone" type="text" class="H-textbox H-vertical-align-middle H-vertical-middle H-font-size-16 H-flex-item H-box-sizing-border-box H-border-none H-outline-none H-padding-12" placeholder="手机号码">
@@ -117,6 +117,7 @@
 		function verify() {
 			var phone = document.getElementById("phone").value;
 			var code = document.getElementById("code").value;
+			//
 			smsVerify.verify({
 				phone : phone,
 				code : code,
@@ -140,7 +141,12 @@
 						}, function(ret, err) {
 							if (ret == 0) {
 								alert('绑定成功')
+								
 								api.closeWin({
+								});
+								api.openFrame({
+									name : 'edit',
+									reload : true
 								});
 							} else
 								(

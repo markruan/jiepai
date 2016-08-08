@@ -267,14 +267,19 @@
 				api.hideProgress();
 			}
 
-          function opensearch(){
-            api.openWin({
-	            name: 'search',
-	            url: '../html/search/header.html'
-            });
-          
-            
-          }
+			function opensearch() {
+				api.openWin({
+					name : 'search',
+					url : '../html/search/header.html',
+					animation : {
+						type : "push", //动画类型（详见动画类型常量）
+						subType : "from_bottom ", //动画子类型（详见动画子类型常量）
+						duration : 300 //动画过渡时间，默认300毫秒
+					}
+				});
+			}
+
+
 			H.ready(function() {
 				api.setStatusBarStyle({
 					style : 'light'
