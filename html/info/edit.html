@@ -22,7 +22,6 @@
 		</style>
 	</head>
 	<body>
-		 
 		<div class="H-padding-horizontal-both-10">
 			<div class="H-text-list H-flexbox-horizontal  H-theme-background-color-white H-border-vertical-bottom-after H-vertical-middle H-touch-active">
 				<div  class="H-flex-item H-padding-horizontal-both-10 H-font-size-16 H-padding-vertical-both-12">
@@ -35,9 +34,9 @@
 			</div>
 			<div class="H-text-list H-flexbox-horizontal  H-theme-background-color-white H-border-vertical-bottom-after H-vertical-middle ">
 				<div   class="H-flex-item H-padding-horizontal-both-10 H-font-size-16 H-padding-vertical-both-12 ">
-					昵称：<span id="nickname H-touch-active">初冬那些事</span>
+					昵称：<span id="nickname" >初冬那些事</span>
 				</div>
-				<span onclick="xiunick()" class=" H-padding-horizontal-right-5 H-display-block H-font-size-16  H-padding-horizontal-right-20">修改</span>
+				<span onclick="xiunick()" class=" H-padding-horizontal-right-5 H-display-block H-font-size-16  H-padding-horizontal-right-20 H-touch-active">修改</span>
 				<span class="H-icon H-padding-horizontal-right-5 H-display-block"></span>
 			</div>
 			<div class="H-text-list H-flexbox-horizontal  H-theme-background-color-white H-border-vertical-bottom-after H-vertical-middle ">
@@ -63,27 +62,24 @@
 	<script type="text/javascript" src="../../script/api.js"></script>
 	<script type="text/javascript" src="../../script/jie.js"></script>
 	<script type="text/javascript">
-	    function xiupsw() {
+		function xiupsw() {
 			api.openWin({
 				name : 'psw_head',
 				url : '../../html/info/psw_head.html',
-				 
 			});
 		}
+
 		function xiunick() {
 			api.openWin({
 				name : 'nick_head',
 				url : '../../html/info/nick_head.html',
-				 
 			});
 		}
-	      
-	      
+
 		function opensms() {
 			api.openWin({
 				name : 'opensms',
 				url : '../../html/info/edit_head.html',
-				 
 			});
 		}
 
@@ -97,7 +93,14 @@
 			});
 		}
 
-		apiready = function() {
+		function reload() {
+			api.openFrame({
+				name : 'edit',
+				reload : true
+			});
+		}
+
+		function intt() {
 			api.getPrefs({
 				key : 'user'
 			}, function(ret, err) {
@@ -119,6 +122,10 @@
 					$api.attr($api.byId('img'), 'src', uploadUrl + ret.icon);
 				});
 			});
+		}
+
+		apiready = function() {
+			intt()
 		};
 	</script>
 </html>

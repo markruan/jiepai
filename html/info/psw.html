@@ -23,7 +23,6 @@
 		</style>
 	</head>
 	<body>
-	 
 		<div class=" form   ">
 			<div class="H-flexbox-horizontal H-border-vertical-bottom-margin-left-10-after">
 				<span   class="H-vertical-middle H-padding-horizontal-left-10 H-theme-background-color-white H-font-size-16">新密码：</span>
@@ -45,9 +44,8 @@
 	<script type="text/javascript">
 		function update() {
 			var newpsw1 = $api.val($api.byId('newpsw1'));
-		 	var newpsw2 = $api.val($api.byId('newpsw2'));
-		 
-			if (newpsw1.length == 0 ||newpsw2.length == 0 ) {
+			var newpsw2 = $api.val($api.byId('newpsw2'));
+			if (newpsw1.length == 0 || newpsw2.length == 0) {
 				alert('输入不能为空')
 				return
 			} else {
@@ -77,9 +75,7 @@
 									api.toast({
 										msg : '修改成功'
 									});
-									
-									api.closeWin({
-                                    });
+									setTimeout(refresh(), 280)
 								} else {
 									api.toast({
 										msg : '修改失败'
@@ -90,6 +86,18 @@
 					});
 				}
 			}
+		}
+
+		function refresh() {
+			var jsfun = 'intt()'
+			api.execScript({
+				script : jsfun,
+				name : 'info',
+				frameName : 'edit',
+			});
+			api.closeWin({
+				name : 'psw_head'
+			});
 		}
 
 		apiready = function() {
