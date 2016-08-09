@@ -17,18 +17,8 @@
 		var headerh = $api.getStorage('headerJ');
 		apiready = function() {
 			var mlist = api.pageParam.name
-			//			api.openFrame({
-			//				name : 'zipai',
-			//				url : '../../html/index/index.html',
-			//				rect : {
-			//					x : 0,
-			//					y : parseInt(headerh) + 44 + 25,
-			//					w : api.frameWidth,
-			//					h : api.frameHeight - 44
-			//				}
-			//			});
 			api.ajax({
-				url : Api+'fenleiList/search/',
+				url : Api + 'fenleiList/search/',
 				method : 'post',
 				timeout : 30,
 				dataType : 'text',
@@ -106,7 +96,7 @@
 					var index = ret.index
 					//					alert(mlist[index].title)
 					api.ajax({
-						url : Api+'fenleiList/search/',
+						url : Api + 'fenleiList/search/',
 						method : 'post',
 						timeout : 30,
 						dataType : 'text',
