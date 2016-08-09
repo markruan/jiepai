@@ -34,7 +34,7 @@
 						<span class="H-icon H-center-all H-theme-background-transparent H-border-radius-circle H-theme-border-color-white H-margin-horizontal-auto" style="height: 40px; width: 40px; "><i class="iconfont icon-fenxiang H-font-size-26 H-theme-font-color-white"style="font-size: 26px"></i></span>
 						<label class="H-display-block H-font-size-13 H-margin-vertical-top-5 H-theme-font-color-white">分享到</label>
 					</div>
-					<div class="H-flex-item"  onclick="kaifa()">
+					<div class="H-flex-item"  onclick="shoucangP()">
 						<span class="H-icon H-center-all H-theme-background-transparent H-border-radius-circle H-theme-border-color-white H-margin-horizontal-auto" style="height: 40px; width: 40px; "><i class="iconfont icon-heart H-font-size-22 H-theme-font-color-white"style="font-size: 26px"></i></span>
 						<label class="H-display-block H-font-size-13 H-margin-vertical-top-5 H-theme-font-color-white">收藏</label>
 					</div>
@@ -46,6 +46,7 @@
 			</div>
 	</body>
 	<script type="text/javascript" src="../../script/api.js"></script>
+	<script type="text/javascript" src="../../script/jie.js"></script>
 	<script type="text/javascript">
 		function kaifa() {
 			alert('开发中...')
@@ -62,6 +63,39 @@
 				name : 'img1',
 				script : jsfun
 			});
+		}
+
+		function shoucangP() {
+			var pid = api.pageParam.pid;
+			if (api.pageParam.shoucang == 0) {
+			    alert('已经收藏过了')
+			   
+			} else {
+				api.getPrefs({
+					key : 'user'
+				}, function(ret, err) {
+					var user = ret.value
+					api.ajax({
+						url : Api + 'shoucangP.html',
+						method : 'post',
+						timeout : 30,
+						dataType : 'text',
+						returnAll : false,
+						data : {
+							values : {
+								pid : pid,
+								username : user ,
+							},
+						}
+					}, function(ret, err) {
+						if (ret == 0) {
+							alert('收藏成功')
+						} else {
+							alert('收藏失败或已经收藏过了')
+						}
+					});
+				});
+			}
 		}
 
 		apiready = function() {
