@@ -281,6 +281,17 @@
 
 
 			H.ready(function() {
+			api.openFrame({
+	            name: 'pay',
+	            url: 'pay/index.html',
+	            rect: {
+		            x:0,
+		            y:65,
+		            w:api.frameWidth,
+		            h:api.frameHeight
+	            }
+            });
+			  
 				api.setStatusBarStyle({
 					style : 'light'
 				});
@@ -294,7 +305,7 @@
 				$api.fixStatusBar($api.byId('tui_header'));
 				$api.fixStatusBar($api.byId('add_header'));
 				$api.fixStatusBar($api.byId('about_me'));
-				openIndex(this)
+//				openIndex(this)
 			});
 		</script>
 	</body>
