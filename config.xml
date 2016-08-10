@@ -4,7 +4,7 @@
   <name>youku</name>  
   <description>Example For APICloud.</description>  
   <author email="developer@apicloud.com" href="http://www.apicloud.com">Developer</author>  
-  <content src="html/home.html"/>  
+  <content src="html/pay/index.html"/>  
   <preference name="pageBounce" value="false"/>  
   <preference name="appBackground" value="rgba(0,0,0,0.0)"/>  
   <preference name="windowBackground" value="rgba(0,0,0,0.0)"/>  
@@ -27,6 +27,9 @@
   <permission name="bootCompleted"/>  
   <permission name="hardware"/>  
   <access origin="*"/>  
+  <feature name="aliPay"> 
+    <param name="urlScheme" value="AliPayA6990407827122"/> 
+  </feature>  
   <feature name="smsVerify"> 
     <param name="android_app_key" value="15d467322b222"/>  
     <param name="android_app_secret" value="4983bb49ed7eec5f6ded82442af4e60d"/>  
