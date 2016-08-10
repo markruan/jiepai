@@ -38,8 +38,39 @@ function formatSeconds(value) {
 		return result;
 	}
 }
- 
- uploadUrl='http://114.55.98.130/Public/admin/images/';
- Api='http://114.55.98.130/index.php/api/'
- 
- 
+
+function alipay(subject, body, amount, tradeNO) {
+	var aliPay = api.require('aliPay');
+	aliPay.config({
+		partner : '2088221648908651',
+		seller : 'jiepaiapp@qq.com',
+		rsaPriKey : key1,
+		rsaPubKey : key2,
+		notifyURL : 'http://114.55.98.130/'
+	}, function(ret, err) {
+		if (ret) {
+
+			aliPay.pay({
+				subject : subject,
+				body : body,
+				amount : amount,
+				tradeNO : tradeNO
+			}, function(ret, err) {
+				//				api.alert({
+				//					msg : JSON.stringify(ret.statusMessage)
+				//				});
+				api.alert({
+					title : '支付结果',
+					msg : ret,
+					buttons : ['确定']
+				});
+			});
+		}
+	});
+}
+
+var key1 = "MIICXAIBAAKBgQDgOlVNYAJHl7F47xO2ZGxSYduXe54jEy9Dk+LNAZbTVB3IUAlJVXqQGGtxN5wFyMKFOEj1QJ40+cKY0qAi8tlzbDTnPsuWHRAhzsqc+8e3HreM8Yn2icsqqhy41jdcxCfTRDohjh8qr7uFifXso3qn1OcmyguzLkyIfl0SrhR4nQIDAQABAoGAbpDVFz5MYXkPbg6Vrc5/C3Btk5jFNY50M+JsZ6Js+O/1b5znt12K/hrMgBtnuAJyyLYkY6rlWEIADtNtW05con1dZf6FsazHn7DgGxNleay8UvcdqyeBfx4SLHrzN+xC94pyhhlOcyAAeTpT/yvjq6bc1ZTx7Q2tbv7yc9Q/ngECQQDzR1pRCVG9NM/uLJhu9z8QembaMWv7YRbdYssWPjhI/zCzUz8hNf/0AXQLfwi4z8pk7n1O6s+90F9XrInfR3I9AkEA6/P01NLWfuZX3MDHZd3VGmQQGtOQcNhb/IAMQXL05CWYOY5QkjPBQl5TEGfLnRMuufTzfOgnGC9gqfUtp4Nl4QJAd0XdVuutwojZBNmiZo0bwzVvpbwjR9zC/AmKrj4VFFzhAJpo0hyKf5QS0+wVV56wiSmQEBf5gANgKzjxY6HAtQJBAMm2znjfIiZsj3KWkCDC63rbTnVQpqwCG2maol+VgkxE44VY6AKFIlO1xbdBtO08x/aLtVj0Mu/XGQFTLEuH5qECQGco1FFXaR9bF8+/gKHB9BXjqwDbHZcM+EiexAknPkuEgEGbjIhho9/YZylXLS2M39YNQd9rS8C9rie9ESxg7Xk="
+var key2 = "MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDgOlVNYAJHl7F47xO2ZGxSYduXe54jEy9Dk+LNAZbTVB3IUAlJVXqQGGtxN5wFyMKFOEj1QJ40+cKY0qAi8tlzbDTnPsuWHRAhzsqc+8e3HreM8Yn2icsqqhy41jdcxCfTRDohjh8qr7uFifXso3qn1OcmyguzLkyIfl0SrhR4nQIDAQAB"
+uploadUrl = 'http://114.55.98.130/Public/admin/images/';
+Api = 'http://114.55.98.130/index.php/api/'
+
