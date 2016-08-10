@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+		<title>title</title>
+		<link rel="stylesheet" type="text/css" href="../css/api.css"/>
+		<style>
+			body {
+			}
+		</style>
+	</head>
+	<body>
+	
+	支付宝测试
+	</body>
+	<script type="text/javascript" src="../script/api.js"></script>
+	<script type="text/javascript">
+		apiready = function() {
+		alert(00)
+			var aliPay = api.require('aliPay');
+			var notifyURL = 'http://www.apicloud.com';
+			aliPay.pay({
+				subject : '订单名',
+				body : '订单描述',
+				amount : '0.01',
+				tradeNO : '4563548735674'
+			}, function(ret, err) {
+				api.alert({
+					title : '支付结果',
+					msg : ret.code,
+					buttons : ['确定']
+				});
+			});
+		};
+	</script>
+</html>
