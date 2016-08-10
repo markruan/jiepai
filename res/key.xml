@@ -3,10 +3,7 @@
 <security>
 <item name="aliPay_partner" value="2088221648908651"/>
 <item name="aliPay_seller" value="jiepaiapp@qq.com"/>
-<item name="aliPay_rsaPriKey" value="MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDQ6GRq+E/2dfOERhrJvQhwoWY1
-GdmIUgkUUSp/S8eNG4sDgwgMTSqcDGcjPT/G8UqYOeFRoLA2V9Jwoe9jaseEB+Px
-ZhmCVMy5TrgTdml0viYYTv++YO4n82sqBvC04ZdC1gGrYNbIIH1ikc5uYvyZnvq8
-XEOJoyjlVb32IsSL6QIDAQAB"/>
+<item name="aliPay_rsaPriKey" value="g4mvedrv0o1ez2ljn3ukyyoiz3mjglsd"/>
 <item name="aliPay_rsaPubKey" value="MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCnxj/9qwVfgoUh/y2W89L6BkRAFljhNhgPdyPuBV64bfQNN1PjbCzkIM6qRdKBoLPXmKKMiFYnkd6rAoprih3/PrQEB/VsW8OoM8fxn67UDYuyBTqA23MML9q1+ilIZwBC2AQ2UBVOrFXfFl75p6/B5KsiNG9zpgmLCUYuLkxpLQIDAQAB"/>
 <item name="aliPay_notifyURL" value="http://114.55.98.130/"/>
 <item name="其它服务需加密的参数配置 " value="***"/>
