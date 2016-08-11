@@ -119,20 +119,14 @@
 			var meId = $api.byId('about_me');
 			var jingxuan_footer = $api.byId('jingxuan_footer');
 			function openM(title, mingzi) {
+				api.closeFrameGroup({
+					name : 'shoucang_group'
+				});
 				api.closeFrame({
 					name : 'common_index'
 				});
 				api.closeFrame({
 					name : 'shoucang'
-				});
-				api.closeFrame({
-					name : 'history'
-				});
-				api.closeFrameGroup({
-					name : 'shoucang_group'
-				});
-				api.closeFrameGroup({
-					name : 'history_group'
 				});
 				api.openWin({
 					name : title,
@@ -148,8 +142,9 @@
 				api.closeFrame({
 					name : 'history'
 				});
-				api.closeFrame({
-					name : 'me'
+				api.setFrameAttr({
+					name : 'me',
+					hidden : true
 				});
 				api.closeFrameGroup({
 					name : 'history_group'
@@ -177,18 +172,6 @@
 			}
 
 			function openMe(button) {
-				api.closeFrame({
-					name : 'common_index'
-				});
-				api.closeFrame({
-					name : 'shoucang'
-				});
-				api.closeFrameGroup({
-					name : 'history_group'
-				});
-				api.closeFrame({
-					name : 'history'
-				});
 				$api.addCls(hh1, 'H-display-none');
 				$api.addCls(hhh, 'H-display-none');
 				$api.addCls(shouId, 'H-display-none');
@@ -201,7 +184,7 @@
 				api.openFrame({
 					name : 'me',
 					url : '../html/me/index.html',
-					reload : true,
+					//					reload : true,
 					rect : {
 						x : 0,
 						y : 25,
@@ -215,8 +198,9 @@
 				api.closeFrame({
 					name : 'common_index'
 				});
-				api.closeFrame({
-					name : 'me'
+				api.setFrameAttr({
+					name : 'me',
+					hidden : true
 				});
 				api.closeFrame({
 					name : 'shoucang'
@@ -249,8 +233,9 @@
 				api.closeFrame({
 					name : 'history'
 				});
-				api.closeFrame({
-					name : 'me'
+				api.setFrameAttr({
+					name : 'me',
+					hidden : true
 				});
 				api.closeFrame({
 					name : 'shoucang'
