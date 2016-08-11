@@ -48,7 +48,7 @@
 	<script type="text/javascript" src="../../script/api.js"></script>
 	<script type="text/javascript" src="../../script/echo.min.js"></script>
 	<script type="text/javascript">
-		function openV(url,vid, varr, title, vbianhao) {
+		function openV(url,vid, varr, title, vbianhao,img,vprice) {
 			api.openWin({
 				name : 'veido',
 				url : '../../html/vedio/index.html',
@@ -58,7 +58,9 @@
 					title : title,
 					vbianhao : vbianhao,
 					vid : vid,
-					shoucang:1
+					shoucang:1,
+					img:img,
+					vprice:vprice
 				}
 			});
 		}
@@ -93,13 +95,14 @@
 				var title = myobj[i].vname;
 				var vbianhao = myobj[i].vbianhao;
 				var pic = myobj[i].vpic;
+				var vprice = myobj[i].vprice;
 				var vid = myobj[i].id;
 				var img = pic.split(' ');
 				var picc = img[0]
 				var varr = eval(myobj[i].vurl)
 				var vurl = eval(myobj[i].vurl)[0]
 				var totaltime = eval(myobj[i].vtime)[0]
-				html += '<div onclick="openV(\'' + vurl + '\' ,\'' + vid + '\',\'' + varr + '\',\'' + title + '\',\'' + vbianhao + '\' )" class="H-display-table-cell H-theme-background-color-white H-float-left  H-box-sizing-border-box H-width-avg-3 H-padding-horizontal-right-4 H-margin-vertical-bottom-10   " style="margin-bottom: 10px; ">';
+				html += '<div onclick="openV(\'' + vurl + '\' ,\'' + vid + '\',\'' + varr + '\',\'' + title + '\',\'' + vbianhao + '\',\'' + pic + '\' ,\'' + vprice + '\' )" class="H-display-table-cell H-theme-background-color-white H-float-left  H-box-sizing-border-box H-width-avg-3 H-padding-horizontal-right-4 H-margin-vertical-bottom-10   " style="margin-bottom: 10px; ">';
 				html += '<img src="../../image/default.jpg"    data-echo="' + picc + '" class=" H-float-right H-margin-vertical-top-8 H-margin-horizontal-both-2 H-display-block" alt="" title="" style="width: 96%" ;height:200>';
 				html += '<img src="../../image/xia.png " class=" H-float-right  H-margin-vertical-top-8 H-margin-horizontal-both-2 H-display-block" style="margin-top: -200px; height: 200px ; width: 96%" alt="" title="">';
 				html += '<div  class=" " style=" margin-right:8px; margin-top:-30px;line-height: 30px; float: right; color:white ;">' + totaltime + '</div>';

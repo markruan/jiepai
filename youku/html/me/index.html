@@ -116,13 +116,19 @@
 						url : '../../html/info/info_head.html'
 					});
 				} else {
-					api.toast({
-						msg : "请先登录，谢谢"
+					api.confirm({
+						title : '快点登录吧？',
+												msg : '更多精彩内容登录后查看',
+						buttons : ['确定', '取消']
+					}, function(ret, err) {
+						var index = ret.buttonIndex;
+						if (index == 1) {
+							api.sendFrameToBack({
+								from : 'me'
+							});
+							login()
+						}
 					});
-					api.sendFrameToBack({
-						from : 'me'
-					});
-					login()
 				}
 			});
 		}
