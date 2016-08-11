@@ -21,8 +21,7 @@
 		</style>
 	</head>
 	<body>
-	<div id="list" ></div>
-		
+		<div id="list" ></div>
 		<div class="H-padding-vertical-bottom-10"></div>
 	</body>
 	<script type="text/javascript" src="../../script/api.js"></script>
@@ -38,12 +37,14 @@
 					varr : varr,
 					title : title,
 					vbianhao : vbianhao,
-					shoucang:0
+					shoucang : 0
 				}
 			});
 		}
 
 		function int() {
+			var html = '';
+			var list = $api.byId('list');
 			api.showProgress({
 				style : 'default',
 				animationType : 'fade',
@@ -51,50 +52,58 @@
 				text : '先喝杯茶...',
 				modal : false
 			});
-			api.ajax({
-				url : Api + 'shoucangVapi.html',
-				method : 'post',
+			api.getPrefs({
+				key : 'user'
 			}, function(ret, err) {
-				var html = '';
-				var list = $api.byId('list');
-				var myobj = ret
-				for (var i = 0; i < myobj.length; i++) {
-					var title = myobj[i].vname;
-					var vbianhao = myobj[i].vbianhao;
-					var pic = myobj[i].vpic;
-					var img = pic.split(' ');
-					var picc = img[0]
-					var varr = eval(myobj[i].vurl)
-					var vurl = eval(myobj[i].vurl)[0]
-					var totaltime = eval(myobj[i].vtime)[0]
-					//					html += '<div onclick="openV(\'' + vurl + '\' ,\'' + varr + '\',\'' + title + '\',\'' + vbianhao + '\' )" class="H-display-table-cell H-theme-background-color-white H-float-left  H-box-sizing-border-box H-width-avg-3 H-padding-horizontal-right-4 H-margin-vertical-bottom-10   " style="margin-bottom: 10px; ">';
-					//					html += '<img src="../../image/default.jpg"    data-echo="' + picc + '" class=" H-float-right H-margin-vertical-top-8 H-margin-horizontal-both-2 H-display-block" alt="" title="" style="width: 96%" ;height:200>';
-					//					html += '<img src="../../image/xia.png " class=" H-float-right  H-margin-vertical-top-8 H-margin-horizontal-both-2 H-display-block" style="margin-top: -200px; height: 200px ; width: 96%" alt="" title="">';
-					//					html += '<div  class=" " style=" margin-right:8px; margin-top:-30px;line-height: 30px; float: right; color:white ;">' + totaltime + '</div>';
-					//					html += '<div class="H-text-align-center H-font-size-14 H-padding-vertical-top-10    " style="line-height: 35px">' + title.substr(0, 7) + '</div>';
-					//					html += '<div class="H-padding-vertical-bottom-10 H-theme-background-color-eee  " style="margin: 0 -10px"></div></div>';
-					html += '<div  class="H-flexbox-horizontal H-theme-background-color-white  "  >';
-					html += '<div class="H-padding-vertical-both-10" style="width:31%; hight:95%;"><img onclick="openV(\'' + vurl + '\' ,\'' + varr + '\',\'' + title + '\',\'' + vbianhao + '\' )"  src="../../image/default.jpg"    data-echo="' + picc + '" alt="" title="" class="H-display-block H-margin-horizontal-left-10" style="width:100%;  "></div>';
-					html += '<div class="H-flex-item H-padding-10">';
-					html += '<strong class="H-font-weight-normal font-weight-500 H-font-size-16 H-display-block H-padding-horizontal-left-10 H-padding-vertical-both-3">名称：<span>' + title.substr(0, 7) + '</span></strong>';
-					html += '<strong class="H-font-weight-normal font-weight-500 H-font-size-16 H-display-block H-padding-horizontal-left-10 H-padding-vertical-both-3">续集：第42期</strong>';
-					html += '<strong class="H-font-weight-normal font-weight-500 H-font-size-16 H-display-block H-padding-horizontal-left-10 H-padding-vertical-both-3">编号：<span>'+vbianhao+'</span></strong>';
-					html += '<strong class="H-font-weight-normal font-weight-500 H-font-size-16 H-display-block H-padding-horizontal-left-10 H-padding-vertical-both-3">类型：VIP用户</strong>';
-					html += '<span class="H-padding-horizontal-left-10 H-float-left">';
-					html += '<button class="H-button H-font-size-15 H-outline-none H-padding-vertical-both-8 H-padding-horizontal-both-20 H-theme-background-color-zhuti H-theme-font-color-white H-theme-border-color8 H-theme-border-color8-click H-theme-background-color8-click H-theme-font-color8-click H-border-radius-3">铜牌播放</button></span>';
-					html += '<span class="H-padding-horizontal-left-10 H-float-left">';
-					html += '<button class="H-button H-font-size-15 H-outline-none H-theme-background-color-transparent H-padding-vertical-both-8 H-padding-horizontal-both-20 H-theme-font-color4 H-theme-border-color4 H-theme-border-color4-click H-theme-background-color4-click H-theme-font-color4-click">开通VIP</button> </span></div></div>';
+				var user = ret.value
+				if (user!='') {
+					api.ajax({
+						url : Api + 'shoucangVapi.html',
+						method : 'post',
+						data : {
+							values : {
+								username : user,
+							},
+						}
+					}, function(ret, err) {
+						var myobj = ret
+						for (var i = 0; i < myobj.length; i++) {
+							var title = myobj[i].vname;
+							var vbianhao = myobj[i].vbianhao;
+							var pic = myobj[i].vpic;
+							var img = pic.split(' ');
+							var picc = img[0]
+							var varr = eval(myobj[i].vurl)
+							var vurl = eval(myobj[i].vurl)[0]
+							var totaltime = eval(myobj[i].vtime)[0]
+							html += '<div  class="H-flexbox-horizontal H-theme-background-color-white  "  >';
+							html += '<div class="H-padding-vertical-both-10" style="width:31%; hight:95%;"><img onclick="openV(\'' + vurl + '\' ,\'' + varr + '\',\'' + title + '\',\'' + vbianhao + '\' )"  src="../../image/default.jpg"    data-echo="' + picc + '" alt="" title="" class="H-display-block H-margin-horizontal-left-10" style="width:100%;  "></div>';
+							html += '<div class="H-flex-item H-padding-10">';
+							html += '<strong class="H-font-weight-normal font-weight-500 H-font-size-16 H-display-block H-padding-horizontal-left-10 H-padding-vertical-both-3">名称：<span>' + title.substr(0, 7) + '</span></strong>';
+							html += '<strong class="H-font-weight-normal font-weight-500 H-font-size-16 H-display-block H-padding-horizontal-left-10 H-padding-vertical-both-3">续集：第42期</strong>';
+							html += '<strong class="H-font-weight-normal font-weight-500 H-font-size-16 H-display-block H-padding-horizontal-left-10 H-padding-vertical-both-3">编号：<span>' + vbianhao + '</span></strong>';
+							html += '<strong class="H-font-weight-normal font-weight-500 H-font-size-16 H-display-block H-padding-horizontal-left-10 H-padding-vertical-both-3">类型：VIP用户</strong>';
+							html += '<span class="H-padding-horizontal-left-10 H-float-left">';
+							html += '<button class="H-button H-font-size-15 H-outline-none H-padding-vertical-both-8 H-padding-horizontal-both-20 H-theme-background-color-zhuti H-theme-font-color-white H-theme-border-color8 H-theme-border-color8-click H-theme-background-color8-click H-theme-font-color8-click H-border-radius-3">铜牌播放</button></span>';
+							html += '<span class="H-padding-horizontal-left-10 H-float-left">';
+							html += '<button class="H-button H-font-size-15 H-outline-none H-theme-background-color-transparent H-padding-vertical-both-8 H-padding-horizontal-both-20 H-theme-font-color4 H-theme-border-color4 H-theme-border-color4-click H-theme-background-color4-click H-theme-font-color4-click">开通VIP</button> </span></div></div><div class="H-padding-vertical-bottom-5"></div>';
+						}
+						$api.html(list, html);
+						api.hideProgress();
+						api.refreshHeaderLoadDone();
+						echo.init({
+							offset : 0,
+							throttle : 150,
+							unload : false,
+							callback : function(element, op) {
+							}
+						});
+					});
+				} else {
+					$api.html(list, '<div onclick="login()" class="H-center-all  H-auto-height  H-font-size-16  " style="color: #bcbcbc;margin-top:50%;"> 请先登录  </div>');
+					api.hideProgress();
+					api.refreshHeaderLoadDone();
 				}
-				$api.html(list, html);
-				api.hideProgress();
-				api.refreshHeaderLoadDone();
-				echo.init({
-					offset : 0,
-					throttle : 150,
-					unload : false,
-					callback : function(element, op) {
-					}
-				});
 			});
 		}
 
