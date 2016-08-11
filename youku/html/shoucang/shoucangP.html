@@ -24,10 +24,6 @@
 	</head>
 	<body class="H-z-index-1000">
 		<div id="imglist" class="H-clear-both H-width-100-percent H-display-table H-box-sizing-border-box H-padding-horizontal-both-10  "></div>
-	    
-	  
-	   
-	
 	</body>
 	<script type="text/javascript" src="../../script/api.js"></script>
 	<script type="text/javascript" src="../../script/jie.js"></script>
@@ -50,6 +46,7 @@
 			api.openWin({
 				name : 'img1',
 				url : '../../html/img/index.html',
+				slidBackEnabled : false,
 				pageParam : {
 					name : arr,
 					pid : pid,
@@ -57,7 +54,7 @@
 				}
 			});
 		}
- 
+
 		function intimg() {
 			var html = '';
 			var list = $api.byId('imglist');
@@ -68,7 +65,6 @@
 				text : '先喝杯茶...',
 				modal : false
 			});
-			 
 			api.getPrefs({
 				key : 'user'
 			}, function(ret, err) {
