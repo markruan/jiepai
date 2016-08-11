@@ -25,7 +25,7 @@
 				},
 				pageParam : {
 					pid : api.pageParam.pid,
-					shoucang:api.pageParam.shoucang
+					shoucang : api.pageParam.shoucang
 				}
 			});
 		}
@@ -101,6 +101,26 @@
 				}
 				if (ret.eventType == 'change') {
 					var index = ret.index + 1;
+					if (index == 4) {
+						api.getPrefs({
+							key : 'user'
+						}, function(ret, err) {
+							if (ret.value != '') {
+								return
+							} else {
+								api.openFrame({
+									name : 'login1',
+									url : '../../html/login1.html',
+									rect : {
+										x : 0,
+										y : 0,
+										w : api.frameWidth,
+										h : api.screenHeight
+									}
+								});
+							}
+						});
+					}
 					api.sendEvent({
 						name : 'imglist',
 						extra : {
@@ -115,8 +135,7 @@
 			api.addEventListener({
 				name : 'keyback'
 			}, function(ret, err) {
-				api.closeFrame({
-					name : 'img1'
+				api.closeWin({
 				});
 			});
 		};
