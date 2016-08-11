@@ -45,7 +45,7 @@
 	<script type="text/javascript" src="../../script/jie.js"></script>
 	<script type="text/javascript" src="../../script/echo.min.js"></script>
 	<script type="text/javascript">
-		function openV(url, vid, varr, title, vbianhao,img,vprice) {
+		function openV(url, vid, varr, title, vbianhao, img, vprice) {
 			api.openWin({
 				name : 'veido',
 				url : '../../html/vedio/index.html',
@@ -55,9 +55,9 @@
 					title : title,
 					vbianhao : vbianhao,
 					vid : vid,
-					shoucang:1,
-					img:img,
-					vprice:vprice
+					shoucang : 1,
+					img : img,
+					vprice : vprice
 				}
 			});
 		}
@@ -66,7 +66,7 @@
 			api.openWin({
 				name : 'img1',
 				url : '../../html/img/index.html',
-				slidBackEnabled:false,
+				slidBackEnabled : false,
 				pageParam : {
 					name : arr,
 					pid : pid
