@@ -172,6 +172,21 @@
 			}
 
 			function openMe(button) {
+				api.closeFrame({
+					name : 'common_index'
+				});
+				api.closeFrame({
+					name : 'history'
+				});
+				api.closeFrameGroup({
+					name : 'history_group'
+				});
+				api.closeFrame({
+					name : 'shoucang'
+				});
+				api.closeFrameGroup({
+					name : 'shoucang_group'
+				});
 				$api.addCls(hh1, 'H-display-none');
 				$api.addCls(hhh, 'H-display-none');
 				$api.addCls(shouId, 'H-display-none');
