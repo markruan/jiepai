@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+		<title>title</title>
+		<link rel="stylesheet" type="text/css" href="../../css/Hui.css"/>
+		<style>
+			.H-theme-background-color-zhuti {
+				background-color: #ff6606;
+			}
+			.H-theme-font-color-hui {
+				color: #9E9E9E;
+			}
+			.H-channel-line {
+				margin-left: 1px;
+				height: 8px;
+				width: 1.9px;
+			}
+			.H-theme-border-color-hui {
+				border: 1px solid #f4f5f9;
+			}
+		</style>
+	</head>
+	<body class="H-z-index-1000">
+		<div id="imglist" class="H-clear-both H-width-100-percent H-display-table H-box-sizing-border-box H-padding-horizontal-both-10  "></div>
+	    
+	  
+	   
+	
+	</body>
+	<script type="text/javascript" src="../../script/api.js"></script>
+	<script type="text/javascript" src="../../script/jie.js"></script>
+	<script type="text/javascript" src="../../script/echo.min.js"></script>
+	<script type="text/javascript">
+		function openV(url, varr, title, vbianhao) {
+			api.openWin({
+				name : 'veido',
+				url : '../../html/vedio/index.html',
+				pageParam : {
+					name : url,
+					varr : varr,
+					title : title,
+					vbianhao : vbianhao
+				}
+			});
+		}
+
+		function openImg(arr, pid) {
+			api.openWin({
+				name : 'img1',
+				url : '../../html/img/index.html',
+				pageParam : {
+					name : arr,
+					pid : pid,
+					shoucang : 0
+				}
+			});
+		}
+ 
+		function intimg() {
+			var html = '';
+			var list = $api.byId('imglist');
+			api.showProgress({
+				style : 'default',
+				animationType : 'fade',
+				title : '努力加载中...',
+				text : '先喝杯茶...',
+				modal : false
+			});
+			 
+			api.getPrefs({
+				key : 'user'
+			}, function(ret, err) {
+				var user = ret.value
+				if (user != '') {
+					api.ajax({
+						url : Api + 'shoucangPapi.html',
+						method : 'post',
+						data : {
+							values : {
+								username : user,
+							},
+						}
+					}, function(ret, err) {
+						var myobj = ret
+						for (var i = 0; i < myobj.length; i++) {
+							var title = myobj[i].vname;
+							var pic = myobj[i].pp
+							var pid = myobj[i].id
+							var title = myobj[i].pname
+							var vurl = myobj[i].purl
+							var img = pic.split(' ');
+							var zhang = img.length
+							html += '<div onclick="openImg(\'' + pic + '\',' + pid + ')" class="H-display-table-cell H-theme-background-color-white H-float-left  H-box-sizing-border-box H-width-avg-3 H-padding-horizontal-right-4 H-margin-vertical-bottom-10   " style="margin-bottom: 10px; ">';
+							html += '<img  src="../../image/default.jpg"  data-echo="' + vurl + '" class=" H-float-right H-margin-vertical-top-8 H-margin-horizontal-both-2 H-display-block" alt="" title="" style="width: 96%" ;height:200>';
+							html += '<img src="../../image/xia.png " class=" H-float-right  H-margin-vertical-top-8 H-margin-horizontal-both-2 H-display-block" style="margin-top: -200px; height: 200px ; width: 96%" alt="" title="">';
+							html += '<div  class=" " style=" margin-right:8px; margin-top:-30px;line-height: 30px; float: right; color:white ;">' + zhang + '<span>张</span></div>';
+							html += '<div class="H-text-align-center H-font-size-14 H-padding-vertical-top-10    " style="line-height: 35px">' + title.substr(0, 7) + '</div>';
+							html += '<div class="H-padding-vertical-bottom-10 H-theme-background-color-eee  " style="margin: 0 -10px"></div></div>';
+						}
+						$api.html(list, html);
+						api.hideProgress();
+						api.refreshHeaderLoadDone();
+						echo.init({
+							offset : 0,
+							throttle : 150,
+							unload : false,
+							callback : function(element, op) {
+							}
+						});
+					});
+				} else {
+					$api.html(list, '<div  onclick="login()" class="H-center-all  H-auto-height  H-font-size-16 " style="color: #bcbcbc;margin-top:50%;"> 请先登录  </div>');
+					api.hideProgress();
+					api.refreshHeaderLoadDone();
+				}
+			});
+		}
+
+		apiready = function() {
+			intimg();
+			api.setRefreshHeaderInfo({
+				visible : true,
+				bgColor : '#f2f2f2',
+				textColor : '#4d4d4d',
+				textDown : '下拉刷新...',
+				textUp : '松开刷新...',
+				showTime : true
+			}, function(ret, err) {
+				intimg();
+			});
+		};
+	</script>
+</html>
