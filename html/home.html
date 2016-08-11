@@ -119,6 +119,21 @@
 			var meId = $api.byId('about_me');
 			var jingxuan_footer = $api.byId('jingxuan_footer');
 			function openM(title, mingzi) {
+				api.closeFrame({
+					name : 'common_index'
+				});
+				api.closeFrame({
+					name : 'shoucang'
+				});
+				api.closeFrame({
+					name : 'history'
+				});
+				api.closeFrameGroup({
+					name : 'shoucang_group'
+				});
+				api.closeFrameGroup({
+					name : 'history_group'
+				});
 				api.openWin({
 					name : title,
 					url : '../html/jingxuan/header.html',
