@@ -122,11 +122,17 @@
 				api.closeFrameGroup({
 					name : 'shoucang_group'
 				});
-				api.closeFrame({
-					name : 'common_index'
-				});
+				//				api.closeFrame({
+				//					name : 'common_index'
+				//				});
 				api.closeFrame({
 					name : 'shoucang'
+				});
+				api.closeFrame({
+					name : 'history'
+				});
+				api.closeFrame({
+					name : 'me'
 				});
 				api.openWin({
 					name : title,
@@ -175,17 +181,17 @@
 				api.closeFrame({
 					name : 'common_index'
 				});
-				api.closeFrame({
-					name : 'history'
-				});
 				api.closeFrameGroup({
 					name : 'history_group'
 				});
-				api.closeFrame({
-					name : 'shoucang'
-				});
 				api.closeFrameGroup({
 					name : 'shoucang_group'
+				});
+				api.closeFrame({
+					name : 'history'
+				});
+				api.closeFrame({
+					name : 'shoucang'
 				});
 				$api.addCls(hh1, 'H-display-none');
 				$api.addCls(hhh, 'H-display-none');
@@ -199,7 +205,7 @@
 				api.openFrame({
 					name : 'me',
 					url : '../html/me/index.html',
-					//					reload : true,
+					reload : true,
 					rect : {
 						x : 0,
 						y : 25,
@@ -213,12 +219,8 @@
 				api.closeFrame({
 					name : 'common_index'
 				});
-				api.setFrameAttr({
-					name : 'me',
-					hidden : true
-				});
 				api.closeFrame({
-					name : 'shoucang'
+					name : 'common_index'
 				});
 				api.closeFrameGroup({
 					name : 'shoucang_group'
@@ -232,7 +234,7 @@
 				$api.removeCls(hhh, 'H-display-none');
 				$api.removeCls(jingxuan_footer, 'H-theme-font-color-zhuti');
 				api.openFrame({
-					name : 'history ',
+					name : 'history',
 					url : '../html/history/index.html',
 					reload : true,
 					rect : {
@@ -241,6 +243,10 @@
 						w : api.frameWidth,
 						h : api.frameHeight - offset - header2 - 25
 					}
+				});
+				api.setFrameAttr({
+					name : 'me',
+					hidden : true
 				});
 			}
 

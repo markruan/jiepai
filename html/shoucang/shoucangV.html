@@ -28,7 +28,7 @@
 	<script type="text/javascript" src="../../script/jie.js"></script>
 	<script type="text/javascript" src="../../script/echo.min.js"></script>
 	<script type="text/javascript">
-		function openV(url, varr, title, vbianhao) {
+		function openV(url, vid, varr, title, vbianhao, img, vprice) {
 			api.openWin({
 				name : 'veido',
 				url : '../../html/vedio/index.html',
@@ -37,7 +37,10 @@
 					varr : varr,
 					title : title,
 					vbianhao : vbianhao,
-					shoucang : 0
+					vid : vid,
+					shoucang : 0,
+					img : img,
+					vprice : vprice
 				}
 			});
 		}
@@ -56,7 +59,7 @@
 				key : 'user'
 			}, function(ret, err) {
 				var user = ret.value
-				if (user!='') {
+				if (user != '') {
 					api.ajax({
 						url : Api + 'shoucangVapi.html',
 						method : 'post',
@@ -69,6 +72,8 @@
 						var myobj = ret
 						for (var i = 0; i < myobj.length; i++) {
 							var title = myobj[i].vname;
+							var vid = myobj[i].id;
+							var vprice = myobj[i].vprice;
 							var vbianhao = myobj[i].vbianhao;
 							var pic = myobj[i].vpic;
 							var img = pic.split(' ');
@@ -77,7 +82,7 @@
 							var vurl = eval(myobj[i].vurl)[0]
 							var totaltime = eval(myobj[i].vtime)[0]
 							html += '<div  class="H-flexbox-horizontal H-theme-background-color-white  "  >';
-							html += '<div class="H-padding-vertical-both-10" style="width:31%; hight:95%;"><img onclick="openV(\'' + vurl + '\' ,\'' + varr + '\',\'' + title + '\',\'' + vbianhao + '\' )"  src="../../image/default.jpg"    data-echo="' + picc + '" alt="" title="" class="H-display-block H-margin-horizontal-left-10" style="width:100%;  "></div>';
+							html += '<div class="H-padding-vertical-both-10" style="width:31%; hight:95%;"><img onclick="openV(\'' + vurl + '\' ,\'' + vid + '\',\'' + varr + '\',\'' + title + '\',\'' + vbianhao + '\',\'' + pic + '\' ,\'' + vprice + '\')"  src="../../image/default.jpg"    data-echo="' + picc + '" alt="" title="" class="H-display-block H-margin-horizontal-left-10" style="width:100%;  "></div>';
 							html += '<div class="H-flex-item H-padding-10">';
 							html += '<strong class="H-font-weight-normal font-weight-500 H-font-size-16 H-display-block H-padding-horizontal-left-10 H-padding-vertical-both-3">名称：<span>' + title.substr(0, 7) + '</span></strong>';
 							html += '<strong class="H-font-weight-normal font-weight-500 H-font-size-16 H-display-block H-padding-horizontal-left-10 H-padding-vertical-both-3">续集：第42期</strong>';

@@ -55,6 +55,7 @@
 /A6990407827122/html/shishang/menu.html
 /A6990407827122/html/pay/index.html
 /A6990407827122/css/Hui.css
+/A6990407827122/html/ce.html
 /A6990407827122/html/shipin/menu.html
 /A6990407827122/html/page/body.html
 /A6990407827122/html/fankui/fankui_head.html
