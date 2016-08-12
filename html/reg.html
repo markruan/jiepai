@@ -91,7 +91,9 @@
 	 
  
 		apiready = function() {
- 
+              var regdate=(new Date()).valueOf()
+               
+            
 					$api.byId('login').onclick = function() {
 					if ($api.byId('name').value.length == 0) {
 						$api.byId('name').focus();
@@ -119,6 +121,8 @@
 								values : {
 									username : nameVal,
 									password : passwordVal,
+									regdate:regdate
+
 								},
 							}
 						}, function(ret, err) {

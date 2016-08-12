@@ -75,18 +75,16 @@
 				$api.fixStatusBar(headerJ);
 				var title = api.pageParam.name;
 				switch (title) {
-					case 'jingxuan':
-						x = "精选";
-						break;
-					case 'dianying':
-						x = "电影";
-						break;
 					case 'shipin':
-						x = "视频";
+						x = "街拍视频";
 						break;
-					case 'shishang':
-						x = "时尚";
+					case 'jiepai':
+						x = "街拍图片";
 						break;
+					case 'tupian':
+						x = "私拍图片";
+						break;
+					 
 				}
 				$api.text($api.byId('title'), x);
 				
