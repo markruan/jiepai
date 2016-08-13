@@ -94,7 +94,7 @@
 			api.addEventListener({
 	            name:'duration'
             },function(ret,err){
-            	 total=formatSeconds(ret.value.duration)
+            	total=formatSeconds(ret.value.duration)
             	$api.text($api.byId('time1'), total);
             });
 			
