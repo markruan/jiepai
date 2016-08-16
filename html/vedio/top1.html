@@ -44,8 +44,8 @@
 			api.closeWin({
 			});
 			api.removePrefs({
-	            key:'duration'
-            });
+				key : 'duration'
+			});
 		}
 
 		function pause() {
@@ -55,7 +55,7 @@
 				script : jsfun
 			});
 			$api.removeCls(playid, 'H-display-none');
-			$api.css($api.byId('body'),'background-image: url(../../image/v.jpg)');
+			$api.css($api.byId('body'), 'background-image: url(../../image/v.jpg)');
 		}
 
 		function full() {
@@ -65,10 +65,8 @@
 				script : jsfun
 			});
 			$api.removeCls(playid, 'H-display-none');
-			$api.css($api.byId('body'),'background-image: url(../../image/v.jpg)');
+			$api.css($api.byId('body'), 'background-image: url(../../image/v.jpg)');
 		}
-
-		 
 
 		function play() {
 			var jsfun = 'play1();';
@@ -77,31 +75,37 @@
 				script : jsfun
 			});
 			$api.addCls(playid, 'H-display-none');
-			$api.css($api.byId('body'),'background-image: url()');
+			$api.css($api.byId('body'), 'background-image: url()');
 		}
 
 		apiready = function() {
 			var header = $api.byId('header');
 			$api.fixStatusBar(header);
-//			api.getPrefs({
-//				//			sync:true,
-//				key : 'duration'
-//			}, function(ret, err) {
-//				timed = ret.value
-//				var time1 = formatSeconds(ret.value)
-//				$api.text($api.byId('time1'), time1);
-//			});
+			//			api.getPrefs({
+			//				//			sync:true,
+			//				key : 'duration'
+			//			}, function(ret, err) {
+			//				timed = ret.value
+			//				var time1 = formatSeconds(ret.value)
+			//				$api.text($api.byId('time1'), time1);
+			//			});
 			api.addEventListener({
-	            name:'duration'
-            },function(ret,err){
-            	total=formatSeconds(ret.value.duration)
-            	$api.text($api.byId('time1'), total);
-            });
-			
-			
+				name : 'duration'
+			}, function(ret, err) {
+				var total = formatSeconds(ret.value.duration)
+				api.setPrefs({
+					key : 'total',
+					value : total
+				});
+				$api.text($api.byId('time1'), total);
+			});
 			api.addEventListener({
 				name : 'time2'
 			}, function(ret, err) {
+				var total = api.getPrefs({
+					sync : true,
+					key : 'total'
+				});
 				var timec = ret.value.key1
 				var percent = (timec / total) * 100;
 				var per = Math.round(percent) + '%';
