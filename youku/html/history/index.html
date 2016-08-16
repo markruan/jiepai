@@ -50,6 +50,10 @@
 			}
 
 			apiready = function() {
+				 api.closeFrameGroup({
+	                name: 'shoucang_group'
+                });
+             
 				api.showProgress({
 					style : 'default',
 					animationType : 'fade',
@@ -72,7 +76,7 @@
 						w : 'auto',
 						h : api.winHeight - footer - hight1 - 25
 					},
-					index : 0,
+					index : 1,
 					frames : [{
 						name : 'historyP',
 						url : 'historyP.html',
