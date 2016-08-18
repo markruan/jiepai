@@ -297,56 +297,83 @@ function isyouxiao(filegrade, iid) {
 			data : {
 				values : {
 					username : username,
-
 				},
 			}
 		}, function(ret, err) {
+			var fname = ret.fname
 			var gradexu = ret.xu
 			var setgradetime = ret.setgradetime
 			var time1 = Number(timest()) - Number(setgradetime);
 			var time2 = Math.round(time1 / (60 * 60 * 24));
 			var days = ret.days
-			var time3 = Number(days) - time2
+			var time3 = Number(days) - Number(time2)
 
-			if (time3 < 0) {
-				alert('您的会员已过期请续费');
-				return
-			} else if (gradexu < filegrade) {
-				alert('您的权限无法查看该文件，请升级VIP');
+			api.ajax({
+				url : Api + 'quanji.html',
+				method : 'post',
+				timeout : 30,
+				dataType : 'text',
+				returnAll : false,
+				data : {
+					values : {
+						username : username,
+						lid : iid
 
-				return
-			} else if (iid) {
+					},
+				}
+			}, function(ret, err) {
 
-				api.ajax({
-					url : Api + 'userinfo.html',
-					method : 'post',
-					timeout : 30,
-					dataType : 'json',
-					returnAll : false,
-					data : {
-						values : {
-							username : username,
-							lid : iid
+				if (time3 < 0) {
+					alert('您的会员已过期请续费');
 
-						},
-					}
-				}, function(ret, err) {
-					if ( ret = 1) {
-						alert('您无权查看该文件，请购买全集或者升级为VIP')
-						return
-					} else {
-						///打开文件
-					}
+					return
+				} else if (!time3) {
+					alert('您还未登录');
+					return
+				} else if (ret == 0 || gradexu > filegrade) {
 
-				});
+					api.sendEvent({
+						name : 'quanxian',
 
-			} else {
-			 alert(00000)
-			}
+					});
+
+				} else {
+
+					alert(fname + '视频，您无权查看该文件，请购买全集或者升级VIP')
+					return
+
+				}
+
+			});
 
 		});
 
 	});
 
+}
+
+function goumai() {
+	var vid = api.pageParam.vid
+	var tradeNO = (new Date()).valueOf();
+	var username = api.getPrefs({
+		sync : true,
+		key : 'user'
+	});
+	api.ajax({
+		url : Api + 'orderlist.html',
+		method : 'post',
+		timeout : 30,
+		dataType : 'text',
+		returnAll : false,
+		data : {
+			values : {
+				lid : vid,
+				tradeNO : tradeNO,
+				username : username
+			},
+		}
+	}, function(ret, err) {
+		alert(ret)
+	});
 }
 

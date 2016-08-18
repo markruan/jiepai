@@ -55,7 +55,6 @@
 		}
 
 		function full1() {
-		 
 			var url = api.getPrefs({
 				sync : true,
 				key : 'vurl'
@@ -115,17 +114,14 @@
 			});
 		}
 
-		apiready = function() {
+		function player() {
 			var videoPlayer = api.require('videoPlayer');
 			var vurl = api.pageParam.name
 			var varr = api.pageParam.varr
 			var vlist = varr.split(',');
-			api.setPrefs({
-				key : 'vurl',
-				value : vurl
-			});
 			videoPlayer.open({
 				path : vurl,
+				autoPlay : false,
 				rect : {
 					x : 0,
 					y : 0,
@@ -136,7 +132,6 @@
 			}, function(ret, err) {
 				if (ret.status) {
 					var pro = ret.duration
-				 
 					api.sendEvent({
 						name : 'duration',
 						extra : {
@@ -165,14 +160,14 @@
 				}
 			});
 			setTimeout('sendback()', 20000)
-			//			api.addEventListener({
-			//				name : 'tap'
-			//			}, function(ret, err) {
-			//				api.bringFrameToFront({
-			//					from : 'top1'
-			//				});
-			//				setTimeout('sendback()', 20000)
-			//			});
+		}
+
+		apiready = function() {
+			var videoPlayer = api.require('videoPlayer');
+			var vurl = api.pageParam.name
+			var varr = api.pageParam.varr
+			var vlist = varr.split(',');
+			player()
 		};
 	</script>
 </html>

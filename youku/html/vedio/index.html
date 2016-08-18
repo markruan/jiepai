@@ -19,6 +19,8 @@
 			var vtitle = api.pageParam.title
 			var vbianhao = api.pageParam.vbianhao
 			var vprice = api.pageParam.vprice
+			var xu = api.pageParam.xu
+			var vid = api.pageParam.vid
 			
 			api.openFrame({
 				name : 'top',
@@ -56,6 +58,11 @@
 					y : 0,
 					w : api.frameWidth,
 					h : 200
+				},
+				pageParam : {
+					xu : xu,
+					vid:vid
+					 
 				}
 			});
 			api.openFrame({

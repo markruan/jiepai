@@ -41,6 +41,10 @@
 	<script type="text/javascript">
 		var playid = $api.byId('play');
 		function back() {
+		
+		    api.removePrefs({
+	            key:'quanji'
+            });
 			api.closeWin({
 			});
 			api.removePrefs({
@@ -69,26 +73,27 @@
 		}
 
 		function play() {
-			var jsfun = 'play1();';
-			api.execScript({
-				frameName : 'top',
-				script : jsfun
+			var filegrade = api.pageParam.xu
+			var iid = api.pageParam.vid
+			isyouxiao(filegrade, iid)
+			api.addEventListener({
+				name : 'quanxian'
+			}, function(ret, err) {
+				var jsfun = 'play1();';
+				api.execScript({
+					frameName : 'top',
+					script : jsfun
+				});
+				$api.addCls(playid, 'H-display-none');
+				$api.css($api.byId('body'), 'background-image: url()');
 			});
-			$api.addCls(playid, 'H-display-none');
-			$api.css($api.byId('body'), 'background-image: url()');
 		}
 
 		apiready = function() {
 			var header = $api.byId('header');
+			$api.css($api.byId('body'), 'background-image: url(../../image/v.jpg)');
+			$api.removeCls(playid, 'H-display-none');
 			$api.fixStatusBar(header);
-			//			api.getPrefs({
-			//				//			sync:true,
-			//				key : 'duration'
-			//			}, function(ret, err) {
-			//				timed = ret.value
-			//				var time1 = formatSeconds(ret.value)
-			//				$api.text($api.byId('time1'), time1);
-			//			});
 			api.addEventListener({
 				name : 'duration'
 			}, function(ret, err) {

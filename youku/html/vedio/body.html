@@ -139,29 +139,6 @@
 			}
 		}
 
-		function goumai() {
-			var vid = api.pageParam.vid
-			var tradeNO = (new Date()).valueOf();
-			var username = api.getPrefs({
-				sync : true,
-				key : 'user'
-			});
-			api.ajax({
-				url : Api + 'orderlist.html',
-				method : 'post',
-				timeout : 30,
-				dataType : 'text',
-				returnAll : false,
-				data : {
-					values : {
-						lid : vid,
-						tradeNO : tradeNO ,
-						username:username
-					},
-				}
-			}, function(ret, err) {
-				alert(ret)
-			});
-		}
+		
 	</script>
 </html>
