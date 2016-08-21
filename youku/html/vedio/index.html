@@ -21,7 +21,7 @@
 			var vprice = api.pageParam.vprice
 			var xu = api.pageParam.xu
 			var vid = api.pageParam.vid
-			
+			var fname = api.pageParam.fname
 			api.openFrame({
 				name : 'top',
 				url : 'top.html',
@@ -61,8 +61,8 @@
 				},
 				pageParam : {
 					xu : xu,
-					vid:vid
-					 
+					vid : vid,
+					fname : api.pageParam.fname
 				}
 			});
 			api.openFrame({
@@ -76,12 +76,15 @@
 				},
 				pageParam : {
 					varr : varr,
-					title:vtitle,
-					vbianhao:vbianhao,
-					vid:api.pageParam.vid,
-					shoucang:api.pageParam.shoucang,
-					img:api.pageParam.img,
-					vprice:api.pageParam.vprice
+					title : vtitle,
+					vbianhao : vbianhao,
+					vid : api.pageParam.vid,
+					shoucang : api.pageParam.shoucang,
+					img : api.pageParam.img,
+					vprice : api.pageParam.vprice,
+					xu : api.pageParam.xu,
+					fname : api.pageParam.fname,
+					vvprice : api.pageParam.vvprice,
 				}
 			});
 		};

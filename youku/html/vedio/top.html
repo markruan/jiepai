@@ -35,7 +35,7 @@
 				sync : true,
 				key : 'vurl'
 			});
-			//coding...
+			
 			var videoPlayer = api.require('videoPlayer');
 			videoPlayer.setPath({
 				path : url,
@@ -47,6 +47,12 @@
 						extra : {
 							duration : total,
 						}
+					});
+					play1()
+					var jsfun11 = "remping()";
+					api.execScript({
+						frameName : 'top1',
+						script : jsfun11
 					});
 				} else {
 					alert(JSON.stringify(err));
@@ -94,7 +100,7 @@
 				},
 				path : url,
 				//在 android 平台上不支持 widget://
-				autoPlay : false, //（可选项）布尔类型；打开时是否自动播放；默认：true（自动播放）,
+				autoPlay : true, //（可选项）布尔类型；打开时是否自动播放；默认：true（自动播放）,
 			}, function(ret, err) {
 				if (ret) {
 					//					      alert(JSON.stringify(ret));
