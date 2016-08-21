@@ -121,7 +121,7 @@
 						}
 					}, function(ret, err) {
 						$api.text($api.byId('username'), ret.username);
-						$api.text($api.byId('grade'), ret.grade);
+						$api.text($api.byId('grade'), ret.fname);
 						$api.attr($api.byId('img'), 'src', uploadUrl + ret.icon);
 						var setgradetime = ret.setgradetime;
 						var time1 = Number(timest()) - Number(setgradetime);

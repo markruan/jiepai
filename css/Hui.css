@@ -58,6 +58,12 @@ textarea { overflow: auto; }
 
 /*字体图标*/
 /*引入字体图标*/
+.H-theme-background-color-zhuti {
+				background-color: #ff6606;
+			}
+			.H-theme-font-color-zhuti {
+				color: #ff6606;
+			}
 @font-face { font-family: 'iconfont'; src: url('Hui.ttf') format('truetype'); }
 .H-iconfont { font-family: "iconfont" !important; font-size: 16px; font-style: normal; -webkit-font-smoothing: antialiased; -webkit-text-stroke-width: 0.2px; -moz-osx-font-smoothing: grayscale; }
 .H-icon-share-to:before { content: "\f102"; }

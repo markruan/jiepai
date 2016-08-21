@@ -45,7 +45,7 @@
 	<script type="text/javascript" src="../../script/jie.js"></script>
 	<script type="text/javascript" src="../../script/echo.min.js"></script>
 	<script type="text/javascript">
-		function openV(url, vid, varr, title, vbianhao, img, vprice, xu) {
+		function openV(url, vid, varr, title, vbianhao, img, vprice, xu, fname,vvprice) {
 			api.openWin({
 				name : 'veido',
 				url : '../../html/vedio/index.html',
@@ -58,26 +58,30 @@
 					shoucang : 1,
 					img : img,
 					vprice : vprice,
-					xu:xu
+					xu : xu,
+					fname : fname,
+					vvprice:vvprice
 				}
 			});
 		}
 
-		function openImg(arr, pid) {
+		function openImg(arr, pid,freenum,xu,fname) {
 			api.openWin({
 				name : 'img1',
 				url : '../../html/img/index.html',
 				slidBackEnabled : false,
 				pageParam : {
 					name : arr,
-					pid : pid
+					pid : pid,
+					freenum:freenum,
+					xu:xu,
+					fname:fname
+					
 				}
 			});
 		}
 
 		function int() {
-		
-		
 			api.showProgress({
 				style : 'default',
 				animationType : 'fade',
@@ -96,6 +100,7 @@
 					var ftitle = myobj[i].ftitle
 					var vid = myobj[i].vid;
 					var xu = myobj[i].xu;
+					var fname = myobj[i].fname;
 					var vprice = myobj[i].vprice;
 					var vbianhao = myobj[i].vbianhao;
 					var pic = myobj[i].vpic;
@@ -103,8 +108,9 @@
 					var picc = myobj[i].purl;
 					var varr = eval(myobj[i].vurl)
 					var vurl = eval(myobj[i].vurl)[0]
+					var vvprice = eval(myobj[i].vvprice)
 					var totaltime = eval(myobj[i].vtime)[0]
-					html += '<div onclick="openV(\'' + vurl + '\' ,\'' + vid + '\',\'' + varr + '\',\'' + title + '\',\'' + vbianhao + '\',\'' + pic + '\' ,\'' + vprice + '\',' + xu + ')" class="H-display-table-cell H-theme-background-color-white H-float-left  H-box-sizing-border-box H-width-avg-3 H-padding-horizontal-right-4 H-margin-vertical-bottom-10   " style="margin-bottom: 10px; ">';
+					html += '<div onclick="openV(\'' + vurl + '\' ,\'' + vid + '\',\'' + varr + '\',\'' + title + '\',\'' + vbianhao + '\',\'' + pic + '\' ,\'' + vprice + '\',' + xu + ',\'' + fname + '\',\'' + vvprice + '\')" class="H-display-table-cell H-theme-background-color-white H-float-left  H-box-sizing-border-box H-width-avg-3 H-padding-horizontal-right-4 H-margin-vertical-bottom-10   " style="margin-bottom: 10px; ">';
 					html += '<img src="../../image/default.jpg"    data-echo="' + picc + '" class=" H-float-right H-margin-vertical-top-8 H-margin-horizontal-both-2 H-display-block" alt="" title="" style="width: 96%" ;height:200>';
 					html += '<img src="../../image/xia.png " class=" H-float-right  H-margin-vertical-top-8 H-margin-horizontal-both-2 H-display-block" style="margin-top: -200px; height: 200px ; width: 96%" alt="" title="">';
 					html += '<div  class=" " style=" margin-right:8px; margin-top:-30px;line-height: 30px; float: right; color:white ;">' + totaltime + '</div>';
@@ -144,11 +150,14 @@
 					var pnum = myobj[i].pnum
 					var pid = myobj[i].id
 					var title = myobj[i].pname
+					var fname = myobj[i].fname;
+					var xu = myobj[i].xu
+					var freenum = myobj[i].freenum
 					var ftitle = myobj[i].ftitle
 					var vurl = myobj[i].purl
 					var img = pic.split(' ');
 					var zhang = img.length
-					html += '<div onclick="openImg(\'' + pic + '\',' + pid + ')" class="H-display-table-cell H-theme-background-color-white H-float-left  H-box-sizing-border-box H-width-avg-3 H-padding-horizontal-right-4 H-margin-vertical-bottom-10   " style="margin-bottom: 10px; ">';
+					html += '<div onclick="openImg(\'' + pic + '\',' + pid + ','+freenum+','+xu+',\'' + fname + '\')" class="H-display-table-cell H-theme-background-color-white H-float-left  H-box-sizing-border-box H-width-avg-3 H-padding-horizontal-right-4 H-margin-vertical-bottom-10   " style="margin-bottom: 10px; ">';
 					html += '<img  src="../../image/default.jpg"  data-echo="' + vurl + '" class=" H-float-right H-margin-vertical-top-8 H-margin-horizontal-both-2 H-display-block" alt="" title="" style="width: 96%" ;height:200>';
 					html += '<img src="../../image/xia.png " class=" H-float-right  H-margin-vertical-top-8 H-margin-horizontal-both-2 H-display-block" style="margin-top: -200px; height: 200px ; width: 96%" alt="" title="">';
 					html += '<div  class=" " style=" margin-right:8px; margin-top:-30px;line-height: 30px; float: right; color:white ;">' + pnum + '<span>张</span></div>';

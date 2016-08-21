@@ -39,7 +39,8 @@ function formatSeconds(value) {
 	}
 }
 
-function alipay(subject, body, amount, days) {
+function alipay(subject, body, amount, days, vid) {
+
 	var aliPay = api.require('aliPay');
 	var tradeNO = (new Date()).valueOf();
 	api.getPrefs({
@@ -68,7 +69,10 @@ function alipay(subject, body, amount, days) {
 							switch (status) {
 								case 9000:
 									x = "支付成功";
-
+									alert(vid)
+									if (vid) {
+										goumai(vid, 0)
+									}
 									break;
 								case 4000:
 									x = "系统异常";
@@ -118,15 +122,19 @@ function alipay(subject, body, amount, days) {
 								}
 							}, function(ret, err) {
 								if (ret == 1) {
+
+									api.closeFrame({
+										name : 'goumai'
+									});
 									api.alert({
 										title : '支付结果',
-										msg : mss,
+										msg : x,
 										buttons : ['确定']
 									});
 								} else {
 									api.alert({
 										title : '支付结果',
-										msg : mss,
+										msg : x,
 										buttons : ['确定']
 									});
 								}
@@ -162,6 +170,10 @@ function alipay(subject, body, amount, days) {
 							switch (status) {
 								case '9000':
 									mss = "支付成功";
+									alert(vid)
+									if (vid) {
+										goumai(vid, 0)
+									}
 									break;
 								case '4000':
 									mss = "系统异常";
@@ -191,6 +203,7 @@ function alipay(subject, body, amount, days) {
 									mss = "用户中途取消支付操作";
 									break;
 							}
+
 							api.ajax({
 								url : Api + 'orders.html',
 								method : 'post',
@@ -213,6 +226,9 @@ function alipay(subject, body, amount, days) {
 								}
 							}, function(ret, err) {
 								if (ret == 1) {
+									api.closeFrame({
+										name : 'goumai'
+									});
 									api.alert({
 										title : '支付结果',
 										msg : mss,
@@ -283,7 +299,10 @@ Api = 'http://114.55.98.130/index.php/api/'
 //判断是否在有效期内的用户
 ///iid是指视频文件或者图片文件的ID
 
-function isyouxiao(filegrade, iid) {
+function isyouxiaoP(filegrade) {
+
+	var fname = api.pageParam.fname
+
 	api.getPrefs({
 		key : 'user'
 	}, function(ret, err) {
@@ -300,7 +319,78 @@ function isyouxiao(filegrade, iid) {
 				},
 			}
 		}, function(ret, err) {
-			var fname = ret.fname
+
+			var gradexu = ret.xu
+			var setgradetime = ret.setgradetime
+			var time1 = Number(timest()) - Number(setgradetime);
+			var time2 = Math.round(time1 / (60 * 60 * 24));
+			var days = ret.days
+			var time3 = Number(days) - Number(time2)
+
+			if (time3 < 0) {
+				alert('您的会员已过期请续费');
+
+				return
+			} else if (!time3) {
+				api.openFrame({
+					name : 'login1',
+					url : '../../html/login1.html',
+					rect : {
+						x : 0,
+						y : 0,
+						w : api.frameWidth,
+						h : api.screenHeight
+					}
+				});
+				return
+			} else if (gradexu >= filegrade) {
+
+			} else {
+				api.openFrame({
+					name : 'quanxian',
+					url : '../../html/vedio/quanxian.html',
+					rect : {
+						x : 0,
+						y : 0,
+						w : api.winWidth,
+						h : api.winHeight
+					},
+					pageParam : {
+
+						grade : api.pageParam.fname,
+						type : 1
+
+					}
+				});
+			}
+
+		});
+
+	});
+
+}
+
+function isyouxiao(filegrade, iid, danid, dan, type) {
+
+	var fname = api.pageParam.fname
+
+	api.getPrefs({
+		key : 'user'
+	}, function(ret, err) {
+		var username = ret.value
+		api.ajax({
+			url : Api + 'userinfo.html',
+			method : 'post',
+			timeout : 30,
+			dataType : 'json',
+			returnAll : false,
+			data : {
+				values : {
+					username : username,
+				},
+			}
+		}, function(ret, err) {
+
 			var gradexu = ret.xu
 			var setgradetime = ret.setgradetime
 			var time1 = Number(timest()) - Number(setgradetime);
@@ -317,7 +407,8 @@ function isyouxiao(filegrade, iid) {
 				data : {
 					values : {
 						username : username,
-						lid : iid
+						lid : iid,
+						type : type
 
 					},
 				}
@@ -330,18 +421,86 @@ function isyouxiao(filegrade, iid) {
 				} else if (!time3) {
 					alert('您还未登录');
 					return
-				} else if (ret == 0 || gradexu > filegrade) {
+				} else if (ret == 0 || gradexu >= filegrade) {
 
 					api.sendEvent({
 						name : 'quanxian',
 
 					});
 
+				} else if (dan || dan === 0) {
+
+					var vvprice = api.pageParam.vvprice
+					var danprice = vvprice.split(',');
+					var ddd = dan + 1
+					var xuhao = api.pageParam.title + '第' + ddd + '集';
+					var vid = api.pageParam.vid
+					var dangeid = vid + dan
+					api.ajax({
+						url : Api + 'quanji.html',
+						method : 'post',
+						timeout : 30,
+						dataType : 'text',
+						returnAll : false,
+						data : {
+							values : {
+								username : username,
+								lid : danid,
+								type : type
+
+							},
+						}
+					}, function(ret, err) {
+						if (ret == 0) {
+
+							api.sendEvent({
+								name : 'quanxian',
+
+							});
+
+						} else {
+
+							api.openFrame({
+								name : 'goumai',
+								url : '../../html/goumai.html',
+								rect : {
+									x : 0,
+									y : 0,
+									w : api.winWidth,
+									h : api.winHeight
+								},
+								pageParam : {
+									grade : fname,
+									danprice : danprice[dan],
+									title : xuhao,
+									dangeid : dangeid
+
+								}
+							});
+							return
+
+						}
+
+					});
+
 				} else {
 
-					alert(fname + '视频，您无权查看该文件，请购买全集或者升级VIP')
-					return
+					api.openFrame({
+						name : 'quanxian',
+						url : '../../html/vedio/quanxian.html',
+						rect : {
+							x : 0,
+							y : 0,
+							w : api.winWidth,
+							h : api.winHeight
+						},
+						pageParam : {
+							grade : fname
 
+						}
+					});
+
+					return
 				}
 
 			});
@@ -352,8 +511,7 @@ function isyouxiao(filegrade, iid) {
 
 }
 
-function goumai() {
-	var vid = api.pageParam.vid
+function goumai(vid, aa) {
 	var tradeNO = (new Date()).valueOf();
 	var username = api.getPrefs({
 		sync : true,
@@ -369,11 +527,21 @@ function goumai() {
 			values : {
 				lid : vid,
 				tradeNO : tradeNO,
-				username : username
+				username : username,
+				type : aa
 			},
 		}
 	}, function(ret, err) {
-		alert(ret)
+
+		if (ret == 0) {
+			api.toast({
+				msg : '购买成功'
+			});
+
+		} else {
+			alert('已经购买过了')
+
+		}
 	});
 }
 

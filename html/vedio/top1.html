@@ -41,10 +41,9 @@
 	<script type="text/javascript">
 		var playid = $api.byId('play');
 		function back() {
-		
-		    api.removePrefs({
-	            key:'quanji'
-            });
+			api.removePrefs({
+				key : 'quanji'
+			});
 			api.closeWin({
 			});
 			api.removePrefs({
@@ -62,6 +61,11 @@
 			$api.css($api.byId('body'), 'background-image: url(../../image/v.jpg)');
 		}
 
+		function remping() {
+			$api.addCls(playid, 'H-display-none');
+			$api.css($api.byId('body'), 'background-image: url()');
+		}
+
 		function full() {
 			var jsfun = 'full1();';
 			api.execScript({
@@ -75,7 +79,7 @@
 		function play() {
 			var filegrade = api.pageParam.xu
 			var iid = api.pageParam.vid
-			isyouxiao(filegrade, iid)
+			isyouxiao(filegrade, iid,'','',0)
 			api.addEventListener({
 				name : 'quanxian'
 			}, function(ret, err) {

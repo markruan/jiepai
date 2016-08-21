@@ -12,6 +12,7 @@
 	</head>
 	<body></body>
 	<script type="text/javascript" src="../../script/api.js"></script>
+	<script type="text/javascript" src="../../script/jie.js"></script>
 	<script type="text/javascript">
 		function openH() {
 			api.openFrame({
@@ -19,9 +20,9 @@
 				url : '../../html/img/img.html',
 				rect : {
 					x : 0,
-					y : 25,
+					y : 0,
 					w : api.frameWidth,
-					h : api.winHeight - 25
+					h : api.winHeight
 				},
 				pageParam : {
 					pid : api.pageParam.pid,
@@ -87,8 +88,10 @@
 
 		apiready = function() {
 			var photoBrowser = api.require('photoBrowser');
+			var freenum = api.pageParam.freenum
 			var pics = api.pageParam.name
 			var img = pics.split(' ');
+			var xu = api.pageParam.xu
 			photoBrowser.open({
 				images : img,
 				activeIndex : 0,
@@ -101,25 +104,8 @@
 				}
 				if (ret.eventType == 'change') {
 					var index = ret.index + 1;
-					if (index == 4) {
-						api.getPrefs({
-							key : 'user'
-						}, function(ret, err) {
-							if (ret.value != '') {
-								return
-							} else {
-								api.openFrame({
-									name : 'login1',
-									url : '../../html/login1.html',
-									rect : {
-										x : 0,
-										y : 0,
-										w : api.frameWidth,
-										h : api.screenHeight
-									}
-								});
-							}
-						});
+					if (index == freenum) {
+						isyouxiaoP(xu)
 					}
 					api.sendEvent({
 						name : 'imglist',
