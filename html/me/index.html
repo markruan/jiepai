@@ -135,20 +135,18 @@
 					});
 				};
 			});
-			$.ajax({
-				type : "post",
+			api.ajax({
 				url : Api + 'grade.html',
-				dataType : "json",
-				//data : params,
-				success : function(msg) {
-					var playlist = msg
-					var data = {
-						list : msg
-					};
-					var render = H.tppl(H.D("#tppl").innerHTML);
-					H.D(".result").innerHTML = render(data);
-					//						懒加载
-				}
+				method : 'post',
+				timeout : 30,
+				dataType : 'json',
+			}, function(ret, err) {
+				var playlist = ret
+				var data = {
+					list : msg
+				};
+				var render = H.tppl(H.D("#tppl").innerHTML);
+				H.D(".result").innerHTML = render(data);
 			});
 		}
 	</script>
