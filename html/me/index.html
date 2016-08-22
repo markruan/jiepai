@@ -101,8 +101,7 @@
 			});
 		}
 
-
-		H.ready(function() {
+		apiready = function() {
 			api.getPrefs({
 				key : 'user'
 			}, function(ret, err) {
@@ -151,6 +150,6 @@
 					//						懒加载
 				}
 			});
-		});
+		}
 	</script>
 </html>
