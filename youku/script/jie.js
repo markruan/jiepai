@@ -306,65 +306,80 @@ function isyouxiaoP(filegrade) {
 	api.getPrefs({
 		key : 'user'
 	}, function(ret, err) {
-		var username = ret.value
-		api.ajax({
-			url : Api + 'userinfo.html',
-			method : 'post',
-			timeout : 30,
-			dataType : 'json',
-			returnAll : false,
-			data : {
-				values : {
-					username : username,
-				},
-			}
-		}, function(ret, err) {
-
-			var gradexu = ret.xu
-			var setgradetime = ret.setgradetime
-			var time1 = Number(timest()) - Number(setgradetime);
-			var time2 = Math.round(time1 / (60 * 60 * 24));
-			var days = ret.days
-			var time3 = Number(days) - Number(time2)
-
-			if (time3 < 0) {
-				alert('您的会员已过期请续费');
-
-				return
-			} else if (!time3) {
-				api.openFrame({
-					name : 'login1',
-					url : '../../html/login1.html',
-					rect : {
-						x : 0,
-						y : 0,
-						w : api.frameWidth,
-						h : api.screenHeight
-					}
-				});
-				return
-			} else if (gradexu >= filegrade) {
-
-			} else {
-				api.openFrame({
-					name : 'quanxian',
-					url : '../../html/vedio/quanxian.html',
-					rect : {
-						x : 0,
-						y : 0,
-						w : api.winWidth,
-						h : api.winHeight
+		if (ret) {
+			var username = ret.value
+			api.ajax({
+				url : Api + 'userinfo.html',
+				method : 'post',
+				timeout : 30,
+				dataType : 'json',
+				returnAll : false,
+				data : {
+					values : {
+						username : username,
 					},
-					pageParam : {
+				}
+			}, function(ret, err) {
 
-						grade : api.pageParam.fname,
-						type : 1
+				var gradexu = ret.xu
+				var setgradetime = ret.setgradetime
+				var time1 = Number(timest()) - Number(setgradetime);
+				var time2 = Math.round(time1 / (60 * 60 * 24));
+				var days = ret.days
+				var time3 = Number(days) - Number(time2)
 
-					}
-				});
-			}
+				if (time3 < 0) {
+					alert('您的会员已过期请续费');
 
-		});
+					return
+				} else if (!time3) {
+					api.openFrame({
+						name : 'login1',
+						url : '../../html/login1.html',
+						rect : {
+							x : 0,
+							y : 0,
+							w : api.frameWidth,
+							h : api.screenHeight
+						}
+					});
+					return
+				} else if (gradexu >= filegrade) {
+
+				} else {
+					api.openFrame({
+						name : 'quanxian',
+						url : '../../html/vedio/quanxian.html',
+						rect : {
+							x : 0,
+							y : 0,
+							w : api.winWidth,
+							h : api.winHeight
+						},
+						pageParam : {
+
+							grade : api.pageParam.fname,
+							type : 1
+
+						}
+					});
+				}
+
+			});
+		} else {
+			api.openFrame({
+				name : 'login1',
+				url : '../../html/login1.html',
+				rect : {
+					x : 0,
+					y : 0,
+					w : api.frameWidth,
+					h : api.screenHeight
+				}
+			});
+			return
+
+		}
 
 	});
 
@@ -377,135 +392,142 @@ function isyouxiao(filegrade, iid, danid, dan, type) {
 	api.getPrefs({
 		key : 'user'
 	}, function(ret, err) {
-		var username = ret.value
-		api.ajax({
-			url : Api + 'userinfo.html',
-			method : 'post',
-			timeout : 30,
-			dataType : 'json',
-			returnAll : false,
-			data : {
-				values : {
-					username : username,
-				},
-			}
-		}, function(ret, err) {
-
-			var gradexu = ret.xu
-			var setgradetime = ret.setgradetime
-			var time1 = Number(timest()) - Number(setgradetime);
-			var time2 = Math.round(time1 / (60 * 60 * 24));
-			var days = ret.days
-			var time3 = Number(days) - Number(time2)
-
+		if (ret) {
+			var username = ret.value
 			api.ajax({
-				url : Api + 'quanji.html',
+				url : Api + 'userinfo.html',
 				method : 'post',
 				timeout : 30,
-				dataType : 'text',
+				dataType : 'json',
 				returnAll : false,
 				data : {
 					values : {
 						username : username,
-						lid : iid,
-						type : type
-
 					},
 				}
 			}, function(ret, err) {
 
-				if (time3 < 0) {
-					alert('您的会员已过期请续费');
+				var gradexu = ret.xu
+				var setgradetime = ret.setgradetime
+				var time1 = Number(timest()) - Number(setgradetime);
+				var time2 = Math.round(time1 / (60 * 60 * 24));
+				var days = ret.days
+				var time3 = Number(days) - Number(time2)
 
-					return
-				} else if (!time3) {
-					alert('您还未登录');
-					return
-				} else if (ret == 0 || gradexu >= filegrade) {
+				api.ajax({
+					url : Api + 'quanji.html',
+					method : 'post',
+					timeout : 30,
+					dataType : 'text',
+					returnAll : false,
+					data : {
+						values : {
+							username : username,
+							lid : iid,
+							type : type
 
-					api.sendEvent({
-						name : 'quanxian',
-
-					});
-
-				} else if (dan || dan === 0) {
-
-					var vvprice = api.pageParam.vvprice
-					var danprice = vvprice.split(',');
-					var ddd = dan + 1
-					var xuhao = api.pageParam.title + '第' + ddd + '集';
-					var vid = api.pageParam.vid
-					var dangeid = vid + dan
-					api.ajax({
-						url : Api + 'quanji.html',
-						method : 'post',
-						timeout : 30,
-						dataType : 'text',
-						returnAll : false,
-						data : {
-							values : {
-								username : username,
-								lid : danid,
-								type : type
-
-							},
-						}
-					}, function(ret, err) {
-						if (ret == 0) {
-
-							api.sendEvent({
-								name : 'quanxian',
-
-							});
-
-						} else {
-
-							api.openFrame({
-								name : 'goumai',
-								url : '../../html/goumai.html',
-								rect : {
-									x : 0,
-									y : 0,
-									w : api.winWidth,
-									h : api.winHeight
-								},
-								pageParam : {
-									grade : fname,
-									danprice : danprice[dan],
-									title : xuhao,
-									dangeid : dangeid
-
-								}
-							});
-							return
-
-						}
-
-					});
-
-				} else {
-
-					api.openFrame({
-						name : 'quanxian',
-						url : '../../html/vedio/quanxian.html',
-						rect : {
-							x : 0,
-							y : 0,
-							w : api.winWidth,
-							h : api.winHeight
 						},
-						pageParam : {
-							grade : fname
+					}
+				}, function(ret, err) {
 
-						}
-					});
+					if (time3 < 0) {
+						alert('您的会员已过期请续费');
 
-					return
-				}
+						return
+					} else if (!time3 && !gradexu) {
+						alert('您还未登录');
+						return
+					} else if (ret == 0 || gradexu >= filegrade) {
+
+						api.sendEvent({
+							name : 'quanxian',
+
+						});
+
+					} else if (dan || dan === 0) {
+
+						var vvprice = api.pageParam.vvprice
+						var danprice = vvprice.split(',');
+						var ddd = dan + 1
+						var xuhao = api.pageParam.title + '第' + ddd + '集';
+						var vid = api.pageParam.vid
+						var dangeid = vid + dan
+						api.ajax({
+							url : Api + 'quanji.html',
+							method : 'post',
+							timeout : 30,
+							dataType : 'text',
+							returnAll : false,
+							data : {
+								values : {
+									username : username,
+									lid : danid,
+									type : type
+
+								},
+							}
+						}, function(ret, err) {
+							if (ret == 0) {
+
+								api.sendEvent({
+									name : 'quanxian',
+
+								});
+
+							} else {
+
+								api.openFrame({
+									name : 'goumai',
+									url : '../../html/goumai.html',
+									rect : {
+										x : 0,
+										y : 0,
+										w : api.winWidth,
+										h : api.winHeight
+									},
+									pageParam : {
+										grade : fname,
+										danprice : danprice[dan],
+										title : xuhao,
+										dangeid : dangeid
+
+									}
+								});
+								return
+
+							}
+
+						});
+
+					} else {
+
+						api.openFrame({
+							name : 'quanxian',
+							url : '../../html/vedio/quanxian.html',
+							rect : {
+								x : 0,
+								y : 0,
+								w : api.winWidth,
+								h : api.winHeight
+							},
+							pageParam : {
+								grade : fname
+
+							}
+						});
+
+						return
+					}
+
+				});
 
 			});
+		} else {
 
-		});
+			alert('您还未登录');
+			return
+
+		}
 
 	});
 
