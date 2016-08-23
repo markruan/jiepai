@@ -14,15 +14,37 @@
 	<script type="text/javascript" src="../../script/api.js"></script>
 	<script type="text/javascript" src="../../script/jie.js"></script>
 	<script type="text/javascript">
-		function openH() {
+		function openf() {
+			var hhh = api.frameHeight - 86;
 			api.openFrame({
 				name : 'img2',
 				url : '../../html/img/img.html',
 				rect : {
 					x : 0,
+					y : hhh,
+					w : api.frameWidth,
+					h : 86
+				},
+				pageParam : {
+					pid : api.pageParam.pid,
+					shoucang : api.pageParam.shoucang
+				}
+			});
+		}
+
+		function openH() {
+			api.setPrefs({
+				key : 'isopen',
+				value : '110'
+			});
+			api.openFrame({
+				name : 'img_head',
+				url : '../../html/img/head.html',
+				rect : {
+					x : 0,
 					y : 0,
 					w : api.frameWidth,
-					h : api.winHeight
+					h : 89
 				},
 				pageParam : {
 					pid : api.pageParam.pid,
@@ -99,25 +121,32 @@
 				bgColor : '#000'
 			}, function(ret, err) {
 				if (ret.eventType == 'click') {
-					openH()
-				} else {
-				}
-				if (ret.eventType == 'change') {
-					var index = ret.index + 1;
-					if (index == freenum) {
-			 
-						isyouxiaoP(xu)
-				 
-					}
-					api.sendEvent({
-						name : 'imglist',
-						extra : {
-							imglenth : img.length,
-							imgindex : index
+					api.getPrefs({
+						key : 'isopen'
+					}, function(ret, err) {
+						if (ret.value) {
+//							api.closeFrame({
+//								name : 'img2'
+//							});
+//							api.closeFrame({
+//								name : 'img_head'
+//							});
+							api.setFrameAttr({
+								name : 'img_head',
+								hidden:true 
+							});
+							api.setFrameAttr({
+								name : 'img2',
+								hidden:true 
+							});
+							api.removePrefs({
+								key : 'isopen'
+							});
+						} else {
+							openH()
+							openf()
 						}
 					});
-				} else {
-					//						alert(JSON.stringify(err));
 				}
 			});
 			api.addEventListener({
