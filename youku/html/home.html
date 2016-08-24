@@ -179,20 +179,17 @@
 			}
 
 			function openMe(button) {
-				api.closeFrame({
-					name : 'common_index'
-				});
-				api.closeFrameGroup({
-					name : 'history_group'
-				});
 				api.closeFrameGroup({
 					name : 'shoucang_group'
 				});
 				api.closeFrame({
-					name : 'history'
+					name : 'shoucang'
+				});
+				api.closeFrameGroup({
+					name : 'history_group'
 				});
 				api.closeFrame({
-					name : 'shoucang'
+					name : 'history'
 				});
 				$api.addCls(hh1, 'H-display-none');
 				$api.addCls(hhh, 'H-display-none');
@@ -206,33 +203,24 @@
 				api.openFrame({
 					name : 'me',
 					url : '../html/me/index.html',
-					reload : true,
+					//					reload : true,
 					rect : {
 						x : 0,
 						y : 25,
 						w : api.frameWidth,
 						h : api.frameHeight - offset - 25
-					}
-				});
+					},
+				})
 			}
 
 			function openh(button) {
-				api.setFrameAttr({
-					name : 'shoucang_group',
-					hidden : true
-				});
-				api.closeFrame({
-					name : 'common_index'
-				});
-				api.closeFrame({
-					name : 'common_index'
-				});
+			
+			    
 				api.closeFrameGroup({
 					name : 'shoucang_group'
 				});
-				api.setFrameAttr({
-					name : 'shoucang_group',
-					hidden : true
+				api.closeFrame({
+					name : 'shoucang'
 				});
 				api.hideProgress();
 				for ( i = 0; i < aa.length; i++) {
@@ -260,26 +248,10 @@
 			}
 
 			function openIndex(button) {
-//				api.setFrameAttr({
-//					name : 'me',
-//					hidden : true
-//				});
-//				api.setFrameAttr({
-//					name : 'history',
-//					hidden : true
-//				});
-//				api.setFrameAttr({
-//					name : 'me',
-//					hidden : true
-//				});
-//				api.setFrameGroupAttr({
-//					name : 'history_group',
-//					hidden : true
-//				});
-//				api.setFrameGroupAttr({
-//					name : 'shoucang_group,
-//					hidden : true
-//				});
+				api.setFrameAttr({
+					name : 'me',
+					hidden : true
+				});
 				api.closeFrame({
 					name : 'history'
 				});
@@ -302,7 +274,7 @@
 				api.openFrame({
 					name : 'common_index',
 					url : '../html/index/index.html',
-					reload : true,
+					//					reload : true,
 					rect : {
 						x : 0,
 						y : header2 + 25,
