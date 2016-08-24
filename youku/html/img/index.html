@@ -33,48 +33,18 @@
 		}
 
 		function openH() {
-			api.setPrefs({
-				key : 'isopen',
-				value : '110'
-			});
 			api.openFrame({
 				name : 'img_head',
 				url : '../../html/img/head.html',
 				rect : {
 					x : 0,
-					y : 0,
+					y : 25,
 					w : api.frameWidth,
 					h : 89
 				},
 				pageParam : {
 					pid : api.pageParam.pid,
 					shoucang : api.pageParam.shoucang
-				}
-			});
-		}
-
-		function npic() {
-			var photoBrowser = api.require('photoBrowser');
-			photoBrowser.getIndex(function(ret, err) {
-				if (ret) {
-					photoBrowser.setIndex({
-						index : ret.index + 1
-					});
-				} else {
-					alert(JSON.stringify(err));
-				}
-			});
-		}
-
-		function bpic() {
-			var photoBrowser = api.require('photoBrowser');
-			photoBrowser.getIndex(function(ret, err) {
-				if (ret) {
-					photoBrowser.setIndex({
-						index : ret.index - 1
-					});
-				} else {
-					alert(JSON.stringify(err));
 				}
 			});
 		}
@@ -114,37 +84,85 @@
 			var pics = api.pageParam.name
 			var img = pics.split(' ');
 			var xu = api.pageParam.xu
+			var fname = api.pageParam.fname
 			photoBrowser.open({
 				images : img,
 				activeIndex : 0,
 				placeholderImg : 'widget://image/6.jpg',
 				bgColor : '#000'
 			}, function(ret, err) {
+				var index = ret.index
+				//				openH()
+				//				openf()
+				api.sendEvent({
+					name : 'imglist',
+					extra : {
+						imglenth : img.length,
+						imgindex : index
+					}
+				});
+				if (index == freenum) {
+					api.getPrefs({
+						key : 'user'
+					}, function(ret, err) {
+						if (ret.value) {
+							var userinfo = $api.getStorage('userinfo')
+							if (userinfo.xu < xu) {
+								api.openFrame({
+									name : 'quanxianimg',
+									url : '../../html/img/quanxian.html',
+									rect : {
+										x : 0,
+										y : 0,
+										w : api.winWidth,
+										h : api.winHeight
+									},
+									pageParam : {
+										fname : fname,
+										imglenth : img.length,
+										imgindex : index
+									}
+								});
+								openH()
+								openf()
+							}
+						} else {
+							api.openFrame({
+								name : 'login1',
+								url : '../../html/login1.html',
+								rect : {
+									x : 0,
+									y : 0,
+									w : api.winWidth,
+									h : api.winHeight
+								}
+							});
+						}
+					});
+				}
 				if (ret.eventType == 'click') {
 					api.getPrefs({
 						key : 'isopen'
 					}, function(ret, err) {
-						if (ret.value) {
-//							api.closeFrame({
-//								name : 'img2'
-//							});
-//							api.closeFrame({
-//								name : 'img_head'
-//							});
+						if (ret.value=='') {
+							openH()
+							openf()
+							api.setPrefs({
+								key : 'isopen',
+								value : '110'
+							});
+						} else {
 							api.setFrameAttr({
 								name : 'img_head',
-								hidden:true 
+								hidden : true
 							});
 							api.setFrameAttr({
 								name : 'img2',
-								hidden:true 
+								hidden : true
 							});
 							api.removePrefs({
 								key : 'isopen'
 							});
-						} else {
-							openH()
-							openf()
 						}
 					});
 				}

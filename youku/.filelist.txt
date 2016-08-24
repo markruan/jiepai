@@ -37,8 +37,10 @@
 /A6990407827122/image/default.jpg
 /A6990407827122/html/me/head.html
 /A6990407827122/html/info/psw.html
+/A6990407827122/html/img/quanxian.html
 /A6990407827122/html/shoucang/shoucangV.html
 /A6990407827122/image/shoucang_on.png
+/A6990407827122/image/jian.png
 /A6990407827122/html/reg.html
 /A6990407827122/html/page/header.html
 /A6990407827122/script/echo.min.js

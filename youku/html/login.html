@@ -33,9 +33,7 @@
 	</head>
 	<body class="H-height-100-percent H-box-sizing-border-box H-overflow-hidden">
 		<div class="fix">
-			<div class="H-horizontal-center H-padding-vertical-both-25">
-			 
-			</div>
+			<div class="H-horizontal-center H-padding-vertical-both-25"></div>
 			<div class=" form   ">
 				<div class="from_1 H-theme-background-color-red ">
 					<div class="H-flexbox-horizontal  H-border-vertical-bottom-margin-both-10-after">
@@ -60,7 +58,7 @@
 		</div>
 		<div class="H-padding-vertical-bottom-10"></div>
 		<div class="H-theme-font-white H-text-align-center H-padding-vertical-both-10 H-font-size-14">
-		<div class="H-padding-vertical-bottom-10"></div>
+			<div class="H-padding-vertical-bottom-10"></div>
 			其他方式登录
 		</div>
 		<div class="H-flexbox-horizontal H-text-align-center  H-padding-vertical-both-15">
@@ -81,76 +79,85 @@
 	<script type="text/javascript" src="../script/api.js"></script>
 	<script type="text/javascript" src="../script/jie.js"></script>
 	<script type="text/javascript">
-	
-	  function reg(){
-	    api.openWin({
-	        name: 'reg',
-	        url: 'reg.html'
-        });
-	   
-	  }
- 
+		function reg() {
+			api.openWin({
+				name : 'reg',
+				url : 'reg.html'
+			});
+		}
+
 		apiready = function() {
- 
-					$api.byId('login').onclick = function() {
-					if ($api.byId('name').value.length == 0) {
-						$api.byId('name').focus();
-						api.toast({
-							msg : '用户名不能为空'
-						});
-						return;
-					} else if ($api.byId('password').value.length == 0) {
-						$api.byId('password').focus();
-						api.toast({
-							msg : '密码不能为空！'
-						});
-						return;
-					} else {
-//						var nameVal = $api.byId('name').value;
-						var nameVal =  $api.val($api.byId('name'));
-						var passwordVal = $api.byId('password').value;
-						api.ajax({
-							url : Api+'login.html',
-							method : 'post',
-							timeout : 30,
-							dataType : 'text',
-							returnAll : false,
-							data : {
-								values : {
-									username : nameVal,
-									password : passwordVal,
-								},
-							}
-						}, function(ret, err) {
-							if (ret == 1) {
-								api.toast({
-									msg : '登陆成功'
-								});
-								api.setPrefs({
-									key : 'user',
-									value : nameVal
-								});
-								api.sendEvent({
-									name : 'reg_login_successEvent',
-									extra : {
-										user : nameVal,
-									}
-								});
-                                api.openWin({
-	                                name: 'home',
-	                                url: 'home.html'
-                                });
-                                api.closeWin({
-                                 name: 'login_head',
-                                });
-							 
-								 
-							} else {
-								alert("用户名或密码错误 ");
-							}
-						});
-					}
+			$api.byId('login').onclick = function() {
+				if ($api.byId('name').value.length == 0) {
+					$api.byId('name').focus();
+					api.toast({
+						msg : '用户名不能为空'
+					});
+					return;
+				} else if ($api.byId('password').value.length == 0) {
+					$api.byId('password').focus();
+					api.toast({
+						msg : '密码不能为空！'
+					});
+					return;
+				} else {
+					//						var nameVal = $api.byId('name').value;
+					var nameVal = $api.val($api.byId('name'));
+					var passwordVal = $api.byId('password').value;
+					api.ajax({
+						url : Api + 'login.html',
+						method : 'post',
+						timeout : 30,
+						dataType : 'text',
+						returnAll : false,
+						data : {
+							values : {
+								username : nameVal,
+								password : passwordVal,
+							},
+						}
+					}, function(ret, err) {
+						if (ret == 1) {
+							api.toast({
+								msg : '登陆成功'
+							});
+							api.setPrefs({
+								key : 'user',
+								value : nameVal
+							});
+							api.ajax({
+								url : Api + 'userinfo.html',
+								method : 'post',
+								timeout : 30,
+								dataType : 'json',
+								data : {
+									values : {
+										username : nameVal,
+									},
+								}
+							}, function(ret, err) {
+								$api.setStorage('userinfo', ret);
+								
+							});
+							api.sendEvent({
+								name : 'reg_login_successEvent',
+								extra : {
+									user : nameVal,
+								}
+							});
+							api.openWin({
+								name : 'home',
+								url : 'home.html'
+							});
+							api.closeWin({
+								name : 'login_head',
+							});
+						} else {
+							alert("用户名或密码错误 ");
+						}
+					});
 				}
+			}
 		};
 	</script>
 </html>

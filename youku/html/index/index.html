@@ -22,7 +22,7 @@
 			}
 		</style>
 	</head>
-	<body class="H-z-index-1000">
+	<body id="body" class="H-z-index-1000 H-display-none">
 		<div class="H-padding-vertical-bottom-2"></div>
 		<div class="H-channel-title H-flexbox-horizontal H-theme-background-color-white H-vertical-middle  ">
 			<div class="H-channel-line H-theme-background-color-zhuti H-padding-vertical-top-15 H-padding-horizontal-left-3  H-margin-horizontal-left-4"></div>
@@ -45,7 +45,7 @@
 	<script type="text/javascript" src="../../script/jie.js"></script>
 	<script type="text/javascript" src="../../script/echo.min.js"></script>
 	<script type="text/javascript">
-		function openV(url, vid, varr, title, vbianhao, img, vprice, xu, fname,vvprice) {
+		function openV(url, vid, varr, title, vbianhao, img, vprice, xu, fname, vvprice) {
 			api.openWin({
 				name : 'veido',
 				url : '../../html/vedio/index.html',
@@ -60,12 +60,12 @@
 					vprice : vprice,
 					xu : xu,
 					fname : fname,
-					vvprice:vvprice
+					vvprice : vvprice
 				}
 			});
 		}
 
-		function openImg(arr, pid,freenum,xu,fname) {
+		function openImg(arr, pid, freenum, xu, fname) {
 			api.openWin({
 				name : 'img1',
 				url : '../../html/img/index.html',
@@ -73,10 +73,9 @@
 				pageParam : {
 					name : arr,
 					pid : pid,
-					freenum:freenum,
-					xu:xu,
-					fname:fname
-					
+					freenum : freenum,
+					xu : xu,
+					fname : fname
 				}
 			});
 		}
@@ -157,7 +156,7 @@
 					var vurl = myobj[i].purl
 					var img = pic.split(' ');
 					var zhang = img.length
-					html += '<div onclick="openImg(\'' + pic + '\',' + pid + ','+freenum+','+xu+',\'' + fname + '\')" class="H-display-table-cell H-theme-background-color-white H-float-left  H-box-sizing-border-box H-width-avg-3 H-padding-horizontal-right-4 H-margin-vertical-bottom-10   " style="margin-bottom: 10px; ">';
+					html += '<div onclick="openImg(\'' + pic + '\',' + pid + ',' + freenum + ',' + xu + ',\'' + fname + '\')" class="H-display-table-cell H-theme-background-color-white H-float-left  H-box-sizing-border-box H-width-avg-3 H-padding-horizontal-right-4 H-margin-vertical-bottom-10   " style="margin-bottom: 10px; ">';
 					html += '<img  src="../../image/default.jpg"  data-echo="' + vurl + '" class=" H-float-right H-margin-vertical-top-8 H-margin-horizontal-both-2 H-display-block" alt="" title="" style="width: 96%" ;height:200>';
 					html += '<img src="../../image/xia.png " class=" H-float-right  H-margin-vertical-top-8 H-margin-horizontal-both-2 H-display-block" style="margin-top: -200px; height: 200px ; width: 96%" alt="" title="">';
 					html += '<div  class=" " style=" margin-right:8px; margin-top:-30px;line-height: 30px; float: right; color:white ;">' + pnum + '<span>张</span></div>';
@@ -167,6 +166,7 @@
 				$api.html(list, html);
 				api.hideProgress();
 				api.refreshHeaderLoadDone();
+				setTimeout($api.removeCls($api.byId('body'), 'H-display-none'), 400)
 				echo.init({
 					offset : 0,
 					throttle : 150,
@@ -174,7 +174,9 @@
 					callback : function(element, op) {
 					}
 				});
+				
 			});
+			
 		}
 
 		apiready = function() {

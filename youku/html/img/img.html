@@ -20,7 +20,6 @@
 		</style>
 	</head>
 	<body>
-	 
 		<div class="bottom_footer "style=" background-color: rgba(0, 0, 0, 0.45)">
 			<div class="share-menu H-z-index-1000000   H-margin-vertical-bottom-0"  >
 				<div class="H-flexbox-horizontal H-text-align-center H-padding-vertical-both-10">
@@ -52,6 +51,13 @@
 		}
 
 		function imgdownload() {
+			var userinfo = $api.getStorage('userinfo');
+			if (!userinfo) {
+				api.toast({
+					msg : '请先登录..'
+				});
+				return
+			}
 			var jsfun = 'download()'
 			api.execScript({
 				name : 'img1',
@@ -60,7 +66,14 @@
 		}
 
 		function shoucangP() {
+			var userinfo = $api.getStorage('userinfo');
 			var pid = api.pageParam.pid;
+			if (!userinfo) {
+				api.toast({
+					msg : '请先登录..'
+				});
+				return
+			}
 			if (api.pageParam.shoucang == 0) {
 				alert('已经收藏过了')
 			} else {
@@ -92,43 +105,11 @@
 		}
 
 		apiready = function() {
+			var userinfo = $api.getStorage('userinfo');
 			api.addEventListener({
 				name : 'keyback'
 			}, function(ret, err) {
 				back()
-			});
-			api.addEventListener({
-				name : 'tap'
-			}, function(ret, err) {
-				api.sendFrameToBack({
-					from : 'img2'
-				});
-			});
-			api.addEventListener({
-				name : 'swiperight'
-			}, function(ret, err) {
-				var jsfun = 'bpic();';
-				setTimeout(api.execScript({
-					name : 'img1',
-					script : jsfun
-				}), 2000);
-			});
-			api.addEventListener({
-				name : 'swipeleft'
-			}, function(ret, err) {
-				var jsfun = 'npic();';
-				setTimeout(api.execScript({
-					name : 'img1',
-					script : jsfun
-				}), 2000);
-			});
-			api.addEventListener({
-				name : 'imglist'
-			}, function(ret, err) {
-				var total = ret.value.imglenth
-				var imgindex = ret.value.imgindex
-				$api.html($api.byId('list'), '<span id="" style="color: red;margin-left: 10px;">' + imgindex + '</span><span>/</span>' + total + '</span>');
-				//				$api.html($api.byId('download'), '<label onclick="download()" class="H-display-block H-font-size-13 H-margin-vertical-top-5 H-theme-font-color-white">保存</label>');
 			});
 		};
 	</script>
