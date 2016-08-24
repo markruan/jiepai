@@ -22,7 +22,7 @@
 			}
 		</style>
 	</head>
-	<body class="H-z-index-1000">
+	<body class="H-z-index-1000 H-display-none "id="body"  >
 		<div id="imglist" class="H-clear-both H-width-100-percent H-display-table H-box-sizing-border-box H-padding-horizontal-both-10  "></div>
 	</body>
 	<script type="text/javascript" src="../../script/api.js"></script>
@@ -93,6 +93,7 @@
 						$api.html(list, html);
 						api.hideProgress();
 						api.refreshHeaderLoadDone();
+						setTimeout($api.removeCls($api.byId('body'), 'H-display-none'), 400)
 						echo.init({
 							offset : 0,
 							throttle : 150,

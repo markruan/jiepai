@@ -45,16 +45,16 @@
 				<div class="H-header-title H-center-all H-font-size-18 H-text-show-row-1 H-theme-font-color-white H-position-absolute H-width-100-percent" >
 					<div class="H-flexbox-horizontal H-theme-background-color-zhuti H-padding-horizontal-both-30" style="height: 40px;">
 						<div onclick="openM('shipin','街拍视频')" class="H-flex-item H-center-all H-padding-vertical-both-9  H-touch-active1  H-font-size-16  H-theme-font-color-white" style="border-width: 0 0 2px  0">
-						  街拍视频
+							街拍视频
 						</div>
 						<div onclick="openM('jiepai','街拍图片')"  class="H-flex-item H-center-all H-padding-vertical-both-9   H-touch-active1 H-font-size-16 H-theme-font-color-white" style="border-width: 0 0 2px  0">
-						街拍图片
+							街拍图片
 						</div>
 						<div onclick="openM('tupian','私拍图片')"  class="H-flex-item H-center-all H-padding-vertical-both-9   H-touch-active1 H-font-size-16 H-theme-font-color-white" style="border-width: 0 0 2px  0">
-							 私拍图片
+							私拍图片
 						</div>
 						<!--<div onclick="openM('shishang','时尚')"  class="H-flex-item H-center-all H-padding-vertical-both-9   H-touch-active1 H-font-size-16 H-theme-font-color-white" style="border-width: 0 0 2px  0">
-							时尚
+						时尚
 						</div>-->
 					</div>
 				</div>
@@ -217,6 +217,10 @@
 			}
 
 			function openh(button) {
+				api.setFrameAttr({
+					name : 'shoucang_group',
+					hidden : true
+				});
 				api.closeFrame({
 					name : 'common_index'
 				});
@@ -225,6 +229,10 @@
 				});
 				api.closeFrameGroup({
 					name : 'shoucang_group'
+				});
+				api.setFrameAttr({
+					name : 'shoucang_group',
+					hidden : true
 				});
 				api.hideProgress();
 				for ( i = 0; i < aa.length; i++) {
@@ -252,12 +260,28 @@
 			}
 
 			function openIndex(button) {
+//				api.setFrameAttr({
+//					name : 'me',
+//					hidden : true
+//				});
+//				api.setFrameAttr({
+//					name : 'history',
+//					hidden : true
+//				});
+//				api.setFrameAttr({
+//					name : 'me',
+//					hidden : true
+//				});
+//				api.setFrameGroupAttr({
+//					name : 'history_group',
+//					hidden : true
+//				});
+//				api.setFrameGroupAttr({
+//					name : 'shoucang_group,
+//					hidden : true
+//				});
 				api.closeFrame({
 					name : 'history'
-				});
-				api.setFrameAttr({
-					name : 'me',
-					hidden : true
 				});
 				api.closeFrame({
 					name : 'shoucang'
