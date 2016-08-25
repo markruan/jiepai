@@ -86,14 +86,16 @@
 			}, function(ret, err) {
 				back()
 			});
+			 
+			  setTimeout( 
 			api.addEventListener({
 				name : 'imglist'
 			}, function(ret, err) {
 				var total = ret.value.imglenth
-				var imgindex = ret.value.imgindex+1
+				var imgindex = ret.value.imgindex + 1
 				$api.html($api.byId('list'), '<span id="" style="color: red;margin-left: 10px;">' + imgindex + '</span><span>/</span>' + total + '</span>');
 				//				$api.html($api.byId('download'), '<label onclick="download()" class="H-display-block H-font-size-13 H-margin-vertical-top-5 H-theme-font-color-white">保存</label>');
-			});
+			}),18000)
 		};
 	</script>
 </html>

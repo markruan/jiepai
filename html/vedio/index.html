@@ -12,6 +12,7 @@
 	</head>
 	<body></body>
 	<script type="text/javascript" src="../../script/api.js"></script>
+	<script type="text/javascript" src="../../script/jie.js"></script>
 	<script type="text/javascript">
 		apiready = function() {
 			var vurl = api.pageParam.name
@@ -86,6 +87,24 @@
 					fname : api.pageParam.fname,
 					vvprice : api.pageParam.vvprice,
 				}
+			});
+			var userName = api.getPrefs({
+				sync : true,
+				key : 'user'
+			});
+			api.ajax({
+				url : Api + 'addhistory.html',
+				method : 'post',
+				timeout : 30,
+				dataType : 'json',
+				data : {
+					values : {
+						username : userName,
+						id : api.pageParam.vid,
+						type : api.pageParam.type
+					},
+				}
+			}, function(ret, err) {
 			});
 		};
 	</script>

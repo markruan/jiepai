@@ -22,43 +22,31 @@
 			}
 		</style>
 	</head>
-	<body class="H-z-index-1000 H-display-none "id="body">
+	<body class="H-z-index-1000  "id="body">
 		<div id="imglist" class="H-clear-both H-width-100-percent H-display-table H-box-sizing-border-box H-padding-horizontal-both-10  "></div>
-	    
-	  
-	   
-	
 	</body>
 	<script type="text/javascript" src="../../script/api.js"></script>
 	<script type="text/javascript" src="../../script/jie.js"></script>
 	<script type="text/javascript" src="../../script/echo.min.js"></script>
 	<script type="text/javascript">
-		function openV(url, varr, title, vbianhao) {
+       function openImg(arr, pid, freenum, xu, fname) {
 			api.openWin({
-				name : 'veido',
-				url : '../../html/vedio/index.html',
+				name : 'img1',
+				url : '../../html/img/index.html',
+				slidBackEnabled : false,
 				pageParam : {
-					name : url,
-					varr : varr,
-					title : title,
-					vbianhao : vbianhao
+					name : arr,
+					pid : pid,
+					freenum : freenum,
+					xu : xu,
+					fname : fname,
+					type:'图片'
 				}
 			});
 		}
 
-		function openImg(arr, pid) {
-			api.openWin({
-				name : 'img1',
-				url : '../../html/img/index.html',
-					slidBackEnabled:false,
-				pageParam : {
-					name : arr,
-					pid : pid,
-					shoucang : 0
-				}
-			});
-		}
- 
+	 
+
 		function intimg() {
 			var html = '';
 			var list = $api.byId('imglist');
@@ -69,41 +57,45 @@
 				text : '先喝杯茶...',
 				modal : false
 			});
-			 
 			api.getPrefs({
 				key : 'user'
 			}, function(ret, err) {
 				var user = ret.value
 				if (user != '') {
 					api.ajax({
-						url : Api + 'shoucangPapi.html',
+						url : Api + 'history.html',
 						method : 'post',
 						data : {
 							values : {
 								username : user,
+								type : '图片'
 							},
 						}
 					}, function(ret, err) {
 						var myobj = ret
 						for (var i = 0; i < myobj.length; i++) {
 							var title = myobj[i].vname;
-							var pic = myobj[i].pp
-							var pid = myobj[i].id
-							var title = myobj[i].pname
-							var vurl = myobj[i].purl
-							var img = pic.split(' ');
-							var zhang = img.length
-							html += '<div onclick="openImg(\'' + pic + '\',' + pid + ')" class="H-display-table-cell H-theme-background-color-white H-float-left  H-box-sizing-border-box H-width-avg-3 H-padding-horizontal-right-4 H-margin-vertical-bottom-10   " style="margin-bottom: 10px; ">';
-							html += '<img  src="../../image/default.jpg"  data-echo="' + vurl + '" class=" H-float-right H-margin-vertical-top-8 H-margin-horizontal-both-2 H-display-block" alt="" title="" style="width: 96%" ;height:200>';
-							html += '<img src="../../image/xia.png " class=" H-float-right  H-margin-vertical-top-8 H-margin-horizontal-both-2 H-display-block" style="margin-top: -200px; height: 200px ; width: 96%" alt="" title="">';
-							html += '<div  class=" " style=" margin-right:8px; margin-top:-30px;line-height: 30px; float: right; color:white ;">' + zhang + '<span>张</span></div>';
-							html += '<div class="H-text-align-center H-font-size-14 H-padding-vertical-top-10    " style="line-height: 35px">' + title.substr(0, 7) + '</div>';
-							html += '<div class="H-padding-vertical-bottom-10 H-theme-background-color-eee  " style="margin: 0 -10px"></div></div>';
+					var pic = myobj[i].pp
+					var pnum = myobj[i].pnum
+					var pid = myobj[i].p_id
+					var title = myobj[i].pname
+					var fname = myobj[i].fname;
+					var xu = myobj[i].xu
+					var freenum = myobj[i].freenum
+					var ftitle = myobj[i].ftitle
+					var vurl = myobj[i].purl
+					var img = pic.split(' ');
+					var zhang = img.length
+					html += '<div onclick="openImg(\'' + pic + '\',' + pid + ',' + freenum + ',' + xu + ',\'' + fname + '\')" class="H-display-table-cell H-theme-background-color-white H-float-left  H-box-sizing-border-box H-width-avg-3 H-padding-horizontal-right-4 H-margin-vertical-bottom-10   " style="margin-bottom: 10px; ">';
+					html += '<img  src="../../image/default.jpg"  data-echo="' + vurl + '" class=" H-float-right H-margin-vertical-top-8 H-margin-horizontal-both-2 H-display-block" alt="" title="" style="width: 96%" ;height:200>';
+					html += '<img src="../../image/xia.png " class=" H-float-right  H-margin-vertical-top-8 H-margin-horizontal-both-2 H-display-block" style="margin-top: -200px; height: 200px ; width: 96%" alt="" title="">';
+					html += '<div  class=" " style=" margin-right:8px; margin-top:-30px;line-height: 30px; float: right; color:white ;">' + pnum + '<span>张</span></div>';
+					html += '<div class="H-text-align-center H-font-size-14 H-padding-vertical-top-10    " style="line-height: 35px">' + ftitle.substr(0, 7) + '</div>';
+					html += '<div class="H-padding-vertical-bottom-10 H-theme-background-color-eee  " style="margin: 0 -10px"></div></div>';
 						}
 						$api.html(list, html);
 						api.hideProgress();
 						api.refreshHeaderLoadDone();
-							setTimeout($api.removeCls($api.byId('body'), 'H-display-none'), 1800)
 						echo.init({
 							offset : 0,
 							throttle : 150,

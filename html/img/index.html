@@ -27,7 +27,7 @@
 				},
 				pageParam : {
 					pid : api.pageParam.pid,
-					shoucang : api.pageParam.shoucang
+					shoucang : api.pageParam.shoucang,
 				}
 			});
 		}
@@ -44,7 +44,7 @@
 				},
 				pageParam : {
 					pid : api.pageParam.pid,
-					shoucang : api.pageParam.shoucang
+					shoucang : api.pageParam.shoucang,
 				}
 			});
 		}
@@ -92,14 +92,16 @@
 				bgColor : '#000'
 			}, function(ret, err) {
 				var index = ret.index
-				//				openH()
-				//				openf()
 				api.sendEvent({
 					name : 'imglist',
 					extra : {
 						imglenth : img.length,
 						imgindex : index
 					}
+				});
+				api.setPrefs({
+					key : 'imglenth',
+					value : img.length
 				});
 				if (index == freenum) {
 					api.getPrefs({
@@ -144,7 +146,7 @@
 					api.getPrefs({
 						key : 'isopen'
 					}, function(ret, err) {
-						if (ret.value=='') {
+						if (ret.value == '') {
 							openH()
 							openf()
 							api.setPrefs({
@@ -172,6 +174,24 @@
 			}, function(ret, err) {
 				api.closeWin({
 				});
+			});
+			var userName = api.getPrefs({
+				sync : true,
+				key : 'user'
+			});
+			api.ajax({
+				url : Api + 'addhistory.html',
+				method : 'post',
+				timeout : 30,
+				dataType : 'json',
+				data : {
+					values : {
+						username : userName,
+						id : api.pageParam.pid,
+						type:api.pageParam.type
+					},
+				}
+			}, function(ret, err) {
 			});
 		};
 	</script>
