@@ -22,7 +22,7 @@
 			}
 		</style>
 	</head>
-	<body id="body" class="H-z-index-1000 H-display-none">
+	<body id="body" class="H-z-index-1000 ">
 		<div class="H-padding-vertical-bottom-2"></div>
 		<div class="H-channel-title H-flexbox-horizontal H-theme-background-color-white H-vertical-middle  ">
 			<div class="H-channel-line H-theme-background-color-zhuti H-padding-vertical-top-15 H-padding-horizontal-left-3  H-margin-horizontal-left-4"></div>
@@ -60,7 +60,8 @@
 					vprice : vprice,
 					xu : xu,
 					fname : fname,
-					vvprice : vvprice
+					vvprice : vvprice,
+					type:'视频'
 				}
 			});
 		}
@@ -75,7 +76,8 @@
 					pid : pid,
 					freenum : freenum,
 					xu : xu,
-					fname : fname
+					fname : fname,
+					type:'图片'
 				}
 			});
 		}
@@ -166,7 +168,7 @@
 				$api.html(list, html);
 				api.hideProgress();
 				api.refreshHeaderLoadDone();
-				setTimeout($api.removeCls($api.byId('body'), 'H-display-none'), 400)
+//				setTimeout($api.removeCls($api.byId('body'), 'H-display-none'), 400)
 				echo.init({
 					offset : 0,
 					throttle : 150,
@@ -174,9 +176,7 @@
 					callback : function(element, op) {
 					}
 				});
-				
 			});
-			
 		}
 
 		apiready = function() {

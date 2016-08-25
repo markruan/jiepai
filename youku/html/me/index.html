@@ -25,14 +25,14 @@
 			}
 		</style>
 	</head>
-	<body  id="body" class="H-display-none">
+	<body  id="body" class="H-display-none" >
 		<div class="H-text-list H-flexbox-horizontal  H-theme-background-color-zhuti   H-vertical-middle  " style="height: 160px;">
 			<span class=" H-padding-horizontal-right-5 H-display-block"style="margin-top: 0px;"> <img onclick="openme()" id="img" src="../../image/ic.jpg" style="width: 70px; height: 70px;border-radius: 35px;margin-left:30px; margin-top: -28px;margin-right:30px;" / ></span>
 			<div class="H-flex-item H-padding-horizontal-both-10 H-font-size-24 H-padding-vertical-bottom-12 ">
 				<span class="H-font-weight-600 H-theme-font-color-white" id="username"></span>
 				<br>
 				<button id="grade" class="H-margin-horizontal-left-0 H-button-1 H-font-size-15 H-outline-none H-padding-vertical-both-1 H-padding-horizontal-both-1 H-theme-background-color-white H-theme-font-color-white H-theme-border-color-white H-theme-border-color8-click H-theme-background-color8-click H-theme-font-color8-click H-border-radius-3"style="color: #ff6606 ">
-					金牌用户
+					普通用户
 				</button>
 				<span class="H-font-size-15 H-theme-font-color-white">剩余时间：<span id="days">0</span>天</span>
 				<div>
@@ -80,7 +80,8 @@
 				if (val && val != "") {
 					api.openWin({
 						name : 'info',
-						url : '../../html/info/info_head.html'
+						url : '../../html/info/info_head.html',
+												delay:200
 					});
 				} else {
 					api.confirm({
@@ -101,6 +102,13 @@
 		}
 
 		apiready = function() {
+			api.showProgress({
+				style : 'default',
+				animationType : 'fade',
+				title : '努力加载中...',
+				text : '先喝杯茶...',
+				modal : false
+			});
 			api.getPrefs({
 				key : 'user'
 			}, function(ret, err) {
@@ -121,6 +129,7 @@
 						$api.text($api.byId('username'), ret.username);
 						$api.text($api.byId('grade'), ret.fname);
 						$api.attr($api.byId('img'), 'src', uploadUrl + ret.icon);
+						$api.removeCls($api.byId('body'), 'H-display-none');
 						var setgradetime = ret.setgradetime;
 						var time1 = Number(timest()) - Number(setgradetime);
 						var time2 = Math.round(time1 / (60 * 60 * 24));
@@ -131,8 +140,9 @@
 						} else {
 							$api.text($api.byId('days'), time3);
 						}
-						
 					});
+				} else {
+					$api.removeCls($api.byId('body'), 'H-display-none');
 				};
 			});
 			api.ajax({
@@ -147,10 +157,8 @@
 				};
 				var render = H.tppl(H.D("#tppl").innerHTML);
 				H.D(".result").innerHTML = render(data);
-				
 			});
-			
-   setTimeout($api.removeCls($api.byId('body'), 'H-display-none'), 200)
+			api.hideProgress();
 		}
 	</script>
 </html>
