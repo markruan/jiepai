@@ -327,15 +327,15 @@
 						//						alert(ret.status)
 					}
 				});
-				jpush = api.require('ajpush');
-				api.addEventListener({
-					name : 'appintent'
-				}, function(ret, err) {
-					var extra = ret.extra;
-					//					var id=ret.extra.id
-					alert(extra)
-					//监听通知被点击后收到的数据
-				})
+//				jpush = api.require('ajpush');
+//				api.addEventListener({
+//					name : 'appintent'
+//				}, function(ret, err) {
+//					var extra = ret.extra;
+//					//					var id=ret.extra.id
+//					alert(extra)
+//					//监听通知被点击后收到的数据
+//				})
 				ajpush.setListener(function(ret) {
 					var id = ret.id;
 					var title = ret.title;
