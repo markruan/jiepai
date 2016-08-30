@@ -84,7 +84,6 @@
 			var pics = api.pageParam.name
 			var img = pics.split(' ');
 			var xu = api.pageParam.xu
-			 
 			var fname = api.pageParam.fname
 			photoBrowser.open({
 				images : img,
@@ -109,8 +108,13 @@
 						key : 'user'
 					}, function(ret, err) {
 						if (ret.value) {
-							var userinfo = $api.getStorage('userinfo')
-							if (userinfo.xu < xu) {
+							//							var userinfo = $api.getStorage('userinfo')
+							var userinfo = api.getPrefs({
+								sync : true,
+								key : 'userinfo'
+							});
+							 
+							if (userinfo< xu) {
 								api.openFrame({
 									name : 'quanxianimg',
 									url : '../../html/img/quanxian.html',

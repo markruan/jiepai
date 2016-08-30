@@ -137,6 +137,10 @@
 								}
 							}, function(ret, err) {
 								$api.setStorage('userinfo', ret);
+								api.setPrefs({
+	                                key:'userinfo',
+	                                value:ret.xu
+                                });
 							});
 							api.sendEvent({
 								name : 'reg_login_successEvent',

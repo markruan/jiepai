@@ -91,7 +91,9 @@
 				key : 'user'
 			});
 			$api.rmStorage('userinfo');
-			 
+			 api.removePrefs({
+	             key:'userinfo'
+             });
 			api.removePrefs({
 				key : 'quanji'
 			});
