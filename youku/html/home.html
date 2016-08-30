@@ -325,15 +325,13 @@
 				ajpush.init(function(ret) {
 					if (ret && ret.status) {
 						//						alert(ret.status)
-						
 						api.addEventListener({
-					name : 'appintent'
-				}, function(ret, err) {
-					extra =  JSON.stringify(ret).extra;
-					alert(extra);
-					//监听通知被点击后收到的数据
-					//监听通知被点击后收到的数据
-				})
+							name : 'appintent'
+						}, function(ret, err) {
+							extra =JSON.stringify(ret.extra)
+							alert(extra);
+						 
+						})
 					}
 				});
 				//				jpush = api.require('ajpush');
@@ -352,8 +350,6 @@
 				//					var extra = ret.extra;
 				//					alert(extra)
 				//				});
-				 
-				
 				//				api.addEventListener({
 				//					name : 'pause'
 				//				}, function(ret, err) {
