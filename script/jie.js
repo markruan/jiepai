@@ -580,7 +580,7 @@ function changePerson() {
 		allowEdit : true,
 		saveToPhotoAlbum : false
 	}, function(ret, err) {
-		if (ret.data!='') {
+		if (ret.data != '') {
 			api.showProgress({
 				title : ' 上传中...',
 				text : '先喝杯茶...',
@@ -599,19 +599,29 @@ function changePerson() {
 				},
 				dataType : 'text',
 			}, function(ret, err) {
-				if (ret) {
+			 
+				if (ret!=1) {
 					var url = uploadUrl + ret;
 					$api.attr($api.byId('img'), 'src', url);
 					api.toast({
 						msg : '更新成功'
 					});
 					api.hideProgress();
+					var jsfun = 'int()';
+					api.execScript({
+						name : 'root',
+						frameName : 'me',
+						script : jsfun
+					});
+				}else{
+				 alert('图片尺寸太大请重新上传')
+				 api.hideProgress();
+				
 				}
 			});
 		} else {
-		
-		   return
-			api.alert({
+
+			return api.alert({
 				msg : err.msg
 			});
 		} ;

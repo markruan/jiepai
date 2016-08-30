@@ -346,7 +346,7 @@
 											},
 										}
 									}, function(ret, err) {
-										return api.openWin({
+										api.openWin({
 											name : 'img1',
 											url : '../html/img/index.html',
 											slidBackEnabled : false,
@@ -361,40 +361,45 @@
 										});
 									});
 								} else {
-									//////////获取视频信息
+									api.ajax({
+										url : Api + 'vouttui.html',
+										method : 'post',
+										timeout : 30,
+										dataType : 'json',
+										returnAll : false,
+										data : {
+											values : {
+												id : idd.id,
+											},
+										}
+									}, function(ret, err) {
+									
+									  var myobj = ret
+									  var pic = myobj[0].vpic;
+										api.openWin({
+											name : 'veido',
+											url : '../html/vedio/index.html',
+											pageParam : {
+												name : eval(myobj[0].vurl)[0],
+												varr : eval(myobj[i].vurl),
+												title : myobj[0].vname,
+												vbianhao : myobj[i].vbianhao,
+												vid : myobj[0].vid,
+												shoucang : 1,
+												img : pic.split(' '),
+												vprice : myobj[0].vprice,
+												xu : myobj[0].xu,
+												fname : myobj[0].fname,
+												vvprice : eval(myobj[0].vvprice),
+												type : '视频'
+											}
+										});
+									});
 								}
 							}
 						})
 					}
 				});
-				//				jpush = api.require('ajpush');
-				//				api.addEventListener({
-				//					name : 'appintent'
-				//				}, function(ret, err) {
-				//					var extra = ret.extra;
-				//					//					var id=ret.extra.id
-				//					alert(extra)
-				//					//监听通知被点击后收到的数据
-				//				})
-				//				ajpush.setListener(function(ret) {
-				//					var id = ret.id;
-				//					var title = ret.title;
-				//					var content = ret.content;
-				//					var extra = ret.extra;
-				//					alert(extra)
-				//				});
-				//				api.addEventListener({
-				//					name : 'pause'
-				//				}, function(ret, err) {
-				//					onPause();
-				//					//监听应用进入后台，通知jpush暂停事件
-				//				})
-				//				api.addEventListener({
-				//					name : 'resume'
-				//				}, function(ret, err) {
-				//					onResume();
-				//					//监听应用恢复到前台，通知jpush恢复事件
-				//				})
 			});
 		</script>
 	</body>
