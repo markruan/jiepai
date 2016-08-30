@@ -329,7 +329,7 @@
 							name : 'appintent'
 						}, function(ret, err) {
 							var extra = ret.appParam.ajpush.extra
-							var type = eval(ret.appParam.ajpush.extra).type;
+							var type = eval(extra).type;
 							var id = ret.appParam.ajpush.extra.id;
 							
 							alert(extra+type+id)
