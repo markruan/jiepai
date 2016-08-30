@@ -330,9 +330,9 @@
 						}, function(ret, err) {
 							var extra = ret.appParam.ajpush.extra
 							var idd= JSON.parse(extra);
-							alert(extra  + idd.id)
+							 
 							if (extra) {
-								if (type == '图片') {
+								if (idd.type == '图片') {
 									/////获取图集信息
 									api.ajax({
 										url : Api + 'outimgtui.html',
@@ -342,7 +342,7 @@
 										returnAll : false,
 										data : {
 											values : {
-												id : id,
+												id : idd.id,
 											},
 										}
 									}, function(ret, err) {
