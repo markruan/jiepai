@@ -330,9 +330,10 @@
 						}, function(ret, err) {
 						      var ty =JSON.stringify(ret.appParam.ajpush);
 							 var type=JSON.stringify(ret.appParam.ajpush.extra);
-							 var id=JSON.stringify(ret.appParam.ajpush.extra.id);
-							  alert(ty)
-							 alert(type+id)
+							 var iid=type.Replace("\\","\")
+						 
+							  alert(iid)
+							 alert(iid.id+id)
 							 
 						 
 						})
