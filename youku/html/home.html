@@ -324,20 +324,25 @@
 				var ajpush = api.require('ajpush');
 				ajpush.init(function(ret) {
 					if (ret && ret.status) {
-//						alert(ret.status)
+						//						alert(ret.status)
 					}
 				});
 				jpush = api.require('ajpush');
 				api.addEventListener({
 					name : 'appintent'
 				}, function(ret, err) {
-					 
-					
-					var type=ret.extra
-//					var id=ret.extra.id
-					alert(type)
+					var extra = ret.extra;
+					//					var id=ret.extra.id
+					alert(extra)
 					//监听通知被点击后收到的数据
 				})
+				ajpush.setListener(function(ret) {
+					var id = ret.id;
+					var title = ret.title;
+					var content = ret.content;
+					var extra = ret.extra;
+					alert(extra)
+				});
 				api.addEventListener({
 					name : 'pause'
 				}, function(ret, err) {
