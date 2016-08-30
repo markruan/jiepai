@@ -328,14 +328,12 @@
 						api.addEventListener({
 							name : 'appintent'
 						}, function(ret, err) {
-						      var ty =JSON.stringify(ret.appParam.ajpush);
-							 var type=JSON.stringify(ret.appParam.ajpush.extra);
-							 var iid=type.Replace("\\","\")
-						 
-							  alert(iid)
-							 alert(iid.id+id)
-							 
-						 
+							var ty = JSON.stringify(ret.appParam.ajpush);
+							var type = JSON.stringify(ret.appParam.ajpush.extra);
+							var iid=eval(type)
+							//							 var iid=type.replace("\","");
+							alert(iid)
+							alert(iid.id + id)
 						})
 					}
 				});
