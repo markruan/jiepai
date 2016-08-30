@@ -294,6 +294,17 @@
 				});
 			}
 
+			function onResume() {
+				jpush.onResume();
+				console.log('JPush onResume');
+			}
+
+			//统计-app暂停
+			function onPause() {
+				jpush.onPause();
+				console.log('JPush onPause');
+			}
+
 			var jpush = null;
 			H.ready(function() {
 				api.setStatusBarStyle({
@@ -313,7 +324,7 @@
 				var ajpush = api.require('ajpush');
 				ajpush.init(function(ret) {
 					if (ret && ret.status) {
-						alert(ret.status)
+//						alert(ret.status)
 					}
 				});
 				jpush = api.require('ajpush');
