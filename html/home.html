@@ -330,8 +330,7 @@
 							name : 'appintent'
 						}, function(ret, err) {
 							var extra = ret.appParam.ajpush.extra
-							var idd= JSON.parse(extra);
-							 
+							var idd = JSON.parse(extra);
 							if (extra) {
 								if (idd.type == '图片') {
 									/////获取图集信息
@@ -347,12 +346,9 @@
 											},
 										}
 									}, function(ret, err) {
-									alert(ret[0].fname)
-									alert(Api + 'outimgtui.html')
-										 
 										return api.openWin({
 											name : 'img1',
-											url : '../../html/img/index.html',
+											url : '../html/img/index.html',
 											slidBackEnabled : false,
 											pageParam : {
 												name : ret[0].arr,
