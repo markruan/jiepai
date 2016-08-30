@@ -347,17 +347,19 @@
 											},
 										}
 									}, function(ret, err) {
-										alert(ret.fname)
+									alert(ret[0].fname)
+									alert(Api + 'outimgtui.html')
+										 
 										return api.openWin({
 											name : 'img1',
 											url : '../../html/img/index.html',
 											slidBackEnabled : false,
 											pageParam : {
-												name : arr,
-												pid : pid,
-												freenum : freenum,
-												xu : xu,
-												fname : fname,
+												name : ret[0].arr,
+												pid : ret[0].p_id,
+												freenum : ret[0].freenum,
+												xu : ret[0].xu,
+												fname : ret[0].fname,
 												type : '图片'
 											}
 										});
