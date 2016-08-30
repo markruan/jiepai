@@ -330,12 +330,14 @@
 						}, function(ret, err) {
 							var extra = ret.appParam.ajpush.extra
 							var type = ret.appParam.ajpush.extra.type;
-							var id = ret.appParam.ajpush.extra.type;
+							var id = ret.appParam.ajpush.extra.id;
+							
+							alert(extra+type+id)
 							if (extra) {
 								if (type == '图片') {
 									/////获取图集信息
 									api.ajax({
-									 url : Api + 'outimgtui.html',
+										url : Api + 'outimgtui.html',
 										method : 'post',
 										timeout : 30,
 										dataType : 'text',
@@ -347,8 +349,7 @@
 										}
 									}, function(ret, err) {
 										alert(ret.fname)
-										return
-										api.openWin({
+										return api.openWin({
 											name : 'img1',
 											url : '../../html/img/index.html',
 											slidBackEnabled : false,
