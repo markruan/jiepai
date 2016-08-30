@@ -328,11 +328,43 @@
 						api.addEventListener({
 							name : 'appintent'
 						}, function(ret, err) {
-							var type1 = JSON.stringify(ret.appParam.ajpush.extra);
-							var iid = eval(type1)
-							if (type1) {
-								alert(iid)
-								alert(ret.appParam.ajpush.extra)
+							var extra = ret.appParam.ajpush.extra
+							var type = ret.appParam.ajpush.extra.type;
+							var id = ret.appParam.ajpush.extra.type;
+							if (extra) {
+								if (type == '图片') {
+									/////获取图集信息
+									api.ajax({
+									 url : Api + 'outimgtui.html',
+										method : 'post',
+										timeout : 30,
+										dataType : 'text',
+										returnAll : false,
+										data : {
+											values : {
+												id : id,
+											},
+										}
+									}, function(ret, err) {
+										alert(ret.fname)
+										return
+										api.openWin({
+											name : 'img1',
+											url : '../../html/img/index.html',
+											slidBackEnabled : false,
+											pageParam : {
+												name : arr,
+												pid : pid,
+												freenum : freenum,
+												xu : xu,
+												fname : fname,
+												type : '图片'
+											}
+										});
+									});
+								} else {
+									//////////获取视频信息
+								}
 							}
 						})
 					}
