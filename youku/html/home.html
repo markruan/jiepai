@@ -346,7 +346,8 @@
 				api.addEventListener({
 					name : 'appintent'
 				}, function(ret, err) {
-					alert(ret.extra);
+				var aa=JSON.stringify(ret)
+					  alert(aa.extra);//监听通知被点击后收到的数据
 					//监听通知被点击后收到的数据
 				})
 				//				api.addEventListener({
