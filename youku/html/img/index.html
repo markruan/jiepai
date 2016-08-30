@@ -84,6 +84,7 @@
 			var pics = api.pageParam.name
 			var img = pics.split(' ');
 			var xu = api.pageParam.xu
+			 
 			var fname = api.pageParam.fname
 			photoBrowser.open({
 				images : img,
@@ -188,7 +189,7 @@
 					values : {
 						username : userName,
 						id : api.pageParam.pid,
-						type:api.pageParam.type
+						type : api.pageParam.type
 					},
 				}
 			}, function(ret, err) {
