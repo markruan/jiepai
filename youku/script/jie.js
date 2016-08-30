@@ -532,6 +532,7 @@ function isyouxiao(filegrade, iid, danid, dan, type) {
 	});
 
 }
+
 function goumai(vid, aa) {
 	var tradeNO = (new Date()).valueOf();
 	var username = api.getPrefs({
@@ -566,3 +567,53 @@ function goumai(vid, aa) {
 	});
 }
 
+function changePerson() {
+	var userName = api.getPrefs({
+		sync : true,
+		key : 'user'
+	});
+	api.getPicture({
+		sourceType : 'library',
+		encodingType : 'png',
+		mediaValue : 'pic',
+		destinationType : 'url',
+		allowEdit : true,
+		saveToPhotoAlbum : false
+	}, function(ret, err) {
+		if (ret.data!='') {
+			api.showProgress({
+				title : ' 上传中...',
+				text : '先喝杯茶...',
+				modal : false
+			}), api.ajax({
+				timeout : 300,
+				method : 'post',
+				url : Api + 'changIcon.html',
+				data : {
+					files : {
+						upfile : ret.data
+					},
+					values : {
+						username : userName
+					},
+				},
+				dataType : 'text',
+			}, function(ret, err) {
+				if (ret) {
+					var url = uploadUrl + ret;
+					$api.attr($api.byId('img'), 'src', url);
+					api.toast({
+						msg : '更新成功'
+					});
+					api.hideProgress();
+				}
+			});
+		} else {
+		
+		   return
+			api.alert({
+				msg : err.msg
+			});
+		} ;
+	});
+}
