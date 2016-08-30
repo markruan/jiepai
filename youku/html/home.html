@@ -327,15 +327,15 @@
 						//						alert(ret.status)
 					}
 				});
-//				jpush = api.require('ajpush');
-//				api.addEventListener({
-//					name : 'appintent'
-//				}, function(ret, err) {
-//					var extra = ret.extra;
-//					//					var id=ret.extra.id
-//					alert(extra)
-//					//监听通知被点击后收到的数据
-//				})
+				//				jpush = api.require('ajpush');
+				//				api.addEventListener({
+				//					name : 'appintent'
+				//				}, function(ret, err) {
+				//					var extra = ret.extra;
+				//					//					var id=ret.extra.id
+				//					alert(extra)
+				//					//监听通知被点击后收到的数据
+				//				})
 				ajpush.setListener(function(ret) {
 					var id = ret.id;
 					var title = ret.title;
@@ -343,18 +343,18 @@
 					var extra = ret.extra;
 					alert(extra)
 				});
-				api.addEventListener({
-					name : 'pause'
-				}, function(ret, err) {
-					onPause();
-					//监听应用进入后台，通知jpush暂停事件
-				})
-				api.addEventListener({
-					name : 'resume'
-				}, function(ret, err) {
-					onResume();
-					//监听应用恢复到前台，通知jpush恢复事件
-				})
+				//				api.addEventListener({
+				//					name : 'pause'
+				//				}, function(ret, err) {
+				//					onPause();
+				//					//监听应用进入后台，通知jpush暂停事件
+				//				})
+				//				api.addEventListener({
+				//					name : 'resume'
+				//				}, function(ret, err) {
+				//					onResume();
+				//					//监听应用恢复到前台，通知jpush恢复事件
+				//				})
 			});
 		</script>
 	</body>
