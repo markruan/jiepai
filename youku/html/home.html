@@ -329,8 +329,8 @@
 							name : 'appintent'
 						}, function(ret, err) {
 							var extra = ret.appParam.ajpush.extra
-							var id = ret.appParam.ajpush.extra.id;
-							alert(extra  + id)
+							var idd= JSON.parse(extra);
+							alert(extra  + idd.id)
 							if (extra) {
 								if (type == '图片') {
 									/////获取图集信息
