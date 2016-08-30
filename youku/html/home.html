@@ -325,6 +325,15 @@
 				ajpush.init(function(ret) {
 					if (ret && ret.status) {
 						//						alert(ret.status)
+						
+						api.addEventListener({
+					name : 'appintent'
+				}, function(ret, err) {
+					extra =  JSON.stringify(ret).extra;
+					alert(extra);
+					//监听通知被点击后收到的数据
+					//监听通知被点击后收到的数据
+				})
 					}
 				});
 				//				jpush = api.require('ajpush');
@@ -343,24 +352,8 @@
 				//					var extra = ret.extra;
 				//					alert(extra)
 				//				});
-				var ajpush = api.require('ajpush');
-				ajpush.setListener(function(ret) {
-					var extra;
-					if (api.systemType == "ios") {
-						extra = ret.extra;
-					} else {
-						extra = $api.strToJson(ret.extra);
-						alert(extra + extra.id)
-					}
-				})
-				api.addEventListener({
-					name : 'appintent'
-				}, function(ret, err) {
-					extra = $api.strToJson(ret.extra);
-					alert(extra);
-					//监听通知被点击后收到的数据
-					//监听通知被点击后收到的数据
-				})
+				 
+				
 				//				api.addEventListener({
 				//					name : 'pause'
 				//				}, function(ret, err) {
