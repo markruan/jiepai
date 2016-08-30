@@ -328,15 +328,11 @@
 						api.addEventListener({
 							name : 'appintent'
 						}, function(ret, err) {
-							 
 							var type = JSON.stringify(ret.appParam.ajpush.extra);
-							var iid=eval(type)
-							if(type){
-							alert(idd.type+idd.id)
-							
-							}else}
-						 
-						
+							var iid = eval(type)
+							if (type) {
+								alert(idd.type + idd.id)
+							}
 						})
 					}
 				});
