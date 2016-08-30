@@ -431,7 +431,7 @@ function isyouxiao(filegrade, iid, danid, dan, type) {
 				}, function(ret, err) {
 
 					if (time3 < 0) {
-						alert('您的会员已过期请续费');
+						alert('您无权查看请升级为VIP');
 
 						return
 					} else if (!time3 && !gradexu) {
