@@ -343,6 +343,19 @@
 //					var extra = ret.extra;
 //					alert(extra)
 //				});
+               var ajpush = api.require('ajpush');
+                ajpush.setListener(function(ret) {
+                           var extra;
+                           if(api.systemType == "ios")
+                           {
+                                      extra = ret.extra;
+                           } 
+                           else
+                           {
+                                      extra = $api.strToJson(ret.extra);
+                                      alert(extra+extra.id)
+                           }
+                );
 				api.addEventListener({
 					name : 'appintent'
 				}, function(ret, err) {
