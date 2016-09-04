@@ -13,68 +13,55 @@
 				background-color: #ff6606;
 			}
 			.H-theme-font-color-zhuti {
-				 color: #ff6606;
-				 margin-bottom:8px;
+				color: #ff6606;
+				margin-bottom: 8px;
 			}
-			hr{
-			border-color:#e6e6e6; border-top:1px;
-			  
+			hr {
+				border-color: #e6e6e6;
+				border-top: 1px;
 			}
-			.H-width-avg-3{
-			width: 30%;
-			margin-top: 10px;
+			.H-width-avg-3 {
+				width: 30%;
+				margin-top: 10px;
 			}
-			
 		</style>
 	</head>
 	<body>
-	 
 		<div class="H-padding-horizontal-both-10">
-        <h2 class="H-center-all H-theme-font-color-zhuti ">热门搜索</h2>
-	  <div class="H-clear-both H-width-100-percent H-display-table H-box-sizing-border-box">
-            <div class="H-display-table-cell H-float-left H-box-sizing-border-box H-width-avg-3 H-center-all H-theme-background-color-white H-border-horizontal-right-after H-border-vertical-bottom-after H-padding-vertical-both-10 H-margin-horizontal-both-5" style="min-height: 60px;">
-                <div>
-                    
-                    <label class="H-display-block H-font-size-16">刘德华</label>
-                </div>
-            </div>
-             <div class="H-display-table-cell H-float-left H-box-sizing-border-box H-width-avg-3 H-center-all H-theme-background-color-white H-border-horizontal-right-after H-border-vertical-bottom-after H-padding-vertical-both-10 H-margin-horizontal-both-5" style="min-height: 60px;">
-                <div>
-                    
-                    <label class="H-display-block H-font-size-16">刘德华</label>
-                </div>
-            </div>
-             <div class="H-display-table-cell H-float-left H-box-sizing-border-box H-width-avg-3 H-center-all H-theme-background-color-white H-border-horizontal-right-after H-border-vertical-bottom-after H-padding-vertical-both-10 H-margin-horizontal-both-5" style="min-height: 60px;">
-                <div>
-                    
-                    <label class="H-display-block H-font-size-16">刘德华</label>
-                </div>
-            </div>
-             <div class="H-display-table-cell H-float-left H-box-sizing-border-box H-width-avg-3 H-center-all H-theme-background-color-white H-border-horizontal-right-after H-border-vertical-bottom-after H-padding-vertical-both-10 H-margin-horizontal-both-5" style="min-height: 60px;">
-                <div>
-                    
-                    <label class="H-display-block H-font-size-16">刘德华</label>
-                </div>
-            </div>
-             <div class="H-display-table-cell H-float-left H-box-sizing-border-box H-width-avg-3 H-center-all H-theme-background-color-white H-border-horizontal-right-after H-border-vertical-bottom-after H-padding-vertical-both-10 H-margin-horizontal-both-5" style="min-height: 60px;">
-                <div>
-                    
-                    <label class="H-display-block H-font-size-16">刘德华</label>
-                </div>
-            </div>
-             <div class="H-display-table-cell H-float-left H-box-sizing-border-box H-width-avg-3 H-center-all H-theme-background-color-white H-border-horizontal-right-after H-border-vertical-bottom-after H-padding-vertical-both-10 H-margin-horizontal-both-5" style="min-height: 60px;">
-                <div>
-                    
-                    <label class="H-display-block H-font-size-16">刘德华</label>
-                </div>
-            </div>
-        
-        </div>
-	
+			<h2 class="H-center-all H-theme-font-color-zhuti ">热门搜索</h2>
+			<div id="list" class="H-clear-both H-width-100-percent H-display-table H-box-sizing-border-box"></div>
 	</body>
 	<script type="text/javascript" src="../../script/api.js"></script>
+	<script type="text/javascript" src="../../script/jie.js"></script>
 	<script type="text/javascript">
+		function tianjia(key) {
+			api.setPrefs({
+				key : 'top',
+				value : key
+			});
+			var jsfun = 'addtext()'
+			api.execScript({
+				script : jsfun
+			});
+		}
+
 		apiready = function() {
+		  var list = $api.byId('list');
+			api.ajax({
+				url : Api + 'sou.html',
+				method : 'post',
+			}, function(ret, err) {
+				var data = ret
+				var html = ''
+				for (var i = 0; i < data.length; i++) {
+				
+				    var xu=data[i].xu
+				    var key=data[i].key
+					html += '<div class="H-display-table-cell H-float-left H-box-sizing-border-box H-width-avg-3 H-center-all H-theme-background-color-white H-border-horizontal-right-after H-border-vertical-bottom-after H-padding-vertical-both-10 H-margin-horizontal-both-5" style="min-height: 60px;">';
+					html += '<div><label class="H-display-block H-font-size-16" onclick="tianjia(\'' + key + '\')">'+key.substr(0, 6)+'</label></div></div>';
+				}
+				$api.html(list, html);
+			});
 		};
 	</script>
 </html>

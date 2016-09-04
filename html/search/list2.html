@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+		<title>title</title>
+		<link rel="stylesheet" type="text/css" href="../../css/Hui.css"/>
+		<style>
+			.H-theme-background-color-zhuti {
+				background-color: #ff6606;
+			}
+			.H-theme-font-color-hui {
+				color: #9E9E9E;
+			}
+			.H-channel-line {
+				margin-left: 1px;
+				height: 8px;
+				width: 1.9px;
+			}
+			.H-theme-border-color-hui {
+				border: 1px solid #f4f5f9;
+			}
+			.H-button {
+				min-width: 100px;
+			}
+			.H-theme-border-color8 {
+				border: 1px solid #ff6606;
+			}
+		</style>
+	</head>
+	<body class="H-z-index-1000  "id="body">
+		<div id="imglist" class="H-clear-both H-width-100-percent H-display-table H-box-sizing-border-box H-padding-horizontal-both-10  "></div>
+		<div id="list" ></div>
+	</body>
+	<script type="text/javascript" src="../../script/api.js"></script>
+	<script type="text/javascript" src="../../script/jie.js"></script>
+	<script type="text/javascript" src="../../script/echo.min.js"></script>
+	<script type="text/javascript">
+		function openV(url, vid, varr, title, vbianhao, img, vprice, xu, fname, vvprice) {
+			api.openWin({
+				name : 'veido',
+				url : '../../html/vedio/index.html',
+				pageParam : {
+					name : url,
+					varr : varr,
+					title : title,
+					vbianhao : vbianhao,
+					vid : vid,
+					shoucang : 1,
+					img : img,
+					vprice : vprice,
+					xu : xu,
+					fname : fname,
+					vvprice : vvprice,
+					type : '视频'
+				}
+			});
+		}
+
+		function openImg(arr, pid, freenum, xu, fname) {
+			api.openWin({
+				name : 'img1',
+				url : '../../html/img/index.html',
+				slidBackEnabled : false,
+				pageParam : {
+					name : arr,
+					pid : pid,
+					freenum : freenum,
+					xu : xu,
+					fname : fname,
+					type : '图片'
+				}
+			});
+		}
+
+		function int() {
+			var ky = api.getPrefs({
+				sync : true,
+				key : 'ky'
+			});
+			var html = '';
+			var list = $api.byId('list');
+			api.showProgress({
+				style : 'default',
+				animationType : 'fade',
+				title : '努力加载中...',
+				text : '先喝杯茶...',
+				modal : false
+			});
+			api.ajax({
+				url : Api + 'search.html',
+				method : 'post',
+				data : {
+					values : {
+						key : ky,
+						type : '视频'
+					},
+				}
+			}, function(ret, err) {
+				if (ret != '') {
+					var myobj = ret
+					for (var i = 0; i < myobj.length; i++) {
+						var title = myobj[i].vname;
+						var ftitle = myobj[i].ftitle
+						var vid = myobj[i].vid;
+						var xu = myobj[i].xu;
+						var fname = myobj[i].fname;
+						var vprice = myobj[i].vprice;
+						var vbianhao = myobj[i].vbianhao;
+						var pic = myobj[i].vpic;
+						var img = pic.split(' ');
+						var picc = myobj[i].purl;
+						var varr = eval(myobj[i].vurl)
+						var vurl = eval(myobj[i].vurl)[0]
+						var vvprice = eval(myobj[i].vvprice)
+						var totaltime = eval(myobj[i].vtime)[0]
+						html += '<div  class="H-flexbox-horizontal H-theme-background-color-white  "  >';
+						html += '<div class="H-padding-vertical-both-10" style="width:31%; hight:95%;"><img onclick="openV(\'' + vurl + '\' ,\'' + vid + '\',\'' + varr + '\',\'' + title + '\',\'' + vbianhao + '\',\'' + pic + '\' ,\'' + vprice + '\',' + xu + ',\'' + fname + '\',\'' + vvprice + '\')" src="../../image/default.jpg"    data-echo="' + picc + '" alt="" title="" class="H-display-block H-margin-horizontal-left-10" style="width:100%;  "></div>';
+						html += '<div class="H-flex-item H-padding-10">';
+						html += '<strong class="H-font-weight-normal font-weight-500 H-font-size-16 H-display-block H-padding-horizontal-left-10 H-padding-vertical-both-3">名称：<span>' + title.substr(0, 7) + '</span></strong>';
+						html += '<strong class="H-font-weight-normal font-weight-500 H-font-size-16 H-display-block H-padding-horizontal-left-10 H-padding-vertical-both-3">续集：第42期</strong>';
+						html += '<strong class="H-font-weight-normal font-weight-500 H-font-size-16 H-display-block H-padding-horizontal-left-10 H-padding-vertical-both-3">编号：<span>' + vbianhao + '</span></strong>';
+						html += '<strong class="H-font-weight-normal font-weight-500 H-font-size-16 H-display-block H-padding-horizontal-left-10 H-padding-vertical-both-3">类型：VIP用户</strong>';
+						html += '<span class="H-padding-horizontal-left-10 H-float-left">';
+						html += '<button class="H-button H-font-size-15 H-outline-none H-padding-vertical-both-8 H-padding-horizontal-both-20 H-theme-background-color-zhuti H-theme-font-color-white H-theme-border-color8 H-theme-border-color8-click H-theme-background-color8-click H-theme-font-color8-click H-border-radius-3">' + fname.substr(0, 2) + '播放</button></span>';
+						html += '<span class="H-padding-horizontal-left-10 H-float-left">';
+						html += '<button onclick="openme()" class="H-button H-font-size-15 H-outline-none H-theme-background-color-transparent H-padding-vertical-both-8 H-padding-horizontal-both-20 H-theme-font-color4 H-theme-border-color4 H-theme-border-color4-click H-theme-background-color4-click H-theme-font-color4-click" >开通VIP</button> </span></div></div><div class="H-padding-vertical-bottom-5"></div>';
+					}
+					$api.html(list, html);
+					api.hideProgress();
+					api.refreshHeaderLoadDone();
+					echo.init({
+						offset : 0,
+						throttle : 150,
+						unload : false,
+						callback : function(element, op) {
+						}
+					});
+				} else {
+				
+				    api.hideProgress();
+					api.refreshHeaderLoadDone();
+					$api.html(list, '<div class="H-center-all H-margin-vertical-top-25"> 无相关搜索！</div>');
+					
+				}
+			})
+		}
+
+		apiready = function() {
+			int()
+		};
+	</script>
+</html>

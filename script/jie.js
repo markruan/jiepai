@@ -599,8 +599,8 @@ function changePerson() {
 				},
 				dataType : 'text',
 			}, function(ret, err) {
-			 
-				if (ret!=1) {
+
+				if (ret != 1) {
 					var url = uploadUrl + ret;
 					$api.attr($api.byId('img'), 'src', url);
 					api.toast({
@@ -613,10 +613,10 @@ function changePerson() {
 						frameName : 'me',
 						script : jsfun
 					});
-				}else{
-				 alert('图片尺寸太大请重新上传')
-				 api.hideProgress();
-				
+				} else {
+					alert('图片尺寸太大请重新上传')
+					api.hideProgress();
+
 				}
 			});
 		} else {
