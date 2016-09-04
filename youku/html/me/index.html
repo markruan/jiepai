@@ -34,7 +34,7 @@
 				<button id="grade" class="H-margin-horizontal-left-0 H-button-1 H-font-size-15 H-outline-none H-padding-vertical-both-1 H-padding-horizontal-both-1 H-theme-background-color-white H-theme-font-color-white H-theme-border-color-white H-theme-border-color8-click H-theme-background-color8-click H-theme-font-color8-click H-border-radius-3"style="color: #ff6606 ">
 					普通用户
 				</button>
-				<span class="H-font-size-15 H-theme-font-color-white">剩余时间：<span id="days">0</span>天</span>
+				<span class="H-font-size-15 H-theme-font-color-white">剩余时间：<span id="days">0</span ><span id="tian" class="" >天</span></span>
 				<div>
 					<span class=" H-padding-horizontal-right-10 H-display-block H-font-size-16 H-float-right    "  >
 						<div class="H-text-align-center ">
@@ -115,32 +115,25 @@
 				var val = ret.value;
 				if (val && val != "") {
 					var nameVal = ret.value
-					api.ajax({
-						url : Api + 'userinfo.html',
-						method : 'post',
-						timeout : 30,
-						dataType : 'json',
-						data : {
-							values : {
-								username : nameVal,
-							},
-						}
-					}, function(ret, err) {
-						$api.text($api.byId('username'), ret.username);
-						$api.text($api.byId('grade'), ret.fname);
-						$api.attr($api.byId('img'), 'src', uploadUrl + ret.icon);
-						$api.removeCls($api.byId('body'), 'H-display-none');
-						var setgradetime = ret.setgradetime;
-						var time1 = Number(timest()) - Number(setgradetime);
-						var time2 = Math.round(time1 / (60 * 60 * 24));
-						var days = ret.days
-						var time3 = Number(days) - time2
-						if (time3 <= 0) {
-							$api.text($api.byId('days'), 0);
-						} else {
-							$api.text($api.byId('days'), time3);
-						}
-					});
+					var userinfo = $api.getStorage('userinfo');
+					$api.text($api.byId('username'), userinfo.username);
+					$api.text($api.byId('grade'), userinfo.fname);
+					$api.attr($api.byId('img'), 'src', uploadUrl + userinfo.icon);
+					$api.removeCls($api.byId('body'), 'H-display-none');
+					var setgradetime = userinfo.setgradetime;
+					var time1 = Number(timest()) - Number(setgradetime);
+					var time2 = Math.round(time1 / (60 * 60 * 24));
+					var days = userinfo.days
+					var xu = userinfo.xu
+					var time3 = Number(days) - time2
+					if (time3 <= 0) {
+						$api.text($api.byId('days'), 0);
+					} else if (xu == 6) {
+						$api.text($api.byId('days'), days);
+						$api.addCls($api.byId('tian'), 'H-display-none');
+					} else {
+						$api.text($api.byId('days'), time3);
+					}
 				} else {
 					$api.removeCls($api.byId('body'), 'H-display-none');
 				};

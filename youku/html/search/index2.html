@@ -1,0 +1,108 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0" />
+		<meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+		<title></title>
+		<link rel="stylesheet" type="text/css" href="../../css/Hui.css" />
+		<style type="text/css">
+			.H-theme-background-color-zhuti {
+				background-color: #ff6606;
+			}
+			.H-theme-font-color-tab {
+				color: #ff6606;
+			}
+			.H-theme-border-tab {
+				border: 1px solid #ff6606;
+			}
+			.H-z-index-f {
+				z-index: -2;
+			}
+		</style>
+	</head>
+	<body class="H-flexbox-vertical H-z-index-f" >
+		<header class="H-header H-theme-background-color-zhuti" id="header">
+			<div class="H-flexbox-horizontal H-theme-background-color-white" id="tag">
+				<div id="tab1" tapmode="" onclick="setPage(0, 'search');" class="H-flex-item H-center-all H-theme-font-color-black H-padding-vertical-both-10 H-theme-border-color-white  H-font-size-16 H-theme-border-color-52ace5 H-theme-font-color-tab H-theme-border-tab H-theme-font-black" style="border-width: 0 0 2px  0">
+					图片
+				</div>
+				<div id="tab2" tapmode="" onclick="setPage(1, 'search');" class="H-flex-item H-center-all H-theme-font-color-black H-padding-vertical-both-10 H-theme-border-color-white  H-font-size-16" style="border-width: 0 0 2px  0">
+					视频
+				</div>
+			</div>
+		</header>
+		<script type="text/javascript" src="../../script/api.js"></script>
+		<script type="text/javascript">
+			function setPage(index, frame) {
+				api.setFrameGroupIndex({
+					name : frame,
+					index : index,
+					scroll : true
+				})
+			}
+
+			apiready = function() {
+				var header2 = $api.byId('header');
+				var header3 = $api.offset(header2).h;
+				var header4 = $api.getStorage('h1');
+				var footer = parseInt($api.getStorage('f1'));
+				var hight1 = parseInt(header3) + parseInt(header4)
+				var key1=api.pageParam.key1
+				api.openFrameGroup({
+					name : 'search',
+					background : '#fff',
+					scrollEnabled : true,
+					rect : {
+						x : 0,
+						y : hight1 + 25,
+						w : 'auto',
+						h : api.winHeight - footer - hight1 - 25
+					},
+					index : 0,
+					frames : [{
+						name : 'list1',
+						url : 'list.html',
+						bgColor : '#fff',
+						pageParam : {
+							type : '图片',
+							body : key1
+						},
+						reload : true,
+						bounces : false
+					}, {
+						name : 'list2',
+						url : 'list2.html',
+						bgColor : '#fff',
+						pageParam : {
+							type : '视频',
+							body : key1
+						},
+						reload : true,
+						bounces : false
+					}]
+				}, function(ret, err) {
+					var index = ret.index;
+					var ta2 = $api.byId('tab2');
+					var ta1 = $api.byId('tab1');
+					if (index == 1) {
+						$api.removeCls(ta1, 'H-theme-border-tab');
+						$api.removeCls(ta1, 'H-theme-font-color-tab');
+						$api.addCls(ta2, 'H-theme-font-color-tab');
+						$api.addCls(ta2, 'H-theme-border-tab');
+						api.setFrameAttr({
+							name : 'history',
+							hidden : true,
+						});
+					} else {
+						$api.removeCls(ta2, 'H-theme-font-color-tab');
+						$api.removeCls(ta2, 'H-theme-border-tab');
+						$api.addCls(ta1, 'H-theme-font-color-tab');
+						$api.addCls(ta1, 'H-theme-border-tab');
+					}
+				});
+				//
+			};
+		</script>
+	</body>
+</html>

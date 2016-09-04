@@ -124,9 +124,6 @@
 				api.closeFrameGroup({
 					name : 'shoucang_group'
 				});
-				//				api.closeFrame({
-				//					name : 'common_index'
-				//				});
 				api.closeFrame({
 					name : 'shoucang'
 				});
@@ -175,6 +172,11 @@
 						y : header2 + 25,
 						w : api.frameWidth,
 						h : api.frameHeight - offset - header2 - 25
+					},
+					animation : {
+						type : "fade", //动画类型（详见动画类型常量）
+						subType : "from_top", //动画子类型（详见动画子类型常量）
+						duration : 300 //动画过渡时间，默认300毫秒
 					}
 				});
 			}
@@ -237,6 +239,11 @@
 						y : header2 + 25,
 						w : api.frameWidth,
 						h : api.frameHeight - offset - header2 - 25
+					},
+					animation : {
+						type : "fade", //动画类型（详见动画类型常量）
+						subType : "from_top", //动画子类型（详见动画子类型常量）
+						duration : 300 //动画过渡时间，默认300毫秒
 					}
 				});
 				api.setFrameAttr({
@@ -278,7 +285,7 @@
 						y : header2 + 25,
 						w : api.frameWidth,
 						h : api.frameHeight - offset - header2 - 25
-					}
+					} 
 				});
 				api.hideProgress();
 			}
@@ -288,7 +295,7 @@
 					name : 'search',
 					url : '../html/search/header.html',
 					animation : {
-						type : "push", //动画类型（详见动画类型常量）
+						type : "suck", //动画类型（详见动画类型常量）
 						subType : "from_bottom ", //动画子类型（详见动画子类型常量）
 						duration : 300 //动画过渡时间，默认300毫秒
 					}
