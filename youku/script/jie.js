@@ -431,11 +431,35 @@ function isyouxiao(filegrade, iid, danid, dan, type) {
 				}, function(ret, err) {
 
 					if (time3 < 0) {
-						alert('您无权查看请升级为VIP');
+//						alert('您无权查看请升级为VIP');
+                        	api.openFrame({
+							name : 'quanxian',
+							url : '../../html/vedio/quanxian.html',
+							rect : {
+								x : 0,
+								y : 0,
+								w : api.winWidth,
+								h : api.winHeight
+							},
+							pageParam : {
+								grade : fname
+
+							}
+						});
 
 						return
 					} else if (!time3 && !gradexu) {
-						alert('您还未登录');
+//						alert('您还未登录');
+						api.openFrame({
+								name : 'login1',
+								url : '../../html/login1.html',
+								rect : {
+									x : 0,
+									y : 0,
+									w : api.winWidth,
+									h : api.winHeight
+								}
+							});
 						return
 					} else if (ret == 0 || gradexu >= filegrade) {
 
@@ -627,3 +651,22 @@ function changePerson() {
 		} ;
 	});
 }
+
+function imageCache(url) {//图片缓存方法
+	var path = url;
+	api.imageCache({
+		url : url,
+	}, function(ret, err) {
+		if (ret) {
+			path = ret.url;
+		}
+	});
+	return path;
+}
+
+function openme() {
+			api.openWin({
+				name : 'me_head',
+				url : '../../html/me/head.html'
+			});
+		}

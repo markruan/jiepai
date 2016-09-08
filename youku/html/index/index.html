@@ -92,6 +92,7 @@
 			});
 			api.ajax({
 				url : Api + 'vout.html',
+				method : 'post',
 			}, function(ret, err) {
 				var html = '';
 				var list = $api.byId('list');
@@ -111,17 +112,15 @@
 					var vurl = eval(myobj[i].vurl)[0]
 					var vvprice = eval(myobj[i].vvprice)
 					var totaltime = eval(myobj[i].vtime)[0]
-					api.imageCache({
-						url : picc
-					}, function(ret, err) {
-						var piccc = ret.url;
+					var piccc=imageCache(picc)
+				 
 						html += '<div onclick="openV(\'' + vurl + '\' ,\'' + vid + '\',\'' + varr + '\',\'' + title + '\',\'' + vbianhao + '\',\'' + pic + '\' ,\'' + vprice + '\',' + xu + ',\'' + fname + '\',\'' + vvprice + '\')" class="H-display-table-cell H-theme-background-color-white H-float-left  H-box-sizing-border-box H-width-avg-3 H-padding-horizontal-right-4 H-margin-vertical-bottom-10   " style="margin-bottom: 10px; ">';
 						html += '<img src="../../image/default.jpg"    data-echo="' + piccc + '" class=" H-float-right H-margin-vertical-top-8 H-margin-horizontal-both-2 H-display-block" alt="" title="" style="width: 96%" ;height:200>';
 						html += '<img src="../../image/xia.png " class=" H-float-right  H-margin-vertical-top-8 H-margin-horizontal-both-2 H-display-block" style="margin-top: -200px; height: 200px ; width: 96%" alt="" title="">';
 						html += '<div  class=" " style=" margin-right:8px; margin-top:-30px;line-height: 30px; float: right; color:white ;">' + totaltime + '</div>';
 						html += '<div class="H-text-align-center H-font-size-14 H-padding-vertical-top-10    " style="line-height: 35px">' + ftitle.substr(0, 7) + '</div>';
 						html += '<div class="H-padding-vertical-bottom-10 H-theme-background-color-eee  " style="margin: 0 -10px"></div></div>';
-					});
+				 
 				}
 				$api.html(list, html);
 				api.hideProgress();
@@ -160,9 +159,11 @@
 					var xu = myobj[i].xu
 					var freenum = myobj[i].freenum
 					var ftitle = myobj[i].ftitle
-					var vurl = myobj[i].purl
+					var vurll = myobj[i].purl
 					var img = pic.split(' ');
 					var zhang = img.length
+					 
+					var vurl= imageCache(vurll)
 					html += '<div onclick="openImg(\'' + pic + '\',' + pid + ',' + freenum + ',' + xu + ',\'' + fname + '\')" class="H-display-table-cell H-theme-background-color-white H-float-left  H-box-sizing-border-box H-width-avg-3 H-padding-horizontal-right-4 H-margin-vertical-bottom-10   " style="margin-bottom: 10px; ">';
 					html += '<img  src="../../image/default.jpg"  data-echo="' + vurl + '" class=" H-float-right H-margin-vertical-top-8 H-margin-horizontal-both-2 H-display-block" alt="" title="" style="width: 96%" ;height:200>';
 					html += '<img src="../../image/xia.png " class=" H-float-right  H-margin-vertical-top-8 H-margin-horizontal-both-2 H-display-block" style="margin-top: -200px; height: 200px ; width: 96%" alt="" title="">';
