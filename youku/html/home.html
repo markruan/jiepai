@@ -7,13 +7,13 @@
 		<title>Hui</title>
 		<link href="../css/Hui.css" rel="stylesheet" type="text/css" />
 		<link href="../css/api.css" rel="stylesheet" type="text/css" />
-		<link href="http://at.alicdn.com/t/font_1469889460_3988683.css" rel="stylesheet" type="text/css" />
+		<link rel="stylesheet" type="text/css" href="http://at.alicdn.com/t/font_1473395695_2299788.css"/>
 		<style type="text/css">
 			.iconfont {
 				font-size: 25px;
 			}
 			.H-theme-background-color-zhuti {
-				background-color: #ff6606;
+				background-color: #e43252;
 			}
 			.H-theme-background-color-zhuti-click {
 				background-color: #f17b31;
@@ -26,15 +26,23 @@
 				padding-right: 50px;
 			}
 			.H-theme-font-color-hui {
-				color: #9E9E9E;
+				color: #e43252;
 			}
 			.H-theme-font-color-zhuti {
-				color: #ff6606;
+				color: #e43252;
 			}
 			.H-touch-active1 {
 			}
 			.H-touch-active1:active {
 				background: #f17b31;
+			}
+			.H-border-radius-12-left-both {
+				border-radius: 3px 0 0 3px;
+				-webkit-border-radius: 3px 0 0 3px;
+			}
+			.H-border-radius-12-right-both {
+				border-radius: 0 3px 3px 0;
+				-webkit-border-radius: 0 3px 3px 0;
 			}
 		</style>
 	</head>
@@ -44,14 +52,19 @@
 			<div class="H-header-title H-vertical-middle H-font-size-18 H-text-show-row-1 H-theme-font-color-999 H-position-absolute H-width-100-percent H-box-sizing-border-box" style="padding-left:38px;">
 				<div class="H-header-title H-center-all H-font-size-18 H-text-show-row-1 H-theme-font-color-white H-position-absolute H-width-100-percent" >
 					<div class="H-flexbox-horizontal H-theme-background-color-zhuti H-padding-horizontal-both-30" style="height: 40px;">
-						<div onclick="openM('shipin','街拍视频')" class="H-flex-item H-center-all H-padding-vertical-both-9  H-touch-active1  H-font-size-16  H-theme-font-color-white" style="border-width: 0 0 2px  0">
-							街拍视频
+						<!--<div onclick="openM('shipin','街拍视频')" class="H-flex-item H-center-all H-padding-vertical-both-9  H-touch-active1  H-font-size-16  H-theme-font-color-white" style="border-width: 0 0 2px  0">
+						街拍视频
 						</div>
-						<div onclick="openM('jiepai','街拍图片')"  class="H-flex-item H-center-all H-padding-vertical-both-9   H-touch-active1 H-font-size-16 H-theme-font-color-white" style="border-width: 0 0 2px  0">
-							街拍图片
-						</div>
-						<div onclick="openM('tupian','私拍图片')"  class="H-flex-item H-center-all H-padding-vertical-both-9   H-touch-active1 H-font-size-16 H-theme-font-color-white" style="border-width: 0 0 2px  0">
-							私拍图片
+						<div onclick="openM('jiepai','街拍图片')"  class="H-center-all H-padding-vertical-both-9   H-touch-active1 H-font-size-16 H-theme-font-color-white" style="border-width: 0 0 2px  0">
+						街拍图片
+						</div>-->
+						<div class="H-center-all H-flex-item  ">
+							<div  onclick="setPage(0, 'group123') " id="left"  class="H-header-tag H-font-size-14 H-padding-vertical-both-2 H-padding-horizontal-both-12 H-border-vertical-both-white H-border-horizontal-left-white H-border-radius-12-left-both H-overflow-hidden H-center-all  ">
+								视频
+							</div>
+							<div  onclick="setPage(1, 'group123') " id="right" class="H-header-tag H-font-size-14 H-padding-vertical-both-2 H-padding-horizontal-both-12 H-border-vertical-both-white H-border-horizontal-both-white H-border-radius-12-right-both H-overflow-hidden H-center-all">
+								图片
+							</div>
 						</div>
 						<!--<div onclick="openM('shishang','时尚')"  class="H-flex-item H-center-all H-padding-vertical-both-9   H-touch-active1 H-font-size-16 H-theme-font-color-white" style="border-width: 0 0 2px  0">
 						时尚
@@ -269,6 +282,39 @@
 				api.closeFrameGroup({
 					name : 'shoucang_group'
 				});
+				api.openFrameGroup({
+					name : 'group123',
+					background : '#fff',
+					scrollEnabled : false,
+					rect : {
+						x : 0,
+						y : header2 + 25,
+						w : api.frameWidth,
+						h : api.frameHeight - offset - header2 - 25
+					},
+					index : 0,
+					frames : [{
+						name : 'frame1',
+						url : '../html/index/v.html',
+						bgColor : '#fff'
+					}, {
+						name : 'frame2',
+						url : '../html/index/p.html',
+						bgColor : '#fff'
+					}]
+				}, function(ret, err) {
+					var index = ret.index;
+					if (index == 1) {
+				    $api.attr($api.byId('left'), 'class', 'H-header-tag H-font-size-14 H-padding-vertical-both-2 H-padding-horizontal-both-12 H-border-vertical-both-white H-border-horizontal-both-white H-border-radius-12-left-both H-overflow-hidden H-center-all');
+				    $api.attr($api.byId('right'), 'class', 'H-header-tag H-font-size-14 H-padding-vertical-both-2 H-padding-horizontal-both-12 H-border-vertical-both-white H-border-horizontal-right-white H-border-radius-12-right-both H-overflow-hidden H-center-all H-theme-background-color-white H-theme-font-color4'); 
+				    
+					  
+					} else if (index == 0) {
+					 $api.attr($api.byId('right'), 'class', 'H-header-tag H-font-size-14 H-padding-vertical-both-2 H-padding-horizontal-both-12 H-border-vertical-both-white H-border-horizontal-both-white H-border-radius-12-right-both H-overflow-hidden H-center-all');
+				    $api.attr($api.byId('left'), 'class', 'H-header-tag H-font-size-14 H-padding-vertical-both-2 H-padding-horizontal-both-12 H-border-vertical-both-white H-border-horizontal-left-white H-border-radius-12-left-both H-overflow-hidden H-center-all H-theme-background-color-white H-theme-font-color4'); 
+					
+					}
+				});
 				for ( i = 0; i < aa.length; i++) {
 					$api.removeCls(aa[i], 'H-theme-font-color-zhuti');
 				}
@@ -407,6 +453,43 @@
 					}
 				});
 			});
+			function test() {
+				api.openFrameGroup({
+					name : 'group1',
+					background : '#fff',
+					scrollEnabled : false,
+					rect : {
+						x : 0,
+						y : header2 + 25,
+						w : api.frameWidth,
+						h : api.frameHeight - offset - header2 - 25
+					},
+					index : 0,
+					frames : [{
+						name : 'frame1',
+						url : '../html/index/v.html',
+						bgColor : '#fff'
+					}, {
+						name : 'frame2',
+						url : '../html/index/p.html',
+						bgColor : '#fff'
+					}]
+				}, function(ret, err) {
+					var index = ret.index;
+					
+				});
+			}
+
+			function setPage(index, frame) {
+				api.sendFrameToBack({
+					from : 'common_index'
+				});
+				api.setFrameGroupIndex({
+					name : frame,
+					index : index,
+					scroll : true
+				})
+			}
 		</script>
 	</body>
 </html>
