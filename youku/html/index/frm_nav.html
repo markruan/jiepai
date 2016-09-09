@@ -1,68 +1,95 @@
 ﻿<!DOCTYPE html>
 <html>
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
-    <link rel="stylesheet" type="text/css" href="../../css/api.css"/>
-     
-    <style>
-        body{
-            height: auto;
-        }
-        .category {
-            width: 100%;
-        }
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+		<link rel="stylesheet" type="text/css" href="../../css/api.css"/>
+		<!--<link rel="stylesheet" type="text/css" href="../../css/Hui.css"/>-->
+		<style>
+			body {
+				height: auto;
+			}
+			.category {
+				width: 100%;
+			}
+			.category li {
+				display: inline-block;
+				width: 24%;
+				text-align: center;
+				padding: 10px 0;
+			}
+			span {
+				width: 88%;
+				box-sizing: border-box;
+				border: 1px solid #DDDDDE;
+				padding: 7px 0;
+				border-radius: 20px;
+				color: #424242;
+			}
+			.more-lable {
+				padding: 10px;
+				background-color: #E7E7E7;
+			}
+			.H-theme-border-color-zhuti {
+				border: 1px solid #e43252;
+			}
+		</style>
+		<body>
+			<ul class="category">
+				<li>
+					<span data-click="0" onclick="select(this)" class="" >标签名称</span>
+				</li>
+				<li>
+					<span data-click="0" onclick="select(this)" class="" >标签名称</span>
+				</li>
+				<li>
+					<span data-click="0" onclick="select(this)" class="" >经典</span>
+				</li>
+				<li>
+					<span data-click="0" onclick="select(this)" class="" >标签名称</span>
+				</li>
+				<li>
+					<span data-click="0" onclick="select(this)" class="" >美女</span>
+				</li>
+				<li>
+					<span data-click="0" onclick="select(this)" class="" >标签名称</span>
+				</li>
+				<li>
+					<span data-click="0" onclick="select(this)" class="" >标签名称</span>
+				</li>
+				<li>
+					<span data-click="0" onclick="select(this)" class="" >标签名称</span>
+				</li>
+				<li>
+					<span data-click="0" onclick="select(this)" class="" >标签名称</span>
+				</li>
+				<li>
+					<span data-click="0" onclick="select(this)" class="" >标签名称</span>
+				</li>
+				<li>
+					<span data-click="0" onclick="select(this)" class="" >标签名称</span>
+				</li>
+				<li>
+					<span data-click="0" onclick="select(this)" class="" >标签名称</span>
+				</li>
+			</ul>
+			<script src="../../script/api.js"></script>
+			<script>
+				function select(button) {
+					var click = button.getAttribute("data-click");
+					if (click == 0) {
+						// 点开
+						button.setAttribute("data-click", 1);
+						$api.addCls(button, 'H-theme-border-color-zhuti');
+					} else {
+						// 关闭
+						button.setAttribute("data-click", 0);
+						$api.removeCls(button, 'H-theme-border-color-zhuti');
+					}
+				}
 
-        .category li {
-
-            display: inline-block;
-            width: 24%;
-            text-align: center;
-            padding: 10px 0;
-
-        }
-
-        span {
-            width: 88%;
-            box-sizing: border-box;
-            border: 1px solid #DDDDDE;
-            padding: 7px 0;
-            border-radius: 20px;
-            color: #424242;
-
-        }
-        .more-lable{
-            padding: 10px;
-            background-color: #E7E7E7;
-        }
-    </style>
-<body>
-<ul class="category">
-    <li><span>标签名称</span></li>
-    <li><span>热点</span></li>
-    <li><span>娱乐</span></li>
-    <li><span>体育</span></li>
-    <li><span>财经</span></li>
-    <li><span>北京</span></li>
-    <li><span>科技</span></li>
-    <li><span>汽车</span></li>
-    <li><span>房产</span></li>
-    <li><span>游戏</span></li>
-    <li><span>时尚</span></li>
-    <li><span>精选</span></li>
-    <li><span>房产</span></li>
-    <li><span>标签名称</span></li>
-    <li><span>标签名称</span></li>
-</ul>
-<div class="more-lable">
-    点击添加更多栏目
-</div>
-<script src="../../script/zepto.min.js"></script>
-<script>
-    apiready=function(){
-        
-     
-    }
-</script>
-</body>
+				apiready = function() {
+				}
+			</script>
+		</body>
 </html>
