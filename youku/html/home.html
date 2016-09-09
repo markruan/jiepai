@@ -12,9 +12,6 @@
 			.iconfont {
 				font-size: 25px;
 			}
-			.H-theme-background-color-zhuti {
-				background-color: #e43252;
-			}
 			.H-theme-background-color-zhuti-click {
 				background-color: #f17b31;
 			}
@@ -26,9 +23,6 @@
 				padding-right: 50px;
 			}
 			.H-theme-font-color-hui {
-				color: #e43252;
-			}
-			.H-theme-font-color-zhuti {
 				color: #e43252;
 			}
 			.H-touch-active1 {
@@ -225,12 +219,21 @@
 						w : api.frameWidth,
 						h : api.frameHeight - offset - 25
 					},
+					bounces : false,
 				})
+				api.setFrameAttr({
+					name : 'me',
+					bounces : false
+				});
 			}
 
 			function openh(button) {
 				api.closeFrameGroup({
 					name : 'shoucang_group'
+				});
+				api.setFrameAttr({
+					name : 'me',
+					hidden : true
 				});
 				api.closeFrame({
 					name : 'shoucang'
@@ -259,10 +262,6 @@
 						duration : 300 //动画过渡时间，默认300毫秒
 					}
 				});
-				api.setFrameAttr({
-					name : 'me',
-					hidden : true
-				});
 			}
 
 			function openIndex(button) {
@@ -285,7 +284,7 @@
 				api.openFrameGroup({
 					name : 'group123',
 					background : '#fff',
-					scrollEnabled : false,
+					scrollEnabled : true,
 					rect : {
 						x : 0,
 						y : header2 + 25,
@@ -305,14 +304,19 @@
 				}, function(ret, err) {
 					var index = ret.index;
 					if (index == 1) {
-				    $api.attr($api.byId('left'), 'class', 'H-header-tag H-font-size-14 H-padding-vertical-both-2 H-padding-horizontal-both-12 H-border-vertical-both-white H-border-horizontal-both-white H-border-radius-12-left-both H-overflow-hidden H-center-all');
-				    $api.attr($api.byId('right'), 'class', 'H-header-tag H-font-size-14 H-padding-vertical-both-2 H-padding-horizontal-both-12 H-border-vertical-both-white H-border-horizontal-right-white H-border-radius-12-right-both H-overflow-hidden H-center-all H-theme-background-color-white H-theme-font-color4'); 
-				    
-					  
+						$api.attr($api.byId('left'), 'class', 'H-header-tag H-font-size-14 H-padding-vertical-both-2 H-padding-horizontal-both-12 H-border-vertical-both-white H-border-horizontal-both-white H-border-radius-12-left-both H-overflow-hidden H-center-all');
+						$api.attr($api.byId('right'), 'class', 'H-header-tag H-font-size-14 H-padding-vertical-both-2 H-padding-horizontal-both-12 H-border-vertical-both-white H-border-horizontal-right-white H-border-radius-12-right-both H-overflow-hidden H-center-all H-theme-background-color-white H-theme-font-color4');
+						api.setFrameAttr({
+							name : 'common_index',
+							hidden : true
+						});
 					} else if (index == 0) {
-					 $api.attr($api.byId('right'), 'class', 'H-header-tag H-font-size-14 H-padding-vertical-both-2 H-padding-horizontal-both-12 H-border-vertical-both-white H-border-horizontal-both-white H-border-radius-12-right-both H-overflow-hidden H-center-all');
-				    $api.attr($api.byId('left'), 'class', 'H-header-tag H-font-size-14 H-padding-vertical-both-2 H-padding-horizontal-both-12 H-border-vertical-both-white H-border-horizontal-left-white H-border-radius-12-left-both H-overflow-hidden H-center-all H-theme-background-color-white H-theme-font-color4'); 
-					
+						$api.attr($api.byId('right'), 'class', 'H-header-tag H-font-size-14 H-padding-vertical-both-2 H-padding-horizontal-both-12 H-border-vertical-both-white H-border-horizontal-both-white H-border-radius-12-right-both H-overflow-hidden H-center-all');
+						$api.attr($api.byId('left'), 'class', 'H-header-tag H-font-size-14 H-padding-vertical-both-2 H-padding-horizontal-both-12 H-border-vertical-both-white H-border-horizontal-left-white H-border-radius-12-left-both H-overflow-hidden H-center-all H-theme-background-color-white H-theme-font-color4');
+						api.setFrameAttr({
+							name : 'common_index',
+							hidden : true
+						});
 					}
 				});
 				for ( i = 0; i < aa.length; i++) {
@@ -322,10 +326,15 @@
 				$api.removeCls(hh1, 'H-display-none');
 				$api.addCls(hhh, 'H-display-none');
 				$api.addCls(this, 'H-display-none');
+				api.setFrameGroupAttr({
+					name : 'group123',
+					hidden : true
+				});
 				api.openFrame({
 					name : 'common_index',
 					url : '../html/index/index.html',
 					//					reload : true,
+					bounces : false,
 					rect : {
 						x : 0,
 						y : header2 + 25,
@@ -334,6 +343,10 @@
 					}
 				});
 				api.hideProgress();
+//				api.setFrameAttr({
+//					name : 'common_index',
+//					hidden : false
+//				});
 			}
 
 			function opensearch() {
@@ -453,36 +466,13 @@
 					}
 				});
 			});
-			function test() {
-				api.openFrameGroup({
-					name : 'group1',
-					background : '#fff',
-					scrollEnabled : false,
-					rect : {
-						x : 0,
-						y : header2 + 25,
-						w : api.frameWidth,
-						h : api.frameHeight - offset - header2 - 25
-					},
-					index : 0,
-					frames : [{
-						name : 'frame1',
-						url : '../html/index/v.html',
-						bgColor : '#fff'
-					}, {
-						name : 'frame2',
-						url : '../html/index/p.html',
-						bgColor : '#fff'
-					}]
-				}, function(ret, err) {
-					var index = ret.index;
-					
-				});
-			}
-
 			function setPage(index, frame) {
 				api.sendFrameToBack({
 					from : 'common_index'
+				});
+				api.setFrameGroupAttr({
+					name : 'group123',
+					hidden : false
 				});
 				api.setFrameGroupIndex({
 					name : frame,
