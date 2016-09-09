@@ -26,14 +26,14 @@
 			}
 		</style>
 	</head>
-	<body  id="body" class="H-display-none" >
+	<body  id="body" class="H-display-none"  >
 		<div class="H-text-list H-flexbox-horizontal  H-theme-background-color-zhuti   H-vertical-middle  " style="height: 160px;">
-			<span class=" H-padding-horizontal-right-5 H-display-block"style="margin-top: 0px;"> <img onclick="openme()" id="img" src="../../image/ic.jpg" style="width: 70px; height: 70px;border-radius: 35px;margin-left:30px; margin-top: -28px;margin-right:30px;" / ></span>
+			<span class=" H-padding-horizontal-right-5 H-display-block"style="margin-top: 0px;"> <img onclick="openme()" id="img" src="../../image/ic.png" style="width: 70px; height: 70px;border-radius: 35px;margin-left:30px; margin-top: -28px;margin-right:30px;" / ></span>
 			<div class="H-flex-item H-padding-horizontal-both-10 H-font-size-24 H-padding-vertical-bottom-12 ">
 				<span class="H-font-weight-600 H-theme-font-color-white" id="username"></span>
 				<br>
-				<button id="grade" class="H-margin-horizontal-left-0 H-button-1 H-font-size-15 H-outline-none H-padding-vertical-both-1 H-padding-horizontal-both-1 H-theme-background-color-white H-theme-font-color-white H-theme-border-color-white H-theme-border-color8-click H-theme-background-color8-click H-theme-font-color8-click H-border-radius-3"style="color: #ff6606 ">
-					普通用户
+				<button onclick="openlogin() " id="grade" class="H-margin-horizontal-left-0 H-button-1 H-font-size-15 H-outline-none H-padding-vertical-both-1 H-padding-horizontal-both-1 H-theme-background-color-white H-theme-font-color-white H-theme-border-color-white H-theme-border-color8-click H-theme-background-color8-click H-theme-font-color8-click H-border-radius-3"style="color: #ff6606 ">
+					未登录
 				</button>
 				<span class="H-font-size-15 H-theme-font-color-white">剩余时间：<span id="days">0</span ><span id="tian" class="" >天</span></span>
 				<div>
@@ -156,19 +156,23 @@
 			api.refreshHeaderLoadDone();
 		}
 
+		function openlogin() {
+			api.openWin({
+				name : 'login_head',
+				url : '../../html/login_head.html',
+				pageParam : {}
+			});
+		}
+
 		apiready = function() {
 			api.getPrefs({
 				key : 'user'
 			}, function(ret, err) {
 				if (ret.value) {
-				 
 					int();
 				} else {
-					api.openWin({
-						name : 'login_head',
-						url : '../../html/login_head.html',
-						pageParam : {}
-					});
+					int();
+					openlogin()
 				}
 			});
 		}
