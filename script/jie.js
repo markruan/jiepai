@@ -299,92 +299,6 @@ Api = 'http://114.55.98.130/index.php/api/'
 //判断是否在有效期内的用户
 ///iid是指视频文件或者图片文件的ID
 
-//function isyouxiaoP(filegrade) {
-//
-//	var fname = api.pageParam.fname
-//
-//	api.getPrefs({
-//		key : 'user'
-//	}, function(ret, err) {
-//		if (ret) {
-//			var username = ret.value
-//			api.ajax({
-//				url : Api + 'userinfo.html',
-//				method : 'post',
-//				timeout : 30,
-//				dataType : 'json',
-//				returnAll : false,
-//				data : {
-//					values : {
-//						username : username,
-//					},
-//				}
-//			}, function(ret, err) {
-//
-//				var gradexu = ret.xu
-//				var setgradetime = ret.setgradetime
-//				var time1 = Number(timest()) - Number(setgradetime);
-//				var time2 = Math.round(time1 / (60 * 60 * 24));
-//				var days = ret.days
-//				var time3 = Number(days) - Number(time2)
-//
-//				if (time3 < 0) {
-//					alert('您的会员已过期请续费');
-//
-//					return
-//				} else if (!time3) {
-//					api.openFrame({
-//						name : 'login1',
-//						url : '../../html/login1.html',
-//						rect : {
-//							x : 0,
-//							y : 0,
-//							w : api.frameWidth,
-//							h : api.screenHeight
-//						}
-//					});
-//					return
-//				} else if (gradexu >= filegrade) {
-//
-//				} else {
-//					api.openFrame({
-//						name : 'quanxian',
-//						url : '../../html/vedio/quanxian.html',
-//						rect : {
-//							x : 0,
-//							y : 0,
-//							w : api.winWidth,
-//							h : api.winHeight
-//						},
-//						pageParam : {
-//
-//							grade : api.pageParam.fname,
-//							type : 1
-//
-//						}
-//					});
-//				}
-//
-//			});
-//		} else {
-//			api.openFrame({
-//				name : 'login1',
-//				url : '../../html/login1.html',
-//				rect : {
-//					x : 0,
-//					y : 0,
-//					w : api.frameWidth,
-//					h : api.screenHeight
-//				}
-//			});
-//			return
-//
-//		}
-//
-//	});
-//
-//}
-
 function isyouxiao(filegrade, iid, danid, dan, type) {
 
 	var fname = api.pageParam.fname
@@ -431,8 +345,8 @@ function isyouxiao(filegrade, iid, danid, dan, type) {
 				}, function(ret, err) {
 
 					if (time3 < 0) {
-//						alert('您无权查看请升级为VIP');
-                        	api.openFrame({
+						//						alert('您无权查看请升级为VIP');
+						api.openFrame({
 							name : 'quanxian',
 							url : '../../html/vedio/quanxian.html',
 							rect : {
@@ -449,17 +363,17 @@ function isyouxiao(filegrade, iid, danid, dan, type) {
 
 						return
 					} else if (!time3 && !gradexu) {
-//						alert('您还未登录');
+						//						alert('您还未登录');
 						api.openFrame({
-								name : 'login1',
-								url : '../../html/login1.html',
-								rect : {
-									x : 0,
-									y : 0,
-									w : api.winWidth,
-									h : api.winHeight
-								}
-							});
+							name : 'login1',
+							url : '../../html/login1.html',
+							rect : {
+								x : 0,
+								y : 0,
+								w : api.winWidth,
+								h : api.winHeight
+							}
+						});
 						return
 					} else if (ret == 0 || gradexu >= filegrade) {
 
@@ -665,8 +579,9 @@ function imageCache(url) {//图片缓存方法
 }
 
 function openme() {
-			api.openWin({
-				name : 'me_head',
-				url : '../../html/me/head.html'
-			});
-		}
+	api.openWin({
+		name : 'me_head',
+		url : '../../html/me/head.html'
+	});
+}
+
