@@ -18,7 +18,7 @@
 			}
 		</style>
 	</head>
-	<body id="body"   >
+	<body id="body" style="background-size:100%;"  >
 		<header class="H-header H-theme-background-color-transparent" id="header" >
 			<span class="H-icon H-center-all   H-border-radius-circle H-margin-horizontal-auto H-float-left H-font-size-26 H-font-weight-600 H-theme-font-color-white H-margin-horizontal-left-5 H-margin-vertical-top-2" style="height: 35px; width: 35px; line-height:35px;"> <span onclick="back()" class="H-position-relative H-display-inline-block  H-vertical-middle H-theme-font-color-white  H-z-index-100"><i class="H-iconfont H-icon-arrow-left H-font-size-18 H-center-all"></i><label class="H-display-block H-vertical-middle H-font-size-18"></label></span></span>
 		</header>
@@ -73,7 +73,7 @@
 				script : jsfun
 			});
 			$api.removeCls(playid, 'H-display-none');
-			$api.css($api.byId('body'), 'background-image: url(../../image/v.jpg)');
+			$api.css($api.byId('body'), 'background-image: url(../../image/v.png)');
 		}
 
 		function play() {
@@ -95,7 +95,7 @@
 
 		apiready = function() {
 			var header = $api.byId('header');
-			$api.css($api.byId('body'), 'background-image: url(../../image/v.jpg)');
+			$api.css($api.byId('body'), 'background-image: url(../../image/v.png);background-repeat:no-repeat');
 			$api.removeCls(playid, 'H-display-none');
 			$api.fixStatusBar(header);
 			api.addEventListener({
