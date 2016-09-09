@@ -26,7 +26,6 @@
 			}
 		</style>
 	</head>
-	
 	<body  id="body" class="H-display-none" >
 		<div class="H-text-list H-flexbox-horizontal  H-theme-background-color-zhuti   H-vertical-middle  " style="height: 160px;">
 			<span class=" H-padding-horizontal-right-5 H-display-block"style="margin-top: 0px;"> <img onclick="openme()" id="img" src="../../image/ic.jpg" style="width: 70px; height: 70px;border-radius: 35px;margin-left:30px; margin-top: -28px;margin-right:30px;" / ></span>
@@ -158,16 +157,19 @@
 		}
 
 		apiready = function() {
-			int();
-			api.setRefreshHeaderInfo({
-				visible : true,
-				bgColor : '#f2f2f2',
-				textColor : '#4d4d4d',
-				textDown : '下拉刷新...',
-				textUp : '松开刷新...',
-				showTime : true
+			api.getPrefs({
+				key : 'user'
 			}, function(ret, err) {
-				int();
+				if (ret.value) {
+				 
+					int();
+				} else {
+					api.openWin({
+						name : 'login_head',
+						url : '../../html/login_head.html',
+						pageParam : {}
+					});
+				}
 			});
 		}
 	</script>
