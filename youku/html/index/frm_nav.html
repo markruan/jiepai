@@ -19,7 +19,7 @@
 				padding: 10px 0;
 			}
 			span {
-				width: 88%;
+				width: 98%;
 				box-sizing: border-box;
 				border: 1px solid #DDDDDE;
 				padding: 7px 0;
@@ -35,45 +35,9 @@
 			}
 		</style>
 		<body>
-			<ul class="category">
-				<li>
-					<span data-click="0" onclick="select(this)" class="" >标签名称</span>
-				</li>
-				<li>
-					<span data-click="0" onclick="select(this)" class="" >标签名称</span>
-				</li>
-				<li>
-					<span data-click="0" onclick="select(this)" class="" >经典</span>
-				</li>
-				<li>
-					<span data-click="0" onclick="select(this)" class="" >标签名称</span>
-				</li>
-				<li>
-					<span data-click="0" onclick="select(this)" class="" >美女</span>
-				</li>
-				<li>
-					<span data-click="0" onclick="select(this)" class="" >标签名称</span>
-				</li>
-				<li>
-					<span data-click="0" onclick="select(this)" class="" >标签名称</span>
-				</li>
-				<li>
-					<span data-click="0" onclick="select(this)" class="" >标签名称</span>
-				</li>
-				<li>
-					<span data-click="0" onclick="select(this)" class="" >标签名称</span>
-				</li>
-				<li>
-					<span data-click="0" onclick="select(this)" class="" >标签名称</span>
-				</li>
-				<li>
-					<span data-click="0" onclick="select(this)" class="" >标签名称</span>
-				</li>
-				<li>
-					<span data-click="0" onclick="select(this)" class="" >标签名称</span>
-				</li>
-			</ul>
+			<ul id="list" class="category"></ul>
 			<script src="../../script/api.js"></script>
+			<script type="text/javascript" src="../../script/jie.js"></script>
 			<script>
 				function select(button) {
 					var click = button.getAttribute("data-click");
@@ -88,7 +52,29 @@
 					}
 				}
 
+				function intbiao(type) {
+					var html = ""
+					api.ajax({
+						url : Api + 'biaoqian.html',
+						method : 'post',
+						data : {
+							values : {
+								type : type,
+							},
+						}
+					}, function(ret, err) {
+						var listb = $api.byId('list');
+						for (var i = 0; i < ret.length; i++) {
+							html += '<li><span data-click="0" onclick="select(this)" class="" >' + ret[i].title + '</span></li> ';
+						}
+						$api.html(listb, html);
+					});
+				}
+
 				apiready = function() {
+				
+				var type=api.pageParam.name
+				intbiao(type)
 				}
 			</script>
 		</body>
