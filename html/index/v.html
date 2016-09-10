@@ -61,8 +61,9 @@
 				border: 1px solid;
 				border-radius: 10px;
 			}
-		 
-			.H-theme-border-color-zhuti { border: 1px solid #e43252; }
+			.H-theme-border-color-zhuti {
+				border: 1px solid #e43252;
+			}
 		</style>
 	</head>
 	<body>
@@ -71,19 +72,20 @@
 			<div id="wrapper" style="width: 90%;">
 				<div id="scroller">
 					<ul>
-						<div class="H-flexbox-horizontal H-theme-background-color-white " >
-							<div class="H-flex-item H-center-all H-padding-vertical-both-10 H-theme-border-color-white H-touch-active H-font-size-16 H-theme-border-color-zhuti H-theme-font-color-zhuti" style="border-width: 0 0 2px  0">
-								标签名称
+						<div id="listb" class="H-flexbox-horizontal H-theme-background-color-white " >
+							<!--	<div class="H-flex-item H-center-all H-padding-vertical-both-10 H-theme-border-color-white H-touch-active H-font-size-16 H-theme-border-color-zhuti H-theme-font-color-zhuti" style="border-width: 0 0 2px  0">
+							标签名称
 							</div>
 							<div class="H-flex-item H-center-all H-padding-vertical-both-10 H-theme-border-color-white H-touch-active H-font-size-16" style="border-width: 0 0 2px  0">
-								标签名称
+							标签名称
 							</div>
 							<div class="H-flex-item H-center-all H-padding-vertical-both-10 H-theme-border-color-white H-touch-active H-font-size-16" style="border-width: 0 0 2px  0">
-								标签名称
+							标签名称
 							</div>
 							<div class="H-flex-item H-center-all H-padding-vertical-both-10 H-theme-border-color-white H-touch-active H-font-size-16" style="border-width: 0 0 2px  0">
-								标签名称
-							</div>
+							标签名称
+							</div>-->
+						</div>
 					</ul>
 				</div>
 			</div>
@@ -205,6 +207,11 @@
 					w : api.frameWidth,
 					h : 298
 				},
+				pageParam : {
+						name : '视频',
+						 
+					}
+				
 			});
 			api.bringFrameToFront({
 				from : 'frm_nav'
@@ -217,8 +224,28 @@
 			});
 		}
 
+		function intbiao() {
+			var html = ""
+			api.ajax({
+				url : Api + 'biaoqian.html',
+				method : 'post',
+				data : {
+					values : {
+						type : '视频',
+					},
+				}
+			}, function(ret, err) {
+				var listb = $api.byId('listb');
+				for (var i = 0; i < ret.length; i++) {
+					html += '<div class="H-flex-item H-center-all H-padding-vertical-both-10 H-theme-border-color-white H-touch-active H-font-size-16" style="border-width: 0 0 2px  0">	' + ret[i].title + '</div>';
+				}
+				$api.html(listb, html);
+			});
+		}
+
 		apiready = function() {
 			int();
+			intbiao()
 			api.setRefreshHeaderInfo({
 				visible : true,
 				bgColor : '#f2f2f2',
