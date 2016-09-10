@@ -38,13 +38,6 @@
 			</div>
 			<% }}%>
 		</script>
-		<!--<div class="H-margin-horizontal-both-2 H-margin-vertical-both-5  H-border-radius-9 H-padding-horizontal-both-10 H-display-table-cell H-float-left H-box-sizing-border-box H-width-avg-9 H-center-all H-theme-background-color-white H-border-horizontal-right-after H-border-vertical-bottom-after H-padding-vertical-both-10" style="max-height: 40px;min-width: 45px;border-radius: 4px;">
-		<div class=" "style="line-height: 20px">
-		<i class="iconfont icon-jiahao H-theme-font-color-zhuti H-font-size-20  H-vertical-middle"></i>
-		<!--<span class="H-icon H-display-block H-horizontal-center"><i class="H-iconfont H-icon-user H-font-size-24 H-vertical-middle"></i></span>
-		<label class="H-display-block H-font-size-12"></label>
-		</div>
-		</div>-->
 		<div class="H-channel-title H-flexbox-horizontal H-theme-background-color-white H-vertical-middle H-border-vertical-bottom-after">
 			<div class="H-channel-line H-theme-background-color-zhuti H-padding-vertical-top-25 H-padding-horizontal-left-3  H-margin-horizontal-left-4"></div>
 			<div class="H-channel-text H-theme-font-color-black H-flex-item H-font-size-18 H-theme-font-color-black H-padding-10 H-margin-horizontal-right-10 H-text-show-row-1">
@@ -102,15 +95,8 @@
 			var img = pic.split(' ');
 			var html2 = '';
 			for (var i = 0; i < img.length; i++) {
-//				html2 += '<div class="H-display-table-cell H-theme-background-color-white H-float-left  H-box-sizing-border-box H-width-avg-3 H-padding-horizontal-right-4 H-margin-vertical-bottom-10   " style="margin-bottom: 10px; ">';
-//				html2 += '<img  src="' + img[i] + '" class=" H-float-right H-margin-vertical-top-8 H-margin-horizontal-both-2 H-display-block" alt="" title="" style="width: 96%">';
-//				html2 += '<img src="../../image/xia.png " class=" H-float-right  H-margin-vertical-top-8 H-margin-horizontal-both-2 H-display-block" style="margin-top: -200px; height: 200px ; width: 96%" alt="" title="">';
-//				html2 += '<div class="H-padding-vertical-bottom-10 H-theme-background-color-eee  " style="margin: 0 -10px"></div></div>';
-			  html2+='<div class="H-display-table-cell H-float-left  H-box-sizing-border-box H-width-avg-3 H-padding-horizontal-right-5 H-margin-vertical-bottom-5">';
-             html2+='<img src="' + img[i] + '" class="H-width-100-percent H-display-block" alt="" title=""></div>';
-        
-        
-			
+				html2 += '<div class="H-display-table-cell H-float-left  H-box-sizing-border-box H-width-avg-3 H-padding-horizontal-right-5 H-margin-vertical-bottom-5">';
+				html2 += '<img src="' + img[i] + '" class="H-width-100-percent H-display-block" alt="" title=""></div>';
 			}
 			$api.html($api.byId('img'), html2);
 		};
@@ -165,7 +151,6 @@
 								},
 							}
 						}, function(ret, err) {
-							 
 							if (ret == 11) {
 								alert('已经收藏过了')
 							} else if (ret == 0) {
