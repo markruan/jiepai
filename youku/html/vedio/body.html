@@ -102,10 +102,15 @@
 			var img = pic.split(' ');
 			var html2 = '';
 			for (var i = 0; i < img.length; i++) {
-				html2 += '<div class="H-display-table-cell H-theme-background-color-white H-float-left  H-box-sizing-border-box H-width-avg-3 H-padding-horizontal-right-4 H-margin-vertical-bottom-10   " style="margin-bottom: 10px; ">';
-				html2 += '<img  src="' + img[i] + '" class=" H-float-right H-margin-vertical-top-8 H-margin-horizontal-both-2 H-display-block" alt="" title="" style="width: 96%">';
-				html2 += '<img src="../../image/xia.png " class=" H-float-right  H-margin-vertical-top-8 H-margin-horizontal-both-2 H-display-block" style="margin-top: -200px; height: 200px ; width: 96%" alt="" title="">';
-				html2 += '<div class="H-padding-vertical-bottom-10 H-theme-background-color-eee  " style="margin: 0 -10px"></div></div>';
+//				html2 += '<div class="H-display-table-cell H-theme-background-color-white H-float-left  H-box-sizing-border-box H-width-avg-3 H-padding-horizontal-right-4 H-margin-vertical-bottom-10   " style="margin-bottom: 10px; ">';
+//				html2 += '<img  src="' + img[i] + '" class=" H-float-right H-margin-vertical-top-8 H-margin-horizontal-both-2 H-display-block" alt="" title="" style="width: 96%">';
+//				html2 += '<img src="../../image/xia.png " class=" H-float-right  H-margin-vertical-top-8 H-margin-horizontal-both-2 H-display-block" style="margin-top: -200px; height: 200px ; width: 96%" alt="" title="">';
+//				html2 += '<div class="H-padding-vertical-bottom-10 H-theme-background-color-eee  " style="margin: 0 -10px"></div></div>';
+			  html2+='<div class="H-display-table-cell H-float-left  H-box-sizing-border-box H-width-avg-4 H-padding-horizontal-right-5 H-margin-vertical-bottom-5">';
+             html2+='<img src="' + img[i] + '" class="H-width-100-percent H-display-block" alt="" title=""></div>';
+        
+        
+			
 			}
 			$api.html($api.byId('img'), html2);
 		};

@@ -123,6 +123,10 @@
 		function player() {
 			var videoPlayer = api.require('videoPlayer');
 			var vurl = api.pageParam.name
+			api.setPrefs({
+	            key:'vurl',
+	            value:vurl
+            });
 			var varr = api.pageParam.varr
 			var vlist = varr.split(',');
 			videoPlayer.open({
