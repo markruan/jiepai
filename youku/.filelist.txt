@@ -25,6 +25,7 @@
 /A6990407827122/icon/icon150x150.png
 /A6990407827122/html/search/index2.html
 /A6990407827122/html/shoucang/shoucangP.html
+/A6990407827122/image/channel_nav_arrow@2x.png
 /A6990407827122/html/jingxuan/header.html
 /A6990407827122/html/info/psw_head.html
 /A6990407827122/html/index/index.html

@@ -5,7 +5,7 @@
 		<meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
 		<title>title</title>
 		<link rel="stylesheet" type="text/css" href="../../css/Hui.css"/>
-		<link href="http://at.alicdn.com/t/font_1469889460_3988683.css" rel="stylesheet" type="text/css" />
+		<link rel="stylesheet" type="text/css" href="http://at.alicdn.com/t/font_1473561265_8698473.css"/>
 		<style>
 			html, body {
 				background-color: transparent !important;
@@ -17,13 +17,43 @@
 				bottom: 0px;
 				width: 100%;
 			}
+			.H-font-size-22{
+			font-size:27px;
+			}
 		</style>
 	</head>
 	<body>
-		<div class="bottom_footer "style=" background-color: rgba(0, 0, 0, 0.45)">
+	
+		<div id="share" class="single-menu  H-display-none-important  H-background-color-red H-flexbox-vertical animated bounceIn  H-position-absolute H-vertical-top-0 H-horizontal-left-0 H-horizontal-right-0 H-vertical-bottom-0 H-height-100-percent H-width-100-percent H-z-index-1000000">
+			<div class="space H-flex-item">
+				000
+			</div>
+			<div class="share-menu">
+				<div class="H-flexbox-horizontal H-text-align-center H-theme-background-color-white H-padding-vertical-both-10">
+					<div class="H-flex-item">
+						<span class="H-icon H-center-all H-theme-background-color1 H-border-radius-circle H-margin-horizontal-auto" style="height: 42px; width: 42px; "><i class="iconfont icon-qq H-font-size-22 H-theme-font-color-white"></i></span>
+						<label class="H-display-block H-font-size-13 H-margin-vertical-top-5">QQ好友</label>
+					</div>
+					<div class="H-flex-item">
+						<span class="H-icon H-center-all H-theme-background-color2 H-border-radius-circle H-margin-horizontal-auto" style="height: 42px; width: 42px; "><i class="iconfont icon-weixin H-font-size-22 H-theme-font-color-white"></i></span>
+						<label class="H-display-block H-font-size-13 H-margin-vertical-top-5">微信好友</label>
+					</div>
+					<div class="H-flex-item">
+						<span class="H-icon H-center-all H-theme-background-color5 H-border-radius-circle H-margin-horizontal-auto" style="height: 42px; width: 42px; "><i class="iconfont icon-pengyouquan H-font-size-22 H-theme-font-color-white"></i></span>
+						<label class="H-display-block H-font-size-13 H-margin-vertical-top-5">朋友圈</label>
+					</div>
+					<div onclick="guanbi()" class="H-flex-item">
+						<span  class="H-icon H-center-all H-theme-background-color5 H-border-radius-circle H-margin-horizontal-auto" style="height: 42px; width: 42px; "><i class="iconfont icon-guanbi1 H-font-size-22 H-theme-font-color-white" style="font-size:20px"></i></span>
+						<label class="H-display-block H-font-size-13 H-margin-vertical-top-5">关闭</label>
+					</div>
+				</div>
+				 
+			</div>
+		</div>
+		<div class="bottom_footer "style=" background-color: rgba(0, 0, 0, 0.45)" >
 			<div class="share-menu H-z-index-1000000   H-margin-vertical-bottom-0"  >
 				<div class="H-flexbox-horizontal H-text-align-center H-padding-vertical-both-10">
-					<div class="H-flex-item" onclick="kaifa()">
+					<div class="H-flex-item" onclick="fenxiang()">
 						<span class="H-icon H-center-all H-theme-background-transparent H-border-radius-circle H-theme-border-color-white H-margin-horizontal-auto" style="height: 40px; width: 40px; "><i class="iconfont icon-fenxiang H-font-size-26 H-theme-font-color-white"style="font-size: 26px"></i></span>
 						<label class="H-display-block H-font-size-13 H-margin-vertical-top-5 H-theme-font-color-white">分享到</label>
 					</div>
@@ -41,8 +71,14 @@
 	<script type="text/javascript" src="../../script/api.js"></script>
 	<script type="text/javascript" src="../../script/jie.js"></script>
 	<script type="text/javascript">
-		function kaifa() {
-			alert('开发中...')
+		function fenxiang() {
+			$api.removeCls($api.byId('share'), 'H-display-none-important');
+			//		  $api.addCls($api.byId('share'), 'single-menu H-background-color-transparent-1 H-flexbox-vertical   H-position-absolute H-vertical-top-0 H-horizontal-left-0 H-horizontal-right-0 H-vertical-bottom-0 H-height-100-percent H-width-100-percent H-z-index-1000000"');
+		}
+
+		function guanbi() {
+			$api.removeCls($api.byId('share'), 'H-display-none-important');
+			$api.addCls($api.byId('share'), 'H-display-none-important');
 		}
 
 		function back() {
