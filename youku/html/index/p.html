@@ -50,6 +50,12 @@
 			.H-theme-border-color-zhuti {
 				border: 1px solid #e43252;
 			}
+			.H-button {
+				min-width: 89px;
+				-webkit-touch-callout: none;
+				-webkit-appearance: none;
+				-webkit-user-select: none;
+			}
 		</style>
 	</head>
 	<body id="body" class="H-z-index-1000 ">
@@ -58,18 +64,7 @@
 				<div id="scroller">
 					<ul>
 						<div id="listb" class="H-flexbox-horizontal H-theme-background-color-white " >
-					<!--<div class="H-flex-item H-center-all H-padding-vertical-both-10 H-theme-border-color-white H-touch-active H-font-size-16 H-theme-border-color-zhuti H-theme-font-color-zhuti" style="border-width: 0 0 2px  0">
-							标签名称
-							</div>
-							<div class="H-flex-item H-center-all H-padding-vertical-both-10 H-theme-border-color-white H-touch-active H-font-size-16" style="border-width: 0 0 2px  0">
-							标签名称
-							</div>
-							<div class="H-flex-item H-center-all H-padding-vertical-both-10 H-theme-border-color-white H-touch-active H-font-size-16" style="border-width: 0 0 2px  0">
-							标签名称
-							</div>
-							<div class="H-flex-item H-center-all H-padding-vertical-both-10 H-theme-border-color-white H-touch-active H-font-size-16" style="border-width: 0 0 2px  0">
-							标签名称
-							</div>-->
+						 
 						</div>
 					</ul>
 				</div>
@@ -186,9 +181,8 @@
 					h : 298
 				},
 				pageParam : {
-						name : '图片',
-						 
-					}
+					name : '图片',
+				}
 			});
 			api.bringFrameToFront({
 				from : 'frm_nav'
@@ -215,7 +209,7 @@
 				//				alert(ret)
 				var listb = $api.byId('listb');
 				for (var i = 0; i < ret.length; i++) {
-					html += '<div class="H-flex-item H-center-all H-padding-vertical-both-10 H-theme-border-color-white H-touch-active H-font-size-16" style="border-width: 0 0 2px  0">	' + ret[i].title + '</div>';
+					html += '<div class="H-flex-item H-center-all H-padding-vertical-both-10 H-theme-border-color-white H-touch-active H-font-size-16" style="border-width: 0 0 2px  0"><button class="H-button H-font-size-15 H-outline-none H-padding-vertical-both-8 H-padding-horizontal-both-20 H-theme-background-color-zhuti H-theme-font-color-white H-theme-border-color-zhuti H-theme-border-color2-click H-theme-background-color2-click H-theme-font-color2-click H-border-radius-3">	' + ret[i].title + '' + ret[i].title + '</button></div>';
 				}
 				$api.html(listb, html);
 			});
