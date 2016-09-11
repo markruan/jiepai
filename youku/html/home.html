@@ -182,9 +182,9 @@
 					reload : true,
 					rect : {
 						x : 0,
-						y : header2 + 25,
+						y : header2 ,
 						w : api.frameWidth,
-						h : api.frameHeight - offset - header2 - 25
+						h : api.frameHeight - offset - header2  
 					},
 					animation : {
 						type : "fade", //动画类型（详见动画类型常量）
@@ -221,9 +221,9 @@
 					url : '../html/me/index.html',
 					rect : {
 						x : 0,
-						y : 25,
+						y : 0,
 						w : api.frameWidth,
-						h : api.frameHeight - offset - 25
+						h : api.frameHeight - offset 
 					},
 					bounces : false,
 				})
@@ -258,9 +258,9 @@
 					reload : true,
 					rect : {
 						x : 0,
-						y : header2 + 25,
+						y : header2,
 						w : api.frameWidth,
-						h : api.frameHeight - offset - header2 - 25
+						h : api.frameHeight - offset - header2
 					},
 					animation : {
 						type : "fade", //动画类型（详见动画类型常量）
@@ -293,9 +293,9 @@
 					scrollEnabled : true,
 					rect : {
 						x : 0,
-						y : header2 + 25,
+						y : header2,
 						w : api.frameWidth,
-						h : api.frameHeight - offset - header2 - 25
+						h : api.frameHeight - offset - header2
 					},
 					index : 0,
 					frames : [{
@@ -335,9 +335,9 @@
 					bounces : false,
 					rect : {
 						x : 0,
-						y : header2 + 25,
+						y : header2 ,
 						w : api.frameWidth,
-						h : api.frameHeight - offset - header2 - 25
+						h : api.frameHeight - offset - header2 
 					}
 				});
 				api.hideProgress();
@@ -371,7 +371,7 @@
 			}
 
 			var jpush = null;
-			H.ready(function() {
+			apiready = function() {
 				api.setStatusBarStyle({
 					style : 'light'
 				});
@@ -385,10 +385,10 @@
 				var footer = $api.byId('footer');
 				var offset = $api.offset(footer).h;
 				$api.setStorage('f1', offset);
-				$api.fixStatusBar(header1);
-				$api.fixStatusBar($api.byId('tui_header'));
-				$api.fixStatusBar($api.byId('add_header'));
-				$api.fixStatusBar($api.byId('about_me'));
+//				$api.fixStatusBar(header1);
+//				$api.fixStatusBar($api.byId('tui_header'));
+//				$api.fixStatusBar($api.byId('add_header'));
+//				$api.fixStatusBar($api.byId('about_me'));
 				openIndex(this)
 				var ajpush = api.require('ajpush');
 				ajpush.init(function(ret) {
@@ -467,7 +467,7 @@
 						})
 					}
 				});
-			});
+			};
 			function setPage(index, frame) {
 				api.sendFrameToBack({
 					from : 'common_index'

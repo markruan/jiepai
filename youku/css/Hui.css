@@ -1055,8 +1055,8 @@ textarea { overflow: auto; }
 .H-badge.H-badge-null { width: 8px; height: 8px; }
 
 /* 顶部导航栏 */
-.H-header { min-height: 44px; }
-.H-header-title, .H-header .H-icon { height: 44px; }
+ .H-header { min-height: 44px; }
+ .H-header-title, .H-header .H-icon { height: 44px; }
 .H-header-title { left: 0; }
 .H-header input::-webkit-input-placeholder { line-height: 1.5em; }
 

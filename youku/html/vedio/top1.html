@@ -67,10 +67,17 @@
 		}
 
 		function full() {
-			var jsfun = 'full1();';
-			api.execScript({
-				frameName : 'top',
-				script : jsfun
+			var filegrade = api.pageParam.xu
+			var iid = api.pageParam.vid
+			isyouxiao(filegrade, iid, '', '', 0)
+			api.addEventListener({
+				name : 'quanxian'
+			}, function(ret, err) {
+				var jsfun = 'full1();';
+				api.execScript({
+					frameName : 'top',
+					script : jsfun
+				});
 			});
 			$api.removeCls(playid, 'H-display-none');
 			$api.css($api.byId('body'), 'background-image: url(../../image/v.jpg)');
@@ -79,7 +86,7 @@
 		function play() {
 			var filegrade = api.pageParam.xu
 			var iid = api.pageParam.vid
-			isyouxiao(filegrade, iid,'','',0)
+			isyouxiao(filegrade, iid, '', '', 0)
 			api.addEventListener({
 				name : 'quanxian'
 			}, function(ret, err) {
