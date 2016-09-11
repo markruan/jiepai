@@ -30,8 +30,8 @@
 			.H-theme-border-white {
 				border: 1px solid #ffffff;
 			}
-			.H-font-size-42{
-			font-size: 30px;
+			.H-font-size-42 {
+				font-size: 30px;
 			}
 		</style>
 	</head>
@@ -143,6 +143,9 @@
 							api.openWin({
 								name : 'home',
 								url : 'home.html'
+							});
+							api.closeWin({
+								name : 'reg',
 							});
 						} else {
 							alert(ret.msg);

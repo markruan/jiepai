@@ -135,23 +135,7 @@
 								key : 'userinfo',
 								value : ret.data.xu
 							});
-							//							api.ajax({
-							//								url : Api + 'userinfo.html',
-							//								method : 'post',
-							//								timeout : 30,
-							//								dataType : 'json',
-							//								data : {
-							//									values : {
-							//										username : nameVal,
-							//									},
-							//								}
-							//							}, function(ret, err) {
-							//								$api.setStorage('userinfo', ret);
-							//								api.setPrefs({
-							//	                                key:'userinfo',
-							//	                                value:ret.xu
-							//                              });
-							//							});
+						 
 							api.sendEvent({
 								name : 'reg_login_successEvent',
 								extra : {
