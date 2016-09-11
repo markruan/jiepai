@@ -26,6 +26,7 @@
   <permission name="internet"/>  
   <permission name="bootCompleted"/>  
   <permission name="hardware"/>  
+  <preference name="font" value=""/>  
   <access origin="*"/>  
   <feature name="aliPay"> 
     <param name="urlScheme" value="AliPayA6990407827122"/> 

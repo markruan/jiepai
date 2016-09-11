@@ -14,7 +14,7 @@
  */
 
 /* 重置样式 */
-html { font-family: sans-serif; -ms-text-size-adjust: 100%; -webkit-text-size-adjust: 100%; font-size: 62.5%; -webkit-overflow-scrolling: touch; width: 100%; height: 100%; }
+html {   -ms-text-size-adjust: 100%; -webkit-text-size-adjust: 100%; font-size: 62.5%; -webkit-overflow-scrolling: touch; width: 100%; height: 100%; }
 body { margin: 0; -webkit-overflow-scrolling: touch; font-size: 1.6rem; line-height: 1.5; background: #f8f8f8; }
 article, aside, details, figcaption, figure, footer, header, main, menu, nav, section, summary { display: block; }
 audio, canvas, progress, video { display: inline-block; }
