@@ -58,6 +58,7 @@ textarea { overflow: auto; }
 
 /*字体图标*/
 /*引入字体图标*/
+.H-iconfont { font-family: "iconfont" !important; font-size: 16px; font-style: normal; -webkit-font-smoothing: antialiased; -webkit-text-stroke-width: 0.2px; -moz-osx-font-smoothing: grayscale; }
 .H-theme-background-color-zhuti {
 				background-color: #e43252;
 			}
