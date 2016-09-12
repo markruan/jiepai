@@ -16,8 +16,9 @@
   <preference name="fullScreen" value="false"/>  
   <preference name="autoUpdate" value="true"/>  
   <preference name="smartUpdate" value="false"/>  
-  <preference name="debug" value="true"/>  
+  <preference name="debug" value="false"/>  
   <preference name="statusBarAppearance" value="false"/>  
+  <preference name="font" value=""/>  
   <permission name="readPhoneState"/>  
   <permission name="camera"/>  
   <permission name="record"/>  
@@ -26,7 +27,6 @@
   <permission name="internet"/>  
   <permission name="bootCompleted"/>  
   <permission name="hardware"/>  
-  <preference name="font" value=""/>  
   <access origin="*"/>  
   <feature name="aliPay"> 
     <param name="urlScheme" value="AliPayA6990407827122"/> 
