@@ -152,6 +152,12 @@
 							if (ret == 0) {
 								alert('绑定成功')
 								setTimeout(refresh(), 280)
+								var jsfun = 'intt()';
+								api.execScript({
+									name : 'info',
+									frameName : 'edit',
+									script : jsfun
+								});
 							} else
 								(
 									alert('绑定失败')

@@ -157,10 +157,17 @@
 		}
 
 		function openlogin() {
-			api.openWin({
-				name : 'login_head',
-				url : '../../html/login_head.html',
-				pageParam : {}
+			api.getPrefs({
+				key : 'user'
+			}, function(ret, err) {
+				if (ret.value) {
+				} else {
+					api.openWin({
+						name : 'login_head',
+						url : '../../html/login_head.html',
+						pageParam : {}
+					});
+				}
 			});
 		}
 

@@ -64,38 +64,36 @@
 			.H-theme-border-color-zhuti {
 				border: 1px solid #e43252;
 			}
+			.H-theme-border-color2 {
+				border: 1px solid #fafafa;
+			}
+			.H-button {
+				min-width: 60px;
+				height: 30px;
+				-webkit-touch-callout: none;
+				-webkit-appearance: none;
+				-webkit-user-select: none;
+				background-color: #FF576F
+			}
 		</style>
 	</head>
 	<body>
 	<body id="body" class="H-z-index-1000 ">
-		<nav id="nav" class=" ">
-			<div id="wrapper" style="width: 90%;">
+		<nav id="nav" class=" H-position-fixed H-z-index-100">
+			<div id="wrapper" style="width: 92%;">
 				<div id="scroller">
 					<ul>
-						<div id="listb" class="H-flexbox-horizontal H-theme-background-color-white " >
-							<!--	<div class="H-flex-item H-center-all H-padding-vertical-both-10 H-theme-border-color-white H-touch-active H-font-size-16 H-theme-border-color-zhuti H-theme-font-color-zhuti" style="border-width: 0 0 2px  0">
-							标签名称
-							</div>
-							<div class="H-flex-item H-center-all H-padding-vertical-both-10 H-theme-border-color-white H-touch-active H-font-size-16" style="border-width: 0 0 2px  0">
-							标签名称
-							</div>
-							<div class="H-flex-item H-center-all H-padding-vertical-both-10 H-theme-border-color-white H-touch-active H-font-size-16" style="border-width: 0 0 2px  0">
-							标签名称
-							</div>
-							<div class="H-flex-item H-center-all H-padding-vertical-both-10 H-theme-border-color-white H-touch-active H-font-size-16" style="border-width: 0 0 2px  0">
-							标签名称
-							</div>-->
-						</div>
+						<li  id="listb"  class="H-margin-vertical-both-8 H-margin-horizontal-left-3"></li>
 					</ul>
 				</div>
 			</div>
-			<div class="switchNav H-display-none H-font-size-16">
-				切换栏目
+			<!--	<div class="switchNav H-display-none H-font-size-16">
+			切换栏目
 			</div>
-			<div  class="arrow_down " onclick="openNav()" tapmode=""></div>
+			<div  class="arrow_down " onclick="openNav()" tapmode=""></div>-->
 		</nav>
 		<div class="H-padding-vertical-bottom-2"></div>
-		<div class="H-channel-title H-flexbox-horizontal H-theme-background-color-white H-vertical-middle  ">
+		<div style="margin-top: 46px;" class="H-channel-title H-flexbox-horizontal H-theme-background-color-white H-vertical-middle  ">
 			<div class="H-channel-line H-theme-background-color-zhuti H-padding-vertical-top-15 H-padding-horizontal-left-3  H-margin-horizontal-left-4"></div>
 			<div class="  H-channel-text H-theme-font-color-black H-flex-item H-font-size-18 H-theme-font-color-black H-padding-10 H-margin-horizontal-right-10 H-text-show-row-1">
 				视频
@@ -131,7 +129,7 @@
 			});
 		}
 
-		function int() {
+		function int(key) {
 			api.showProgress({
 				style : 'default',
 				animationType : 'fade',
@@ -142,6 +140,14 @@
 			api.ajax({
 				url : Api + 'vout.html',
 				method : 'post',
+				timeout : 30,
+				dataType : 'json',
+				returnAll : false,
+				data : {
+					values : {
+						key : key,
+					},
+				}
 			}, function(ret, err) {
 				var html = '';
 				var list = $api.byId('list');
@@ -166,7 +172,7 @@
 					html += '<img src="../../image/default.jpg"    data-echo="' + piccc + '" class=" H-float-right H-margin-vertical-top-8 H-margin-horizontal-both-2 H-display-block" alt="" title="" style="width: 96%" ;height:200>';
 					html += '<img src="../../image/xia.png " class=" H-float-right  H-margin-vertical-top-8 H-margin-horizontal-both-2 H-display-block" style="margin-top: -200px; height: 200px ; width: 96%" alt="" title="">';
 					html += '<div  class=" " style=" margin-right:8px; margin-top:-30px;line-height: 30px; float: right; color:white ;">' + totaltime + '</div>';
-					html += '<div class="H-text-align-center H-font-size-14 H-padding-vertical-top-10    " style="line-height: 35px">' + ftitle.substr(0, 7) + '</div>';
+					html += '<div class="  H-font-size-14 H-padding-vertical-top-10    " style="line-height: 35px">' + ftitle.substr(0, 7) + '</div>';
 					html += '<div class="H-padding-vertical-bottom-10 H-theme-background-color-eee  " style="margin: 0 -10px"></div></div>';
 				}
 				$api.html(list, html);
@@ -203,15 +209,13 @@
 				url : 'frm_nav.html',
 				rect : {
 					x : 0,
-					y : 44  + 44,
+					y : 44 + 44,
 					w : api.frameWidth,
 					h : 298
 				},
 				pageParam : {
-						name : '视频',
-						 
-					}
-				
+					name : '视频',
+				}
 			});
 			api.bringFrameToFront({
 				from : 'frm_nav'
@@ -237,13 +241,14 @@
 			}, function(ret, err) {
 				var listb = $api.byId('listb');
 				for (var i = 0; i < ret.length; i++) {
-					html += '<div class="H-flex-item H-center-all H-padding-vertical-both-10 H-theme-border-color-white H-touch-active H-font-size-16" style="border-width: 0 0 2px  0">	' + ret[i].title + '</div>';
+					html += '<button onclick="int(\'' + ret[i].title + '\')"  class="H-button H-font-size-15  H-outline-none   H-padding-vertical-both-3 H-padding-horizontal-both-7   H-theme-font-color-white H-theme-border-color2 H-theme-border-color2-click H-theme-background-color2-click H-theme-font-color2-click H-border-radius-3">' + ret[i].title + '</button> ';
 				}
 				$api.html(listb, html);
 			});
 		}
 
 		apiready = function() {
+			var key = ''
 			int();
 			intbiao()
 			api.setRefreshHeaderInfo({

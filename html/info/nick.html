@@ -67,6 +67,12 @@
 									msg : '修改成功'
 								});
 								setTimeout(refresh(), 280)
+								var jsfun = 'intt()';
+								api.execScript({
+									name : 'info',
+									frameName : 'edit',
+									script : jsfun
+								});
 							} else {
 								api.toast({
 									msg : '修改失败'

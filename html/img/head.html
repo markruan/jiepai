@@ -20,11 +20,11 @@
 		</style>
 	</head>
 	<body>
-		<header class="H-header " id="header" style="min-height: 89px;background-image: url('../../image/shangbeijing.png')">
-			<span class="H-icon H-center-all   H-border-radius-circle H-margin-horizontal-auto H-float-left H-font-size-26 H-font-weight-600 H-theme-font-color-white H-margin-horizontal-left-5 H-margin-vertical-top-2" style="height: 35px; width: 35px; line-height:35px;"> <span  class="H-position-relative H-display-inline-block  H-vertical-middle H-theme-font-color-white  H-z-index-100"><i onclick="back()" class="iconfont icon-left H-font-size-18 H-center-all"></i><label class="H-display-block H-vertical-middle H-font-size-18"></label></span></span>
-			<br />
-			<div id='list' style=" font-size: 35px; color: white ; line-height: 35px; ">
-				<span   style="color: red;margin-left: 10px;"> </span><span> </span></span>
+		<header class="H-header   " id="header" style=" background-color: rgba(0, 0, 0, 0.45)">
+			<!--<span class="H-icon      H-border-radius-circle   H-font-size-26 H-font-weight-600 H-theme-font-color-white H-margin-horizontal-left-5 H-margin-vertical-top-2" style="height: 35px; width: 35px; line-height:35px;"> <span  class="H-position-relative H-display-inline-block H-margin-horizontal-left-2  H-vertical-middle H-theme-font-color-white  H-z-index-100"><i onclick="back()" class="iconfont icon-left   H-font-size-18 H-center-all"></i><label class="H-display-block H-vertical-middle H-font-size-18"></label></span></span>-->
+			 <span class="H-icon H-position-relative H-display-block H-float-left H-vertical-middle H-theme-font-color-white H-padding-horizontal-left-20 H-z-index-1000"><i onclick="back()" class="iconfont icon-left   H-font-size-18 H-center-all"></i></span>
+			<div id='list'  class="H-center-all" style=" font-size: 35px; color: white ; line-height: 35px; ">
+				<!--<span   style="color: red;"> 2 </span><span> 1 </span></span>-->
 			</div>
 		</header>
 	</body>
@@ -86,16 +86,14 @@
 			}, function(ret, err) {
 				back()
 			});
-			 
-			  setTimeout( 
-			api.addEventListener({
+			setTimeout(api.addEventListener({
 				name : 'imglist'
 			}, function(ret, err) {
 				var total = ret.value.imglenth
 				var imgindex = ret.value.imgindex + 1
-				$api.html($api.byId('list'), '<span id="" style="color: red;margin-left: 10px;">' + imgindex + '</span><span>/</span>' + total + '</span>');
+				$api.html($api.byId('list'), '<span id=""   style="color: red;margin-left: 10px;">' + imgindex + '</span><span>/</span>' + total + '</span>');
 				//				$api.html($api.byId('download'), '<label onclick="download()" class="H-display-block H-font-size-13 H-margin-vertical-top-5 H-theme-font-color-white">保存</label>');
-			}),18000)
+			}), 18000)
 		};
 	</script>
 </html>
