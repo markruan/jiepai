@@ -111,11 +111,24 @@
 		function intt() {
 			var ret = $api.getStorage('userinfo');
 			$api.text($api.byId('username'), ret.username);
-			$api.text($api.byId('nickname'), ret.nickname);
-			$api.text($api.byId('grade'), ret.fname);
-			$api.text($api.byId('phone'), ret.phone);
-			$api.attr($api.byId('img'), 'src', uploadUrl + ret.icon);
-			api.refreshHeaderLoadDone();
+			api.ajax({
+				url : Api + 'userinfo.html',
+				method : 'post',
+				timeout : 30,
+				dataType : 'json',
+				returnAll : false,
+				data : {
+					values : {
+						username : ret.username,
+					},
+				}
+			}, function(ret, err) {
+				$api.text($api.byId('nickname'), ret.nickname);
+				$api.text($api.byId('grade'), ret.fname);
+				$api.text($api.byId('phone'), ret.phone);
+				$api.attr($api.byId('img'), 'src', uploadUrl + ret.icon);
+				api.refreshHeaderLoadDone();
+			});
 		}
 
 		apiready = function() {

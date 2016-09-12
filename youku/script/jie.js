@@ -344,8 +344,8 @@ function isyouxiao(filegrade, iid, danid, dan, type) {
 					}
 				}, function(ret, err) {
 
-					if (time3 < 0) {
-						//						alert('您无权查看请升级为VIP');
+					if (time3 < 0 && gradexu < 1) {
+						 
 						api.openFrame({
 							name : 'quanxian',
 							url : '../../html/vedio/quanxian.html',
@@ -363,7 +363,7 @@ function isyouxiao(filegrade, iid, danid, dan, type) {
 
 						return
 					} else if (!time3 && !gradexu) {
-						//						alert('您还未登录');
+						alert('您还未登录');
 						api.openFrame({
 							name : 'login1',
 							url : '../../html/login1.html',
