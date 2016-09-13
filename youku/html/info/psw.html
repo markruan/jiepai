@@ -6,11 +6,15 @@
 		<title>title</title>
 		<link rel="stylesheet" type="text/css" href="../../css/Hui.css"/>
 		<style>
-		 
 		</style>
 	</head>
 	<body>
 		<div class=" form   ">
+			<div class="H-flexbox-horizontal H-border-vertical-bottom-margin-left-10-after">
+				<span   class="H-vertical-middle H-padding-horizontal-left-10 H-theme-background-color-white H-font-size-16">原密码：</span>
+				<input id="oldpassword" value="" type="password" class="H-textbox H-vertical-align-middle H-vertical-middle H-font-size-16 H-flex-item H-box-sizing-border-box H-border-none H-outline-none H-padding-12" placeholder="请输入当前登录密码">
+				<span class="H-icon H-vertical-middle H-padding-horizontal-right-10 H-theme-background-color-white">
+			</div>
 			<div class="H-flexbox-horizontal H-border-vertical-bottom-margin-left-10-after">
 				<span   class="H-vertical-middle H-padding-horizontal-left-10 H-theme-background-color-white H-font-size-16">新密码：</span>
 				<input id="newpsw1" value="" type="password" class="H-textbox H-vertical-align-middle H-vertical-middle H-font-size-16 H-flex-item H-box-sizing-border-box H-border-none H-outline-none H-padding-12" placeholder="请输入新密码">
@@ -30,6 +34,7 @@
 	<script type="text/javascript" src="../../script/jie.js"></script>
 	<script type="text/javascript">
 		function update() {
+			var oldpassword = $api.val($api.byId('oldpassword'));
 			var newpsw1 = $api.val($api.byId('newpsw1'));
 			var newpsw2 = $api.val($api.byId('newpsw2'));
 			if (newpsw1.length == 0 || newpsw2.length == 0) {
@@ -50,11 +55,12 @@
 								url : Api + 'psw.html',
 								method : 'post',
 								timeout : 30,
-								dataType : 'json',
+								dataType : 'text',
 								data : {
 									values : {
 										username : nameVal,
-										password : newpsw2
+										password : newpsw2,
+										oldpassword : oldpassword
 									},
 								}
 							}, function(ret, err) {
@@ -64,9 +70,7 @@
 									});
 									setTimeout(refresh(), 280)
 								} else {
-									api.toast({
-										msg : '修改失败'
-									});
+									alert('原密码不正确')
 								}
 							});
 						};
