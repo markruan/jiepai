@@ -59,7 +59,7 @@
 			<%=list[i].gname %>
 			</div>
 			<span class=" H-padding-horizontal-right-5 H-display-block H-font-size-16  H-padding-horizontal-right-20"> <!--<input type="radio" name="n2" checked="checked" class="H-radio H-radio-fill H-vertical-align-middle H-font-size-18 H-theme-font-color1 H-theme-background-color-white H-border-radius-circle">-->
-			<button onclick="alipay('<%=list[i].gname %>', '<%=list[i].fname %>', '<%=list[i].price %>','<%=list[i].days %>')" class="H-button H-font-size-15 H-outline-none H-padding-vertical-both-5 H-padding-horizontal-both-20 H-theme-background-color-white H-theme-font-color1 H-theme-border-color1 H-theme-border-color1-click H-theme-background-color1-click H-theme-font-color1-click H-border-radius-3" style="min-width: 70px; margin-left: 3px;">
+			<button onclick="alipay('<%=list[i].gname %>', '<%=list[i].fname %>', '<%=list[i].price %>','<%=list[i].days %>','','<%=list[i].xu %>')" class="H-button H-font-size-15 H-outline-none H-padding-vertical-both-5 H-padding-horizontal-both-20 H-theme-background-color-white H-theme-font-color1 H-theme-border-color1 H-theme-border-color1-click H-theme-background-color1-click H-theme-font-color1-click H-border-radius-3" style="min-width: 70px; margin-left: 3px;">
 			开通
 			</button></span>
 			</div>
@@ -116,25 +116,39 @@
 				var val = ret.value;
 				if (val && val != "") {
 					var nameVal = ret.value
-					var userinfo = $api.getStorage('userinfo');
-					$api.text($api.byId('username'), userinfo.username);
-					$api.text($api.byId('grade'), userinfo.fname);
-					$api.attr($api.byId('img'), 'src', uploadUrl + userinfo.icon);
-					$api.removeCls($api.byId('body'), 'H-display-none');
-					var setgradetime = userinfo.setgradetime;
-					var time1 = Number(timest()) - Number(setgradetime);
-					var time2 = Math.round(time1 / (60 * 60 * 24));
-					var days = userinfo.days
-					var xu = userinfo.xu
-					var time3 = Number(days) - time2
-					if (time3 <= 0) {
-						$api.text($api.byId('days'), 0);
-					} else if (xu == 6) {
-						$api.text($api.byId('days'), days);
-						$api.addCls($api.byId('tian'), 'H-display-none');
-					} else {
-						$api.text($api.byId('days'), time3);
-					}
+//					var userinfo = $api.getStorage('userinfo');
+					api.ajax({
+						url : Api + 'userinfo.html',
+						method : 'post',
+						timeout : 30,
+						dataType : 'json',
+						returnAll : false,
+						data : {
+							values : {
+								username : nameVal,
+							},
+						}
+					}, function(ret, err) {
+						userinfo = ret
+						$api.text($api.byId('username'), userinfo.username);
+						$api.text($api.byId('grade'), userinfo.fname);
+						$api.attr($api.byId('img'), 'src', uploadUrl + userinfo.icon);
+						$api.removeCls($api.byId('body'), 'H-display-none');
+						var setgradetime = userinfo.setgradetime;
+						var time1 = Number(timest()) - Number(setgradetime);
+						var time2 = Math.round(time1 / (60 * 60 * 24));
+						var days = userinfo.days
+						var xu = userinfo.xu
+						var time3 = Number(days) - time2
+						if (time3 <= 0) {
+							$api.text($api.byId('days'), 0);
+						} else if (xu == 6) {
+							$api.text($api.byId('days'), days);
+							$api.addCls($api.byId('tian'), 'H-display-none');
+						} else {
+							$api.text($api.byId('days'), time3);
+						}
+					});
 				} else {
 					$api.removeCls($api.byId('body'), 'H-display-none');
 				};
