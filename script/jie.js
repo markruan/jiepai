@@ -39,7 +39,7 @@ function formatSeconds(value) {
 	}
 }
 
-function alipay(subject, body, amount, days, vid) {
+function alipay(subject, body, amount, days, vid,gradexu) {
 
 	var aliPay = api.require('aliPay');
 	var tradeNO = (new Date()).valueOf();
@@ -69,7 +69,7 @@ function alipay(subject, body, amount, days, vid) {
 							switch (status) {
 								case 9000:
 									x = "支付成功";
-									alert(vid)
+//									alert(vid)
 									if (vid) {
 										goumai(vid, 0)
 									}
@@ -170,7 +170,7 @@ function alipay(subject, body, amount, days, vid) {
 							switch (status) {
 								case '9000':
 									mss = "支付成功";
-									alert(vid)
+									alert(gradexu)
 									if (vid) {
 										goumai(vid, 0)
 									}
@@ -219,7 +219,7 @@ function alipay(subject, body, amount, days, vid) {
 										days : days,
 										amount : amount,
 										tradeNO : tradeNO,
-
+                                        gradexu:gradexu,
 										states : status
 
 									},
