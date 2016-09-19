@@ -1,16 +1,7 @@
 ﻿@charset "UTF-8";
 
 /*!
- * 文件名称：Hui.css
- * 文件版本：Version 0.3.4    2016-05-15
- * 文件作者：新生帝
- * 编写日期：2016年04月15日
- * 版权所有：中山赢友网络科技有限公司
- * 企业官网：http://www.winu.net
- * 开源协议：MIT License
- * 文件描述：一切从简，只为了更懒！
- * 讨论群区：一起改变中国IT教育 18863883
- * 开源地址：https://git.oschina.net/winu.net/Hui.git
+ 
  */
 
 /* 重置样式 */
@@ -297,13 +288,14 @@ textarea { overflow: auto; }
 
 /* 常用主题字体颜色 */
 .H-theme-font-color-ccc { color: #ccc; }
+.H-theme-font-color-hhh { color: #333333; }
 .H-theme-font-color-eee { color: #eee; }
 .H-theme-font-color-333 { color: #333; }
 .H-theme-font-color-444 { color: #444; }
 .H-theme-font-color-666 { color: #666; }
 .H-theme-font-color-999 { color: #999; }
 .H-theme-font-color-white { color: white; }
-.H-theme-font-color-black { color: black; }
+.H-theme-font-color-black { color: #333333; }
 .H-theme-font-color-red { color: red; }
 .H-theme-font-color-green { color: green; }
 .H-theme-font-color-blue { color: blue; }
