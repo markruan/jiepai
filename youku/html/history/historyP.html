@@ -23,19 +23,7 @@
 		</style>
 	</head>
 	<body class="H-z-index-1000 H-theme-background-color-white "id="body">
-		<div id="imglist" class="H-clear-both H-width-100-percent H-theme-background-color-white H-display-table H-box-sizing-border-box   ">
-	<!--		<div onclick="openImg(\'' + pic + '\',' + pid + ',' + freenum + ',' + xu + ',\'' + fname + '\')" class="H-display-table-cell H-theme-background-color-white H-float-left  H-box-sizing-border-box H-width-avg-3 H-padding-horizontal-right-4 H-margin-vertical-bottom-10   " style="margin-bottom: 10px; ">
-				<img  src="../../image/default.jpg"  data-echo="' + vurl + '" class=" H-float-right H-margin-vertical-top-8 H-margin-horizontal-both-2 H-display-block" alt="" title="" style="width: 96%" ;height:200>
-				<img src="../../image/xia.png " class=" H-float-right  H-margin-vertical-top-8 H-margin-horizontal-both-2 H-display-block" style="margin-top: -200px; height: 200px ; width: 96%" alt="" title=""> 
-				<div  class=" " style=" margin-right:8px; margin-top:-30px;line-height: 30px; float: right; color:white ;">
-					' + pnum + '<span>张</span>
-				</div>
-				<div class="  H-font-size-14 H-padding-vertical-top-10    " style="line-height: 35px">
-					' + ftitle.substr(0, 7) + '
-				</div>
-				<div class="H-padding-vertical-bottom-10 H-theme-background-color-eee  "  ></div>
-			</div>-->
-		</div>
+		<div id="imglist" class="H-clear-both H-width-100-percent H-theme-background-color-white H-display-table H-box-sizing-border-box   "></div>
 	</body>
 	<script type="text/javascript" src="../../script/api.js"></script>
 	<script type="text/javascript" src="../../script/jie.js"></script>
@@ -83,7 +71,6 @@
 						}
 					}, function(ret, err) {
 						var myobj = ret
-						 
 						for (var i = 0; i < myobj.length; i++) {
 							var title = myobj[i].vname;
 							var pic = myobj[i].pp
@@ -102,8 +89,8 @@
 							html += '<img  src="../../image/default.jpg"  data-echo="' + vurl + '" class=" H-float-right H-margin-vertical-top-8 H-margin-horizontal-both-2 H-display-block" alt="" title="" style="width: 96%" ;height:200>';
 							html += '<img src="../../image/xia.png " class=" H-float-right  H-margin-vertical-top-8 H-margin-horizontal-both-2 H-display-block" style="margin-top: -200px; height: 200px ; width: 96%" alt="" title="">';
 							html += '<div  class=" " style=" margin-right:8px; margin-top:-30px;line-height: 30px; float: right; color:white ;">' + pnum + '<span>张</span></div>';
-							html += '<div class="  H-font-size-14 H-padding-vertical-top-10    " style="line-height: 35px">' + ftitle.substr(0, 7) + '</div>';
-							html += '<div class="H-padding-vertical-bottom-10 H-theme-background-color-eee  "  ></div></div>';
+							html += '<div class="  H-font-size-14 H-padding-vertical-top-10  H-theme-font-color-hhh   " style="line-height: 35px">' + ftitle.substr(0, 7) + '</div>';
+							html += ' </div>';
 						}
 						$api.html(list, html);
 						api.hideProgress();
