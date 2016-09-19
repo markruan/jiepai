@@ -45,28 +45,40 @@
 				-webkit-border-radius: 0 3px 3px 0;
 			}
 			.H-border-vertical-top-after:after, .H-border-vertical-top-margin-left-10-after:after, .H-border-vertical-top-margin-right-10-after:after, .H-border-vertical-top-margin-both-10-after:after {
-    border-top: 1px solid #939393;
-}
+				border-top: 1px solid #939393;
+			}
+			.H-font-size-10 {
+				font-size: 9px;
+				text-height: 9px;
+				text-align: center;
+			}
+			.H-font-size-11 {
+				font-size: 19px;
+			}
+			.H-padding-vertical-both-2 {
+				padding-top: 0px;
+				padding-bottom: 0px;
+			}
 		</style>
 	</head>
 	<body class="H-flexbox-vertical">
 		<header class="H-header H-theme-background-color-zhuti  " id="common_header" >
-			<span tapmode="" onclick="H.openWin('fankui','fankui/fankui_head.html')" class="H-icon H-position-relative H-display-block H-float-left H-vertical-middle H-theme-font-color-white H-padding-horizontal-left-20 H-z-index-1000"><i class="iconfont icon-fankui   H-vertical-middle H-font-size-14"></i></span>
+			<span tapmode="" onclick="H.openWin('fankui','fankui/fankui_head.html')" class="H-icon H-position-relative H-display-block H-float-left H-vertical-middle H-theme-font-color-white H-padding-horizontal-left-20 H-z-index-1000"><i class="iconfont icon-fankui   H-vertical-middle H-font-size-11"></i></span>
 			<div class="H-header-title H-vertical-middle H-font-size-18 H-text-show-row-1 H-theme-font-color-999 H-position-absolute H-width-100-percent H-box-sizing-border-box" style="padding-left:38px;">
 				<div class="H-header-title H-center-all H-font-size-18 H-text-show-row-1 H-theme-font-color-white H-position-absolute H-width-100-percent" >
 					<div class="H-flexbox-horizontal H-theme-background-color-zhuti H-padding-horizontal-both-30" style="height: 40px;">
 						<div class="H-center-all H-flex-item  ">
-							<div  onclick="setPage(0, 'group123') " id="left"  class="H-header-tag H-font-size-12 H-padding-vertical-both-2 H-padding-horizontal-both-12 H-border-vertical-both-white H-border-horizontal-left-white H-border-radius-12-left-both H-overflow-hidden H-center-all  ">
+							<div  onclick="setPage(0, 'group123') " id="left"  class="H-header-tag H-font-size-10   H-padding-horizontal-both-10 H-border-vertical-both-white H-border-horizontal-left-white H-border-radius-12-left-both H-overflow-hidden H-center-all  ">
 								视频
 							</div>
-							<div  onclick="setPage(1, 'group123') " id="right" class="H-header-tag H-font-size-12 H-padding-vertical-both-2 H-padding-horizontal-both-12 H-border-vertical-both-white H-border-horizontal-both-white H-border-radius-12-right-both H-overflow-hidden H-center-all">
+							<div  onclick="setPage(1, 'group123') " id="right" class="H-header-tag H-font-size-10   H-padding-horizontal-both-10 H-border-vertical-both-white H-border-horizontal-both-white H-border-radius-12-right-both H-overflow-hidden H-center-all">
 								图片
 							</div>
 						</div>
 					</div>
 				</div>
 			</div>
-			<span tapmode="" id="drop-menu" data-open="false" class="H-icon H-position-relative H-display-block H-float-right H-vertical-middle H-theme-font-color-white H-padding-horizontal-right-20 H-z-index-1000  H-margin-horizontal-left-10"><i onclick="opensearch()" class="iconfont icon-shoubing  H-font-size-14 H-vertical-middle H-margin-horizontal-left-10" ></i></span>
+			<span tapmode="" id="drop-menu" data-open="false" class="H-icon H-position-relative H-display-block H-float-right H-vertical-middle H-theme-font-color-white H-padding-horizontal-right-20 H-z-index-1000  H-margin-horizontal-left-10"><i onclick="opensearch()" class="iconfont icon-shoubing  H-font-size-11 H-vertical-middle H-margin-horizontal-left-10" ></i></span>
 		</header>
 		<header class=" fabuColor H-display-none" id="fabu_header"></header>
 		<header class="H-header H-theme-background-color-zhuti H-display-none" id="tui_header">
@@ -335,7 +347,6 @@
 					}
 				});
 				api.hideProgress();
-			 
 			}
 
 			function opensearch() {
