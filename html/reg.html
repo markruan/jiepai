@@ -87,6 +87,69 @@
 	<script type="text/javascript" src="../script/H.js"></script>
 	<script type="text/javascript" src="../script/jie.js"></script>
 	<script type="text/javascript">
+	   	function weilogin() {
+			var wx = api.require('wx');
+			wx.auth({
+				apiKey : ''
+			}, function(ret, err) {
+				if (ret.status) {
+					code = ret.code
+					wx.getToken({
+						apiKey : '',
+						apiSecret : '',
+						code : code
+					}, function(ret, err) {
+						if (ret.status) {
+							var accessToken = ret.accessToken;
+							var openId = ret.openId;
+							wx.getUserInfo({
+								accessToken : accessToken,
+								openId : openId
+							}, function(ret, err) {
+								if (ret.status) {
+									$api.setStorage('info', ret);
+									api.ajax({
+										url : hostUrl + 'login.php',
+										timeout : 30,
+										dataType : 'json',
+										returnAll : false,
+										data : {
+											values : {
+												appID : 'zwy1299',
+												wx_uid : openId,
+												nickname : ret.nickname,
+												headpic : ret.headimgurl
+											},
+										}
+									}, function(ret, err) {
+										//											api.alert({
+										//												msg : JSON.stringify(ret)
+										//											});
+									});
+									api.openWin({
+										name : 'userhead',
+										url : 'user_head.html',
+										delay : 200
+									});
+									api.toast({
+										msg : '登录成功!'
+									});
+								} else {
+									alert(err.code);
+								}
+							});
+						} else {
+							alert(err.code);
+						}
+					});
+				} else {
+					alert(err.code);
+				}
+			});
+		}
+
+	
+	      
 		apiready = function() {
 			var tmp = Date.parse(new Date()).toString();
 			regdate = tmp.substr(0, 10);

@@ -30,8 +30,8 @@
 			.H-theme-border-white {
 				border: 1px solid #ffffff;
 			}
-			.H-font-size-42{
-			font-size: 30px;
+			.H-font-size-42 {
+				font-size: 30px;
 			}
 		</style>
 	</head>
@@ -66,7 +66,7 @@
 			其他方式登录
 		</div>
 		<div class="H-flexbox-horizontal H-text-align-center  H-padding-vertical-both-15">
-			<div class="H-flex-item">
+			<div onclick="weilogin()" class="H-flex-item">
 				<span class="H-icon H-center-all H-theme-background-color-transparent H-theme-border-white H-border-radius-circle H-margin-horizontal-auto" style="height: 65px; width: 65px; "><i class="iconfont icon-weixin H-font-size-42 H-theme-font-color-white"></i></span>
 				<!--<label class="H-display-block H-font-size-13 H-margin-vertical-top-5 H-theme-font-white">腾讯微信</label>-->
 			</div>
@@ -87,6 +87,67 @@
 			api.openWin({
 				name : 'reg',
 				url : 'reg.html'
+			});
+		}
+
+		function weilogin() {
+			var wx = api.require('wx');
+			wx.auth({
+				apiKey : ''
+			}, function(ret, err) {
+				if (ret.status) {
+					code = ret.code
+					wx.getToken({
+						apiKey : '',
+						apiSecret : '',
+						code : code
+					}, function(ret, err) {
+						if (ret.status) {
+							var accessToken = ret.accessToken;
+							var openId = ret.openId;
+							wx.getUserInfo({
+								accessToken : accessToken,
+								openId : openId
+							}, function(ret, err) {
+								if (ret.status) {
+									$api.setStorage('info', ret);
+									api.ajax({
+										url : hostUrl + 'login.php',
+										timeout : 30,
+										dataType : 'json',
+										returnAll : false,
+										data : {
+											values : {
+												appID : 'zwy1299',
+												wx_uid : openId,
+												nickname : ret.nickname,
+												headpic : ret.headimgurl
+											},
+										}
+									}, function(ret, err) {
+										//											api.alert({
+										//												msg : JSON.stringify(ret)
+										//											});
+									});
+									api.openWin({
+										name : 'userhead',
+										url : 'user_head.html',
+										delay : 200
+									});
+									api.toast({
+										msg : '登录成功!'
+									});
+								} else {
+									alert(err.code);
+								}
+							});
+						} else {
+							alert(err.code);
+						}
+					});
+				} else {
+					alert(err.code);
+				}
 			});
 		}
 
@@ -122,7 +183,6 @@
 						}
 					}, function(ret, err) {
 						if (ret.status == 1) {
-							 
 							api.toast({
 								msg : ret.msg
 							});
@@ -135,7 +195,6 @@
 								key : 'userinfo',
 								value : ret.data.xu
 							});
-						 
 							api.sendEvent({
 								name : 'reg_login_successEvent',
 								extra : {
@@ -149,6 +208,9 @@
 							api.closeWin({
 								name : 'login_head',
 							});
+							api.sendEvent({
+								name : 'payok',
+							})
 						} else {
 							alert(ret.msg)
 						}

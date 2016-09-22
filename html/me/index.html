@@ -59,7 +59,8 @@
 			<%=list[i].gname %>
 			</div>
 			<span class=" H-padding-horizontal-right-5 H-display-block H-font-size-15  H-padding-horizontal-right-20"> <!--<input type="radio" name="n2" checked="checked" class="H-radio H-radio-fill H-vertical-align-middle H-font-size-18 H-theme-font-color1 H-theme-background-color-white H-border-radius-circle">-->
-			<button onclick="alipay('<%=list[i].gname %>', '<%=list[i].fname %>', '<%=list[i].price %>','<%=list[i].days %>','','<%=list[i].xu %>')" class="H-button H-font-size-15 H-outline-none H-padding-vertical-both-5 H-padding-horizontal-both-20 H-theme-background-color-white H-theme-font-color1 H-theme-border-color1 H-theme-border-color1-click H-theme-background-color1-click H-theme-font-color1-click H-border-radius-3" style="min-width: 70px; margin-left: 3px;">
+			<!--<button onclick="alipay('<%=list[i].gname %>', '<%=list[i].fname %>', '<%=list[i].price %>','<%=list[i].days %>','','<%=list[i].xu %>')" class="H-button H-font-size-15 H-outline-none H-padding-vertical-both-5 H-padding-horizontal-both-20 H-theme-background-color-white H-theme-font-color1 H-theme-border-color1 H-theme-border-color1-click H-theme-background-color1-click H-theme-font-color1-click H-border-radius-3" style="min-width: 70px; margin-left: 3px;">-->
+			<button onclick=" jiepay('<%=list[i].gname %>', '<%=list[i].fname %>', '<%=list[i].price %>','<%=list[i].days %>','<%=list[i].xu %>','') " class="H-button H-font-size-15 H-outline-none H-padding-vertical-both-5 H-padding-horizontal-both-20 H-theme-background-color-white H-theme-font-color1 H-theme-border-color1 H-theme-border-color1-click H-theme-background-color1-click H-theme-font-color1-click H-border-radius-3" style="min-width: 70px; margin-left: 3px;">
 			开通
 			</button></span>
 			</div>
@@ -73,6 +74,8 @@
 	<script type="text/javascript" src="../../script/jie.js"></script>
 	<script type="text/javascript">
 		H.tppl_flag = ["<%", "%>"];
+	
+
 		function openme() {
 			api.getPrefs({
 				key : 'user' // 用户信息key
@@ -116,7 +119,7 @@
 				var val = ret.value;
 				if (val && val != "") {
 					var nameVal = ret.value
-//					var userinfo = $api.getStorage('userinfo');
+					//					var userinfo = $api.getStorage('userinfo');
 					api.ajax({
 						url : Api + 'userinfo.html',
 						method : 'post',
@@ -151,6 +154,7 @@
 					});
 				} else {
 					$api.removeCls($api.byId('body'), 'H-display-none');
+					openlogin()
 				};
 			});
 			api.ajax({
@@ -186,15 +190,21 @@
 		}
 
 		apiready = function() {
-			api.getPrefs({
-				key : 'user'
+			int();
+			api.setRefreshHeaderInfo({
+				visible : true,
+				bgColor : '#f2f2f2',
+				textColor : '#4d4d4d',
+				textDown : '下拉刷新...',
+				textUp : '松开刷新...',
+				showTime : true
 			}, function(ret, err) {
-				if (ret.value) {
-					int();
-				} else {
-					int();
-					openlogin()
-				}
+				int();
+			});
+			api.addEventListener({
+				name : 'payok'
+			}, function(ret, err) {
+				int()
 			});
 		}
 	</script>
