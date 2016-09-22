@@ -19,14 +19,14 @@
 			}
 		</style>
 	</head>
-	<body class="H-flexbox-vertical H-z-index-f" >
+	<body class="H-flexbox-vertical H-z-index-f H-theme-background-color-white " >
 		<header class="H-header H-theme-background-color-zhuti" id="header">
 			<div class="H-flexbox-horizontal H-theme-background-color-white" id="tag">
-				<div id="tab1" tapmode="" onclick="setPage(0, 'search');" class="H-flex-item H-center-all H-theme-font-color-black H-padding-vertical-both-10 H-theme-border-color-white  H-font-size-16 H-theme-border-color-52ace5 H-theme-font-color-tab H-theme-border-tab H-theme-font-black" style="border-width: 0 0 2px  0">
-					图片
-				</div>
-				<div id="tab2" tapmode="" onclick="setPage(1, 'search');" class="H-flex-item H-center-all H-theme-font-color-black H-padding-vertical-both-10 H-theme-border-color-white  H-font-size-16" style="border-width: 0 0 2px  0">
+				<div id="tab1" tapmode="" onclick="setPage(1, 'search');" class="H-flex-item H-center-all H-theme-font-color-black H-padding-vertical-both-10 H-theme-border-color-white  H-font-size-16 H-theme-border-color-52ace5 H-theme-font-color-tab H-theme-border-tab H-theme-font-black" style="border-width: 0 0 2px  0">
 					视频
+				</div>
+				<div id="tab2" tapmode="" onclick="setPage(0, 'search');" class="H-flex-item H-center-all H-theme-font-color-black H-padding-vertical-both-10 H-theme-border-color-white  H-font-size-16" style="border-width: 0 0 2px  0">
+					图片
 				</div>
 			</div>
 		</header>
@@ -60,7 +60,7 @@
 					index : 0,
 					frames : [{
 						name : 'list1',
-						url : 'list.html',
+						url : 'list2.html',
 						bgColor : '#fff',
 						pageParam : {
 							type : '图片',
@@ -70,7 +70,7 @@
 						bounces : false
 					}, {
 						name : 'list2',
-						url : 'list2.html',
+						url : 'list.html',
 						bgColor : '#fff',
 						pageParam : {
 							type : '视频',

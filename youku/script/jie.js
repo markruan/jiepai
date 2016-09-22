@@ -322,6 +322,7 @@ function isyouxiao(filegrade, iid, danid, dan, type) {
 			}, function(ret, err) {
 
 				var gradexu = ret.xu
+			 
 				var setgradetime = ret.setgradetime
 				var time1 = Number(timest()) - Number(setgradetime);
 				var time2 = Math.round(time1 / (60 * 60 * 24));
