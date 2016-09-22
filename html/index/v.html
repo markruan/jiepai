@@ -241,7 +241,7 @@
 			}, function(ret, err) {
 				var listb = $api.byId('listb');
 				for (var i = 0; i < ret.length; i++) {
-					html += '<button onclick="int(\'' + ret[i].title + '\')"  class="H-button H-font-size-15  H-outline-none   H-padding-vertical-both-3 H-padding-horizontal-both-7   H-theme-font-color-white H-theme-border-color2 H-theme-border-color2-click H-theme-background-color2-click H-theme-font-color2-click H-border-radius-3">' + ret[i].title + '</button> ';
+					html += '<button onclick="int(\'' + ret[i].f_id + '\')"  class="H-button H-font-size-15  H-outline-none   H-padding-vertical-both-3 H-padding-horizontal-both-7   H-theme-font-color-white H-theme-border-color2 H-theme-border-color2-click H-theme-background-color2-click H-theme-font-color2-click H-border-radius-3">' + ret[i].fenlei1 + '</button> ';
 				}
 				$api.html(listb, html);
 			});
