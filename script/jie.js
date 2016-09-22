@@ -210,7 +210,7 @@ function alipay(subject, body, amount, days, vid, gradexu) {
 									mss = "用户中途取消支付操作";
 									break;
 							}
-							alert(gradexu)
+
 							api.ajax({
 								url : Api + 'orders.html',
 								method : 'post',
@@ -555,6 +555,10 @@ function changePerson() {
 					api.toast({
 						msg : '更新成功'
 					});
+					api.sendEvent({
+						name : 'payok',
+
+					})
 					api.hideProgress();
 					var jsfun = 'int()';
 					api.execScript({
@@ -759,7 +763,7 @@ function jiepay(gname, fname, price, days, gradexu, dangeid) {
 			title : gname,
 			days : days,
 			gradexu : gradexu,
-			dangeid:dangeid
+			dangeid : dangeid
 		}
 	});
 }
