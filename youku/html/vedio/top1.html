@@ -108,10 +108,11 @@
 			api.addEventListener({
 				name : 'duration'
 			}, function(ret, err) {
+				var total1 = ret.value.duration
 				var total = formatSeconds(ret.value.duration)
 				api.setPrefs({
 					key : 'total',
-					value : total
+					value : total1
 				});
 				$api.text($api.byId('time1'), total);
 			});
@@ -122,15 +123,15 @@
 					sync : true,
 					key : 'total'
 				});
+				 
+				var current = formatSeconds(ret.value.key1)
+				$api.text($api.byId('time2'), current);
 				var timec = ret.value.key1
 				var percent = (timec / total) * 100;
 				var per = Math.round(percent) + '%';
 				var widthh = 'width:' + per
 				$api.css($api.byId('jindu'), widthh);
 				//				 $api.attr($api.byId('jindu'), 'style', widthh);
-				var current = formatSeconds(ret.value.key1)
-				//             alert(JSON.stringify(ret.value));
-				$api.text($api.byId('time2'), current);
 			});
 		};
 	</script>

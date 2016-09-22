@@ -9,8 +9,6 @@
 			.H-button-1 {
 				min-width: 60px;
 			}
-			 
-			 
 			hr {
 				border-color: #e6e6e6;
 				border-top: 1px;
@@ -19,6 +17,7 @@
 				width: 30%;
 				margin-top: 10px;
 			}
+		
 		</style>
 	</head>
 	<body>
@@ -41,7 +40,7 @@
 		}
 
 		apiready = function() {
-		  var list = $api.byId('list');
+			var list = $api.byId('list');
 			api.ajax({
 				url : Api + 'sou.html',
 				method : 'post',
@@ -49,11 +48,10 @@
 				var data = ret
 				var html = ''
 				for (var i = 0; i < data.length; i++) {
-				
-				    var xu=data[i].xu
-				    var key=data[i].key
+					var xu = data[i].xu
+					var key = data[i].key
 					html += '<div class="animated bounceInUp H-display-table-cell H-float-left H-box-sizing-border-box H-width-avg-3 H-center-all H-theme-background-color-white H-border-horizontal-right-after H-border-vertical-bottom-after H-padding-vertical-both-10 H-margin-horizontal-both-5" style="min-height: 60px;">';
-					html += '<div><label class="H-display-block H-font-size-16 H-theme-font-color-hhh " onclick="tianjia(\'' + key + '\')">'+key.substr(0, 6)+'</label></div></div>';
+					html += '<div><label class="H-display-block H-font-size-16 H-theme-font-color-hhh " onclick="tianjia(\'' + key + '\')">' + key.substr(0, 6) + '</label></div></div>';
 				}
 				$api.html(list, html);
 			});

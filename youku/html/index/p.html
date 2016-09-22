@@ -64,11 +64,11 @@
 		</style>
 	</head>
 	<body id="body" class="H-z-index-1000 ">
-		<nav id="nav" class=" H-position-fixed H-z-index-100" style="height: 46px;">
-			<div id="wrapper" style="  background-color: #fafafa;">
+		<nav id="nav" class=" H-position-fixed H-z-index-100" style="height: 46px; background-color: white;">
+			<div id="wrapper" style=" ">
 				<div id="scroller">
 					<ul>
-						<li  id="listb"  class="H-margin-vertical-both-8 H-margin-horizontal-left-3">
+						<li  id="listb"  class="H-margin-vertical-both-8 H-margin-horizontal-left-5 ">
 						 <!--<button onclick="intimg(\'' + ret[i].title + '\')"  class="H-button H-font-size-15  H-outline-none   H-padding-vertical-both-3 H-padding-horizontal-both-5   H-theme-font-color-white H-theme-border-color2 H-theme-border-color2-click H-theme-background-color2-click H-theme-font-color2-click H-border-radius-3">会员专区</button>-->
 						</li>
 					</ul>
@@ -79,14 +79,14 @@
 			</div>
 			<div  class="arrow_down " onclick="openNav()" tapmode=""></div>-->
 		</nav>
-		<div class="H-padding-vertical-bottom-2" ></div>
-		<div style="margin-top: 46px;" class="H-channel-title H-flexbox-horizontal H-theme-background-color-white H-vertical-middle H-border-vertical-bottom-after">
+		<div class="H-padding-vertical-bottom-2 H-background-color-white" ></div>
+		<!--<div style="margin-top: 46px;" class="H-channel-title H-flexbox-horizontal H-theme-background-color-white H-vertical-middle H-border-vertical-bottom-after">
 			<div class="H-channel-line H-theme-background-color-zhuti H-padding-vertical-top-15 H-padding-horizontal-left-3  H-margin-horizontal-left-4"></div>
 			<div class="H-channel-text H-theme-font-color-black H-flex-item H-font-size-18 H-theme-font-color-black H-padding-10 H-margin-horizontal-right-10 H-text-show-row-1">
 				图片
 			</div>
 			<!--<span tapmode=""  data-open="false" class="H-icon H-position-relative H-display-block H-float-right H-vertical-middle H-theme-font-color-black H-padding-horizontal-both-10 H-z-index-1000 H-theme-font-color-hui">范冰冰 &nbsp<div style="height:14px; width:1px; border-left:1px #9E9E9E solid"></div>&nbsp 张馨予</span>-->
-		</div>
+		</div>-->
 		<div id="imglist" class="H-clear-both H-width-100-percent H-display-table H-box-sizing-border-box H-padding-horizontal-both-10 H-theme-background-color-white" ></div>
 	</body>
 	<script type="text/javascript" src="../../script/H.js"></script>
@@ -148,11 +148,11 @@
 					var img = pic.split(' ');
 					var zhang = img.length
 					var vurl = imageCache(vurll)
-					html += '<div onclick="openImg(\'' + pic + '\',' + pid + ',' + freenum + ',' + xu + ',\'' + fname + '\')" class="H-display-table-cell H-theme-background-color-white H-float-left  H-box-sizing-border-box H-width-avg-3 H-padding-horizontal-right-4 H-margin-vertical-bottom-10   " style="margin-bottom: 10px; ">';
+					html += '<div onclick="openImg(\'' + pic + '\',' + pid + ',' + freenum + ',' + xu + ',\'' + fname + '\')" class="H-display-table-cell H-theme-background-color-white H-float-left  H-box-sizing-border-box H-width-avg-3 H-padding-horizontal-right-4    "  >';
 					html += '<img  src="../../image/default.jpg"  data-echo="' + vurl + '" class=" H-float-right H-margin-vertical-top-8 H-margin-horizontal-both-2 H-display-block" alt="" title="" style="width: 96%" ;height:200>';
 					html += '<img src="../../image/xia.png " class=" H-float-right  H-margin-vertical-top-8 H-margin-horizontal-both-2 H-display-block" style="margin-top: -200px; height: 200px ; width: 96%" alt="" title="">';
 					html += '<div  class=" " style=" margin-right:8px; margin-top:-30px;line-height: 30px; float: right; color:white ;">' + pnum + '<span>张</span></div>';
-					html += '<div class="  H-font-size-14 H-padding-vertical-top-10   H-theme-font-color-hhh  " style="line-height: 35px">' + ftitle.substr(0, 7) + '</div>';
+					html += '<div class=" H-padding-horizontal-left-5 H-font-size-12 H-padding-vertical-top-10   H-theme-font-color-hhh  " style="line-height: 30px">' + ftitle.substr(0, 7) + '</div>';
 					html += '</div>';
 				}
 				$api.html(list, html);
@@ -223,7 +223,7 @@
 				//				alert(ret)
 				var listb = $api.byId('listb');
 				for (var i = 0; i < ret.length; i++) {
-					html += ' <button onclick="intimg(\'' + ret[i].f_id + '\')"  class="H-button H-font-size-15  H-outline-none   H-padding-vertical-both-3 H-padding-horizontal-both-5  H-theme-font-color-white H-theme-border-color2 H-theme-border-color2-click H-theme-background-color2-click H-theme-font-color2-click H-border-radius-3">' + ret[i].fenlei1+ '</button> ';
+					html += ' <button onclick="intimg(\'' + ret[i].f_id + '\')"  class="H-button H-font-size-12  H-outline-none   H-padding-vertical-both-3 H-padding-horizontal-both-5  H-theme-font-color-white H-theme-border-color2 H-theme-border-color2-click H-theme-background-color2-click H-theme-font-color2-click H-border-radius-3">' + ret[i].fenlei1+ '</button> ';
 				}
 				$api.html(listb, html);
 			});
@@ -242,6 +242,7 @@
 				showTime : true
 			}, function(ret, err) {
 				intimg();
+				intbiao()
 			});
 		};
 	</script>

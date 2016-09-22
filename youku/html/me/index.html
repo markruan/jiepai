@@ -5,7 +5,7 @@
 		<meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
 		<title>title</title>
 		<link rel="stylesheet" type="text/css" href="../../css/Hui.css"/>
-		<link rel="stylesheet" type="text/css" href="http://at.alicdn.com/t/font_1473395695_2299788.css"/>
+		<link rel="stylesheet" type="text/css" href="http://at.alicdn.com/t/font_1474550096_5939581.css"/>
 		<style>
 			body, html {
 				background-color: white;
@@ -26,24 +26,23 @@
 			}
 		</style>
 	</head>
-	<body  id="body" class="H-display-none"  >
-		<div class="H-text-list H-flexbox-horizontal  H-theme-background-color-zhuti   H-vertical-middle  " style="height: 160px;">
-			<span class=" H-padding-horizontal-right-5 H-display-block"style="margin-top: 0px;"> <img onclick="openme()" id="img" src="../../image/ic.png" style="width: 70px; height: 70px;border-radius: 35px;margin-left:30px; margin-top: -28px;margin-right:30px;" / ></span>
-			<div class="H-flex-item H-padding-horizontal-both-10 H-font-size-24 H-padding-vertical-bottom-12 ">
-				<span class="H-font-weight-600 H-theme-font-color-white" id="username"></span>
-				<br>
-				<button onclick="openlogin() " id="grade" class="H-margin-horizontal-left-0 H-button-1 H-font-size-15 H-outline-none H-padding-vertical-both-1 H-padding-horizontal-both-1 H-theme-background-color-white H-theme-font-color-white H-theme-border-color-white H-theme-border-color8-click H-theme-background-color8-click H-theme-font-color8-click H-border-radius-3"style="color: #ff6606 ">
-					未登录
-				</button>
-				<span class="H-font-size-15 H-theme-font-color-white">剩余时间：<span id="days">0</span ><span id="tian" class="" >天</span></span>
+	<!--class="H-display-none"-->
+	<body  id="body"   >
+		<div class="  H-flexbox-horizontal H-center-all H-theme-background-color-zhuti   H-vertical-middle  " style="height: 160px;">
+			<span class=" H-padding-horizontal-right-5 H-display-block"style="margin-top: 0px;"> <img onclick="openme()" id="img" src="../../image/ic.png" style="width: 70px; height: 70px;border-radius: 35px;margin-left:30px;  margin-right:30px;" / ></span>
+			<div id='list' class="H-flex-item H-padding-horizontal-both-10 H-font-size-24 H-padding-vertical-bottom-12 ">
+				<span class="H-font-weight-600 H-theme-font-color-white H-font-size-20" id="username" onclick="openlogin()">点击登录</span><i class="H-theme-font-color-white iconfont icon-right H-text-align-center H-margin-horizontal-left-5 " style="font-size: 20px;"></i>
+			<!--	<br>-->
+			<!--	<button onclick="openlogin() " id="grade" class="H-margin-horizontal-left-0 H-button-1 H-font-size-15 H-outline-none H-padding-vertical-both-1 H-padding-horizontal-both-1 H-theme-background-color-white H-theme-font-color-white H-theme-border-color-white H-theme-border-color8-click H-theme-background-color8-click H-theme-font-color8-click H-border-radius-3"style="color: #ff6606 ">
+					点击登录
+				</button>-->
+				<!--<span class="H-font-size-15 H-theme-font-color-white">剩余时间：<span id="days">0</span ><span id="tian" class="" >天</span></span>-->
 				<div>
-					<span class=" H-padding-horizontal-right-10 H-display-block H-font-size-16 H-float-right    "  >
-						<div class="H-text-align-center ">
-							<span onclick="H.openWin('fankui','../../html/fankui/fankui_head.html')" class="animated infinite rotate H-icon H-center-all H-theme-background-color-white H-border-radius-circle H-margin-horizontal-auto H-font-size-26 H-font-weight-600 " style="height: 30px; width: 30px; line-height:30px;"><i class="iconfont icon-fankui H-font-size-25 H-vertical-middle H-theme-font-color-zhuti"  ></i></span>
-							<label class="H-display-block H-font-size-11 H-margin-vertical-top-5 H-theme-font-color-white">反馈</label>
-						</div></span>
+					<span class=" H-padding-horizontal-right-10 H-display-block H-font-size-16 H-float-right    "  > <div class="H-text-align-center "></span>
+					</span>
 				</div>
 			</div>
+		</div>
 		</div>
 		<div class="H-text-list H-flexbox-horizontal  H-theme-background-color-white H-border-vertical-bottom-after H-vertical-middle H-touch-active "style="height: 40px;background-color: #e9ebee;" >
 			<div class="H-flex-item H-padding-horizontal-both-10 H-theme-font-color-hhh  H-font-size-15 H-padding-vertical-both-12  ">
@@ -74,8 +73,6 @@
 	<script type="text/javascript" src="../../script/jie.js"></script>
 	<script type="text/javascript">
 		H.tppl_flag = ["<%", "%>"];
-	
-
 		function openme() {
 			api.getPrefs({
 				key : 'user' // 用户信息key
@@ -106,13 +103,6 @@
 		}
 
 		function int() {
-			api.showProgress({
-				style : 'default',
-				animationType : 'fade',
-				title : '努力加载中...',
-				text : '先喝杯茶...',
-				modal : false
-			});
 			api.getPrefs({
 				key : 'user'
 			}, function(ret, err) {
@@ -143,14 +133,20 @@
 						var days = userinfo.days
 						var xu = userinfo.xu
 						var time3 = Number(days) - time2
+						var html = '';
 						if (time3 <= 0) {
-							$api.text($api.byId('days'), 0);
+							html += '<span class="H-font-weight-600 H-theme-font-color-white" id="username">' + userinfo.username + ' </span><br>';
+							html += '<button onclick="openlogin() " id="grade" class="H-margin-horizontal-left-0 H-button-1 H-font-size-15 H-outline-none H-padding-vertical-both-1 H-padding-horizontal-both-1 H-theme-background-color-white H-theme-font-color-white H-theme-border-color-white H-theme-border-color8-click H-theme-background-color8-click H-theme-font-color8-click H-border-radius-3"style="color: #ff6606 ">';
+							html += '' + userinfo.fname + '</button><span class="H-font-size-15 H-theme-font-color-white H-margin-horizontal-left-5 ">剩余时间：<span id="days">0</span ><span id="tian" class="" >天</span></span>';
 						} else if (xu == 6) {
-							$api.text($api.byId('days'), days);
 							$api.addCls($api.byId('tian'), 'H-display-none');
+							html += '<span class="H-font-weight-600 H-theme-font-color-white" id="username">' + userinfo.username + ' </span><br>';
+							html += '<button onclick="openlogin() " id="grade" class="H-margin-horizontal-left-0 H-button-1 H-font-size-15 H-outline-none H-padding-vertical-both-1 H-padding-horizontal-both-1 H-theme-background-color-white H-theme-font-color-white H-theme-border-color-white H-theme-border-color8-click H-theme-background-color8-click H-theme-font-color8-click H-border-radius-3"style="color: #ff6606 ">';
+							html += '' + userinfo.fname + '</button><span class="H-font-size-15 H-theme-font-color-white H-margin-horizontal-left-5  ">剩余时间：<span id="days">' + days + '</span ><span id="tian" class="" ></span></span>';
 						} else {
 							$api.text($api.byId('days'), time3);
 						}
+						$api.html($api.byId('list'), html);
 					});
 				} else {
 					$api.removeCls($api.byId('body'), 'H-display-none');
@@ -191,16 +187,6 @@
 
 		apiready = function() {
 			int();
-			api.setRefreshHeaderInfo({
-				visible : true,
-				bgColor : '#f2f2f2',
-				textColor : '#4d4d4d',
-				textDown : '下拉刷新...',
-				textUp : '松开刷新...',
-				showTime : true
-			}, function(ret, err) {
-				int();
-			});
 			api.addEventListener({
 				name : 'payok'
 			}, function(ret, err) {
