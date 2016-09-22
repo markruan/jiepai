@@ -39,10 +39,11 @@ function formatSeconds(value) {
 	}
 }
 
-function alipay(subject, body, amount, days, vid,gradexu) {
+function alipay(subject, body, amount, days, vid, gradexu) {
 
 	var aliPay = api.require('aliPay');
 	var tradeNO = (new Date()).valueOf();
+
 	api.getPrefs({
 		key : 'user'
 	}, function(ret, err) {
@@ -69,7 +70,7 @@ function alipay(subject, body, amount, days, vid,gradexu) {
 							switch (status) {
 								case 9000:
 									x = "支付成功";
-//									alert(vid)
+									//									alert(vid)
 									if (vid) {
 										goumai(vid, 0)
 									}
@@ -131,12 +132,17 @@ function alipay(subject, body, amount, days, vid,gradexu) {
 										msg : x,
 										buttons : ['确定']
 									});
+
 								} else {
 									api.alert({
 										title : '支付结果',
 										msg : x,
 										buttons : ['确定']
 									});
+									api.sendEvent({
+										name : 'payok',
+
+									})
 								}
 							});
 
@@ -170,9 +176,10 @@ function alipay(subject, body, amount, days, vid,gradexu) {
 							switch (status) {
 								case '9000':
 									mss = "支付成功";
-									alert(gradexu)
+
 									if (vid) {
 										goumai(vid, 0)
+
 									}
 									break;
 								case '4000':
@@ -203,7 +210,7 @@ function alipay(subject, body, amount, days, vid,gradexu) {
 									mss = "用户中途取消支付操作";
 									break;
 							}
-
+							alert(gradexu)
 							api.ajax({
 								url : Api + 'orders.html',
 								method : 'post',
@@ -219,12 +226,13 @@ function alipay(subject, body, amount, days, vid,gradexu) {
 										days : days,
 										amount : amount,
 										tradeNO : tradeNO,
-                                        gradexu:gradexu,
+										gradexu : gradexu,
 										states : status
 
 									},
 								}
 							}, function(ret, err) {
+
 								if (ret == 1) {
 									api.closeFrame({
 										name : 'goumai'
@@ -241,6 +249,10 @@ function alipay(subject, body, amount, days, vid,gradexu) {
 										msg : mss,
 										buttons : ['确定']
 									});
+									api.sendEvent({
+										name : 'payok',
+
+									})
 
 								}
 							});
@@ -296,8 +308,6 @@ var key1 = "MIICXAIBAAKBgQDgOlVNYAJHl7F47xO2ZGxSYduXe54jEy9Dk+LNAZbTVB3IUAlJVXqQ
 var key2 = "MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDgOlVNYAJHl7F47xO2ZGxSYduXe54jEy9Dk+LNAZbTVB3IUAlJVXqQGGtxN5wFyMKFOEj1QJ40+cKY0qAi8tlzbDTnPsuWHRAhzsqc+8e3HreM8Yn2icsqqhy41jdcxCfTRDohjh8qr7uFifXso3qn1OcmyguzLkyIfl0SrhR4nQIDAQAB"
 uploadUrl = 'http://114.55.98.130/Public/admin/images/';
 Api = 'http://114.55.98.130/index.php/api/'
-//判断是否在有效期内的用户
-///iid是指视频文件或者图片文件的ID
 
 function isyouxiao(filegrade, iid, danid, dan, type) {
 
@@ -322,7 +332,7 @@ function isyouxiao(filegrade, iid, danid, dan, type) {
 			}, function(ret, err) {
 
 				var gradexu = ret.xu
-			 
+
 				var setgradetime = ret.setgradetime
 				var time1 = Number(timest()) - Number(setgradetime);
 				var time2 = Math.round(time1 / (60 * 60 * 24));
@@ -346,7 +356,7 @@ function isyouxiao(filegrade, iid, danid, dan, type) {
 				}, function(ret, err) {
 
 					if (time3 < 0 && gradexu < 1) {
-						 
+
 						api.openFrame({
 							name : 'quanxian',
 							url : '../../html/vedio/quanxian.html',
@@ -586,3 +596,170 @@ function openme() {
 	});
 }
 
+function weipay(title, price, gradexu, days, vid) {
+
+	weilogin()
+	var totalFee = price * 100
+
+	var info = $api.getStorage('info');
+	var wxPay = api.require('wxPay');
+	var tradeNO = (new Date()).valueOf();
+
+	var userName = api.getPrefs({
+		sync : true,
+		key : 'user'
+	});
+	wxPay.config({
+		apiKey : '',
+		mchId : '1390293602',
+		partnerKey : 'b040d663f4b9af40c8dce89b0794e8c0',
+		notifyUrl : 'www.baidu.com'
+	}, function(ret, err) {
+		if (ret.status) {
+			wxPay.pay({
+				description : title,
+				totalFee : totalFee,
+				tradeNo : tradeNO,
+				productId : '12235413214070356458058',
+				openId : info.openid
+			}, function(ret, err) {
+				if (ret.status) {
+					if (vid) {
+						goumai(vid, 0)
+
+					}
+					api.ajax({
+						url : Api + 'orders.html',
+						method : 'post',
+						timeout : 30,
+						dataType : 'text',
+						returnAll : false,
+						data : {
+							values : {
+								username : userName,
+								subject : title,
+								body : title,
+								amount : price,
+								tradeNO : tradeNO,
+								gradexu : gradexu,
+								states : ret.status
+
+							},
+						}
+					}, function(ret, err) {
+						if (ret == 0) {
+							api.closeFrame({
+								name : 'goumai'
+							});
+							api.alert({
+								title : '支付结果',
+								msg : '购买成功'
+							});
+
+							api.sendEvent({
+								name : 'payok',
+
+							})
+
+						} else {
+							api.alert({
+								title : '支付结果',
+								msg : '购买失败'
+							});
+
+						}
+					});
+				} else {
+					if (err.code == -2) {
+						api.toast({
+							msg : '用户取消订单了'
+						});
+					}
+				}
+			});
+		} else {
+			alert(err.code);
+		}
+	});
+
+}
+
+function weilogin() {
+	var wx = api.require('wx');
+	wx.auth({
+		apiKey : ''
+	}, function(ret, err) {
+		if (ret.status) {
+			code = ret.code
+			wx.getToken({
+				apiKey : '',
+				apiSecret : '',
+				code : code
+			}, function(ret, err) {
+				if (ret.status) {
+					var accessToken = ret.accessToken;
+					var openId = ret.openId;
+					wx.getUserInfo({
+						accessToken : accessToken,
+						openId : openId
+					}, function(ret, err) {
+						if (ret.status) {
+							$api.setStorage('info', ret);
+							//									api.ajax({
+							//										url : hostUrl + 'login.php',
+							//										timeout : 30,
+							//										dataType : 'json',
+							//										returnAll : false,
+							//										data : {
+							//											values : {
+							//												appID : 'zwy1299',
+							//												wx_uid : openId,
+							//												nickname : ret.nickname,
+							//												headpic : ret.headimgurl
+							//											},
+							//										}
+							//									}, function(ret, err) {
+							//										//											api.alert({
+							//										//												msg : JSON.stringify(ret)
+							//										//											});
+							//									});
+							api.closeFrame({
+								name : api.frameName
+							});
+							api.toast({
+								msg : '登录成功!'
+							});
+						} else {
+							alert(err.code);
+						}
+					});
+				} else {
+					alert(err.code);
+				}
+			});
+		} else {
+			alert(err.code);
+		}
+	});
+}
+
+function jiepay(gname, fname, price, days, gradexu, dangeid) {
+	api.openFrame({
+		name : 'goumai',
+		url : '../../html/goumai.html',
+		rect : {
+			x : 0,
+			y : 0,
+			w : api.winWidth,
+			h : api.winHeight
+		},
+		pageParam : {
+			grade : fname,
+			danprice : price,
+			title : gname,
+			days : days,
+			gradexu : gradexu,
+			dangeid:dangeid
+		}
+	});
+}

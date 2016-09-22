@@ -9,13 +9,12 @@
 		<style>
 			body {
 			}
-		 
-		/*	.H-theme-background-color-zhuti {
-				background-color: #ff6606;
-			}
-			.H-theme-border-color8 {
-				border: 1px solid #ff6606;
-			}*/
+			/*	.H-theme-background-color-zhuti {
+			 background-color: #ff6606;
+			 }
+			 .H-theme-border-color8 {
+			 border: 1px solid #ff6606;
+			 }*/
 			.H-font-size-18 {
 				font-size: 18px;
 			}
@@ -55,6 +54,7 @@
 			var vtitle = api.pageParam.title
 			var vbianhao = api.pageParam.vbianhao
 			var vprice = api.pageParam.vprice
+			var gradexu=api.pageParam.gradexu
 			var vid = api.pageParam.vid
 			var vlist = varr.split(',');
 			var playlist = vlist
@@ -81,10 +81,9 @@
 				title = "购买全集"
 				var render = H.tppl(H.D("#tppl").innerHTML);
 				H.D(".result").innerHTML = render(data);
-				//			$api.attr($api.byId('img'), 'src', imgg);
 				var html = '';
-				html += '<div class="H-flex-item H-padding-horizontal-both-10 H-font-size-15 H-font-weight-600 H-padding-vertical-both-12">' + vtitle.substr(0, 10)+ '<span class="H-margin-horizontal-left-5 H-font-size-14 H-theme-font-color-999">编号：<span>' + vbianhao + '</span></span>';
-				html += '<button onclick="alipay(\'' + title + '\',\'' + vtitle + '\',\'' + vprice + '\',' + abc + ',\'' + vid + '\')" class="H-margin-horizontal-left-5 H-button-1 H-font-size-15 H-outline-none H-padding-vertical-both-4 H-padding-horizontal-both-5 H-theme-background-color-zhuti H-theme-font-color-white H-theme-border-color-zhuti H-theme-border-color8-click H-theme-background-color8-click H-theme-font-color8-click H-border-radius-3">' + title + ' </button> </div>';
+				html += '<div class="H-flex-item H-padding-horizontal-both-10 H-font-size-15 H-font-weight-600 H-padding-vertical-both-12">' + vtitle.substr(0, 10) + '<span class="H-margin-horizontal-left-5 H-font-size-14 H-theme-font-color-999">编号：<span>' + vbianhao + '</span></span>';
+				html += '<button onclick="jiepay(\'' + title + '\',\'' + vtitle + '\',\'' + vprice + '\',' + abc + ',\'' + gradexu + '\',\'' + vid + '\')" class="H-margin-horizontal-left-5 H-button-1 H-font-size-15 H-outline-none H-padding-vertical-both-4 H-padding-horizontal-both-5 H-theme-background-color-zhuti H-theme-font-color-white H-theme-border-color-zhuti H-theme-border-color8-click H-theme-background-color8-click H-theme-font-color8-click H-border-radius-3">' + title + ' </button> </div>';
 				html += '<span class="H-icon H-padding-horizontal-right-5 H-display-block"><i onclick="shoucangV(' + vid + ')" class="iconfont icon-shoucang H-theme-font-color-zhuti H-font-size-18  H-vertical-middle"></i><span onclick="shoucangV(' + vid + ')" class="H-font-size-12 H-margin-horizontal-right-10 H-margin-vertical-top-2"style="margin-top: -10px"> 收藏</span></span>';
 				$api.html($api.byId('title'), html);
 			}
