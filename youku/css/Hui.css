@@ -1,11 +1,20 @@
 ﻿@charset "UTF-8";
 
 /*!
- 
+ * 文件名称：Hui.css
+ * 文件版本：Version 0.3.4    2016-05-18
+ * 文件作者：新生帝
+ * 编写日期：2016年04月15日
+ * 版权所有：中山赢友网络科技有限公司
+ * 企业官网：http://www.winu.net
+ * 开源协议：MIT License
+ * 文件描述：一切从简，只为了更懒！
+ * 讨论群区：一起改变中国IT教育 18863883
+ * 开源地址：https://git.oschina.net/winu.net/Hui.git
  */
 
 /* 重置样式 */
-html {   -ms-text-size-adjust: 100%; -webkit-text-size-adjust: 100%; font-size: 62.5%; -webkit-overflow-scrolling: touch; width: 100%; height: 100%; }
+html { font-family: sans-serif; -ms-text-size-adjust: 100%; -webkit-text-size-adjust: 100%; font-size: 62.5%; -webkit-overflow-scrolling: touch; width: 100%; height: 100%; }
 body { margin: 0; -webkit-overflow-scrolling: touch; font-size: 1.6rem; line-height: 1.5; background: #f8f8f8; }
 article, aside, details, figcaption, figure, footer, header, main, menu, nav, section, summary { display: block; }
 audio, canvas, progress, video { display: inline-block; }
@@ -48,17 +57,15 @@ textarea { overflow: auto; }
 ::-webkit-file-upload-button { -webkit-appearance: button; font: inherit; }
 
 /*字体图标*/
-/*引入字体图标*/
 .H-iconfont { font-family: "iconfont" !important; font-size: 16px; font-style: normal; -webkit-font-smoothing: antialiased; -webkit-text-stroke-width: 0.2px; -moz-osx-font-smoothing: grayscale; }
-.H-theme-background-color-zhuti {
-				background-color: #e43252;
-			}
+.H-theme-background-color-zhuti { background-color: #e43252; }
 			.H-theme-font-color-zhuti {
 				color: #e43252;
 			}
 			.H-theme-border-color-zhuti { border: 1px solid #e43252; }
-
-.H-iconfont {  font-size: 16px; font-style: normal; -webkit-font-smoothing: antialiased; -webkit-text-stroke-width: 0.2px; -moz-osx-font-smoothing: grayscale; }
+/*引入字体图标*/
+@font-face { font-family: 'iconfont'; src: url('Hui.ttf') format('truetype'); }
+.H-iconfont { font-family: "iconfont" !important; font-size: 16px; font-style: normal; -webkit-font-smoothing: antialiased; -webkit-text-stroke-width: 0.2px; -moz-osx-font-smoothing: grayscale; }
 .H-icon-share-to:before { content: "\f102"; }
 .H-icon-star:before { content: "\f031"; }
 .H-icon-qrcode:before { content: "\f024"; }
@@ -288,14 +295,13 @@ textarea { overflow: auto; }
 
 /* 常用主题字体颜色 */
 .H-theme-font-color-ccc { color: #ccc; }
-.H-theme-font-color-hhh { color: #333333; }
 .H-theme-font-color-eee { color: #eee; }
 .H-theme-font-color-333 { color: #333; }
 .H-theme-font-color-444 { color: #444; }
 .H-theme-font-color-666 { color: #666; }
 .H-theme-font-color-999 { color: #999; }
 .H-theme-font-color-white { color: white; }
-.H-theme-font-color-black { color: #333333; }
+.H-theme-font-color-black { color: black; }
 .H-theme-font-color-red { color: red; }
 .H-theme-font-color-green { color: green; }
 .H-theme-font-color-blue { color: blue; }
@@ -1047,8 +1053,8 @@ textarea { overflow: auto; }
 .H-badge.H-badge-null { width: 8px; height: 8px; }
 
 /* 顶部导航栏 */
- .H-header { min-height: 44px; }
- .H-header-title, .H-header .H-icon { height: 44px; }
+.H-header { min-height: 44px; }
+.H-header-title, .H-header .H-icon { height: 44px; }
 .H-header-title { left: 0; }
 .H-header input::-webkit-input-placeholder { line-height: 1.5em; }
 
