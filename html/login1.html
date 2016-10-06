@@ -65,22 +65,23 @@
 	</body>
 	<script type="text/javascript" src="../script/api.js"></script>
 	<script type="text/javascript" src="../script/H.js"></script>
+	<script type="text/javascript" src="../script/jie.js"></script>
 	<script type="text/javascript">
-		function login() {
-			api.openWin({
-				name : 'login_head',
-				url : 'login_head.html',
-				pageParam : {}
-			});
-		}
+function login() {
+	api.openWin({
+		name : 'login_head',
+		url : 'entry/login_head.html',
+		pageParam : {}
+	});
+}
 
-		function reg() {
-			api.openWin({
-				name : 'reg',
-				url : 'reg.html',
-				pageParam : {}
-			});
-		}
+function reg() {
+	api.openWin({
+		name : 'reg_head',
+		url : 'reg/reg_head.html',
+		pageParam : {}
+	});
+}
 
 		apiready = function() {
 		};

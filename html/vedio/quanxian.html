@@ -31,7 +31,7 @@
 				</button>
 			</div>
 			<div class="H-flexbox-horizontal H-center-all H-text-align-center H-theme-background-color-transparent H-padding-vertical-both-10 H-theme-font-color-white">
-				该页面仅限 <span id="grade">铜牌VIP</span> 观看
+				该页面仅限 <span id="grade"> </span> 观看
 			</div>
 			<div class="H-flexbox-horizontal H-center-all  H-text-align-center H-theme-background-color-transparent H-padding-vertical-both-10 H-theme-font-color-zhuti">
 				<span id="danpian" class="H-text-align-center H-vertical-align-middle H-font-size-18">单片点播/购买套餐</span><span ><img src="../../image/tishishoushi.png" class="H-height-30 H-vertical-align-middle" /></span>
@@ -63,6 +63,7 @@
 			});
 			H.ready(function() {
 				var grade = api.pageParam.grade
+			 
 				var type = api.pageParam.type
 				$api.text($api.byId('grade'), grade);
 				if (type == 1) {

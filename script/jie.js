@@ -284,15 +284,15 @@ function alipay(subject, body, amount, days, vid, gradexu) {
 function login() {
 	api.openWin({
 		name : 'login_head',
-		url : '../../html/login_head.html',
+		url : '../../html/entry/login_head.html',
 		pageParam : {}
 	});
 }
 
 function reg() {
 	api.openWin({
-		name : 'reg',
-		url : '../../html/reg.html',
+		name : 'reg_head',
+		url : '../../html/reg/reg_head.html',
 		pageParam : {}
 	});
 }
@@ -367,12 +367,14 @@ function isyouxiao(filegrade, iid, danid, dan, type) {
 								h : api.winHeight
 							},
 							pageParam : {
-								grade : fname
+								//								grade : fname
+								grade1 : 'vip'
 
 							}
 						});
 
 						return
+
 					} else if (!time3 && !gradexu) {
 						alert('您还未登录');
 						api.openFrame({
@@ -450,22 +452,47 @@ function isyouxiao(filegrade, iid, danid, dan, type) {
 
 					} else {
 
-						api.openFrame({
-							name : 'quanxian',
-							url : '../../html/vedio/quanxian.html',
-							rect : {
-								x : 0,
-								y : 0,
-								w : api.winWidth,
-								h : api.winHeight
-							},
-							pageParam : {
-								grade : fname
+						if (gradexu > 1) {
+							api.openFrame({
+								name : 'quanxian',
+								url : '../../html/vedio/quanxian.html',
+								rect : {
+									x : 0,
+									y : 0,
+									w : api.winWidth,
+									h : api.winHeight
+								},
+								pageParam : {
+									grade : fname
+									//								grade : 'vip'
 
-							}
-						});
+								}
+							});
 
-						return
+							return
+
+						} else {
+
+							api.openFrame({
+								name : 'quanxian',
+								url : '../../html/vedio/quanxian.html',
+								rect : {
+									x : 0,
+									y : 0,
+									w : api.winWidth,
+									h : api.winHeight
+								},
+								pageParam : {
+									//								grade : fname
+									grade : 'vip'
+
+								}
+							});
+
+							return
+
+						}
+
 					}
 
 				});

@@ -32,11 +32,14 @@
 		<img src="../../image/jian.png" class="img animated bounceInUp " />
 		<span class="animated bounceInUp">
 			<div class="H-flexbox-horizontal H-center-all H-text-align-center H-theme-background-color-transparent H-padding-vertical-both-10 H-theme-font-color-white">
-				还有 <span id="zhang"></span>张精彩图片的内容
+				该套图有图片 <span id="zhang"></span>张
 		</span>
 		</div>
 		<div class="H-flexbox-horizontal H-center-all H-text-align-center H-theme-background-color-transparent H-padding-vertical-both-10 H-theme-font-color-white">
-			该页面仅限 <span id="grade">铜牌VIP</span> 浏览
+			隐藏图片内容仅限VIP会员浏览 ！
+		</div>
+		<div class="H-flexbox-horizontal H-center-all H-text-align-center H-theme-background-color-transparent H-padding-vertical-both-10 H-theme-font-color-white">
+			隐藏的内容非常精彩，你懂的！
 		</div>
 		<div class="share-menu H-animate-scale-big H-center-all">
 			<button onclick="H.openWin('me_head','../../html/me/head.html')" class="H-button H-font-size-15 H-outline-none H-theme-background-color-transparent H-padding-vertical-both-8 H-padding-horizontal-both-20 H-theme-font-color-white H-theme-border-color-white H-theme-border-color-white-click H-theme-background-color-white-click H-theme-font-color2-click H-border-radius-3">
@@ -73,11 +76,9 @@
 				var type = api.pageParam.type
 				var imglenth = api.pageParam.imglenth
 				var imgindex = api.pageParam.imgindex
-				var yushu=imglenth -imgindex-1
+				var yushu = imglenth - imgindex - 1
 				$api.text($api.byId('grade'), grade);
-				
 				$api.text($api.byId('zhang'), yushu);
-				
 				if (type == 1) {
 					$api.addCls($api.byId('danpian'), 'H-display-none');
 				} else {

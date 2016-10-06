@@ -35,7 +35,8 @@
 				pageParam : {
 					name : vurl,
 					varr : varr
-				}
+				},
+				reload : true
 			});
 			api.openFrame({
 				name : 'top2',
@@ -49,7 +50,8 @@
 				pageParam : {
 					name : vurl,
 					varr : varr
-				}
+				},
+				reload : true
 			});
 			api.openFrame({
 				name : 'top1',
@@ -64,7 +66,8 @@
 					xu : xu,
 					vid : vid,
 					fname : api.pageParam.fname
-				}
+				},
+				reload : true
 			});
 			api.openFrame({
 				name : 'body',
@@ -86,7 +89,8 @@
 					xu : api.pageParam.xu,
 					fname : api.pageParam.fname,
 					vvprice : api.pageParam.vvprice,
-				}
+				},
+				reload : true
 			});
 			var userName = api.getPrefs({
 				sync : true,
