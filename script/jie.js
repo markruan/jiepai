@@ -281,10 +281,10 @@ function alipay(subject, body, amount, days, vid, gradexu) {
 	});
 }
 
-	function closePage() {
-			api.closeWin({
-            });
-		}
+function closePage() {
+	api.closeWin({
+	});
+}
 
 function login() {
 	api.openWin({
@@ -780,22 +780,63 @@ function weilogin() {
 }
 
 function jiepay(gname, fname, price, days, gradexu, dangeid) {
-	api.openFrame({
-		name : 'goumai',
-		url : '../../html/goumai.html',
-		rect : {
-			x : 0,
-			y : 0,
-			w : api.winWidth,
-			h : api.winHeight
-		},
-		pageParam : {
-			grade : fname,
-			danprice : price,
-			title : gname,
-			days : days,
-			gradexu : gradexu,
-			dangeid : dangeid
-		}
+
+	api.getPrefs({
+		key : 'user'
+	}, function(ret, err) {
+		var val = ret.value;
+		if (val && val != "") {
+			var nameVal = ret.value
+			api.ajax({
+				url : Api + 'userinfo.html',
+				method : 'post',
+				timeout : 30,
+				dataType : 'json',
+				returnAll : false,
+				data : {
+					values : {
+						username : nameVal,
+					},
+				}
+			}, function(ret, err) {
+				userinfo = ret
+				var price1 = userinfo.price
+
+				var setgradetime = userinfo.setgradetime;
+				var time1 = Number(timest()) - Number(setgradetime);
+				var time2 = Math.round(time1 / (60 * 60 * 24));
+				var days = userinfo.days
+				var xu = userinfo.xu
+				var time3 = Number(days) - time2
+			 
+				var aa = Math.round(price1 / days * time2)
+				var bb = Number(price) - aa
+		       
+
+				api.openFrame({
+					name : 'goumai',
+					url : '../../html/goumai.html',
+					rect : {
+						x : 0,
+						y : 0,
+						w : api.winWidth,
+						h : api.winHeight
+					},
+					pageParam : {
+						grade : fname,
+						danprice : bb,
+						title : gname,
+						days : days,
+						gradexu : gradexu,
+						dangeid : dangeid
+					}
+				});
+
+			});
+		} else {
+
+			login()
+		};
 	});
+
 }
