@@ -162,18 +162,18 @@
 						if (time3 <= 0) {
 							html += '<span class="H-font-weight-600 H-theme-font-color-white" id="username">' + userinfo.username + ' </span><br>';
 							html += '<button onclick="openlogin() " id="grade" class="H-margin-horizontal-left-0 H-button-1 H-font-size-15 H-outline-none H-padding-vertical-both-1 H-padding-horizontal-both-1 H-theme-background-color-white H-theme-font-color-white H-theme-border-color-white H-theme-border-color8-click H-theme-background-color8-click H-theme-font-color8-click H-border-radius-3"style="color: #ff6606 ">';
-							html += '' + userinfo.fname + '</button><span class="H-font-size-15 H-theme-font-color-white H-margin-horizontal-left-5 ">剩余时间：<span id="days">0</span ><span id="tian" class="" >天</span></span>';
+							html += '' + userinfo.fname + '</button><span class="H-font-size-15 H-theme-font-color-white H-margin-horizontal-left-5 ">剩余时间：<span id="days">0</span ><span id="tian" class="" >'+days+'天</span></span>';
 						} else if (xu == 6) {
 							$api.addCls($api.byId('tian'), 'H-display-none');
 							html += '<span class="H-font-weight-600 H-theme-font-color-white" id="username">' + userinfo.username + ' </span><br>';
 							html += '<button onclick="openlogin() " id="grade" class="H-margin-horizontal-left-0 H-button-1 H-font-size-15 H-outline-none H-padding-vertical-both-1 H-padding-horizontal-both-1 H-theme-background-color-white H-theme-font-color-white H-theme-border-color-white H-theme-border-color8-click H-theme-background-color8-click H-theme-font-color8-click H-border-radius-3"style="color: #ff6606 ">';
-							html += '' + userinfo.fname + '</button><span class="H-font-size-15 H-theme-font-color-white H-margin-horizontal-left-5  ">剩余时间：<span id="days">' + time3 + '</span ><span id="tian" class="" ></span></span>';
+							html += '' + userinfo.fname + '</button><span class="H-font-size-15 H-theme-font-color-white H-margin-horizontal-left-5  ">剩余时间：<span id="days">' + days + '</span ><span id="tian" class="" ></span></span>';
 						} else {
 							$api.text($api.byId('days'), time3);
 							$api.addCls($api.byId('tian'), 'H-display-none');
 							html += '<span class="H-font-weight-600 H-theme-font-color-white" id="username">' + userinfo.username + ' </span><br>';
 							html += '<button onclick="openlogin() " id="grade" class="H-margin-horizontal-left-0 H-button-1 H-font-size-15 H-outline-none H-padding-vertical-both-1 H-padding-horizontal-both-1 H-theme-background-color-white H-theme-font-color-white H-theme-border-color-white H-theme-border-color8-click H-theme-background-color8-click H-theme-font-color8-click H-border-radius-3"style="color: #ff6606 ">';
-							html += '' + userinfo.fname + '</button><span class="H-font-size-15 H-theme-font-color-white H-margin-horizontal-left-5  ">剩余时间：<span id="days">' + time3 + '</span ><span id="tian" class="" ></span></span>';
+							html += '' + userinfo.fname + '</button><span class="H-font-size-15 H-theme-font-color-white H-margin-horizontal-left-5  ">剩余时间：<span id="days">' + time3 + '天</span ><span id="tian" class="" ></span></span>';
 						}
 						$api.html($api.byId('list'), html);
 					});
