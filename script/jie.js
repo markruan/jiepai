@@ -281,6 +281,11 @@ function alipay(subject, body, amount, days, vid, gradexu) {
 	});
 }
 
+	function closePage() {
+			api.closeWin({
+            });
+		}
+
 function login() {
 	api.openWin({
 		name : 'login_head',
