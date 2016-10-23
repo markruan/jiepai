@@ -11,7 +11,7 @@
 				background: rgba(0,0,0,0.41);
 			}
 			.H-theme-font-color-zhuti {
-				color: #ff6606;
+				color: #e43252;
 			}
 			.H-height-30 {
 				height: 30px;
@@ -29,14 +29,14 @@
 	</head>
 	<body class="H-flexbox-vertical  ">
 		<div class="H-height-20-percent space "></div>
-		<img src="../../image/jian.png" class="img animated bounceInUp " />
+		<!--<img src="../../image/jian.png" class="img animated bounceInUp " />-->
 		<span class="animated bounceInUp">
 			<div class="H-flexbox-horizontal H-center-all H-text-align-center H-theme-background-color-transparent H-padding-vertical-both-10 H-theme-font-color-white">
-				该套图有图片 <span id="zhang"></span>张
+				该套图有图片 <span id="zhang" class="H-theme-font-color-zhuti"></span> 张
 		</span>
 		</div>
 		<div class="H-flexbox-horizontal H-center-all H-text-align-center H-theme-background-color-transparent H-padding-vertical-both-10 H-theme-font-color-white">
-			隐藏图片内容仅限VIP会员浏览 ！
+			隐藏的图片内容仅限<span id="grade"></span>会员浏览 ！
 		</div>
 		<div class="H-flexbox-horizontal H-center-all H-text-align-center H-theme-background-color-transparent H-padding-vertical-both-10 H-theme-font-color-white">
 			隐藏的内容非常精彩，你懂的！
@@ -76,8 +76,13 @@
 				var type = api.pageParam.type
 				var imglenth = api.pageParam.imglenth
 				var imgindex = api.pageParam.imgindex
-				var yushu = imglenth - imgindex - 1
-				$api.text($api.byId('grade'), grade);
+				var yushu = api.pageParam.pnum
+				var userinfo = api.pageParam.userinfo
+				if (userinfo > 1) {
+					$api.text($api.byId('grade'), grade);
+				} else {
+					$api.text($api.byId('grade'), "VIP");
+				}
 				$api.text($api.byId('zhang'), yushu);
 				if (type == 1) {
 					$api.addCls($api.byId('danpian'), 'H-display-none');

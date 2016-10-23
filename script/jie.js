@@ -314,7 +314,7 @@ var key2 = "MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDgOlVNYAJHl7F47xO2ZGxSYduXe54j
 uploadUrl = 'http://114.55.98.130/Public/admin/images/';
 Api = 'http://114.55.98.130/index.php/api/'
 
-function isyouxiao(filegrade, iid, danid, dan, type) {
+function isyouxiao(filegrade, iid, type) {
 
 	var fname = api.pageParam.fname
 
@@ -381,7 +381,7 @@ function isyouxiao(filegrade, iid, danid, dan, type) {
 						return
 
 					} else if (!time3 && !gradexu) {
-						alert('您还未登录');
+
 						api.openFrame({
 							name : 'login1',
 							url : '../../html/login1.html',
@@ -400,14 +400,16 @@ function isyouxiao(filegrade, iid, danid, dan, type) {
 
 						});
 
-					} else if (dan || dan === 0) {
+					} else if (filegrade == 7) {
+						 
 
-						var vvprice = api.pageParam.vvprice
-						var danprice = vvprice.split(',');
-						var ddd = dan + 1
-						var xuhao = api.pageParam.title + '第' + ddd + '集';
-						var vid = api.pageParam.vid
-						var dangeid = vid + dan
+						var vprice = api.pageParam.vprice
+						alert(vprice)
+						//						var danprice = vvprice.split(',');
+						//						var ddd = dan + 1
+						//						var xuhao = api.pageParam.title + '第' + ddd + '集';
+						//						var vid = api.pageParam.vid
+						//						var dangeid = vid + dan
 						api.ajax({
 							url : Api + 'quanji.html',
 							method : 'post',
@@ -417,7 +419,7 @@ function isyouxiao(filegrade, iid, danid, dan, type) {
 							data : {
 								values : {
 									username : username,
-									lid : danid,
+									lid : iid,
 									type : type
 
 								},
@@ -443,9 +445,9 @@ function isyouxiao(filegrade, iid, danid, dan, type) {
 									},
 									pageParam : {
 										grade : fname,
-										danprice : danprice[dan],
+										danprice : vprice,
 										title : xuhao,
-										dangeid : dangeid
+										dangeid : iid
 
 									}
 								});
@@ -505,7 +507,16 @@ function isyouxiao(filegrade, iid, danid, dan, type) {
 			});
 		} else {
 
-			alert('您还未登录');
+			api.openFrame({
+				name : 'login1',
+				url : '../../html/login1.html',
+				rect : {
+					x : 0,
+					y : 0,
+					w : api.winWidth,
+					h : api.winHeight
+				}
+			});
 			return
 
 		}
@@ -779,64 +790,148 @@ function weilogin() {
 	});
 }
 
-function jiepay(gname, fname, price, days, gradexu, dangeid) {
+function jiepay(gname, fname, price, days, gradexu, dangeid, xu) {
 
-	api.getPrefs({
-		key : 'user'
-	}, function(ret, err) {
-		var val = ret.value;
-		if (val && val != "") {
-			var nameVal = ret.value
-			api.ajax({
-				url : Api + 'userinfo.html',
-				method : 'post',
-				timeout : 30,
-				dataType : 'json',
-				returnAll : false,
-				data : {
-					values : {
-						username : nameVal,
-					},
-				}
-			}, function(ret, err) {
-				userinfo = ret
-				var price1 = userinfo.price
-
-				var setgradetime = userinfo.setgradetime;
-				var time1 = Number(timest()) - Number(setgradetime);
-				var time2 = Math.round(time1 / (60 * 60 * 24));
-				var days = userinfo.days
-				var xu = userinfo.xu
-				var time3 = Number(days) - time2
-			 
-				var aa = Math.round(price1 / days * time2)
-				var bb = Number(price) - aa
-		       
-
-				api.openFrame({
-					name : 'goumai',
-					url : '../../html/goumai.html',
-					rect : {
-						x : 0,
-						y : 0,
-						w : api.winWidth,
-						h : api.winHeight
-					},
-					pageParam : {
-						grade : fname,
-						danprice : bb,
-						title : gname,
-						days : days,
-						gradexu : gradexu,
-						dangeid : dangeid
+	if (xu == 7) {
+		api.getPrefs({
+			key : 'user'
+		}, function(ret, err) {
+			var val = ret.value;
+			if (val && val != "") {
+				var nameVal = ret.value
+				api.ajax({
+					url : Api + 'userinfo.html',
+					method : 'post',
+					timeout : 30,
+					dataType : 'json',
+					returnAll : false,
+					data : {
+						values : {
+							username : nameVal,
+						},
 					}
+				}, function(ret, err) {
+					userinfo = ret
+
+					openpay(price, gname, fname, price, days, gradexu, dangeid)
+
 				});
+			} else {
 
-			});
-		} else {
+				login()
+			};
+		});
 
-			login()
-		};
+	} else {
+
+		api.getPrefs({
+			key : 'user'
+		}, function(ret, err) {
+			var val = ret.value;
+			if (val && val != "") {
+				var nameVal = ret.value
+				api.ajax({
+					url : Api + 'userinfo.html',
+					method : 'post',
+					timeout : 30,
+					dataType : 'json',
+					returnAll : false,
+					data : {
+						values : {
+							username : nameVal,
+						},
+					}
+				}, function(ret, err) {
+					userinfo = ret
+					var price1 = userinfo.price
+
+					var setgradetime = userinfo.setgradetime;
+					var time1 = Number(timest()) - Number(setgradetime);
+					var time2 = Math.round(time1 / (60 * 60 * 24));
+					var days = userinfo.days
+					var xu = userinfo.xu
+					var time3 = Number(days) - time2
+					var aa = Math.round(price1 / days * time2)
+					var bb = Number(price) - aa
+
+					if (days == 0) {
+						openpay(price, gname, fname, price, days, gradexu, dangeid)
+					} else {
+						console.log(bb)
+						openpay(bb, gname, fname, price, days, gradexu, dangeid)
+
+					}
+
+				});
+			} else {
+
+				login()
+			};
+		});
+	}
+}
+
+function openpay(danprice, gname, fname, price, days, gradexu, dangeid) {
+	console.log(danprice)
+	api.openFrame({
+		name : 'goumai',
+		url : '../../html/goumai.html',
+		rect : {
+			x : 0,
+			y : 0,
+			w : api.winWidth,
+			h : api.winHeight
+		},
+		pageParam : {
+			grade : fname,
+			danprice : danprice,
+			title : gname,
+			days : days,
+			gradexu : gradexu,
+			dangeid : dangeid
+		}
 	});
+
+}
+
+function fankui() {
+
+	var userName = api.getPrefs({
+		sync : true,
+		key : 'user'
+	});
+	var userid = api.getPrefs({
+		sync : true,
+		key : 'userid'
+	});
+
+	var param = {
+		hostName : "jiepaiapp.kf5.com",
+		appId : "001580c66bcb5c988f2fb900b35c63c0d0b1d44bfacc193d",
+		email : userid + "@qq.com",
+		userName : userName,
+		//					verifyUserType : 1,
+		phone : ""
+	};
+	var kf5 = api.require('kf5sdk');
+	kf5.initKF5(param, callback);
+	function callback(ret, err) {
+		var params1 = {
+			navColor : "#e43252",
+			textColor : "#FFFFFF",
+			centerTextSize : 18,
+			rightTextSize : 20,
+			centerTextVisible : true,
+			rightTextVisible : true,
+		};
+		kf5.setTopBarColor({
+			navColor : "#e43252",
+			textColor : "#FFFFFF",
+			centerTextSize : 14,
+		});
+		kf5.showHelpCenter({
+			type : 0
+		});
+	}
 
 }
