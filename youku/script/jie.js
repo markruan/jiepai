@@ -70,7 +70,50 @@ function alipay(subject, body, amount, days, vid, gradexu) {
 							switch (status) {
 								case 9000:
 									x = "支付成功";
-									//									alert(vid)
+									//
+
+									api.ajax({
+										url : Api + 'orders.html',
+										method : 'post',
+										timeout : 30,
+										dataType : 'text',
+										returnAll : false,
+										data : {
+											values : {
+												username : userName,
+												subject : subject,
+												body : body,
+												subject : subject,
+												days : days,
+												amount : amount,
+												tradeNO : tradeNO,
+												states : status
+											},
+										}
+									}, function(ret, err) {
+										if (ret == 1) {
+
+											api.closeFrame({
+												name : 'goumai'
+											});
+											api.alert({
+												title : '支付结果',
+												msg : x,
+												buttons : ['确定']
+											});
+
+										} else {
+											api.alert({
+												title : '支付结果',
+												msg : x,
+												buttons : ['确定']
+											});
+											api.sendEvent({
+												name : 'payok',
+
+											})
+										}
+									});
 									if (vid) {
 										goumai(vid, 0)
 									}
@@ -103,48 +146,6 @@ function alipay(subject, body, amount, days, vid, gradexu) {
 									x = "用户中途取消支付操作";
 									break;
 							}
-							api.ajax({
-								url : Api + 'orders.html',
-								method : 'post',
-								timeout : 30,
-								dataType : 'text',
-								returnAll : false,
-								data : {
-									values : {
-										username : userName,
-										subject : subject,
-										body : body,
-										subject : subject,
-										days : days,
-										amount : amount,
-										tradeNO : tradeNO,
-										states : status
-									},
-								}
-							}, function(ret, err) {
-								if (ret == 1) {
-
-									api.closeFrame({
-										name : 'goumai'
-									});
-									api.alert({
-										title : '支付结果',
-										msg : x,
-										buttons : ['确定']
-									});
-
-								} else {
-									api.alert({
-										title : '支付结果',
-										msg : x,
-										buttons : ['确定']
-									});
-									api.sendEvent({
-										name : 'payok',
-
-									})
-								}
-							});
 
 							api.alert({
 								title : '支付结果',
@@ -181,6 +182,51 @@ function alipay(subject, body, amount, days, vid, gradexu) {
 										goumai(vid, 0)
 
 									}
+									api.ajax({
+										url : Api + 'orders.html',
+										method : 'post',
+										timeout : 30,
+										dataType : 'text',
+										returnAll : false,
+										data : {
+											values : {
+												username : userName,
+												subject : subject,
+												body : body,
+												subject : subject,
+												days : days,
+												amount : amount,
+												tradeNO : tradeNO,
+												gradexu : gradexu,
+												states : status
+
+											},
+										}
+									}, function(ret, err) {
+
+										if (ret == 1) {
+											api.closeFrame({
+												name : 'goumai'
+											});
+											api.alert({
+												title : '支付结果',
+												msg : mss,
+												buttons : ['确定']
+											});
+
+										} else {
+											api.alert({
+												title : '支付结果',
+												msg : mss,
+												buttons : ['确定']
+											});
+											api.sendEvent({
+												name : 'payok',
+
+											})
+
+										}
+									});
 									break;
 								case '4000':
 									mss = "系统异常";
@@ -210,52 +256,6 @@ function alipay(subject, body, amount, days, vid, gradexu) {
 									mss = "用户中途取消支付操作";
 									break;
 							}
-
-							api.ajax({
-								url : Api + 'orders.html',
-								method : 'post',
-								timeout : 30,
-								dataType : 'text',
-								returnAll : false,
-								data : {
-									values : {
-										username : userName,
-										subject : subject,
-										body : body,
-										subject : subject,
-										days : days,
-										amount : amount,
-										tradeNO : tradeNO,
-										gradexu : gradexu,
-										states : status
-
-									},
-								}
-							}, function(ret, err) {
-
-								if (ret == 1) {
-									api.closeFrame({
-										name : 'goumai'
-									});
-									api.alert({
-										title : '支付结果',
-										msg : mss,
-										buttons : ['确定']
-									});
-
-								} else {
-									api.alert({
-										title : '支付结果',
-										msg : mss,
-										buttons : ['确定']
-									});
-									api.sendEvent({
-										name : 'payok',
-
-									})
-
-								}
-							});
 
 						});
 					}
@@ -359,6 +359,8 @@ function isyouxiao(filegrade, iid, type) {
 						},
 					}
 				}, function(ret, err) {
+				
+			 
 
 					if (time3 < 0 && gradexu < 1 && filegrade > 6) {
 
@@ -927,9 +929,10 @@ function fankui() {
 					textColor : "#FFFFFF",
 					centerTextSize : 14,
 				});
-				kf5.showHelpCenter({
-					type : 0
-				});
+				//				kf5.showHelpCenter({
+				//					type : 0
+				//				});
+				kf5.showRequestList();
 			}
 
 		} else {

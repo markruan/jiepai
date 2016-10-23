@@ -109,14 +109,14 @@
 						key : 'user'
 					}, function(ret, err) {
 						if (ret.value) {
-							//							var userinfo = $api.getStorage('userinfo')
+							//	 var userinfo = $api.getStorage('userinfo')
 							var userinfo = api.getPrefs({
 								sync : true,
 								key : 'userinfo'
 							});
-							console.log(userinfo + xu)
+							 
 							if (userinfo) {
-								if (userinfo || userinfo < 2) {
+								if (userinfo < 2 || userinfo < xu) {
 									api.openFrame({
 										name : 'quanxianimg',
 										url : '../../html/img/quanxian.html',
@@ -131,44 +131,17 @@
 											imglenth : img.length,
 											imgindex : index,
 											pnum : pnum,
-											userinfo:userinfo
+											userinfo : userinfo
 										}
 									});
 									openH()
 									openf()
+									//								} else if (1 < userinfo < xu) {
+									//
+									//								} else if (userinfo >= xu) {
+									//
 								}
-							} else if (userinfo || 1 < userinfo < xu) {
-								 
-								api.openFrame({
-									name : 'quanxianimg',
-									url : '../../html/img/quanxian.html',
-									rect : {
-										x : 0,
-										y : 0,
-										w : api.winWidth,
-										h : api.winHeight
-									},
-									pageParam : {
-										fname : fname,
-										imglenth : img.length,
-										imgindex : index,
-										pnum : pnum,
-										userinfo:userinfo
-									}
-								});
-								openH()
-								openf()
 							} else {
-								api.openFrame({
-									name : 'login1',
-									url : '../../html/login1.html',
-									rect : {
-										x : 0,
-										y : 0,
-										w : api.winWidth,
-										h : api.winHeight
-									}
-								});
 							}
 						} else {
 							api.openFrame({
@@ -221,19 +194,26 @@
 				sync : true,
 				key : 'user'
 			});
-			api.ajax({
-				url : Api + 'addhistory.html',
-				method : 'post',
-				timeout : 30,
-				dataType : 'json',
-				data : {
-					values : {
-						username : userName,
-						id : api.pageParam.pid,
-						type : api.pageParam.type
-					},
-				}
+			api.getPrefs({
+				key : 'user'
 			}, function(ret, err) {
+				if (ret.value) {
+					api.ajax({
+						url : Api + 'addhistory.html',
+						method : 'post',
+						timeout : 30,
+						dataType : 'json',
+						data : {
+							values : {
+								username : ret.value,
+								id : api.pageParam.pid,
+								type : api.pageParam.type
+							},
+						}
+					}, function(ret, err) {
+					});
+				} else {
+				}
 			});
 		};
 	</script>
