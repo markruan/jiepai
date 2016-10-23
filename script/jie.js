@@ -360,7 +360,7 @@ function isyouxiao(filegrade, iid, type) {
 					}
 				}, function(ret, err) {
 
-					if (time3 < 0 && gradexu < 1) {
+					if (time3 < 0 && gradexu <1&&filegrade>6) {
 
 						api.openFrame({
 							name : 'quanxian',
@@ -400,8 +400,7 @@ function isyouxiao(filegrade, iid, type) {
 
 						});
 
-					} else if (filegrade == 7) {
-						 
+					} else if (filegrade == 7&&gradexu>1) {
 
 						var vprice = api.pageParam.vprice
 						alert(vprice)
@@ -425,7 +424,9 @@ function isyouxiao(filegrade, iid, type) {
 								},
 							}
 						}, function(ret, err) {
+
 							if (ret == 0) {
+								alert(ret)
 
 								api.sendEvent({
 									name : 'quanxian',
@@ -446,7 +447,7 @@ function isyouxiao(filegrade, iid, type) {
 									pageParam : {
 										grade : fname,
 										danprice : vprice,
-										title : xuhao,
+										title : api.pageParam.title,
 										dangeid : iid
 
 									}
@@ -896,42 +897,53 @@ function openpay(danprice, gname, fname, price, days, gradexu, dangeid) {
 
 function fankui() {
 
-	var userName = api.getPrefs({
-		sync : true,
+	//	var userName = api.getPrefs({
+	//		sync : true,
+	//		key : 'user'
+	//	});
+	api.getPrefs({
 		key : 'user'
-	});
-	var userid = api.getPrefs({
-		sync : true,
-		key : 'userid'
-	});
+	}, function(ret, err) {
+		if (ret) {
+			var userName = ret.value
+			var userid = api.getPrefs({
+				sync : true,
+				key : 'userid'
+			});
 
-	var param = {
-		hostName : "jiepaiapp.kf5.com",
-		appId : "001580c66bcb5c988f2fb900b35c63c0d0b1d44bfacc193d",
-		email : userid + "@qq.com",
-		userName : userName,
-		//					verifyUserType : 1,
-		phone : ""
-	};
-	var kf5 = api.require('kf5sdk');
-	kf5.initKF5(param, callback);
-	function callback(ret, err) {
-		var params1 = {
-			navColor : "#e43252",
-			textColor : "#FFFFFF",
-			centerTextSize : 18,
-			rightTextSize : 20,
-			centerTextVisible : true,
-			rightTextVisible : true,
-		};
-		kf5.setTopBarColor({
-			navColor : "#e43252",
-			textColor : "#FFFFFF",
-			centerTextSize : 14,
-		});
-		kf5.showHelpCenter({
-			type : 0
-		});
-	}
+			var param = {
+				hostName : "jiepaiapp.kf5.com",
+				appId : "001580c66bcb5c988f2fb900b35c63c0d0b1d44bfacc193d",
+				email : userid + "@qq.com",
+				userName : userName,
+				//					verifyUserType : 1,
+				phone : ""
+			};
+			var kf5 = api.require('kf5sdk');
+			kf5.initKF5(param, callback);
+			function callback(ret, err) {
+				var params1 = {
+					navColor : "#e43252",
+					textColor : "#FFFFFF",
+					centerTextSize : 18,
+					rightTextSize : 20,
+					centerTextVisible : true,
+					rightTextVisible : true,
+				};
+				kf5.setTopBarColor({
+					navColor : "#e43252",
+					textColor : "#FFFFFF",
+					centerTextSize : 14,
+				});
+				kf5.showHelpCenter({
+					type : 0
+				});
+			}
+
+		} else {
+
+			login()
+		}
+	});
 
 }
