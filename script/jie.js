@@ -289,7 +289,7 @@ function closePage() {
 function login() {
 	api.openWin({
 		name : 'login_head',
-		url : '../../html/entry/login_head.html',
+		url : 'widget://html/entry/login_head.html',
 		pageParam : {}
 	});
 }
@@ -360,7 +360,7 @@ function isyouxiao(filegrade, iid, type) {
 					}
 				}, function(ret, err) {
 
-					if (time3 < 0 && gradexu <1&&filegrade>6) {
+					if (time3 < 0 && gradexu < 1 && filegrade > 6) {
 
 						api.openFrame({
 							name : 'quanxian',
@@ -400,15 +400,10 @@ function isyouxiao(filegrade, iid, type) {
 
 						});
 
-					} else if (filegrade == 7&&gradexu>1) {
+					} else if (filegrade == 7 && gradexu > 1) {
 
 						var vprice = api.pageParam.vprice
-						alert(vprice)
-						//						var danprice = vvprice.split(',');
-						//						var ddd = dan + 1
-						//						var xuhao = api.pageParam.title + '第' + ddd + '集';
-						//						var vid = api.pageParam.vid
-						//						var dangeid = vid + dan
+
 						api.ajax({
 							url : Api + 'quanji.html',
 							method : 'post',
@@ -897,15 +892,12 @@ function openpay(danprice, gname, fname, price, days, gradexu, dangeid) {
 
 function fankui() {
 
-	//	var userName = api.getPrefs({
-	//		sync : true,
-	//		key : 'user'
-	//	});
 	api.getPrefs({
 		key : 'user'
 	}, function(ret, err) {
-		if (ret) {
-			var userName = ret.value
+		var userName = ret.value
+		if (userName) {
+
 			var userid = api.getPrefs({
 				sync : true,
 				key : 'userid'
@@ -941,7 +933,7 @@ function fankui() {
 			}
 
 		} else {
-
+			alert("请先登录")
 			login()
 		}
 	});
