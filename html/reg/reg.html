@@ -85,7 +85,7 @@
 
 			function regindex() {
 				var tmp = Date.parse(new Date()).toString();
-				regdate = tmp.substr(0, 10);
+//				regdate = tmp.substr(0, 10);
 				if ($api.byId('username').value.length == 0) {
 					$api.byId('username').focus();
 					api.toast({
@@ -112,7 +112,7 @@
 							values : {
 								username : nameVal,
 								password : passwordVal,
-								regdate : regdate
+//								regdate : regdate
 							},
 						}
 					}, function(ret, err) {
