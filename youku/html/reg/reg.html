@@ -24,6 +24,15 @@
 			.H-theme-border-color7 {
 				border: 1px solid #93dbbf;
 			}
+			.footer {
+			  
+			  margin-top:80px;
+				/*position: absolute;
+				bottom: 0;
+				left: 0;
+				height: 230px;
+				width: 100%;*/
+			}
 		</style>
 	</head>
 	<body class="H-height-100-percent H-box-sizing-border-box H-overflow-hidden">
@@ -33,11 +42,11 @@
 				<div class=" H-theme-border-color-ccc H-theme-border-color9-click   H-theme-font-color9-click H-border-radius-5">
 					<div class="H-flexbox-horizontal H-border-vertical-bottom-margin-both-10-after ">
 						<span class="H-icon H-vertical-middle H-padding-horizontal-left-10"> <!--<i class="H-iconfont H-icon-phone H-font-size-18 H-vertical-middle H-theme-font-color-999"></i>--> </span>
-						<input type="text"  id="username" class="H-textbox H-vertical-align-middle H-vertical-middle H-font-size-16 H-flex-item H-box-sizing-border-box H-border-none H-outline-none H-padding-15 H-theme-background-color-transparent" placeholder="请输入手机号码" />
+						<input type="text"  id="username" class="H-textbox H-vertical-align-middle H-vertical-middle H-font-size-16 H-flex-item H-box-sizing-border-box H-border-none H-outline-none H-padding-15 H-theme-background-color-transparent" placeholder="用户名" />
 					</div>
 					<div class="H-flexbox-horizontal H-border-vertical-bottom-after">
 						<span class="H-icon H-vertical-middle H-padding-horizontal-left-10"> <!--<i class="H-iconfont H-icon-lock H-font-size-18 H-vertical-middle H-theme-font-color-999"></i>--> </span>
-						<input type="text" onkeyup="changebutton()" id="password" class="H-textbox H-vertical-align-middle H-vertical-middle H-font-size-16 H-flex-item H-box-sizing-border-box H-border-none H-outline-none H-padding-15 H-theme-background-color-transparent" placeholder="请输入登录密码" />
+						<input type="text" onkeyup="changebutton()" id="password" class="H-textbox H-vertical-align-middle H-vertical-middle H-font-size-16 H-flex-item H-box-sizing-border-box H-border-none H-outline-none H-padding-15 H-theme-background-color-transparent" placeholder="密码" />
 					</div>
 				</div>
 				<div class="H-margin-horizontal-both-15 H-padding-vertical-top-25 ">
@@ -51,13 +60,18 @@
 			</div>
 		</div>
 		<div class="H-padding-vertical-bottom-25"></div>
-		<div class="H-theme-font-color1 H-text-align-center H-padding-vertical-both-10 H-font-size-14 H-padding-vertical-top-20 ">
-			其他方式登录
-		</div>
-		<div class="H-flexbox-horizontal H-text-align-center  H-padding-vertical-both-15">
-			<div class="H-flex-item">
-				<span class="H-icon H-center-all H-theme-background-color9 H-border-radius-circle H-margin-horizontal-auto H-margin-vertical-top-25" style="height: 82px; width: 82px; "><i class="iconfont icon-weixin   H-theme-font-color-white" style="font-size:50px "></i></span>
-				<label class="H-display-block H-font-size-20 H-margin-vertical-top-5 ">微信登录</label>
+		<div class="footer">
+			<div class="H-theme-font-color1     H-font-size-14  H-margin-horizontal-auto"style="width: 80%;color: #a7acaf;">
+				其他方式登录
+			</div>
+			<div class="H-border-vertical-bottom-after H-theme-font-color-white H-margin-horizontal-auto"style="width: 80%">
+				1
+			</div>
+			<div class="H-flexbox-horizontal H-text-align-center  H-padding-vertical-both-15">
+				<div class="H-flex-item">
+					<span class="H-icon H-center-all H-theme-background-color9 H-border-radius-circle H-margin-horizontal-auto H-margin-vertical-top-25" style="height: 70px; width: 70px; "><i class="iconfont icon-weixin   H-theme-font-color-white" style="font-size:45px "></i></span>
+					<label class="H-display-block H-font-size-15 H-margin-vertical-top-5 ">微信登录</label>
+				</div>
 			</div>
 		</div>
 		<script type="text/javascript" src="../../script/api.js"></script>
@@ -102,9 +116,9 @@
 							},
 						}
 					}, function(ret, err) {
-						api.alert({
-							msg : JSON.stringify(ret)
-						});
+						//						api.alert({
+						//							msg : JSON.stringify(ret)
+						//						});
 						if (ret.status == 0) {
 							api.toast({
 								msg : ret.msg

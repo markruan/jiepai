@@ -81,6 +81,7 @@
 		apiready = function() {
 			var photoBrowser = api.require('photoBrowser');
 			var freenum = api.pageParam.freenum
+			var pnum = api.pageParam.pnum
 			var pics = api.pageParam.name
 			var img = pics.split(' ');
 			var xu = api.pageParam.xu
@@ -113,7 +114,31 @@
 								sync : true,
 								key : 'userinfo'
 							});
-							if (userinfo < 2) {
+							console.log(userinfo + xu)
+							if (userinfo) {
+								if (userinfo || userinfo < 2) {
+									api.openFrame({
+										name : 'quanxianimg',
+										url : '../../html/img/quanxian.html',
+										rect : {
+											x : 0,
+											y : 0,
+											w : api.winWidth,
+											h : api.winHeight
+										},
+										pageParam : {
+											fname : fname,
+											imglenth : img.length,
+											imgindex : index,
+											pnum : pnum,
+											userinfo:userinfo
+										}
+									});
+									openH()
+									openf()
+								}
+							} else if (userinfo || 1 < userinfo < xu) {
+								 
 								api.openFrame({
 									name : 'quanxianimg',
 									url : '../../html/img/quanxian.html',
@@ -126,11 +151,24 @@
 									pageParam : {
 										fname : fname,
 										imglenth : img.length,
-										imgindex : index
+										imgindex : index,
+										pnum : pnum,
+										userinfo:userinfo
 									}
 								});
 								openH()
 								openf()
+							} else {
+								api.openFrame({
+									name : 'login1',
+									url : '../../html/login1.html',
+									rect : {
+										x : 0,
+										y : 0,
+										w : api.winWidth,
+										h : api.winHeight
+									}
+								});
 							}
 						} else {
 							api.openFrame({

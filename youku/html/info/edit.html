@@ -96,10 +96,14 @@
 			api.removePrefs({
 				key : 'quanji'
 			});
+			api.closeFrame({
+	            name: 'me'
+            });
 			api.openWin({
 				name : 'login',
 				url : '../../html/home.html'
 			});
+			
 		}
 
 		function reload() {
