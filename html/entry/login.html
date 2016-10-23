@@ -148,6 +148,12 @@
 							api.sendEvent({
 								name : 'payok',
 							})
+							api.execScript({
+								name : 'me',
+								frameName : 'me',
+								script : "int()"
+							});
+							d
 						} else {
 							alert(ret.msg)
 						}
