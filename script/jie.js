@@ -843,14 +843,12 @@ function jiepay(gname, fname, price, days, gradexu, dangeid, xu) {
 					var price1 = userinfo.price
 					var setgradetime = userinfo.setgradetime;
 					var time1 = Number(timest()) - Number(setgradetime);
-					alert(time1)
-					var time2 = Math.round(time1 / (60 * 60 * 24));
+                    var time2 = Math.round(time1 / (60 * 60 * 24));
 					var days = userinfo.days
 					var xu = userinfo.xu
 					var time3 = Number(days) - time2
 					var aa = Math.round(price1 / days * time2)
-					alert(time3)
-					var bb = Number(price) - aa
+                    var bb = Number(price) - aa
 
 					if (days <= 0) {
 						openpay(price, gname, fname, price, days, gradexu, dangeid)
