@@ -639,8 +639,9 @@ function openme() {
 	});
 }
 
+//微信支付
 function weipay(title, price, gradexu, days, vid) {
-
+	alert(price)
 	weilogin()
 	var totalFee = price * 100
 
@@ -728,49 +729,48 @@ function weipay(title, price, gradexu, days, vid) {
 }
 
 function weilogin() {
-	var wx = api.require('wx');
-	wx.auth({
-		apiKey : ''
+
+	api.getPrefs({
+		key : 'weilogin'
 	}, function(ret, err) {
-		if (ret.status) {
-			code = ret.code
-			wx.getToken({
-				apiKey : '',
-				apiSecret : '',
-				code : code
+		if (ret) {
+
+			return
+		} else {
+			var wx = api.require('wx');
+			wx.auth({
+				apiKey : ''
 			}, function(ret, err) {
 				if (ret.status) {
-					var accessToken = ret.accessToken;
-					var openId = ret.openId;
-					wx.getUserInfo({
-						accessToken : accessToken,
-						openId : openId
+					code = ret.code
+					wx.getToken({
+						apiKey : '',
+						apiSecret : '',
+						code : code
 					}, function(ret, err) {
 						if (ret.status) {
-							$api.setStorage('info', ret);
-							//									api.ajax({
-							//										url : hostUrl + 'login.php',
-							//										timeout : 30,
-							//										dataType : 'json',
-							//										returnAll : false,
-							//										data : {
-							//											values : {
-							//												appID : 'zwy1299',
-							//												wx_uid : openId,
-							//												nickname : ret.nickname,
-							//												headpic : ret.headimgurl
-							//											},
-							//										}
-							//									}, function(ret, err) {
-							//										//											api.alert({
-							//										//												msg : JSON.stringify(ret)
-							//										//											});
-							//									});
-							api.closeFrame({
-								name : api.frameName
-							});
-							api.toast({
-								msg : '登录成功!'
+							var accessToken = ret.accessToken;
+							var openId = ret.openId;
+							wx.getUserInfo({
+								accessToken : accessToken,
+								openId : openId
+							}, function(ret, err) {
+								if (ret.status) {
+									$api.setStorage('info', ret);
+									api.closeFrame({
+										name : api.frameName
+									});
+									api.toast({
+										msg : '登录成功!'
+									});
+									api.setPrefs({
+										key : 'weilogin',
+										value : 1
+									});
+
+								} else {
+									alert(err.code);
+								}
 							});
 						} else {
 							alert(err.code);
@@ -780,10 +780,10 @@ function weilogin() {
 					alert(err.code);
 				}
 			});
-		} else {
-			alert(err.code);
+
 		}
 	});
+
 }
 
 function jiepay(gname, fname, price, days, gradexu, dangeid, xu) {
@@ -843,18 +843,25 @@ function jiepay(gname, fname, price, days, gradexu, dangeid, xu) {
 					var price1 = userinfo.price
 					var setgradetime = userinfo.setgradetime;
 					var time1 = Number(timest()) - Number(setgradetime);
-                    var time2 = Math.round(time1 / (60 * 60 * 24));
+					var time2 = Math.round(time1 / (60 * 60 * 24));
 					var days = userinfo.days
 					var xu = userinfo.xu
+					if (xu == gradexu) {
+						alert("已经购买过了")
+						return
+					}
 					var time3 = Number(days) - time2
 					var aa = Math.round(price1 / days * time2)
-                    var bb = Number(price) - aa
+					var bb = Number(price) - aa
 
 					if (days <= 0) {
 						openpay(price, gname, fname, price, days, gradexu, dangeid)
 					} else {
-						console.log(bb)
-						openpay(bb, gname, fname, price, days, gradexu, dangeid)
+						if (bb < 0) {
+							alert("数值错误，请联系管理员")
+						} else {
+							openpay(bb, gname, fname, price, days, gradexu, dangeid)
+						}
 
 					}
 
@@ -868,23 +875,49 @@ function jiepay(gname, fname, price, days, gradexu, dangeid, xu) {
 }
 
 function openpay(danprice, gname, fname, price, days, gradexu, dangeid) {
-	console.log(danprice)
-	api.openFrame({
-		name : 'goumai',
-		url : '../../html/goumai.html',
-		rect : {
-			x : 0,
-			y : 0,
-			w : api.winWidth,
-			h : api.winHeight
-		},
-		pageParam : {
-			grade : fname,
-			danprice : danprice,
-			title : gname,
-			days : days,
-			gradexu : gradexu,
-			dangeid : dangeid
+	var tradeNO = (new Date()).valueOf();
+	var username = api.getPrefs({
+		sync : true,
+		key : 'user'
+	});
+	api.ajax({
+		url : Api + 'ifgoumai.html',
+		method : 'post',
+		timeout : 30,
+		dataType : 'text',
+		returnAll : false,
+		data : {
+			values : {
+				lid : dangeid,
+				tradeNO : tradeNO,
+				username : username,
+				type : 0
+			},
+		}
+	}, function(ret, err) {
+		console.log(ret)
+		if (ret == 0) {
+			alert('已经购买过了')
+			return
+		} else {
+			api.openFrame({
+				name : 'goumai',
+				url : '../../html/goumai.html',
+				rect : {
+					x : 0,
+					y : 0,
+					w : api.winWidth,
+					h : api.winHeight
+				},
+				pageParam : {
+					grade : fname,
+					danprice : danprice,
+					title : gname,
+					days : days,
+					gradexu : gradexu,
+					dangeid : dangeid
+				}
+			});
 		}
 	});
 
@@ -913,23 +946,17 @@ function fankui() {
 			};
 			var kf5 = api.require('kf5sdk');
 			kf5.initKF5(param, callback);
+
 			function callback(ret, err) {
 				var params1 = {
 					navColor : "#e43252",
 					textColor : "#FFFFFF",
-					centerTextSize : 18,
-					rightTextSize : 20,
+					centerTextSize : 16,
+					rightTextSize : 16,
 					centerTextVisible : true,
 					rightTextVisible : true,
 				};
-				kf5.setTopBarColor({
-					navColor : "#e43252",
-					textColor : "#FFFFFF",
-					centerTextSize : 14,
-				});
-				//				kf5.showHelpCenter({
-				//					type : 0
-				//				});
+				kf5.setTopBarColor(params1);
 				kf5.showRequestList();
 			}
 

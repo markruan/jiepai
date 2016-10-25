@@ -11,6 +11,9 @@
 			.H-font-size-18 {
 				font-size: 18px;
 			}
+			.H-theme-border-color8 {
+				border: 1px solid #e43252;
+			}
 		</style>
 	</head>
 	<body>
@@ -20,15 +23,15 @@
 			</div>-->
 			<!--<span class="H-icon H-padding-horizontal-right-5 H-display-block  "><i onclick="shoucangV(' + vid + ')" class="iconfont icon-shoucang H-theme-font-color-zhuti H-font-size-18  H-horizontal-center"style="line-height: 1.1"></i> <span onclick="shoucangV(' + vid + ')" class="H-font-size-12 H-margin-horizontal-right-10 H-margin-vertical-top-2  "style="margin-left:13px;color:#333333">收藏</span></span>-->
 		</div>
-		<div class="H-padding-vertical-bottom-10"></div>
+		<div class="H-padding-vertical-bottom-2"></div>
 		<!--		<div class="H-padding-vertical-bottom-10"></div>-->
-		<div class="result"></div>
+		<div class="result  " style="background-color: red" ></div>
 		<script type="text/html" id="tppl">
 			<% for(var i=0; i < list.length; i++){ if(list.length==1){ %>
 			<% } else{%>
-			<div onclick="setpath(this,'<%=list[i] %>',<%=[i]%>)" class=" fangkuang H-margin-horizontal-both-2 H-margin-vertical-both-5 H-theme-font-color-zhuti    H-padding-horizontal-both-10 H-display-table-cell H-float-left H-box-sizing-border-box H-width-avg-9 H-center-all H-theme-background-color-white H-border-horizontal-right-after H-border-vertical-bottom-after H-padding-vertical-both-10" style="max-height: 40px; min-width: 45px;border-radius: 4px;">
+			<div onclick="setpath(this,'<%=list[i] %>',<%=[i]%>)" class=" fangkuang H-margin-horizontal-both-1 H-margin-vertical-both-2 H-theme-font-color-zhuti     H-display-table-cell H-float-left H-box-sizing-border-box H-width-avg-9 H-center-all H-theme-background-color-white H-border-horizontal-right-after H-border-vertical-bottom-after H-padding-vertical-both-10" style="max-height: 40px; min-width: 45px;border-radius: 4px;">
 			<div class=" H-center-all"style="line-height: 20px">
-			<%=[i+1]%>  <!--<span class="H-icon H-display-block H-horizontal-center"><i class="H-iconfont H-icon-user H-font-size-24 H-vertical-middle"></i></span>-->
+			<%=[i+1]%>   <!--<span class="H-icon H-display-block H-horizontal-center"><i class="H-iconfont H-icon-user H-font-size-24 H-vertical-middle"></i></span>-->
 			<label class="H-display-block H-font-size-12"></label>
 			</div>
 			</div>
@@ -103,7 +106,7 @@
 			var data = {
 				list : vlist
 			};
-			if (vlist.length == 1||userxu==1||!userxu) {
+			if (vlist.length == 1 || userxu == 1 || !userxu) {
 				title = ""
 				var render = H.tppl(H.D("#tppl").innerHTML);
 				H.D(".result").innerHTML = render(data);
@@ -145,9 +148,9 @@
 				if (ret) {
 					var dd = document.getElementsByClassName('fangkuang');
 					for ( ii = 0; ii < dd.length; ii++) {
-						$api.attr(dd[ii], 'class', 'fangkuang H-margin-horizontal-both-2   H-margin-vertical-both-5 H-theme-font-color-zhuti    H-padding-horizontal-both-10 H-display-table-cell H-float-left H-box-sizing-border-box H-width-avg-9 H-center-all H-theme-background-color-white H-border-horizontal-right-after H-border-vertical-bottom-after H-padding-vertical-both-10');
+						$api.attr(dd[ii], 'class', 'fangkuang H-margin-horizontal-both-1   H-margin-vertical-both-2 H-theme-font-color-zhuti    H-padding-horizontal-both-10 H-display-table-cell H-float-left H-box-sizing-border-box H-width-avg-9 H-center-all H-theme-background-color-white H-border-horizontal-right-after H-border-vertical-bottom-after H-padding-vertical-both-10');
 					}
-					$api.attr(button, 'class', 'fangkuang H-margin-horizontal-both-2 H-theme-border-color8 H-margin-vertical-both-5 H-theme-font-color-zhuti    H-padding-horizontal-both-10 H-display-table-cell H-float-left H-box-sizing-border-box H-width-avg-9 H-center-all H-theme-background-color-white H-border-horizontal-right-after H-border-vertical-bottom-after H-padding-vertical-both-10');
+					$api.attr(button, 'class', 'fangkuang H-margin-horizontal-both-1 H-theme-border-color8 H-margin-vertical-both-2 H-theme-font-color-zhuti    H-padding-horizontal-both-10 H-display-table-cell H-float-left H-box-sizing-border-box H-width-avg-9 H-center-all H-theme-background-color-white H-border-horizontal-right-after H-border-vertical-bottom-after H-padding-vertical-both-10');
 					api.setPrefs({
 						key : 'vurl',
 						value : url
