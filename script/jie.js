@@ -641,7 +641,7 @@ function openme() {
 
 //微信支付
 function weipay(title, price, gradexu, days, vid) {
-	alert(price)
+
 	weilogin()
 	var totalFee = price * 100
 
