@@ -847,7 +847,10 @@ function jiepay(gname, fname, price, days, gradexu, dangeid, xu) {
 					var days = userinfo.days
 					var xu = userinfo.xu
 					if (xu == gradexu) {
-						alert("已经购买过了")
+						
+					}
+					if(xu==6&&!dangeid){
+					 alert("您已经是顶级VIP")
 						return
 					}
 					var time3 = Number(days) - time2
