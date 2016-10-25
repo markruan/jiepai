@@ -16,6 +16,7 @@
 /A6990407827122/html/login_head.html
 /A6990407827122/html/index/v.html
 /A6990407827122/script/H.js
+/A6990407827122/html/goumaijilu/goumai_head.html
 /A6990407827122/html/fankui/fankui_body.html
 /A6990407827122/image/xia.png
 /A6990407827122/html/dianying/body.html
@@ -33,6 +34,7 @@
 /A6990407827122/image/channel_nav_arrow@2x.png
 /A6990407827122/html/shipin/header.html
 /A6990407827122/html/info/index.html
+/A6990407827122/html/goumaijilu/index.html
 /A6990407827122/html/page/menu.html
 /A6990407827122/html/jingxuan/body.html
 /A6990407827122/image/3.jpg

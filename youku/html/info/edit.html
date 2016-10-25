@@ -54,6 +54,12 @@
 				</div>
 				<span onclick="xiupsw()" class=" H-padding-horizontal-right-5 H-display-block H-font-size-16  H-padding-horizontal-right-20 H-touch-active H-theme-font-color-hhh ">修改</span>
 			</div>
+			<div class="H-text-list H-flexbox-horizontal  H-theme-background-color-white H-border-vertical-bottom-after H-vertical-middle ">
+				<div class="H-flex-item H-theme-font-color-hhh  H-padding-horizontal-both-10 H-font-size-16 H-padding-vertical-both-12">
+					购买记录
+				</div>
+				<span onclick="goumaijilu()" class=" H-padding-horizontal-right-5 H-display-block H-font-size-16  H-padding-horizontal-right-20 H-touch-active H-theme-font-color-hhh "> <i class="H-iconfont H-icon-arrow-right"></i></span>
+			</div>
 			<div class="  H-center-all "style="margin-top: 80px">
 				<button onclick="logout()" class="H-theme-font-color-hhh  H-margin-horizontal-left-10 H-button H-font-size-15 H-outline-none H-padding-vertical-both-10 H-padding-horizontal-both-20 H-theme-background-color-zhuti H-theme-font-color-white H-theme-border-color8 H-theme-border-color8-click H-theme-background-color8-click H-theme-font-color8-click H-border-radius-3" style="min-width: 250px">
 					注销登录
@@ -75,6 +81,12 @@
 			api.openWin({
 				name : 'nick_head',
 				url : '../../html/info/nick_head.html',
+			});
+		}
+		function goumaijilu() {
+			api.openWin({
+				name : 'goumai_head',
+				url : '../../html/goumaijilu/goumai_head.html',
 			});
 		}
 
