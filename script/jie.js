@@ -847,10 +847,10 @@ function jiepay(gname, fname, price, days, gradexu, dangeid, xu) {
 					var days = userinfo.days
 					var xu = userinfo.xu
 					if (xu == gradexu) {
-						
+
 					}
-					if(xu==6&&!dangeid){
-					 alert("您已经是顶级VIP")
+					if (xu == 6 && !dangeid) {
+						alert("您已经是顶级VIP")
 						return
 					}
 					var time3 = Number(days) - time2
@@ -969,4 +969,12 @@ function fankui() {
 		}
 	});
 
+}
+
+//找回密码
+function findpw() {
+	api.openWin({
+		name : 'find_head',
+		url : '../../html/findpw/find_head.html'
+	});
 }
