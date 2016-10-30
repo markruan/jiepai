@@ -50,7 +50,6 @@ function alipay(subject, body, amount, days, vid, gradexu) {
 		var userName = ret.value;
 		if (userName && userName != "") {
 			if (api.systemType == 'ios') {
-
 				aliPay.config({
 					partner : '2088221648908651',
 					seller : 'jiepaiapp@qq.com',
@@ -59,7 +58,6 @@ function alipay(subject, body, amount, days, vid, gradexu) {
 					notifyURL : 'http://114.55.98.130/'
 				}, function(ret, err) {
 					if (ret) {
-
 						aliPay.pay({
 							subject : subject,
 							body : body,
@@ -67,11 +65,15 @@ function alipay(subject, body, amount, days, vid, gradexu) {
 							tradeNO : tradeNO
 						}, function(ret, err) {
 							var status = ret.code
-							switch (status) {
-								case 9000:
-									x = "支付成功";
-									//
 
+							switch (status) {
+								case '9000':
+									mss = "支付成功";
+
+									if (vid) {
+										goumai(vid, 0)
+
+									}
 									api.ajax({
 										url : Api + 'orders.html',
 										method : 'post',
@@ -87,36 +89,36 @@ function alipay(subject, body, amount, days, vid, gradexu) {
 												days : days,
 												amount : amount,
 												tradeNO : tradeNO,
+												gradexu : gradexu,
 												states : status
+
 											},
 										}
 									}, function(ret, err) {
-										if (ret == 1) {
 
+										if (ret == 1) {
 											api.closeFrame({
 												name : 'goumai'
 											});
 											api.alert({
 												title : '支付结果',
-												msg : x,
+												msg : mss,
 												buttons : ['确定']
 											});
 
 										} else {
 											api.alert({
 												title : '支付结果',
-												msg : x,
+												msg : mss,
 												buttons : ['确定']
 											});
 											api.sendEvent({
 												name : 'payok',
 
 											})
+
 										}
 									});
-									if (vid) {
-										goumai(vid, 0)
-									}
 									break;
 								case 4000:
 									x = "系统异常";
@@ -147,11 +149,6 @@ function alipay(subject, body, amount, days, vid, gradexu) {
 									break;
 							}
 
-							api.alert({
-								title : '支付结果',
-								msg : x,
-								buttons : ['确定']
-							});
 						});
 					}
 				});
@@ -728,13 +725,63 @@ function weipay(title, price, gradexu, days, vid) {
 
 }
 
+function weilogin1() {
+   
+	var wx = api.require('wx');
+	wx.auth({
+		apiKey : ''
+	}, function(ret, err) {
+		if (ret.status) {
+		 
+			code = ret.code
+			wx.getToken({
+				apiKey : '',
+				apiSecret : '',
+				code : code
+			}, function(ret, err) {
+				alert(err)
+				if (ret.status) {
+					var accessToken = ret.accessToken;
+					var openId = ret.openId;
+					wx.getUserInfo({
+						accessToken : accessToken,
+						openId : openId
+					}, function(ret, err) {
+						if (ret.status) {
+					
+							$api.setStorage('info', ret);
+							api.closeFrame({
+								name : api.frameName
+							});
+							api.toast({
+								msg : '登录成功!'
+							});
+							api.setPrefs({
+								key : 'weilogin',
+								value : 1
+							});
+
+						} else {
+							alert(err.code);
+						}
+					});
+				} else {
+					alert(err.code);
+				}
+			});
+		} else {
+			alert(err.code);
+		}
+	});
+
+}
+
 function weilogin() {
 
 	api.getPrefs({
 		key : 'weilogin'
 	}, function(ret, err) {
 		if (ret) {
-
 			return
 		} else {
 			var wx = api.require('wx');
@@ -847,7 +894,8 @@ function jiepay(gname, fname, price, days, gradexu, dangeid, xu) {
 					var days = userinfo.days
 					var xu = userinfo.xu
 					if (xu == gradexu) {
-
+						alert("您已经购买过了")
+						return
 					}
 					if (xu == 6 && !dangeid) {
 						alert("您已经是顶级VIP")
@@ -961,6 +1009,54 @@ function fankui() {
 				};
 				kf5.setTopBarColor(params1);
 				kf5.showRequestList();
+			}
+
+		} else {
+			alert("请先登录")
+			login()
+		}
+	});
+
+}
+
+function showhelp() {
+
+	api.getPrefs({
+		key : 'user'
+	}, function(ret, err) {
+		var userName = ret.value
+		if (userName) {
+
+			var userid = api.getPrefs({
+				sync : true,
+				key : 'userid'
+			});
+
+			var param = {
+				hostName : "jiepaiapp.kf5.com",
+				appId : "001580c66bcb5c988f2fb900b35c63c0d0b1d44bfacc193d",
+				email : userid + "@qq.com",
+				userName : userName,
+				//					verifyUserType : 1,
+				phone : ""
+			};
+			var kf5 = api.require('kf5sdk');
+			kf5.initKF5(param, callback);
+
+			function callback(ret, err) {
+				var params1 = {
+					navColor : "#e43252",
+					textColor : "#FFFFFF",
+					centerTextSize : 16,
+					rightTextSize : 16,
+					centerTextVisible : true,
+					rightTextVisible : true,
+				};
+				kf5.setTopBarColor(params1);
+				var params12 = {
+					type : 2
+				};
+				kf5.showHelpCenter(params12);
 			}
 
 		} else {

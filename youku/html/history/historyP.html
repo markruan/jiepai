@@ -29,7 +29,7 @@
 	<script type="text/javascript" src="../../script/jie.js"></script>
 	<script type="text/javascript" src="../../script/echo.min.js"></script>
 	<script type="text/javascript">
-		function openImg(arr, pid, freenum, xu, fname) {
+		function openImg(arr, pid, freenum, xu, fname,pnum) {
 			api.openWin({
 				name : 'img1',
 				url : '../../html/img/index.html',
@@ -40,7 +40,8 @@
 					freenum : freenum,
 					xu : xu,
 					fname : fname,
-					type : '图片'
+					type : '图片',
+					pnum:pnum
 				}
 			});
 		}
@@ -86,7 +87,7 @@
 							var img = pic.split(' ');
 							var zhang = img.length
 							var vurl = imageCache(vurll)
-							html += '<div onclick="openImg(\'' + pic + '\',' + pid + ',' + freenum + ',' + xu + ',\'' + fname + '\')" class="H-display-table-cell H-theme-background-color-white H-float-left  H-box-sizing-border-box H-width-avg-3 H-padding-horizontal-right-4   "  >';
+							html += '<div onclick="openImg(\'' + pic + '\',' + pid + ',' + freenum + ',' + xu + ',\'' + fname + '\',\'' + pnum + '\')" class="H-display-table-cell H-theme-background-color-white H-float-left  H-box-sizing-border-box H-width-avg-3 H-padding-horizontal-right-4   "  >';
 							html += '<img  src="../../image/default.jpg"  data-echo="' + vurl + '" class=" H-float-right H-margin-vertical-top-8 H-margin-horizontal-both-2 H-display-block" alt="" title="" style="width: 96%" ;height:200>';
 							html += '<img src="../../image/xia.png " class=" H-float-right  H-margin-vertical-top-8 H-margin-horizontal-both-2 H-display-block" style="margin-top: -200px; height: 200px ; width: 96%" alt="" title="">';
 							html += '<div  class=" " style=" margin-right:8px; margin-top:-30px;line-height: 30px; float: right; color:white ;">' + pnum + '<span>张</span></div>';

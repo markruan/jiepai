@@ -54,7 +54,7 @@
 							url : Api + 'nick.html',
 							method : 'post',
 							timeout : 30,
-							dataType : 'json',
+							dataType : 'text',
 							data : {
 								values : {
 									username : nameVal,
@@ -73,10 +73,11 @@
 									frameName : 'edit',
 									script : jsfun
 								});
-							} else {
+							} else if (ret == 1) {
 								api.toast({
 									msg : '修改失败'
 								});
+							} else {
 							}
 						});
 					};
