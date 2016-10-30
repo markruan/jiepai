@@ -67,6 +67,7 @@
 /A6990407827122/html/reg/reg.html
 /A6990407827122/image/xia1.png
 /A6990407827122/html/search/list.html
+/A6990407827122/image/33.png
 /A6990407827122/html/login.html
 /A6990407827122/image/jingxuan_off.png
 /A6990407827122/launch/launch1080x1920.png
@@ -91,6 +92,7 @@
 /A6990407827122/html/findpw/psw.html
 /A6990407827122/html/info/edit.html
 /A6990407827122/html/vedio/index.html
+/A6990407827122/image/22.png
 /A6990407827122/config.xml
 /A6990407827122/image/v.jpg
 /A6990407827122/image/login_bg.jpg

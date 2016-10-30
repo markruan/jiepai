@@ -241,7 +241,8 @@
 		apiready = function() {
 			var key = ''
 			int();
-			intbiao()
+//			intbiao()
+			menu1()
 			api.setRefreshHeaderInfo({
 				visible : true,
 				bgColor : '#f2f2f2',
@@ -250,9 +251,73 @@
 				textUp : '松开刷新...',
 				showTime : true
 			}, function(ret, err) {
-				int();
-				intbiao()
+				 menu1()
+				 int();
+//				intbiao()
 			});
 		};
+		function menu1() {
+			api.ajax({
+				url : Api + 'biaoqian.html',
+				method : 'post',
+				data : {
+					values : {
+						type : '视频',
+					},
+				}
+			}, function(ret, err) {
+				for (var i = 0; i < ret.length; i++) {
+					ret[i].title = ret[i].fenlei1
+					ret[i].icon = 'widget://image/22.png'
+					ret[i].active = 'widget://image/33.png'
+				}
+				data11 = ret
+				var MNNavigationMenu = api.require('MNNavigationMenu');
+				MNNavigationMenu.open({
+					rect : {
+						x : 0,
+						y : 0,
+						w : api.winWidth,
+						h : 44
+					},
+					index : 0,
+					animation : true,
+					styles : {
+						column : 4,
+						bg : '#fafafa',
+						item : {
+							width : api.winWidth / 4,
+							bg : '#fff',
+							active : '#fff',
+							highlight : '#ffffff',
+							title : {
+								marginB : 15,
+								size : 12,
+								height : 44,
+								color : '#ffffff',
+								active : '#e43252',
+								highlight : '#e43252',
+								ttf : 'Alkatip Basma Tom'
+							},
+							icon : {
+								marginT : 8,
+								width : api.winWidth / 4.5,
+								height : 28,
+								corner : 2
+							}
+						}
+					},
+					items : ret,
+					fixedOn : api.frameName,
+					fixed : true
+				}, function(ret, err) {
+					if (ret) {
+						int(data11[ret.index].f_id)
+					} else {
+						alert(JSON.stringify(err));
+					}
+				});
+			});
+		}
 	</script>
 </html>

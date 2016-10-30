@@ -68,18 +68,15 @@
 			<div id="wrapper" style=" ">
 				<div id="scroller">
 					<ul>
-						<li  id="listb"  class="H-margin-vertical-both-8 H-margin-horizontal-left-5 " > 
-						 <!--<button onclick="intimg(\'' + ret[i].title + '\')"  class="H-button H-font-size-15  H-outline-none   H-padding-vertical-both-3 H-padding-horizontal-both-5   H-theme-font-color-white H-theme-border-color2 H-theme-border-color2-click H-theme-background-color2-click H-theme-font-color2-click H-border-radius-3">会员专区</button>-->
+						<li  id="listb"  class="H-margin-vertical-both-8 H-margin-horizontal-left-5 " >
+							<!--<button onclick="intimg(\'' + ret[i].title + '\')"  class="H-button H-font-size-15  H-outline-none   H-padding-vertical-both-3 H-padding-horizontal-both-5   H-theme-font-color-white H-theme-border-color2 H-theme-border-color2-click H-theme-background-color2-click H-theme-font-color2-click H-border-radius-3">会员专区</button>-->
 						</li>
 					</ul>
 				</div>
 			</div>
-		 
 		</nav>
 		<div class="H-padding-vertical-bottom-2 H-background-color-white" ></div>
- 
-		</div> 
-		<div id="imglist" class="H-clear-both H-width-100-percent H-display-table H-box-sizing-border-box H-padding-horizontal-both-10 H-theme-background-color-white" style="margin-top: 38px">  </div>
+		</div> <div id="imglist" class="H-clear-both H-width-100-percent H-display-table H-box-sizing-border-box H-padding-horizontal-both-10 H-theme-background-color-white" style="margin-top: 38px"></div>
 	</body>
 	<script type="text/javascript" src="../../script/H.js"></script>
 	<script type="text/javascript" src="../../script/api.js"></script>
@@ -87,8 +84,7 @@
 	<script type="text/javascript" src="../../script/echo.min.js"></script>
 	<script type="text/javascript" src="../../script/zepto.min.js"></script>
 	<script type="text/javascript">
-		function openImg(arr, pid, freenum, xu, fname,pnum) {
-		 
+		function openImg(arr, pid, freenum, xu, fname, pnum) {
 			api.openWin({
 				name : 'img1',
 				url : '../../html/img/index.html',
@@ -99,7 +95,7 @@
 					freenum : freenum,
 					xu : xu,
 					fname : fname,
-					pnum:pnum,
+					pnum : pnum,
 					type : '图片'
 				}
 			});
@@ -217,7 +213,7 @@
 				//				alert(ret)
 				var listb = $api.byId('listb');
 				for (var i = 0; i < ret.length; i++) {
-					html += ' <button onclick="intimg(\'' + ret[i].f_id + '\')"  class="H-button H-font-size-12  H-outline-none   H-padding-vertical-both-3 H-padding-horizontal-both-5  H-theme-font-color-white H-theme-border-color2 H-theme-border-color2-click H-theme-background-color2-click H-theme-font-color2-click H-border-radius-3">' + ret[i].fenlei1+ '</button> ';
+					html += ' <button onclick="intimg(\'' + ret[i].f_id + '\')"  class="H-button H-font-size-12  H-outline-none   H-padding-vertical-both-3 H-padding-horizontal-both-5  H-theme-font-color-white H-theme-border-color2 H-theme-border-color2-click H-theme-background-color2-click H-theme-font-color2-click H-border-radius-3">' + ret[i].fenlei1 + '</button> ';
 				}
 				$api.html(listb, html);
 			});
@@ -226,7 +222,8 @@
 		apiready = function() {
 			var key = ''
 			intimg(key);
-			intbiao()
+			//			intbiao()
+			menu1()
 			api.setRefreshHeaderInfo({
 				visible : true,
 				bgColor : '#f2f2f2',
@@ -235,9 +232,73 @@
 				textUp : '松开刷新...',
 				showTime : true
 			}, function(ret, err) {
+				menu1()
+				//				intbiao()
 				intimg();
-				intbiao()
 			});
 		};
+		function menu1() {
+			api.ajax({
+				url : Api + 'biaoqian.html',
+				method : 'post',
+				data : {
+					values : {
+						type : '图片',
+					},
+				}
+			}, function(ret, err) {
+				for (var i = 0; i < ret.length; i++) {
+					ret[i].title = ret[i].fenlei1
+					ret[i].icon = 'widget://image/22.png'
+					ret[i].active = 'widget://image/33.png'
+				}
+				data11 = ret
+				var MNNavigationMenu = api.require('MNNavigationMenu');
+				MNNavigationMenu.open({
+					rect : {
+						x : 0,
+						y : 0,
+						w : api.winWidth,
+						h : 44
+					},
+					index : 0,
+					animation : true,
+					styles : {
+						column : 4,
+						bg : '#fafafa',
+						item : {
+							width : api.winWidth / 4,
+							bg : '#ffffff',
+							active : '#fff',
+							highlight : '#ffffff',
+							title : {
+								marginB : 15,
+								size : 12,
+								height : 44,
+								color : '#ffffff',
+								active : '#e43252',
+								highlight : '#e43252',
+								ttf : 'Alkatip Basma Tom'
+							},
+							icon : {
+								marginT : 8,
+								width : api.winWidth / 4.5,
+								height : 28,
+								corner : 2
+							}
+						}
+					},
+					items : ret,
+					fixedOn : api.frameName,
+					fixed : true
+				}, function(ret, err) {
+					if (ret) {
+						intimg(data11[ret.index].f_id)
+					} else {
+						alert(JSON.stringify(err));
+					}
+				});
+			});
+		}
 	</script>
 </html>
