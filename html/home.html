@@ -236,6 +236,7 @@
 						h : api.frameHeight - offset
 					},
 					bounces : false,
+					reload : true
 				})
 				api.setFrameAttr({
 					name : 'me',
@@ -378,8 +379,6 @@
 
 			var jpush = null;
 			apiready = function() {
-			
-			   
 				api.setStatusBarStyle({
 					style : 'light'
 				});
@@ -480,6 +479,10 @@
 				api.sendFrameToBack({
 					from : 'common_index'
 				});
+				api.setFrameAttr({
+	                name: 'common_index',
+	                hidden : true
+                });
 				api.setFrameGroupAttr({
 					name : 'group123',
 					hidden : false

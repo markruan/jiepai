@@ -27,7 +27,7 @@
 		</style>
 	</head>
 	<!--class="H-display-none"-->
-	<body  id="body"    >
+	<body  id="body"   >
 		<div class="  H-flexbox-horizontal H-center-all H-theme-background-color-zhuti   H-vertical-middle  " style="height: 160px;">
 			<span class=" H-padding-horizontal-right-5 H-display-block"style="margin-top: 0px;"> <img onclick="int()"  id="img" src="../../image/ic.png" style="width: 70px; height: 70px;border-radius: 35px;margin-left:30px;  margin-right:30px;" / ></span>
 			<div id='list' class="H-flex-item H-padding-horizontal-both-10 H-font-size-24 H-padding-vertical-bottom-12 ">
@@ -156,9 +156,6 @@
 							key : 'userinfo',
 							value : ret.gradexu
 						});
-						//						api.alert({
-						//							msg : JSON.stringify(ret)
-						//						});
 						$api.text($api.byId('username'), userinfo.username);
 						$api.text($api.byId('grade'), userinfo.fname);
 						$api.attr($api.byId('img'), 'src', uploadUrl + userinfo.icon);
@@ -208,6 +205,9 @@
 			});
 			api.hideProgress();
 			api.refreshHeaderLoadDone();
+		}
+
+		function change() {
 		}
 
 		apiready = function() {
