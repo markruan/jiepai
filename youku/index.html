@@ -18,7 +18,9 @@
 	<script type="text/javascript" src="../../script/jie.js"></script>
 	<script type="text/javascript">
 		apiready = function() {
-			 
+			openhome()
+		};
+		function openhome() {
 			api.openFrame({
 				name : 'main',
 				url : 'html/home.html',
@@ -27,8 +29,9 @@
 					y : 0, //（可选项）数字类型；模块左上角的 y 坐标（相对于所属的 Window 或 Frame）；默认：0
 					w : api.winWidth, //（可选项）数字类型；模块的宽度；默认：所属的 Window 或 Frame 的宽度
 					h : api.winHeight //
-				}
+				},
+				reload : true
 			});
-		};
+		}
 	</script>
 </html>

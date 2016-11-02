@@ -83,6 +83,7 @@
 				url : '../../html/info/nick_head.html',
 			});
 		}
+
 		function goumaijilu() {
 			api.openWin({
 				name : 'goumai_head',
@@ -98,6 +99,11 @@
 		}
 
 		function logout() {
+			api.openWin({
+				name : 'root',
+				url : '../../home.html',
+				reload:true
+			});
 			api.removePrefs({
 				key : 'user'
 			});
@@ -108,12 +114,12 @@
 			api.removePrefs({
 				key : 'quanji'
 			});
-			api.closeFrame({
-				name : 'me'
-			});
-			api.openWin({
-				name : 'login',
-				url : '../../html/home.html'
+			setTimeout(close(), 1600)
+		}
+
+		function close() {
+			api.closeWin({
+				name : 'info'
 			});
 		}
 
@@ -126,25 +132,32 @@
 
 		function intt() {
 			var ret = $api.getStorage('userinfo');
-			$api.text($api.byId('username'), ret.username);
-			api.ajax({
-				url : Api + 'userinfo.html',
-				method : 'post',
-				timeout : 30,
-				dataType : 'json',
-				returnAll : false,
-				data : {
-					values : {
-						username : ret.username,
-					},
-				}
-			}, function(ret, err) {
-				$api.text($api.byId('nickname'), ret.nickname);
-				$api.text($api.byId('grade'), ret.fname);
-				$api.text($api.byId('phone'), ret.phone);
-				$api.attr($api.byId('img'), 'src', uploadUrl + ret.icon);
-				api.refreshHeaderLoadDone();
-			});
+			if (ret) {
+				$api.text($api.byId('username'), ret.username);
+				api.ajax({
+					url : Api + 'userinfo.html',
+					method : 'post',
+					timeout : 30,
+					dataType : 'json',
+					returnAll : false,
+					data : {
+						values : {
+							username : ret.username,
+						},
+					}
+				}, function(ret, err) {
+					$api.text($api.byId('nickname'), ret.nickname);
+					$api.text($api.byId('grade'), ret.fname);
+					$api.text($api.byId('phone'), ret.phone);
+					if (ret.phone) {
+					} else {
+						alert("请绑定手机认证否无法，否则密码丢失后将无法找回")
+					}
+					$api.attr($api.byId('img'), 'src', uploadUrl + ret.icon);
+					api.refreshHeaderLoadDone();
+				});
+			} else {
+			}
 		}
 
 		apiready = function() {
