@@ -726,13 +726,13 @@ function weipay(title, price, gradexu, days, vid) {
 }
 
 function weilogin1() {
-   
+
 	var wx = api.require('wx');
 	wx.auth({
 		apiKey : ''
 	}, function(ret, err) {
 		if (ret.status) {
-		 
+
 			code = ret.code
 			wx.getToken({
 				apiKey : '',
@@ -748,7 +748,7 @@ function weilogin1() {
 						openId : openId
 					}, function(ret, err) {
 						if (ret.status) {
-					
+
 							$api.setStorage('info', ret);
 							api.closeFrame({
 								name : api.frameName
@@ -781,9 +781,11 @@ function weilogin() {
 	api.getPrefs({
 		key : 'weilogin'
 	}, function(ret, err) {
-		if (ret) {
-//			return
+
+		if (ret.value == 1) {
+
 		} else {
+
 			var wx = api.require('wx');
 			wx.auth({
 				apiKey : ''
@@ -807,9 +809,8 @@ function weilogin() {
 									api.closeFrame({
 										name : api.frameName
 									});
-									api.toast({
-										msg : '登录成功!'
-									});
+
+									alert('第一次微信支付需要登录！')
 									api.setPrefs({
 										key : 'weilogin',
 										value : 1
