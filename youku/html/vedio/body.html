@@ -14,16 +14,22 @@
 			.H-theme-border-color8 {
 				border: 1px solid #e43252;
 			}
+			.H-padding-horizontal-left-5 {
+				padding-left: 5px;
+				margin-left: 3px;
+			}
+			.H-padding-vertical-top-20 {
+				padding-top: 22px;
+			}
 		</style>
 	</head>
 	<body>
 		<div id="title" class="H-text-list H-flexbox-horizontal  H-theme-background-color-white H-border-vertical-bottom-after H-vertical-middle  H-border-vertical-bottom-after2">
 			<!--<div class="H-flex-item H-padding-horizontal-both-10 H-font-size-15  H-padding-vertical-both-12" style="color:#333333 ;">
-			12121 <span class="H-margin-horizontal-left-5 H-font-size-14 "style="color:#999999 ;">编号：<span>1211</span></span>
+			  <span class="H-margin-horizontal-left-5 H-font-size-14 "style="color:#999999 ;">编号：<span>1211</span></span>
 			</div>-->
 			<!--<span class="H-icon H-padding-horizontal-right-5 H-display-block  "><i onclick="shoucangV(' + vid + ')" class="iconfont icon-shoucang H-theme-font-color-zhuti H-font-size-18  H-horizontal-center"style="line-height: 1.1"></i> <span onclick="shoucangV(' + vid + ')" class="H-font-size-12 H-margin-horizontal-right-10 H-margin-vertical-top-2  "style="margin-left:13px;color:#333333">收藏</span></span>-->
 		</div>
-		<div class="H-padding-vertical-bottom-2"></div>
 		<!--		<div class="H-padding-vertical-bottom-10"></div>-->
 		<div class="result  " style="background-color: red" ></div>
 		<script type="text/html" id="tppl">
@@ -37,16 +43,18 @@
 			</div>
 			<% }}%>
 		</script>
+		<div class="H-padding-vertical-bottom-2"></div>
 		<div class="H-channel-title H-flexbox-horizontal H-theme-background-color-white H-vertical-middle  ">
-			<div class="H-channel-line H-theme-background-color-zhuti H-padding-vertical-top-15 H-padding-horizontal-left-3  H-margin-horizontal-left-4"></div>
+			<div class="H-channel-line H-theme-background-color-zhuti H-padding-vertical-top-20 H-padding-horizontal-left-5  H-margin-horizontal-left-4"></div>
 			<div class="  H-channel-text H-theme-font-color-black H-flex-item H-font-size-14 H-theme-font-color-black H-padding-10 H-margin-horizontal-right-10 H-text-show-row-1">
 				推荐
 			</div>
 			<!--<span tapmode=""  data-open="false" class="H-icon H-position-relative H-display-block H-float-right H-vertical-middle H-theme-font-color-black H-padding-horizontal-both-10 H-z-index-1000 H-theme-font-color-hui  H-font-size-14 ">范冰冰 &nbsp<div style="height:14px; width:1px; border-left:1px #9E9E9E solid"></div>&nbsp 张馨予</span>-->
 		</div>
 		<div id="list" class="H-clear-both H-width-100-percent H-theme-background-color-white H-display-table H-box-sizing-border-box H-padding-horizontal-both-10"></div>
+		<div class="H-padding-vertical-bottom-2"></div>
 		<div class="H-channel-title H-flexbox-horizontal H-theme-background-color-white H-vertical-middle H-border-vertical-bottom-after">
-			<div class="H-channel-line H-theme-background-color-zhuti H-padding-vertical-top-25 H-padding-horizontal-left-3  H-margin-horizontal-left-4"></div>
+			<div class="H-channel-line H-theme-background-color-zhuti H-padding-vertical-top-20 H-padding-horizontal-left-5 H-margin-horizontal-left-4"></div>
 			<div class="H-channel-text H-theme-font-color-black H-flex-item H-font-size-14 H-theme-font-color-black H-padding-10 H-margin-horizontal-right-10 H-text-show-row-1">
 				视频截图预览
 			</div>
@@ -112,7 +120,7 @@
 				H.D(".result").innerHTML = render(data);
 				//			$api.attr($api.byId('img'), 'src', imgg);
 				var html = '';
-				html += '<div class="H-flex-item H-padding-horizontal-both-10 H-font-size-15  H-padding-vertical-both-12" style="color:#333333 ;">' + vtitle.substr(0, 10) + '<br><span class="H-margin-horizontal-left-5 H-font-size-14 "style="color:#999999 ;">编号：<span>' + vbianhao + '</span></span>';
+				html += '<div class="H-flex-item H-padding-horizontal-both-10 H-font-size-15  H-padding-vertical-both-12" style="color:#333333 ;">' + vtitle.substr(0, 10) + '<br><span class=" H-font-size-14 "style="color:#999999 ;">编号：<span>' + vbianhao + '</span></span>';
 				html += '  </div>';
 				html += '<span class="H-icon H-padding-horizontal-right-5 H-display-block  "><i onclick="shoucangV(' + vid + ')" class="iconfont icon-shoucang H-theme-font-color-zhuti H-font-size-18  H-horizontal-center"style="line-height: 1.1"></i> <span onclick="shoucangV(' + vid + ')" class="H-font-size-12 H-margin-horizontal-right-10 H-margin-vertical-top-2  "style="margin-left:13px;color:#333333">收藏</span></span>';
 				$api.html($api.byId('title'), html);
@@ -121,7 +129,7 @@
 				var render = H.tppl(H.D("#tppl").innerHTML);
 				H.D(".result").innerHTML = render(data);
 				var html = '';
-				html += '<div class="H-flex-item H-padding-horizontal-both-10 H-font-size-15  H-padding-vertical-both-12">' + vtitle.substr(0, 10) + '<span class="H-margin-horizontal-left-5 H-font-size-14 H-theme-font-color-999">编号：<span>' + vbianhao + '</span></span>';
+				html += '<div class="H-flex-item H-padding-horizontal-both-10 H-font-size-15  H-padding-vertical-both-12">' + vtitle.substr(0, 10) + '<span class=" H-font-size-14 H-theme-font-color-999">编号：<span>' + vbianhao + '</span></span>';
 				html += '<button onclick="jiepay(\'' + title + '\',\'' + vtitle + '\',\'' + vprice + '\',' + abc + ',\'' + gradexu + '\',\'' + vid + '\',' + xu + ')" class="H-margin-horizontal-left-5 H-button-1 H-font-size-15 H-outline-none H-padding-vertical-both-4 H-padding-horizontal-both-5 H-theme-background-color-zhuti H-theme-font-color-white H-theme-border-color-zhuti H-theme-border-color8-click H-theme-background-color8-click H-theme-font-color8-click H-border-radius-3">' + title + ' </button> </div>';
 				html += '<span class="H-icon H-padding-horizontal-right-5 H-display-block  "><i onclick="shoucangV(' + vid + ')" class="iconfont icon-shoucang H-theme-font-color-zhuti H-font-size-18  H-horizontal-center"style="line-height: 1.1"></i> <span onclick="shoucangV(' + vid + ')" class="H-font-size-12 H-margin-horizontal-right-10 H-margin-vertical-top-2  "style="margin-left:13px;color:#333333">收藏</span></span>';
 				$api.html($api.byId('title'), html);
@@ -161,7 +169,7 @@
 						script : jsfun
 					});
 				} else {
-					alert(000)
+					//					alert(000)
 				}
 			});
 		}

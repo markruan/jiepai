@@ -36,13 +36,13 @@
 		</span>
 		</div>
 		<div class="H-flexbox-horizontal H-center-all H-text-align-center H-theme-background-color-transparent H-padding-vertical-both-10 H-theme-font-color-white">
-			隐藏的图片内容仅限<span id="grade"></span>会员浏览 ！
+			隐藏的图片内容仅限<span id="grade"></span>浏览 ！
 		</div>
 		<div class="H-flexbox-horizontal H-center-all H-text-align-center H-theme-background-color-transparent H-padding-vertical-both-10 H-theme-font-color-white">
 			隐藏的内容非常精彩，你懂的！
 		</div>
 		<div class="share-menu H-animate-scale-big H-center-all">
-			<button onclick="H.openWin('me_head','../../html/me/head.html')" class="H-button H-font-size-15 H-outline-none H-theme-background-color-transparent H-padding-vertical-both-8 H-padding-horizontal-both-20 H-theme-font-color-white H-theme-border-color-white H-theme-border-color-white-click H-theme-background-color-white-click H-theme-font-color2-click H-border-radius-3">
+			<button id="kaitong" onclick="H.openWin('me_head','../../html/me/head.html')" class="H-button H-font-size-15 H-outline-none H-theme-background-color-transparent H-padding-vertical-both-8 H-padding-horizontal-both-20 H-theme-font-color-white H-theme-border-color-white H-theme-border-color-white-click H-theme-background-color-white-click H-theme-font-color2-click H-border-radius-3">
 				开通VIP
 			</button>
 		</div></span>
@@ -80,8 +80,9 @@
 				var userinfo = api.pageParam.userinfo
 				if (userinfo > 1) {
 					$api.text($api.byId('grade'), grade);
+					$api.text($api.byId('kaitong'), '升级VIP');
 				} else {
-					$api.text($api.byId('grade'), "VIP");
+					$api.text($api.byId('grade'), "VIP会员");
 				}
 				$api.text($api.byId('zhang'), yushu);
 				if (type == 1) {
