@@ -29,7 +29,7 @@
 	<!--class="H-display-none"-->
 	<body  id="body"   >
 		<div class="  H-flexbox-horizontal H-center-all H-theme-background-color-zhuti   H-vertical-middle  " style="height: 160px;">
-			<span class=" H-padding-horizontal-right-5 H-display-block"style="margin-top: 0px;"> <img onclick="int()"  id="img" src="../../image/ic.png" style="width: 70px; height: 70px;border-radius: 35px;margin-left:30px;  margin-right:30px;" / ></span>
+			<span class=" H-padding-horizontal-right-5 H-display-block"style="margin-top: 0px;"> <img onclick="openme()"  id="img" src="../../image/ic.png" style="width: 70px; height: 70px;border-radius: 35px;margin-left:30px;  margin-right:30px;" / ></span>
 			<div id='list' class="H-flex-item H-padding-horizontal-both-10 H-font-size-24 H-padding-vertical-bottom-12 ">
 				<span class="H-font-weight-600 H-theme-font-color-white H-font-size-20" id="username" onclick="login()">点击登录</span><i class="H-theme-font-color-white iconfont icon-right H-text-align-center H-margin-horizontal-left-5 " style="font-size: 20px;"></i>
 				<!--	<br>-->
@@ -167,7 +167,7 @@
 						var xu = userinfo.xu
 						var time3 = Number(days) - time2
 						var html = '';
-						if (time3 <= 0) {
+						if (time3 <= 0 && xu != 1) {
 							html += '<span class="H-font-weight-600 H-theme-font-color-white" id="username">' + userinfo.username + ' </span><br>';
 							html += '<button onclick="openlogin() " id="grade" class="H-margin-horizontal-left-0 H-button-1 H-font-size-15 H-outline-none H-padding-vertical-both-1 H-padding-horizontal-both-1 H-theme-background-color-white H-theme-font-color-white H-theme-border-color-white H-theme-border-color8-click H-theme-background-color8-click H-theme-font-color8-click H-border-radius-3"style="color: #ff6606 ">';
 							html += '' + userinfo.fname + '</button><span class="H-font-size-15 H-theme-font-color-white H-margin-horizontal-left-5 ">剩余时间：<span id="days">0</span ><span id="tian" class="" >' + days + '天</span></span>';
@@ -176,6 +176,11 @@
 							html += '<span class="H-font-weight-600 H-theme-font-color-white" id="username">' + userinfo.username + ' </span><br>';
 							html += '<button onclick="openlogin() " id="grade" class="H-margin-horizontal-left-0 H-button-1 H-font-size-15 H-outline-none H-padding-vertical-both-1 H-padding-horizontal-both-1 H-theme-background-color-white H-theme-font-color-white H-theme-border-color-white H-theme-border-color8-click H-theme-background-color8-click H-theme-font-color8-click H-border-radius-3"style="color: #ff6606 ">';
 							html += '' + userinfo.fname + '</button><span class="H-font-size-15 H-theme-font-color-white H-margin-horizontal-left-5  ">剩余时间：<span id="days">' + days + '</span ><span id="tian" class="" ></span></span>';
+						} else if (xu == 1) {
+							$api.addCls($api.byId('tian'), 'H-display-none');
+							html += '<span class="H-font-weight-600 H-theme-font-color-white" id="username">' + userinfo.username + ' </span><br>';
+							html += '<button onclick="openlogin() " id="grade" class="H-margin-horizontal-left-0 H-button-1 H-font-size-15 H-outline-none H-padding-vertical-both-1 H-padding-horizontal-both-1 H-theme-background-color-white H-theme-font-color-white H-theme-border-color-white H-theme-border-color8-click H-theme-background-color8-click H-theme-font-color8-click H-border-radius-3"style="color: #ff6606 ">';
+							html += '' + userinfo.fname + '</button><span class="H-font-size-15 H-theme-font-color-white H-margin-horizontal-left-5  "><span id="days"> </span ><span id="tian" class="" ></span></span>';
 						} else {
 							$api.text($api.byId('days'), time3);
 							$api.addCls($api.byId('tian'), 'H-display-none');
@@ -208,10 +213,17 @@
 		}
 
 		function change() {
+			 alert('注销成功')
+			 api.execScript({
+			     name:'root',
+	             script: 'openIndex(this)'
+             });
+		  
 		}
 
 		apiready = function() {
 			int();
+			 
 			api.addEventListener({
 				name : 'payok'
 			}, function(ret, err) {

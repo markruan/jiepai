@@ -782,7 +782,7 @@ function weilogin() {
 		key : 'weilogin'
 	}, function(ret, err) {
 		if (ret) {
-			return
+//			return
 		} else {
 			var wx = api.require('wx');
 			wx.auth({
