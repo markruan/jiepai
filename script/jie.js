@@ -688,6 +688,7 @@ function weipay(title, price, gradexu, days, vid) {
 							},
 						}
 					}, function(ret, err) {
+
 						if (ret == 0) {
 							api.closeFrame({
 								name : 'goumai'
@@ -1172,9 +1173,9 @@ function reg(nameVal, passwordVal, type, icon) {
 		}
 	}, function(ret, err) {
 
-//		api.alert({
-//			msg : JSON.stringify(ret)
-//		});
+		//		api.alert({
+		//			msg : JSON.stringify(ret)
+		//		});
 		if (ret.status == 0) {
 			api.toast({
 				msg : ret.msg
