@@ -827,6 +827,11 @@ function weireg() {
 							}, function(ret, err) {
 
 								api.setPrefs({
+									key : 'weilogin',
+									value : 1
+								});
+
+								api.setPrefs({
 									key : 'weixinlogin',
 									value : ret
 								});
@@ -843,10 +848,6 @@ function weireg() {
 									//									alert('第一次微信支付需要登录！')
 									api.closeWin({
 										name : 'log_head'
-									});
-									api.setPrefs({
-										key : 'weilogin',
-										value : 1
 									});
 
 								} else {
