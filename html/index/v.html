@@ -155,14 +155,13 @@
 					var img = pic.split(' ');
 					var picc = myobj[i].purl;
 					var varr = eval(myobj[i].vurl)
-					var vurl = eval(myobj[i].vurl)[0]
-					//					var vvprice = eval(myobj[i].vvprice)
-					var totaltime = eval(myobj[i].vtime)[0]
+					var vurl = eval(myobj[i].vurl)[0] 
+					 var totaltime = eval(myobj[i].vtime)[0]
 					var piccc = imageCache(picc)
 					html += '<div onclick="openV(\'' + vurl + '\' ,\'' + vid + '\',\'' + varr + '\',\'' + title + '\',\'' + vbianhao + '\',\'' + pic + '\' ,\'' + vprice + '\',' + xu + ',\'' + fname + '\',\'' + vprice + '\')" class="H-display-table-cell H-theme-background-color-white H-float-left  H-box-sizing-border-box H-width-avg-3 H-padding-horizontal-right-4     " >';
 					html += '<img src="../../image/default.jpg"    data-echo="' + piccc + '" class=" H-float-right H-margin-vertical-top-8 H-margin-horizontal-both-2 H-display-block" alt="" title="" style="width: 96%" ;height:200>';
 					html += '<img src="../../image/xia.png " class=" H-float-right  H-margin-vertical-top-8 H-margin-horizontal-both-2 H-display-block" style="margin-top: -200px; height: 200px ; width: 96%" alt="" title="">';
-					html += '<div  class=" " style=" margin-right:8px; margin-top:-30px;line-height: 30px; float: right; color:white ;">' + totaltime + '</div>';
+					html += '<div  class="H-font-size-12  " style=" margin-right:8px; margin-top:-30px;line-height: 30px; float: right; color:white ;">' + totaltime + '</div>';
 					html += '<div class=" H-padding-horizontal-left-5 H-font-size-12 H-padding-vertical-top-5 H-theme-font-color-hhh    " style="line-height: 35px">' + ftitle.substr(0, 7) + '</div>';
 					html += '</div>';
 				}

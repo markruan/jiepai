@@ -213,7 +213,6 @@
 				api.closeFrame({
 					name : 'history'
 				});
-				
 				$api.addCls(hh1, 'H-display-none');
 				$api.addCls(hhh, 'H-display-none');
 				$api.addCls(shouId, 'H-display-none');
@@ -379,6 +378,12 @@
 				api.setStatusBarStyle({
 					style : 'light'
 				});
+//				api.removePrefs({
+//	                key:'weilogin'
+//              });
+//              api.removePrefs({
+//	                key:'weixinlogin'
+//              });
 				var header1 = $api.byId('common_header');
 				var header2 = $api.offset(header1).h;
 				api.setPrefs({
@@ -477,9 +482,9 @@
 					from : 'common_index'
 				});
 				api.setFrameAttr({
-	                name: 'common_index',
-	                hidden : true
-                });
+					name : 'common_index',
+					hidden : true
+				});
 				api.setFrameGroupAttr({
 					name : 'group123',
 					hidden : false
