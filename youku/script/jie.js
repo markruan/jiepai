@@ -792,11 +792,19 @@ function weireg() {
 				var info = ret.value
 				login1(info.nickname, info.openId)
 			});
-
+			api.closeWin({
+				name : 'log_head'
+			});
 			alert('登录成功')
 
 		} else {
-
+			api.showProgress({
+				style : 'default',
+				animationType : 'fade',
+				title : '努力加载中...',
+				text : '先喝杯茶...',
+				modal : false
+			});
 			var wx = api.require('wx');
 			wx.auth({
 				apiKey : ''
@@ -808,7 +816,9 @@ function weireg() {
 						apiSecret : '',
 						code : code
 					}, function(ret, err) {
+
 						if (ret.status) {
+
 							var accessToken = ret.accessToken;
 							var openId = ret.openId;
 							wx.getUserInfo({
@@ -831,6 +841,9 @@ function weireg() {
 									reg(nameVal, openId, 1, headimgurl)
 
 									//									alert('第一次微信支付需要登录！')
+									api.closeWin({
+										name : 'log_head'
+									});
 									api.setPrefs({
 										key : 'weilogin',
 										value : 1
@@ -845,7 +858,22 @@ function weireg() {
 						}
 					});
 				} else {
-					alert(err.code);
+					api.hideProgress();
+					switch (err.code) {
+						case 0:
+
+							break;
+						case 1:
+							alert('用户取消')
+							break;
+						case 2:
+							alert('用户拒绝授权')
+							break;
+						case 3:
+							alert('当前设备未安装微信客户端')
+							break;
+
+					}
 				}
 			});
 
@@ -863,7 +891,13 @@ function weilogin() {
 		if (ret.value == 1) {
 
 		} else {
-
+			api.showProgress({
+				style : 'default',
+				animationType : 'fade',
+				title : '努力加载中...',
+				text : '先喝杯茶...',
+				modal : false
+			});
 			var wx = api.require('wx');
 			wx.auth({
 				apiKey : ''
@@ -875,6 +909,7 @@ function weilogin() {
 						apiSecret : '',
 						code : code
 					}, function(ret, err) {
+						api.hideProgress();
 						if (ret.status) {
 							var accessToken = ret.accessToken;
 							var openId = ret.openId;
@@ -903,7 +938,23 @@ function weilogin() {
 						}
 					});
 				} else {
-					alert(err.code);
+
+					switch (err.code) {
+						case 0:
+
+							break;
+						case 1:
+							alert('用户取消')
+							break;
+						case 2:
+							alert('用户拒绝授权')
+							break;
+						case 3:
+							alert('当前设备未安装微信客户端')
+							break;
+
+					}
+
 				}
 			});
 

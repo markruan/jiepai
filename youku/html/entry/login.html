@@ -67,7 +67,7 @@
 				其他方式登录
 			</div>
 			<div class="H-border-vertical-bottom-after H-theme-font-color-white H-margin-horizontal-auto"style="width: 80%">
-				<span  >.  </span> 
+				<span  >. </span>
 			</div>
 			<div onclick="weireg() "  class="H-flexbox-horizontal H-text-align-center  H-padding-vertical-both-15">
 				<div class="H-flex-item">
@@ -152,12 +152,15 @@
 								name : 'me',
 								frameName : 'me',
 								script : "int()"
-							}); 
+							});
 							api.execScript({
 								name : 'info',
 								frameName : 'edit',
 								script : "intt()"
-							}); 
+							});
+							api.closeWin({
+								name : 'log_head'
+							});
 						} else {
 							alert(ret.msg)
 						}
