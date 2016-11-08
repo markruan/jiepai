@@ -639,10 +639,12 @@ function openme() {
 //微信支付
 function weipay(title, price, gradexu, days, vid) {
 
-	weilogin()
+	//	weilogin()
+
 	var totalFee = price * 100
 
-	var info = $api.getStorage('info');
+	var info = $api.getStorage('userinfo');
+
 	var wxPay = api.require('wxPay');
 	var tradeNO = (new Date()).valueOf();
 
@@ -650,12 +652,14 @@ function weipay(title, price, gradexu, days, vid) {
 		sync : true,
 		key : 'user'
 	});
+
 	wxPay.config({
 		apiKey : '',
 		mchId : '1390293602',
 		partnerKey : 'b040d663f4b9af40c8dce89b0794e8c0',
 		notifyUrl : 'www.baidu.com'
 	}, function(ret, err) {
+
 		if (ret.status) {
 			wxPay.pay({
 				description : title,
@@ -664,6 +668,7 @@ function weipay(title, price, gradexu, days, vid) {
 				productId : '12235413214070356458058',
 				openId : info.openid
 			}, function(ret, err) {
+
 				if (ret.status) {
 					if (vid) {
 						goumai(vid, 0)
@@ -890,6 +895,9 @@ function weilogin() {
 	}, function(ret, err) {
 
 		if (ret.value == 1) {
+			api.toast({
+				msg : '登录'
+			});
 
 		} else {
 			api.showProgress({
