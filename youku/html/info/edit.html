@@ -118,13 +118,12 @@
 				key : 'quanji'
 			});
 			api.closeFrame({
-	            name: 'me'
-            });
+				name : 'me'
+			});
 			api.openWin({
 				name : 'home1',
 				url : '../../html/home.html'
 			});
-			
 			setTimeout(close(), 1600)
 		}
 
@@ -162,9 +161,15 @@
 					$api.text($api.byId('phone'), ret.phone);
 					if (ret.phone) {
 					} else {
-						alert("请绑定手机认证否无法，否则密码丢失后将无法找回")
+						api.toast({
+							msg : '请绑定手机认证否无法，否则密码丢失后将无法找回'
+						});
 					}
-					$api.attr($api.byId('img'), 'src', uploadUrl + ret.icon);
+					if (ret.weixin == 1) {
+						$api.attr($api.byId('img'), 'src', ret.icon)
+					} else {
+						$api.attr($api.byId('img'), 'src', uploadUrl + ret.icon);
+					}
 					api.refreshHeaderLoadDone();
 				});
 			} else {
