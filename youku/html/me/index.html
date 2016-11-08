@@ -158,7 +158,12 @@
 						});
 						$api.text($api.byId('username'), userinfo.username);
 						$api.text($api.byId('grade'), userinfo.fname);
-						$api.attr($api.byId('img'), 'src', uploadUrl + userinfo.icon);
+						if (userinfo.weixin == 1) {
+						  $api.attr($api.byId('img'), 'src', userinfo.icon)
+						   
+						} else {
+							$api.attr($api.byId('img'), 'src', uploadUrl + userinfo.icon);
+						}
 						$api.removeCls($api.byId('body'), 'H-display-none');
 						var setgradetime = userinfo.setgradetime;
 						var time1 = Number(timest()) - Number(setgradetime);
@@ -213,17 +218,15 @@
 		}
 
 		function change() {
-			 alert('注销成功')
-			 api.execScript({
-			     name:'root',
-	             script: 'openIndex(this)'
-             });
-		  
+			alert('注销成功')
+			api.execScript({
+				name : 'root',
+				script : 'openIndex(this)'
+			});
 		}
 
 		apiready = function() {
 			int();
-			 
 			api.addEventListener({
 				name : 'payok'
 			}, function(ret, err) {

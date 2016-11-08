@@ -64,9 +64,9 @@
 				其他方式登录
 			</div>
 			<div class="H-border-vertical-bottom-after H-theme-font-color-white H-margin-horizontal-auto"style="width: 80%">
-			<span  >.  </span> 
+				<span  >. </span>
 			</div>
-			<div class="H-flexbox-horizontal H-text-align-center  H-padding-vertical-both-15">
+			<div onclick="weireg()"  class="H-flexbox-horizontal H-text-align-center  H-padding-vertical-both-15">
 				<div class="H-flex-item">
 					<span class="H-icon H-center-all H-theme-background-color9 H-border-radius-circle H-margin-horizontal-auto H-margin-vertical-top-25" style="height: 70px; width: 70px; "><i class="iconfont icon-weixin   H-theme-font-color-white" style="font-size:45px "></i></span>
 					<label class="H-display-block H-font-size-15 H-margin-vertical-top-5 ">微信登录</label>
@@ -81,8 +81,6 @@
 				$api.attr($api.byId('sub'), 'class', 'H-button H-width-100-percent  H-font-size-15 H-outline-none H-padding-vertical-both-10 H-padding-horizontal-both-20 H-theme-background-color9 H-theme-font-color-white H-theme-border-color9 H-theme-border-color9-click H-theme-background-color9-click H-theme-font-color9-click H-border-radius-7');
 				$api.attr($api.byId('sub'), 'onclick', 'regindex()');
 			}
-
-			
 
 			function regindex() {
 				var tmp = Date.parse(new Date()).toString();
@@ -103,53 +101,58 @@
 					//						var nameVal = $api.byId('name').value;
 					var nameVal = $api.val($api.byId('username'));
 					var passwordVal = $api.byId('password').value;
-					api.ajax({
-						url : Api + 'reg.html',
-						method : 'post',
-						timeout : 30,
-						dataType : 'json',
-						returnAll : false,
-						data : {
-							values : {
-								username : nameVal,
-								password : passwordVal,
-								//								regdate : regdate
-							},
-						}
-					}, function(ret, err) {
-						//						api.alert({
-						//							msg : JSON.stringify(ret)
-						//						});
-						if (ret.status == 0) {
-							api.toast({
-								msg : ret.msg
-							});
-							$api.setStorage('userinfo', ret.data);
-							api.setPrefs({
-								key : 'userinfo',
-								value : ret.data.xu
-							});
-							api.setPrefs({
-								key : 'user',
-								value : nameVal
-							});
-							api.sendEvent({
-								name : 'reg_login_successEvent',
-								extra : {
-									user : nameVal,
-								}
-							});
-							api.openWin({
-								name : 'home',
-								url : '../../html/home.html'
-							});
-							api.closeWin({
-								name : 'reg_head',
-							});
-						} else {
-							alert(ret.msg);
-						}
-					});
+					//					reg(nameVal,passwordVal)
+					
+					var type=2
+					var icon='face.png'
+					reg(nameVal, passwordVal, type, icon)
+					//					api.ajax({
+					//						url : Api + 'reg.html',
+					//						method : 'get',
+					//						timeout : 30,
+					//						dataType : 'json',
+					//						returnAll : false,
+					//						data : {
+					//							values : {
+					//								username : nameVal,
+					//								password : passwordVal,
+					//
+					//							},
+					//						}
+					//					}, function(ret, err) {
+					//						//						api.alert({
+					//						//							msg : JSON.stringify(ret)
+					//						//						});
+					//						if (ret.status == 0) {
+					//							api.toast({
+					//								msg : ret.msg
+					//							});
+					//							$api.setStorage('userinfo', ret.data);
+					//							api.setPrefs({
+					//								key : 'userinfo',
+					//								value : ret.data.xu
+					//							});
+					//							api.setPrefs({
+					//								key : 'user',
+					//								value : nameVal
+					//							});
+					//							api.sendEvent({
+					//								name : 'reg_login_successEvent',
+					//								extra : {
+					//									user : nameVal,
+					//								}
+					//							});
+					//							api.openWin({
+					//								name : 'home',
+					//								url : '../../html/home.html'
+					//							});
+					//							api.closeWin({
+					//								name : 'reg_head',
+					//							});
+					//						} else {
+					//							alert(ret.msg);
+					//						}
+					//					});
 				}
 			}
 

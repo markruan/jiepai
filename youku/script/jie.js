@@ -776,6 +776,83 @@ function weilogin1() {
 
 }
 
+function weireg() {
+
+	api.getPrefs({
+		key : 'weilogin'
+	}, function(ret, err) {
+
+		if (ret.value == 1) {
+
+			api.getPrefs({
+				sync : false,
+				key : 'weixinlogin'
+			}, function(ret, err) {
+				var info = ret.value
+				login1(info.nickname, info.openId)
+			});
+
+			alert('登录成功')
+
+		} else {
+
+			var wx = api.require('wx');
+			wx.auth({
+				apiKey : ''
+			}, function(ret, err) {
+				if (ret.status) {
+					code = ret.code
+					wx.getToken({
+						apiKey : '',
+						apiSecret : '',
+						code : code
+					}, function(ret, err) {
+						if (ret.status) {
+							var accessToken = ret.accessToken;
+							var openId = ret.openId;
+							wx.getUserInfo({
+								accessToken : accessToken,
+								openId : openId
+							}, function(ret, err) {
+
+								api.setPrefs({
+									key : 'weixinlogin',
+									value : ret
+								});
+
+								var nameVal = ret.nickname
+								var openId = ret.openid
+
+								var headimgurl = ret.headimgurl
+
+								if (ret.status) {
+
+									reg(nameVal, openId, 1, headimgurl)
+
+									//									alert('第一次微信支付需要登录！')
+									api.setPrefs({
+										key : 'weilogin',
+										value : 1
+									});
+
+								} else {
+									alert(err.code);
+								}
+							});
+						} else {
+							alert(err.code);
+						}
+					});
+				} else {
+					alert(err.code);
+				}
+			});
+
+		}
+	});
+
+}
+
 function weilogin() {
 
 	api.getPrefs({
@@ -947,7 +1024,7 @@ function openpay(danprice, gname, fname, price, days, gradexu, dangeid) {
 			},
 		}
 	}, function(ret, err) {
-		console.log(ret)
+
 		if (ret == 0) {
 			alert('已经购买过了')
 			return
@@ -1074,4 +1151,126 @@ function findpw() {
 		name : 'find_head',
 		url : '../../html/findpw/find_head.html'
 	});
+}
+
+function reg(nameVal, passwordVal, type, icon) {
+
+	api.ajax({
+		url : Api + 'reg.html',
+		method : 'post',
+		timeout : 30,
+		dataType : 'json',
+		returnAll : false,
+		data : {
+			values : {
+				username : nameVal,
+				password : passwordVal,
+				type : type,
+				icon : icon
+				//								regdate : regdate
+			},
+		}
+	}, function(ret, err) {
+
+//		api.alert({
+//			msg : JSON.stringify(ret)
+//		});
+		if (ret.status == 0) {
+			api.toast({
+				msg : ret.msg
+			});
+			$api.setStorage('userinfo', ret.data);
+			api.setPrefs({
+				key : 'userinfo',
+				value : ret.data.xu
+			});
+			api.setPrefs({
+				key : 'user',
+				value : nameVal
+			});
+			api.sendEvent({
+				name : 'reg_login_successEvent',
+				extra : {
+					user : nameVal,
+				}
+			});
+			api.openWin({
+				name : 'home',
+				url : '../../html/home.html'
+			});
+			api.closeWin({
+				name : 'reg_head',
+			});
+		} else if (ret.status == 2) {
+			login1(nameVal, passwordVal)
+		} else {
+			alert(err.msg);
+		}
+	});
+
+}
+
+function login1(nameVal, passwordVal) {
+
+	api.ajax({
+		url : Api + 'login.html',
+		method : 'post',
+		timeout : 30,
+		dataType : 'json',
+		returnAll : false,
+		data : {
+			values : {
+				username : nameVal,
+				password : passwordVal,
+			},
+		}
+	}, function(ret, err) {
+		if (ret.status == 1) {
+			api.toast({
+				msg : ret.msg
+			});
+			api.setPrefs({
+				key : 'user',
+				value : nameVal
+			});
+			$api.setStorage('userinfo', ret.data);
+			api.setPrefs({
+				key : 'userinfo',
+				value : ret.data.xu
+			});
+			api.setPrefs({
+				key : 'userid',
+				value : ret.data.id
+			});
+			api.sendEvent({
+				name : 'reg_login_successEvent',
+				extra : {
+					user : nameVal,
+				}
+			});
+			api.openWin({
+				name : 'home',
+				url : '../../html/home.html'
+			});
+			api.closeWin({
+				name : 'login_head',
+			});
+			api.sendEvent({
+				name : 'payok',
+			})
+			api.execScript({
+				name : 'me',
+				frameName : 'me',
+				script : "int()"
+			});
+			api.execScript({
+				name : 'info',
+				frameName : 'edit',
+				script : "intt()"
+			});
+		} else {
+			alert(ret.msg)
+		}
+	});
+
 }
