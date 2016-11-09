@@ -17,7 +17,6 @@
 				width: 30%;
 				margin-top: 10px;
 			}
-		
 		</style>
 	</head>
 	<body>
@@ -38,8 +37,10 @@
 				script : jsfun
 			});
 		}
-
+       
 		apiready = function() {
+		
+		   $api.setStorage('winheight',api.winHeight);
 			var list = $api.byId('list');
 			api.ajax({
 				url : Api + 'sou.html',

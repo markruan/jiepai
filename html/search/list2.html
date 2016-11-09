@@ -6,10 +6,9 @@
 		<title>title</title>
 		<link rel="stylesheet" type="text/css" href="../../css/Hui.css"/>
 		<style>
-		 html,body{
-		  
-		  background-color: white;
-		 }
+			html,body{
+			 background-color: white;
+			 }
 			.H-channel-line {
 				margin-left: 1px;
 				height: 8px;
@@ -49,7 +48,7 @@
 					vprice : vprice,
 					xu : xu,
 					fname : fname,
-//					vvprice : vvprice,
+					//					vvprice : vvprice,
 					type : '视频'
 				}
 			});
@@ -114,22 +113,22 @@
 						var totaltime = eval(myobj[i].vtime)[0]
 						var piccc = imageCache(picc)
 						html += '<div onclick="openV(\'' + vurl + '\' ,\'' + vid + '\',\'' + varr + '\',\'' + title + '\',\'' + vbianhao + '\',\'' + pic + '\' ,\'' + vprice + '\',' + xu + ',\'' + fname + '\',\'' + vprice + '\')" class="H-display-table-cell H-theme-background-color-white H-float-left  H-box-sizing-border-box H-width-avg-3 H-padding-horizontal-right-4 H-margin-vertical-bottom-10   " style="margin-bottom: 10px; ">';
-							html += '<img src="../../image/default.jpg"    data-echo="' + piccc + '" class=" H-float-right H-margin-vertical-top-8 H-margin-horizontal-both-2 H-display-block" alt="" title="" style="width: 96%" ;height:200>';
-							html += '<img src="../../image/xia.png " class=" H-float-right  H-margin-vertical-top-8 H-margin-horizontal-both-2 H-display-block" style="margin-top: -200px; height: 200px ; width: 96%" alt="" title="">';
-							html += '<div  class="H-font-size-12 " style=" margin-right:8px; margin-top:-30px;line-height: 30px; float: right; color:white ;">' + totaltime + '</div>';
-							html += '<div class=" H-theme-font-color-hhh  H-font-size-14 H-padding-vertical-top-10    " style="line-height: 35px">' + ftitle.substr(0, 7) + '</div>';
-							html += ' </div>';
-//						html += '<div  class="H-flexbox-horizontal H-theme-background-color-white  "  >';
-//						html += '<div class="H-padding-vertical-both-10" style="width:31%; hight:95%;"><img onclick="openV(\'' + vurl + '\' ,\'' + vid + '\',\'' + varr + '\',\'' + title + '\',\'' + vbianhao + '\',\'' + pic + '\' ,\'' + vprice + '\',' + xu + ',\'' + fname + '\',\'' + vvprice + '\')" src="../../image/default.jpg"    data-echo="' + picc + '" alt="" title="" class="H-display-block H-margin-horizontal-left-10" style="width:100%;  "></div>';
-//						html += '<div class="H-flex-item H-padding-10">';
-//						html += '<strong class="H-font-weight-normal font-weight-500 H-font-size-16 H-display-block H-padding-horizontal-left-10 H-padding-vertical-both-3">名称：<span>' + title.substr(0, 7) + '</span></strong>';
-//						html += '<strong class="H-font-weight-normal font-weight-500 H-font-size-16 H-display-block H-padding-horizontal-left-10 H-padding-vertical-both-3">续集：第42期</strong>';
-//						html += '<strong class="H-font-weight-normal font-weight-500 H-font-size-16 H-display-block H-padding-horizontal-left-10 H-padding-vertical-both-3">编号：<span>' + vbianhao + '</span></strong>';
-//						html += '<strong class="H-font-weight-normal font-weight-500 H-font-size-16 H-display-block H-padding-horizontal-left-10 H-padding-vertical-both-3">类型：VIP用户</strong>';
-//						html += '<span class="H-padding-horizontal-left-10 H-float-left">';
-//						html += '<button class="H-button H-font-size-15 H-outline-none H-padding-vertical-both-8 H-padding-horizontal-both-20 H-theme-background-color-zhuti H-theme-font-color-white H-theme-border-color8 H-theme-border-color8-click H-theme-background-color8-click H-theme-font-color8-click H-border-radius-3">' + fname.substr(0, 2) + '播放</button></span>';
-//						html += '<span class="H-padding-horizontal-left-10 H-float-left">';
-//						html += '<button onclick="openme()" class="H-button H-font-size-15 H-outline-none H-theme-background-color-transparent H-padding-vertical-both-8 H-padding-horizontal-both-20 H-theme-font-color4 H-theme-border-color4 H-theme-border-color4-click H-theme-background-color4-click H-theme-font-color4-click" >开通VIP</button> </span></div></div><div class="H-padding-vertical-bottom-5"></div>';
+						html += '<img src="../../image/default.jpg"    data-echo="' + piccc + '" class=" H-float-right H-margin-vertical-top-8 H-margin-horizontal-both-2 H-display-block" alt="" title="" style="width: 96%" ;height:200>';
+						html += '<img src="../../image/xia.png " class=" H-float-right  H-margin-vertical-top-8 H-margin-horizontal-both-2 H-display-block" style="margin-top: -200px; height: 200px ; width: 96%" alt="" title="">';
+						html += '<div  class="H-font-size-12 " style=" margin-right:8px; margin-top:-30px;line-height: 30px; float: right; color:white ;">' + totaltime + '</div>';
+						html += '<div class=" H-theme-font-color-hhh  H-font-size-14 H-padding-vertical-top-10    " style="line-height: 35px">' + ftitle.substr(0, 7) + '</div>';
+						html += ' </div>';
+						//						html += '<div  class="H-flexbox-horizontal H-theme-background-color-white  "  >';
+						//						html += '<div class="H-padding-vertical-both-10" style="width:31%; hight:95%;"><img onclick="openV(\'' + vurl + '\' ,\'' + vid + '\',\'' + varr + '\',\'' + title + '\',\'' + vbianhao + '\',\'' + pic + '\' ,\'' + vprice + '\',' + xu + ',\'' + fname + '\',\'' + vvprice + '\')" src="../../image/default.jpg"    data-echo="' + picc + '" alt="" title="" class="H-display-block H-margin-horizontal-left-10" style="width:100%;  "></div>';
+						//						html += '<div class="H-flex-item H-padding-10">';
+						//						html += '<strong class="H-font-weight-normal font-weight-500 H-font-size-16 H-display-block H-padding-horizontal-left-10 H-padding-vertical-both-3">名称：<span>' + title.substr(0, 7) + '</span></strong>';
+						//						html += '<strong class="H-font-weight-normal font-weight-500 H-font-size-16 H-display-block H-padding-horizontal-left-10 H-padding-vertical-both-3">续集：第42期</strong>';
+						//						html += '<strong class="H-font-weight-normal font-weight-500 H-font-size-16 H-display-block H-padding-horizontal-left-10 H-padding-vertical-both-3">编号：<span>' + vbianhao + '</span></strong>';
+						//						html += '<strong class="H-font-weight-normal font-weight-500 H-font-size-16 H-display-block H-padding-horizontal-left-10 H-padding-vertical-both-3">类型：VIP用户</strong>';
+						//						html += '<span class="H-padding-horizontal-left-10 H-float-left">';
+						//						html += '<button class="H-button H-font-size-15 H-outline-none H-padding-vertical-both-8 H-padding-horizontal-both-20 H-theme-background-color-zhuti H-theme-font-color-white H-theme-border-color8 H-theme-border-color8-click H-theme-background-color8-click H-theme-font-color8-click H-border-radius-3">' + fname.substr(0, 2) + '播放</button></span>';
+						//						html += '<span class="H-padding-horizontal-left-10 H-float-left">';
+						//						html += '<button onclick="openme()" class="H-button H-font-size-15 H-outline-none H-theme-background-color-transparent H-padding-vertical-both-8 H-padding-horizontal-both-20 H-theme-font-color4 H-theme-border-color4 H-theme-border-color4-click H-theme-background-color4-click H-theme-font-color4-click" >开通VIP</button> </span></div></div><div class="H-padding-vertical-bottom-5"></div>';
 					}
 					$api.html(list, html);
 					api.hideProgress();
@@ -142,11 +141,9 @@
 						}
 					});
 				} else {
-				
-				    api.hideProgress();
+					api.hideProgress();
 					api.refreshHeaderLoadDone();
 					$api.html(list, '<div class="H-center-all H-margin-vertical-top-25"> 无相关搜索！</div>');
-					
 				}
 			})
 		}

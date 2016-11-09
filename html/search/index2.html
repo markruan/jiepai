@@ -7,7 +7,6 @@
 		<title></title>
 		<link rel="stylesheet" type="text/css" href="../../css/Hui.css" />
 		<style type="text/css">
-			 
 			.H-theme-font-color-tab {
 				color: #e43252;
 			}
@@ -46,7 +45,8 @@
 				var header4 = $api.getStorage('h1');
 				var footer = parseInt($api.getStorage('f1'));
 				var hight1 = parseInt(header3) + parseInt(header4)
-				var key1=api.pageParam.key1
+				var key1 = api.pageParam.key1
+				var winheight = $api.getStorage('winheight');
 				api.openFrameGroup({
 					name : 'search',
 					background : '#fff',
@@ -55,7 +55,7 @@
 						x : 0,
 						y : hight1,
 						w : 'auto',
-						h : api.winHeight - footer - hight1  
+						h : winheight - hight1
 					},
 					index : 0,
 					frames : [{
