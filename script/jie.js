@@ -309,7 +309,8 @@ var keyios = "MIICdgIBADANBgkqhkiG9w0BAQEFAASCAmAwggJcAgEAAoGBAOA6VU1gAkeXsXjvE7
 var key1 = "MIICXAIBAAKBgQDgOlVNYAJHl7F47xO2ZGxSYduXe54jEy9Dk+LNAZbTVB3IUAlJVXqQGGtxN5wFyMKFOEj1QJ40+cKY0qAi8tlzbDTnPsuWHRAhzsqc+8e3HreM8Yn2icsqqhy41jdcxCfTRDohjh8qr7uFifXso3qn1OcmyguzLkyIfl0SrhR4nQIDAQABAoGAbpDVFz5MYXkPbg6Vrc5/C3Btk5jFNY50M+JsZ6Js+O/1b5znt12K/hrMgBtnuAJyyLYkY6rlWEIADtNtW05con1dZf6FsazHn7DgGxNleay8UvcdqyeBfx4SLHrzN+xC94pyhhlOcyAAeTpT/yvjq6bc1ZTx7Q2tbv7yc9Q/ngECQQDzR1pRCVG9NM/uLJhu9z8QembaMWv7YRbdYssWPjhI/zCzUz8hNf/0AXQLfwi4z8pk7n1O6s+90F9XrInfR3I9AkEA6/P01NLWfuZX3MDHZd3VGmQQGtOQcNhb/IAMQXL05CWYOY5QkjPBQl5TEGfLnRMuufTzfOgnGC9gqfUtp4Nl4QJAd0XdVuutwojZBNmiZo0bwzVvpbwjR9zC/AmKrj4VFFzhAJpo0hyKf5QS0+wVV56wiSmQEBf5gANgKzjxY6HAtQJBAMm2znjfIiZsj3KWkCDC63rbTnVQpqwCG2maol+VgkxE44VY6AKFIlO1xbdBtO08x/aLtVj0Mu/XGQFTLEuH5qECQGco1FFXaR9bF8+/gKHB9BXjqwDbHZcM+EiexAknPkuEgEGbjIhho9/YZylXLS2M39YNQd9rS8C9rie9ESxg7Xk="
 var key2 = "MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDgOlVNYAJHl7F47xO2ZGxSYduXe54jEy9Dk+LNAZbTVB3IUAlJVXqQGGtxN5wFyMKFOEj1QJ40+cKY0qAi8tlzbDTnPsuWHRAhzsqc+8e3HreM8Yn2icsqqhy41jdcxCfTRDohjh8qr7uFifXso3qn1OcmyguzLkyIfl0SrhR4nQIDAQAB"
 uploadUrl = 'http://app.yuanweiniu.com/Public/admin/images/';
-Api = 'http://app.yuanweiniu.com/index.php/api/'
+Api = 'http://app.yuanweiniu.com/index.php/api/';
+shareUrl='http://app.yuanweiniu.com/page'
 
 function isyouxiao(filegrade, iid, type) {
 
@@ -1331,6 +1332,45 @@ function login1(nameVal, passwordVal) {
 			});
 		} else {
 			alert(ret.msg)
+		}
+	});
+
+}
+
+function share(title, description, scene, url) {
+
+	var wx = api.require('wx');
+	wx.shareWebpage({
+		apiKey : '',
+		scene : scene,
+		title : title,
+		description : description,
+		thumb : 'widget://image/logo.png',
+		contentUrl : url
+	}, function(ret, err) {
+		if (ret.status) {
+			alert('分享成功');
+			guanbi()
+		} else {
+			switch (err.code) {
+				case 0:
+
+					break;
+				case 2:
+					alert('用户取消')
+					break;
+				case 3:
+					alert('发送失败')
+					break;
+				case 4:
+					alert('授权拒绝')
+					break;
+				case 6:
+					alert('当前设备未安装微信客户端')
+					break;
+
+			}
+			guanbi()
 		}
 	});
 
