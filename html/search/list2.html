@@ -87,6 +87,7 @@
 			api.ajax({
 				url : Api + 'search.html',
 				method : 'post',
+				dataType : 'text',
 				data : {
 					values : {
 						key : ky,
@@ -94,7 +95,8 @@
 					},
 				}
 			}, function(ret, err) {
-				if (ret != '') {
+		  
+				if (ret != 1) {
 					var myobj = ret
 					for (var i = 0; i < myobj.length; i++) {
 						var title = myobj[i].vname;
