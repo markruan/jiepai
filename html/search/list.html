@@ -72,7 +72,7 @@
 			api.ajax({
 				url : Api + 'search.html',
 				method : 'post',
-				dataType : 'text',
+				dataType : 'json',
 				data : {
 					values : {
 						key : ky,
@@ -80,8 +80,8 @@
 					},
 				}
 			}, function(ret, err) {
-				if (ret != 1) {
-					var myobj = ret
+				if (ret.status == 0) {
+					var myobj = ret.data
 					for (var i = 0; i < myobj.length; i++) {
 						var title = myobj[i].vname;
 						var pic = myobj[i].pp
