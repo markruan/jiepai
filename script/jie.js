@@ -1354,10 +1354,11 @@ function share(title, description, scene, url) {
 		} else {
 			switch (err.code) {
 				case 0:
-
+                    guanbi()
 					break;
 				case 2:
 					alert('用户取消')
+					 
 					break;
 				case 3:
 					alert('发送失败')
