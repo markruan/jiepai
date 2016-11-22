@@ -335,11 +335,9 @@ function isyouxiao(filegrade, iid, type) {
 				}
 			}, function(ret, err) {
 				console.log(JSON.stringify(ret))
-				var gradexu = ret.xu;
-				alert(gradexu)
+				var gradexu = ret.xu; 
 				var setgradetime = ret.setgradetime;
-
-				var time1 = Number(timest()) - Number(setgradetime);
+                var time1 = Number(timest()) - Number(setgradetime);
 				var time2 = Math.round(time1 / (60 * 60 * 24));
 
 				var days = ret.days;
@@ -385,7 +383,7 @@ function isyouxiao(filegrade, iid, type) {
 
 						api.openFrame({
 							name : 'login1',
-							url : '../../html/login1.html',
+							url : '../../html/entry/login1.html',
 							rect : {
 								x : 0,
 								y : 0,
@@ -506,7 +504,7 @@ function isyouxiao(filegrade, iid, type) {
 
 			api.openFrame({
 				name : 'login1',
-				url : '../../html/login1.html',
+				url : '../../html/entry/login1.html',
 				rect : {
 					x : 0,
 					y : 0,
@@ -1259,7 +1257,7 @@ function reg1(nameVal, passwordVal, type, icon) {
 			});
 			api.openWin({
 				name : 'home',
-				url : 'widget://html/home.html',
+				url : '../../html/home.html',
 				reload : true
 			});
 			api.closeWin({
@@ -1320,7 +1318,7 @@ function login1(nameVal, passwordVal) {
 			});
 			api.openWin({
 				name : 'home',
-				url : 'widget://html/home.html',
+				url : '../../html/home.html',
 				reload : true
 			});
 			api.closeWin({
