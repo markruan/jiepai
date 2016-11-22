@@ -47,13 +47,13 @@
 		</div>
 		<div class="header" style="margin-top:25%;"></div>
 		<img class="H-center-all" src="../image/suo.png" />
-		<button onclick="login()" class=" H-center-all H-button H-width-60-percent  H-font-size-15 H-outline-none H-padding-vertical-both-6 H-padding-horizontal-both-15  H-theme-font-color-white H-theme-border-color9 H-theme-border-color1-click H-theme-background-color1-click H-theme-font-color1-click H-border-radius-3"style="background-color: #15924a">
+		<button onclick="weireg()" class=" H-center-all H-button H-width-60-percent  H-font-size-15 H-outline-none H-padding-vertical-both-6 H-padding-horizontal-both-15  H-theme-font-color-white H-theme-border-color9 H-theme-border-color1-click H-theme-background-color1-click H-theme-font-color1-click H-border-radius-3"style="background-color: #15924a">
 			<i class="iconfont icon-weixin H-font-size-32    H-float-left"></i><span class="  H-font-size-20  H-margin-horizontal-right-20 H-center-all ">微信登陆 </span>
 		</button>
-		<button onclick="login()" class=" H-center-all  H-button H-width-60-percent  H-font-size-15 H-outline-none H-padding-vertical-both-6 H-padding-horizontal-both-15 H-theme-background-color2 H-theme-font-color-white H-theme-border-color2 H-theme-border-color1-click H-theme-background-color1-click H-theme-font-color1-click H-border-radius-3"style="background-color: #c6391e">
+		<button onclick="wei_login()" class=" H-center-all  H-button H-width-60-percent  H-font-size-15 H-outline-none H-padding-vertical-both-6 H-padding-horizontal-both-15 H-theme-background-color2 H-theme-font-color-white H-theme-border-color2 H-theme-border-color1-click H-theme-background-color1-click H-theme-font-color1-click H-border-radius-3"style="background-color: #c6391e">
 			<i class="iconfont  icon-weibo H-font-size-32   H-float-left"></i><span class="  H-font-size-20 H-margin-horizontal-right-20 H-center-all ">微博登陆 </span>
 		</button>
-		<button onclick="login()"  class=" H-center-all  H-button H-width-60-percent H-margin-vertical-both-8   H-font-size-15 H-outline-none H-padding-vertical-both-6 H-padding-horizontal-both-15 H-theme-background-color1 H-theme-font-color-white H-theme-border-color1 H-theme-border-color1-click H-theme-background-color1-click H-theme-font-color1-click H-border-radius-3" style="background-color: #30adfd">
+		<button onclick="qq_login()"  class=" H-center-all  H-button H-width-60-percent H-margin-vertical-both-8   H-font-size-15 H-outline-none H-padding-vertical-both-6 H-padding-horizontal-both-15 H-theme-background-color1 H-theme-font-color-white H-theme-border-color1 H-theme-border-color1-click H-theme-background-color1-click H-theme-font-color1-click H-border-radius-3" style="background-color: #30adfd">
 			<i class="iconfont icon-qq H-font-size-32       H-float-left  "></i><span class="   H-font-size-20 H-center-all " >QQ登陆 </span>
 		</button>
 		<div class="H-center-all">
@@ -69,13 +69,60 @@
 	<script type="text/javascript" src="../script/H.js"></script>
 	<script type="text/javascript" src="../script/jie.js"></script>
 	<script type="text/javascript">
-	
-
 		function login() {
 			api.openWin({
 				name : 'login_head',
 				url : 'entry/login_head.html',
 				pageParam : {}
+			});
+		}
+
+		function wei_login() {
+			var weibo = api.require('weibo');
+			weibo.auth(function(ret, err) {
+				if (ret.status) {
+					var token = ret.token
+					var userId = ret.userId
+					weibo.getUserInfo({
+						token : token,
+						userId : userId
+					}, function(ret, err) {
+						if (ret.status) {
+							reg1(ret.userInfo.name, ret.userInfo.id, 2, ret.userInfo.avatar_large)
+						}
+					});
+				}
+			});
+		}
+
+		function qq_login() {
+			var qq = api.require('qq');
+			qq.installed(function(ret, err) {
+				if (ret.status) {
+					qq.login(function(ret, err) {
+						if (ret.status) {
+							var openId = ret.openId;
+							var accessToken = ret.accessToken
+							qq.getUserInfo(function(ret, err) {
+								if (ret.status) {
+									 var icon=ret.info.figureurl_qq_2;
+									 var nickname=ret.info.nickname
+									 reg1(nickname, openId, 3, icon)
+								} else {
+									api.alert({
+										msg : err.msg
+									});
+								}
+							});
+						} else {
+							alert(ret.err)
+						}
+					});
+				} else {
+					api.alert({
+						msg : "没有安装"
+					});
+				}
 			});
 		}
 

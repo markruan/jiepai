@@ -310,7 +310,7 @@ var key1 = "MIICXAIBAAKBgQDgOlVNYAJHl7F47xO2ZGxSYduXe54jEy9Dk+LNAZbTVB3IUAlJVXqQ
 var key2 = "MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDgOlVNYAJHl7F47xO2ZGxSYduXe54jEy9Dk+LNAZbTVB3IUAlJVXqQGGtxN5wFyMKFOEj1QJ40+cKY0qAi8tlzbDTnPsuWHRAhzsqc+8e3HreM8Yn2icsqqhy41jdcxCfTRDohjh8qr7uFifXso3qn1OcmyguzLkyIfl0SrhR4nQIDAQAB"
 uploadUrl = 'http://app.yuanweiniu.com/Public/admin/images/';
 Api = 'http://app.yuanweiniu.com/index.php/api/';
-shareUrl='http://app.yuanweiniu.com/page'
+shareUrl = 'http://app.yuanweiniu.com/page'
 
 function isyouxiao(filegrade, iid, type) {
 
@@ -849,7 +849,7 @@ function weireg() {
 
 								if (ret.status) {
 
-									reg(nameVal, openId, 1, headimgurl)
+									reg1(nameVal, openId, 1, headimgurl)
 
 									//									alert('第一次微信支付需要登录！')
 									api.closeWin({
@@ -1215,7 +1215,7 @@ function findpw() {
 	});
 }
 
-function reg(nameVal, passwordVal, type, icon) {
+function reg1(nameVal, passwordVal, type, icon) {
 
 	api.ajax({
 		url : Api + 'reg.html',
@@ -1229,14 +1229,12 @@ function reg(nameVal, passwordVal, type, icon) {
 				password : passwordVal,
 				type : type,
 				icon : icon
-				//								regdate : regdate
+
 			},
 		}
 	}, function(ret, err) {
-
-		//		api.alert({
-		//			msg : JSON.stringify(ret)
-		//		});
+		console.log(JSON.stringify(ret))
+		console.log(JSON.stringify(ret))
 		if (ret.status == 0) {
 			api.toast({
 				msg : ret.msg
@@ -1258,15 +1256,19 @@ function reg(nameVal, passwordVal, type, icon) {
 			});
 			api.openWin({
 				name : 'home',
-				url : '../../html/home.html'
+				url : 'widget://html/home.html',
+				reload : true
 			});
 			api.closeWin({
 				name : 'reg_head',
 			});
+			
 		} else if (ret.status == 2) {
+
 			login1(nameVal, passwordVal)
+			 
 		} else {
-			alert(err.msg);
+			alert(ret.msg);
 		}
 	});
 
@@ -1288,6 +1290,9 @@ function login1(nameVal, passwordVal) {
 		}
 	}, function(ret, err) {
 		if (ret.status == 1) {
+		    api.closeFrame({
+				name : 'login1'
+			});
 			api.toast({
 				msg : ret.msg
 			});
@@ -1312,7 +1317,8 @@ function login1(nameVal, passwordVal) {
 			});
 			api.openWin({
 				name : 'home',
-				url : '../../html/home.html'
+				url : 'widget://html/home.html',
+				reload : true
 			});
 			api.closeWin({
 				name : 'login_head',
@@ -1354,11 +1360,11 @@ function share(title, description, scene, url) {
 		} else {
 			switch (err.code) {
 				case 0:
-                    guanbi()
+					guanbi()
 					break;
 				case 2:
 					alert('用户取消')
-					 
+
 					break;
 				case 3:
 					alert('发送失败')
