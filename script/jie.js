@@ -319,7 +319,8 @@ function isyouxiao(filegrade, iid, type) {
 	api.getPrefs({
 		key : 'user'
 	}, function(ret, err) {
-		if (ret) {
+		if (ret.value) {
+
 			var username = ret.value
 			api.ajax({
 				url : Api + 'userinfo.html',
@@ -333,14 +334,16 @@ function isyouxiao(filegrade, iid, type) {
 					},
 				}
 			}, function(ret, err) {
+				console.log(JSON.stringify(ret))
+				var gradexu = ret.xu;
+				alert(gradexu)
+				var setgradetime = ret.setgradetime;
 
-				var gradexu = ret.xu
-
-				var setgradetime = ret.setgradetime
 				var time1 = Number(timest()) - Number(setgradetime);
 				var time2 = Math.round(time1 / (60 * 60 * 24));
-				var days = ret.days
-				var time3 = Number(days) - Number(time2)
+
+				var days = ret.days;
+				var time3 = Number(days) - Number(time2);
 
 				api.ajax({
 					url : Api + 'quanji.html',
@@ -1262,11 +1265,11 @@ function reg1(nameVal, passwordVal, type, icon) {
 			api.closeWin({
 				name : 'reg_head',
 			});
-			
+
 		} else if (ret.status == 2) {
 
 			login1(nameVal, passwordVal)
-			 
+
 		} else {
 			alert(ret.msg);
 		}
@@ -1290,7 +1293,7 @@ function login1(nameVal, passwordVal) {
 		}
 	}, function(ret, err) {
 		if (ret.status == 1) {
-		    api.closeFrame({
+			api.closeFrame({
 				name : 'login1'
 			});
 			api.toast({

@@ -158,8 +158,8 @@
 						});
 						$api.text($api.byId('username'), userinfo.username);
 						$api.text($api.byId('grade'), userinfo.fname);
-						if (userinfo.weixin!=0) {
-						  $api.attr($api.byId('img'), 'src', userinfo.icon)
+						if (userinfo.weixin != 0) {
+							$api.attr($api.byId('img'), 'src', userinfo.icon)
 						} else {
 							$api.attr($api.byId('img'), 'src', uploadUrl + userinfo.icon);
 						}
@@ -199,6 +199,12 @@
 					login()
 				};
 			});
+			ios()
+			api.hideProgress();
+			api.refreshHeaderLoadDone();
+		}
+
+		function zhifu() {
 			api.ajax({
 				url : Api + 'grade.html',
 				method : 'post',
@@ -212,8 +218,21 @@
 				var render = H.tppl(H.D("#tppl").innerHTML);
 				H.D(".result").innerHTML = render(data);
 			});
-			api.hideProgress();
-			api.refreshHeaderLoadDone();
+		}
+
+		function ios() {
+			if (api.systemType == 'ios') {
+				api.ajax({
+					url : Api + 'ios.html',
+				}, function(ret, err) {
+					if (ret.status == 0) {
+						zhifu()
+					} else {
+					}
+				});
+			} else {
+				zhifu()
+			}
 		}
 
 		function change() {
