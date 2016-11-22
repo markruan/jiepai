@@ -335,9 +335,9 @@ function isyouxiao(filegrade, iid, type) {
 				}
 			}, function(ret, err) {
 				console.log(JSON.stringify(ret))
-				var gradexu = ret.xu; 
+				var gradexu = ret.xu;
 				var setgradetime = ret.setgradetime;
-                var time1 = Number(timest()) - Number(setgradetime);
+				var time1 = Number(timest()) - Number(setgradetime);
 				var time2 = Math.round(time1 / (60 * 60 * 24));
 
 				var days = ret.days;
@@ -789,9 +789,8 @@ function weireg() {
 	api.getPrefs({
 		key : 'weilogin'
 	}, function(ret, err) {
-
+	 console.log(JSON.stringify(ret))
 		if (ret.value == 1) {
-
 			api.getPrefs({
 				sync : false,
 				key : 'weixinlogin'
@@ -1235,7 +1234,7 @@ function reg1(nameVal, passwordVal, type, icon) {
 		}
 	}, function(ret, err) {
 		console.log(JSON.stringify(ret))
-		console.log(JSON.stringify(ret))
+		 
 		if (ret.status == 0) {
 			api.toast({
 				msg : ret.msg
