@@ -158,7 +158,7 @@
 						});
 						$api.text($api.byId('username'), userinfo.username);
 						$api.text($api.byId('grade'), userinfo.fname);
-						if (userinfo.weixin == 1) {
+						if (userinfo.weixin!=0) {
 						  $api.attr($api.byId('img'), 'src', userinfo.icon)
 						} else {
 							$api.attr($api.byId('img'), 'src', uploadUrl + userinfo.icon);

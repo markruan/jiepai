@@ -50,5 +50,14 @@
   <feature name="ajpush"> 
     <param name="app_key" value="9bd9e0cd6a9c829411f1a61c"/>  
     <param name="channel" value="your channel"/> 
+  </feature>  
+  <feature name="weibo"> 
+    <param name="urlScheme" value="wb555045241"/>  
+    <param name="apiKey" value="555045241"/>  
+    <param name="registUrl" value="http://www.jiepaivip.com/"/> 
+  </feature>  
+  <feature name="qq"> 
+    <param name="urlScheme" value="tencent1105754771"/>  
+    <param name="apiKey" value="1105754771"/> 
   </feature> 
 </widget>

@@ -168,7 +168,7 @@
 							msg : '请绑定手机认证否无法，否则密码丢失后将无法找回'
 						});
 					}
-					if (ret.weixin == 1) {
+					if (ret.weixin!=0) {
 						$api.attr($api.byId('img'), 'src', ret.icon)
 					} else {
 						$api.attr($api.byId('img'), 'src', uploadUrl + ret.icon);
