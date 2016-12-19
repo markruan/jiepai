@@ -155,6 +155,7 @@
 						},
 					}
 				}, function(ret, err) {
+				console.log(JSON.stringify(ret))
 					$api.text($api.byId('nickname'), ret.nickname);
 					$api.text($api.byId('grade'), ret.fname);
 					$api.text($api.byId('phone'), ret.phone);
@@ -164,11 +165,13 @@
 							msg : '请绑定手机认证否无法，否则密码丢失后将无法找回'
 						});
 					}
-					if (ret.weixin!=0) {
+					 $api.attr($api.byId('img'), 'src', uploadUrl + ret.icon);
+					if (ret.weixin!=2) {
 						$api.attr($api.byId('img'), 'src', ret.icon)
 					} else {
 						$api.attr($api.byId('img'), 'src', uploadUrl + ret.icon);
 					}
+					console.log(uploadUrl + ret.icon)
 					api.refreshHeaderLoadDone();
 				});
 			} else {

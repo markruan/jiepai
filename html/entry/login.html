@@ -69,7 +69,7 @@
 			<div class="H-border-vertical-bottom-after H-theme-font-color-white H-margin-horizontal-auto"style="width: 80%">
 				<span  >. </span>
 			</div>
-			<div onclick="weireg() "  class="H-flexbox-horizontal H-text-align-center  H-padding-vertical-both-15">
+			<div onclick="weireg() "  class="H-flexbox-horizontal H-text-align-center  H-padding-vertical-both-15" id="weixin" style="display: none">
 				<div class="H-flex-item">
 					<span class="H-icon H-center-all H-theme-background-color9 H-border-radius-circle H-margin-horizontal-auto H-margin-vertical-top-25" style="height: 70px; width: 70px; "><i class="iconfont icon-weixin   H-theme-font-color-white" style="font-size:45px "></i></span>
 					<label class="H-display-block H-font-size-15 H-margin-vertical-top-5 ">微信登录</label>
@@ -170,6 +170,12 @@
 
 			apiready = function() {
 				loginxindex()
+				var wx = api.require('wx');
+				wx.isInstalled(function(ret, err) {
+					if (ret.installed) {
+						$api.attr($api.byId('weixin'), 'style', ' ');
+					}
+				});
 			}
 		</script>
 	</body>
