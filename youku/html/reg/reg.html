@@ -51,7 +51,7 @@
 				<div class="H-margin-horizontal-both-15 H-padding-vertical-top-25 ">
 					<span tapmode="" onclick="H.openWin('log_head', '../../html/entry/login_head.html');" class="H-theme-font-color1 H-float-left H-font-size-14">账号登录</span><span onclick="findpw()" class="H-theme-font-color1 H-float-right H-font-size-14">忘记密码</span>
 				</div>
-				<div class=" H-margin-vertical-top-10  H-padding-vertical-top-25  H-vertical-align-middle">
+				<div tapmode onclick="regindex()" class=" H-margin-vertical-top-10  H-padding-vertical-top-25  H-vertical-align-middle">
 					<button id="sub" class="H-button H-width-100-percent  H-font-size-15 H-outline-none H-padding-vertical-both-10 H-padding-horizontal-both-20 H-theme-background-color7 H-theme-font-color-white H-theme-border-color7    H-theme-font-color9-click H-border-radius-7">
 						注册提交
 					</button>
@@ -66,7 +66,7 @@
 			<div class="H-border-vertical-bottom-after H-theme-font-color-white H-margin-horizontal-auto"style="width: 80%">
 				<span  >. </span>
 			</div>
-			<div onclick="weireg()"  class="H-flexbox-horizontal H-text-align-center  H-padding-vertical-both-15">
+			<div onclick="weireg()"  id="weixin" class="H-flexbox-horizontal H-text-align-center  H-padding-vertical-both-15" style="display: none">
 				<div class="H-flex-item">
 					<span class="H-icon H-center-all H-theme-background-color9 H-border-radius-circle H-margin-horizontal-auto H-margin-vertical-top-25" style="height: 70px; width: 70px; "><i class="iconfont icon-weixin   H-theme-font-color-white" style="font-size:45px "></i></span>
 					<label class="H-display-block H-font-size-15 H-margin-vertical-top-5 ">微信登录</label>
@@ -102,57 +102,10 @@
 					var nameVal = $api.val($api.byId('username'));
 					var passwordVal = $api.byId('password').value;
 					//					reg(nameVal,passwordVal)
-					
-					var type=2
-					var icon='face.png'
-					reg(nameVal, passwordVal, type, icon)
-					//					api.ajax({
-					//						url : Api + 'reg.html',
-					//						method : 'get',
-					//						timeout : 30,
-					//						dataType : 'json',
-					//						returnAll : false,
-					//						data : {
-					//							values : {
-					//								username : nameVal,
-					//								password : passwordVal,
-					//
-					//							},
-					//						}
-					//					}, function(ret, err) {
-					//						//						api.alert({
-					//						//							msg : JSON.stringify(ret)
-					//						//						});
-					//						if (ret.status == 0) {
-					//							api.toast({
-					//								msg : ret.msg
-					//							});
-					//							$api.setStorage('userinfo', ret.data);
-					//							api.setPrefs({
-					//								key : 'userinfo',
-					//								value : ret.data.xu
-					//							});
-					//							api.setPrefs({
-					//								key : 'user',
-					//								value : nameVal
-					//							});
-					//							api.sendEvent({
-					//								name : 'reg_login_successEvent',
-					//								extra : {
-					//									user : nameVal,
-					//								}
-					//							});
-					//							api.openWin({
-					//								name : 'home',
-					//								url : '../../html/home.html'
-					//							});
-					//							api.closeWin({
-					//								name : 'reg_head',
-					//							});
-					//						} else {
-					//							alert(ret.msg);
-					//						}
-					//					});
+					var type = 2
+					var icon = 'face.png'
+					console.log(nameVal + passwordVal);
+					reg1(nameVal, passwordVal, type, icon)
 				}
 			}
 
@@ -218,68 +171,12 @@
 			}
 
 			apiready = function() {
-				//				$api.byId('login').onclick = function() {
-				//					if ($api.byId('username').value.length == 0) {
-				//						$api.byId('username').focus();
-				//						api.toast({
-				//							msg : '用户名不能为空'
-				//						});
-				//						return;
-				//					} else if ($api.byId('password').value.length == 0) {
-				//						$api.byId('password').focus();
-				//						api.toast({
-				//							msg : '密码不能为空！'
-				//						});
-				//						return;
-				//					} else {
-				//						//						var nameVal = $api.byId('name').value;
-				//						var nameVal = $api.val($api.byId('name'));
-				//						var passwordVal = $api.byId('password').value;
-				//						api.ajax({
-				//							url : Api + 'reg.html',
-				//							method : 'post',
-				//							timeout : 30,
-				//							dataType : 'json',
-				//							returnAll : false,
-				//							data : {
-				//								values : {
-				//									username : nameVal,
-				//									password : passwordVal,
-				//									regdate : regdate
-				//								},
-				//							}
-				//						}, function(ret, err) {
-				//							if (ret.status == 0) {
-				//								api.toast({
-				//									msg : ret.msg
-				//								});
-				//								$api.setStorage('userinfo', ret.data);
-				//								api.setPrefs({
-				//									key : 'userinfo',
-				//									value : ret.data.xu
-				//								});
-				//								api.setPrefs({
-				//									key : 'user',
-				//									value : nameVal
-				//								});
-				//								api.sendEvent({
-				//									name : 'reg_login_successEvent',
-				//									extra : {
-				//										user : nameVal,
-				//									}
-				//								});
-				//								api.openWin({
-				//									name : 'home',
-				//									url : 'home.html'
-				//								});
-				//								api.closeWin({
-				//									name : 'reg',
-				//								});
-				//							} else {
-				//								alert(ret.msg);
-				//							}
-				//						});
-				//					}
+				var wx = api.require('wx');
+				wx.isInstalled(function(ret, err) {
+					if (ret.installed) {
+						$api.attr($api.byId('weixin'), 'style', ' ');
+					}
+				});
 			};
 		</script>
 	</body>

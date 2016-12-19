@@ -65,7 +65,7 @@
 			</div>
 			<% } %>
 		</script>
-		<div class="result "></div>
+		<div class="result " id="zhifu" style="display: none"></div>
 		<hr  >
 		<!--<div onclick="openme()" class="H-text-list H-flexbox-horizontal  H-theme-background-color-white H-border-vertical-bottom-after H-vertical-middle H-touch-active">
 		<span class="H-icon H-display-block H-margin-horizontal-left-10"><i class="H-iconfont H-icon-log H-font-size-22 H-vertical-middle H-theme-font-color-ccc"></i></span>
@@ -136,6 +136,7 @@
 				key : 'user'
 			}, function(ret, err) {
 				var val = ret.value;
+				zhifu()
 				if (val && val != "") {
 					var nameVal = ret.value
 					//					var userinfo = $api.getStorage('userinfo');
@@ -158,7 +159,7 @@
 						});
 						$api.text($api.byId('username'), userinfo.username);
 						$api.text($api.byId('grade'), userinfo.fname);
-						if (userinfo.weixin != 0) {
+						if (userinfo.weixin != 2) {
 							$api.attr($api.byId('img'), 'src', userinfo.icon)
 						} else {
 							$api.attr($api.byId('img'), 'src', uploadUrl + userinfo.icon);
@@ -199,7 +200,12 @@
 					login()
 				};
 			});
-			ios()
+			var wx = api.require('wx');
+			wx.isInstalled(function(ret, err) {
+				if (ret.installed) {
+					$api.attr($api.byId('zhifu'), 'style', ' ');
+				}
+			});
 			api.hideProgress();
 			api.refreshHeaderLoadDone();
 		}
@@ -220,21 +226,20 @@
 			});
 		}
 
-		function ios() {
-			if (api.systemType == 'ios') {
-				api.ajax({
-					url : Api + 'ios.html',
-				}, function(ret, err) {
-					if (ret.status == 0) {
-						zhifu()
-					} else {
-					}
-				});
-			} else {
-				zhifu()
-			}
-		}
-
+		//		function ios() {
+		//			if (api.systemType == 'ios') {
+		//				api.ajax({
+		//					url : Api + 'ios.html',
+		//				}, function(ret, err) {
+		//					if (ret.status == 0) {
+		//						zhifu()
+		//					} else {
+		//					}
+		//				});
+		//			} else {
+		//				zhifu()
+		//			}
+		//		}
 		function change() {
 			alert('注销成功')
 			api.execScript({
