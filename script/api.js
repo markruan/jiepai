@@ -2,6 +2,8 @@
  * APICloud JavaScript Library
  * Copyright (c) 2014 apicloud.com
  */
+
+hosturl='https://app.yuanweiniu.com'
 (function(window){
     var u = {};
     var isAndroid = (/android/gi).test(navigator.appVersion);
