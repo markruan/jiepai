@@ -124,6 +124,12 @@
 				},
 				reload : true
 			});
+			api.sendEvent({
+				name : 'stopvedio',
+				extra : {
+					vurl :url  , 
+				}
+			});
 		}
 
 		apiready = function() {

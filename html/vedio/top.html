@@ -14,6 +14,7 @@
 	<script type="text/javascript" src="../../script/api.js"></script>
 	<script type="text/javascript" src="../../script/jie.js"></script>
 	<script type="text/javascript">
+	var url
 		//		var mp4Url = 'http://7xi3r6.com1.z0.glb.clouddn.com/030008010052561F7E7FF5029E55E9832C5D2B-AEE3-8944-FF4C-9E778580E3E6.mp4';
 		$api.addEvt($api.byId('body'), 'click', function() {
 			api.bringFrameToFront({
@@ -119,13 +120,21 @@
 			});
 		}
 
-		function player() {
+		function player(url) {
 			var videoPlayer = api.require('videoPlayer');
 			var vurl = api.pageParam.name
 			api.setPrefs({
 				key : 'vurl',
 				value : vurl
 			});
+			if(url){
+			vurl=url
+			var videoPlayer = api.require('videoPlayer');
+				videoPlayer.setPath({
+				    path: url,
+				 });
+			
+			}
 			var varr = api.pageParam.varr
 			var vlist = varr.split(',');
 			videoPlayer.open({
@@ -181,6 +190,16 @@
 			var varr = api.pageParam.varr
 			var vlist = varr.split(',');
 			player()
+			api.addEventListener({
+	            name:'stopvedio'
+            },function(ret,err){
+            	if(ret){
+            	var videoPlayer = api.require('videoPlayer');
+		    	videoPlayer.stop();
+		    	 player(ret.value.vurl)
+            	
+            	}
+            });
 		};
 	</script>
 </html>
