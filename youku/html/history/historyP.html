@@ -73,6 +73,8 @@
 					}, function(ret, err) {
 					console.log(ret)
 						var myobj = ret
+						if(JSON.stringify(myobj)){
+						 
 						for (var i = 0; i < myobj.length; i++) {
 							var title = myobj[i].vname;
 							var pic = myobj[i].pp
@@ -104,7 +106,14 @@
 							callback : function(element, op) {
 							}
 						});
+						}else{
+					$api.html(list, '<div class="H-center-all H-margin-vertical-top-25">暂无数据！</div>');
+							api.hideProgress();
+							api.refreshHeaderLoadDone();
+					
+					}
 					});
+					
 				} else {
 					$api.html(list, '<div  onclick="login()" class="H-center-all  H-auto-height  H-font-size-16 " style="color: #bcbcbc;margin-top:50%;"> 请先登录  </div>');
 					api.hideProgress();

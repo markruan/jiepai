@@ -54,18 +54,20 @@
 		function int() {
 			var html = '';
 			var list = $api.byId('list');
-			api.showProgress({
+			
+			api.getPrefs({
+				key : 'user'
+			}, function(ret, err) {
+				var user = ret.value
+			 
+				if (user != '') {
+				api.showProgress({
 				style : 'default',
 				animationType : 'fade',
 				title : '努力加载中...',
 				text : '先喝杯茶...',
 				modal : false
 			});
-			api.getPrefs({
-				key : 'user'
-			}, function(ret, err) {
-				var user = ret.value
-				if (user != '') {
 					api.ajax({
 						url : Api + 'ghistory.html',
 						method : 'post',
@@ -77,6 +79,10 @@
 						}
 					}, function(ret, err) {
 						var myobj = ret
+						 
+						if(JSON.stringify(myobj)){
+						 
+                     
 						for (var i = 0; i < myobj.length; i++) {
 							var title = myobj[i].vname;
 							var ftitle = myobj[i].ftitle
@@ -111,7 +117,14 @@
 							callback : function(element, op) {
 							}
 						});
+						}else{
+						$api.html(list, '<div class="H-center-all H-margin-vertical-top-25">暂无数据！</div>');
+							api.hideProgress();
+							api.refreshHeaderLoadDone();
+					
+					}
 					});
+					
 				} else {
 					$api.html(list, '<div onclick="login()" class="H-center-all  H-auto-height  H-font-size-16  " style="color: #bcbcbc;margin-top:50%;"> 请先登录  </div>');
 					api.hideProgress();
