@@ -554,71 +554,6 @@ function goumai(vid, aa) {
 	});
 }
 
-function changePerson() {
-	var userName = api.getPrefs({
-		sync : true,
-		key : 'user'
-	});
-	api.getPicture({
-		sourceType : 'library',
-		encodingType : 'png',
-		mediaValue : 'pic',
-		destinationType : 'url',
-		allowEdit : true,
-		saveToPhotoAlbum : false
-	}, function(ret, err) {
-		if (ret.data != '') {
-			api.showProgress({
-				title : ' 上传中...',
-				text : '先喝杯茶...',
-				modal : false
-			}), api.ajax({
-				timeout : 300,
-				method : 'post',
-				url : Api + 'changIcon.html',
-				data : {
-					files : {
-						upfile : ret.data
-					},
-					values : {
-						username : userName
-					},
-				},
-				dataType : 'text',
-			}, function(ret, err) {
-
-				if (ret != 1) {
-					var url = uploadUrl + ret;
-					$api.attr($api.byId('img'), 'src', url);
-					api.toast({
-						msg : '更新成功'
-					});
-					api.sendEvent({
-						name : 'payok',
-
-					})
-					api.hideProgress();
-					var jsfun = 'int()';
-					api.execScript({
-						name : 'root',
-						frameName : 'me',
-						script : jsfun
-					});
-				} else {
-					alert('图片尺寸太大请重新上传')
-					api.hideProgress();
-
-				}
-			});
-		} else {
-
-			return api.alert({
-				msg : err.msg
-			});
-		} ;
-	});
-}
-
 function imageCache(url) {//图片缓存方法
 	var path = url;
 	api.imageCache({
@@ -789,7 +724,7 @@ function weireg() {
 	api.getPrefs({
 		key : 'weilogin'
 	}, function(ret, err) {
-	 console.log(JSON.stringify(ret))
+		console.log(JSON.stringify(ret))
 		if (ret.value == 1) {
 			api.getPrefs({
 				sync : false,
@@ -1234,7 +1169,7 @@ function reg1(nameVal, passwordVal, type, icon) {
 		}
 	}, function(ret, err) {
 		console.log(JSON.stringify(ret))
-		 
+
 		if (ret.status == 0) {
 			api.toast({
 				msg : ret.msg
@@ -1264,8 +1199,12 @@ function reg1(nameVal, passwordVal, type, icon) {
 			});
 
 		} else if (ret.status == 2) {
-
+ 
 			login1(nameVal, passwordVal)
+		 	api.sendEvent({
+				name : 'login_s',
+				 
+			});
 
 		} else {
 			alert(ret.msg);
@@ -1381,4 +1320,97 @@ function share(title, description, scene, url) {
 		}
 	});
 
+}
+
+function chaoshi(time) {
+	setTimeout(api.hideProgress, time)
+
+	setTimeout(api.refreshHeaderLoadDone, time)
+
+	setTimeout(function() {
+		api.toast({
+			msg : '加载超时或暂无数据'
+		});
+
+	}, time)
+
+}
+
+//模板函数
+
+function moban(myobj, id) {
+	var list = $api.byId(id);
+	var html = '';
+	for (var i = 0; i < myobj.length; i++) {
+		var title = myobj[i].vname;
+		var pic = myobj[i].pp
+		var pnum = myobj[i].pnum
+		var pid = myobj[i].p_id
+		var title = myobj[i].pname
+		var fname = myobj[i].fname;
+		var xu = myobj[i].xu
+		var freenum = myobj[i].freenum
+		var ftitle = myobj[i].ftitle
+		var vurll = myobj[i].purl
+		var img = pic.split(' ');
+		var zhang = img.length
+		var vurl = imageCache(vurll)
+		html += '<div onclick="openImg(\'' + pic + '\',' + pid + ',' + freenum + ',' + xu + ',\'' + fname + '\',\'' + pnum + '\')" class="H-display-table-cell H-theme-background-color-white H-float-left  H-box-sizing-border-box H-width-avg-3 H-padding-horizontal-right-4     "  >';
+		html += '<img  src="../../image/default.jpg"  data-echo="' + vurl + '" class=" H-float-right H-margin-vertical-top-8 H-margin-horizontal-both-2 H-display-block" alt="" title="" style="width: 96%" ;height:200>';
+		html += '<img src="../../image/xia.png " class=" H-float-right  H-margin-vertical-top-8 H-margin-horizontal-both-2 H-display-block" style="margin-top: -200px; height: 200px ; width: 96%" alt="" title="">';
+		html += '<div  class=" H-font-size-12" style=" margin-right:8px; margin-top:-30px;line-height: 30px; float: right; color:white ;">' + pnum + '<span>张</span></div>';
+		html += '<div class=" H-padding-horizontal-left-5 H-font-size-10 H-padding-vertical-top-10 H-theme-font-color-hhh    " style="line-height: 35px">' + ftitle.substr(0, 10) + '</div>';
+		html += '</div>';
+	}
+	$api.html(list, html);
+	api.hideProgress();
+	api.refreshHeaderLoadDone();
+	echo.init({
+		offset : 0,
+		throttle : 150,
+		unload : false,
+		callback : function(element, op) {
+		}
+	});
+
+}
+
+function mobanv(myobj,id){
+	var list = $api.byId(id);
+	var html = '';
+	for (var i = 0; i < myobj.length; i++) {
+					var title = myobj[i].vname;
+					var ftitle = myobj[i].ftitle
+					var vid = myobj[i].vid;
+					var xu = myobj[i].xu;
+					var fname = myobj[i].fname;
+					var vprice = myobj[i].vprice;
+					var vbianhao = myobj[i].vbianhao;
+					var pic = myobj[i].vpic;
+					var img = pic.split(' ');
+					var picc = myobj[i].purl;
+					var varr = eval(myobj[i].vurl)
+					var vurl = eval(myobj[i].vurl)[0]
+					var vvprice = eval(myobj[i].vvprice)
+					var totaltime = eval(myobj[i].vtime)[0]
+					var piccc=imageCache(picc)
+				 
+						html += '<div onclick="openV(\'' + vurl + '\' ,\'' + vid + '\',\'' + varr + '\',\'' + title + '\',\'' + vbianhao + '\',\'' + pic + '\' ,\'' + vprice + '\',' + xu + ',\'' + fname + '\',\'' + vprice + '\')" class="H-display-table-cell H-theme-background-color-white H-float-left  H-box-sizing-border-box H-width-avg-3 H-padding-horizontal-right-4 H-margin-vertical-bottom-10   " style="margin-bottom: 10px; ">';
+						html += '<img src="../../image/default.jpg"    data-echo="' + piccc + '" class=" H-float-right H-margin-vertical-top-8 H-margin-horizontal-both-2 H-display-block" alt="" title="" style="width: 96%" ;height:200>';
+						html += '<img src="../../image/xia.png " class=" H-float-right  H-margin-vertical-top-8 H-margin-horizontal-both-2 H-display-block" style="margin-top: -200px; height: 200px ; width: 96%" alt="" title="">';
+						html += '<div  class="H-font-size-12 " style=" margin-right:8px; margin-top:-30px;line-height: 30px; float: right; color:white ;">' + totaltime + '</div>';
+						html += '<div class="H-padding-horizontal-left-5 H-font-size-10 H-padding-vertical-top-10    " style="line-height: 35px">' + ftitle.substr(0, 10) + '</div>';
+						html += ' </div>';
+				 
+				}
+				$api.html(list, html);
+				api.hideProgress();
+				api.refreshHeaderLoadDone();
+				echo.init({
+					offset : 0,
+					throttle : 150,
+					unload : false,
+					callback : function(element, op) {
+					}
+				});
 }

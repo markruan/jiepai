@@ -7,7 +7,6 @@
 		<link rel="stylesheet" type="text/css" href="../../css/Hui.css"/>
 		<link rel="stylesheet" type="text/css" href="http://at.alicdn.com/t/font_1473395025_3148139.css"/>
 		<style>
-			 
 			.H-theme-font-color-hui {
 				color: #9E9E9E;
 			}
@@ -22,11 +21,10 @@
 		</style>
 	</head>
 	<body id="body" class="H-z-index-1000 ">
-		 
 		<div class="H-channel-title H-flexbox-horizontal H-theme-background-color-white H-vertical-middle  ">
 			<div class="H-channel-line H-theme-background-color-zhuti H-padding-vertical-top-15 H-padding-horizontal-left-3  H-margin-horizontal-left-4"></div>
 			<div class="  H-channel-text H-theme-font-color-black H-flex-item H-font-size-14 H-theme-font-color-black H-padding-10 H-margin-horizontal-right-10 H-text-show-row-1">
-				视频  
+				视频
 			</div>
 			<span tapmode=""  data-open="false" class="H-icon H-position-relative H-display-block H-float-right H-vertical-middle H-theme-font-color-black H-padding-horizontal-both-10 H-z-index-1000 H-theme-font-color-hui  H-font-size-14 ">范冰冰 &nbsp<div style="height:14px; width:1px; border-left:1px #9E9E9E solid"></div>&nbsp 张馨予</span>
 		</div>
@@ -34,7 +32,7 @@
 		<div class="H-channel-title H-flexbox-horizontal H-theme-background-color-white H-vertical-middle H-border-vertical-bottom-after">
 			<div class="H-channel-line H-theme-background-color-zhuti H-padding-vertical-top-15 H-padding-horizontal-left-3  H-margin-horizontal-left-4"></div>
 			<div class="H-channel-text H-theme-font-color-black H-flex-item H-font-size-14 H-theme-font-color-black H-padding-10 H-margin-horizontal-right-10 H-text-show-row-1">
-				图片  
+				图片
 			</div>
 			<span tapmode=""  data-open="false" class="H-icon H-position-relative H-display-block H-float-right H-vertical-middle H-theme-font-color-black H-padding-horizontal-both-10 H-z-index-1000 H-theme-font-color-hui  H-font-size-14 ">范冰冰 &nbsp<div style="height:14px; width:1px; border-left:1px #9E9E9E solid"></div>&nbsp 张馨予</span>
 		</div>
@@ -45,10 +43,10 @@
 	<script type="text/javascript" src="../../script/echo.min.js"></script>
 	<script type="text/javascript">
 		function openV(url, vid, varr, title, vbianhao, img, vprice, xu, fname, vvprice) {
-		
 			api.openWin({
 				name : 'veido',
 				url : '../../html/vedio/index.html',
+				delay : 400,
 				pageParam : {
 					name : url,
 					varr : varr,
@@ -66,8 +64,7 @@
 			});
 		}
 
-		function openImg(arr, pid, freenum, xu, fname,pnum) {
-		 
+		function openImg(arr, pid, freenum, xu, fname, pnum) {
 			api.openWin({
 				name : 'img1',
 				url : '../../html/img/index.html',
@@ -78,7 +75,7 @@
 					freenum : freenum,
 					xu : xu,
 					fname : fname,
-					pnum:pnum,
+					pnum : pnum,
 					type : '图片'
 				}
 			});
@@ -96,44 +93,7 @@
 				url : Api + 'indexvout.html',
 				method : 'post',
 			}, function(ret, err) {
-				var html = '';
-				var list = $api.byId('list');
-				var myobj = ret
-				for (var i = 0; i < myobj.length; i++) {
-					var title = myobj[i].vname;
-					var ftitle = myobj[i].ftitle
-					var vid = myobj[i].vid;
-					var xu = myobj[i].xu;
-					var fname = myobj[i].fname;
-					var vprice = myobj[i].vprice;
-					var vbianhao = myobj[i].vbianhao;
-					var pic = myobj[i].vpic;
-					var img = pic.split(' ');
-					var picc = myobj[i].purl;
-					var varr = eval(myobj[i].vurl)
-					var vurl = eval(myobj[i].vurl)[0]
-					var vvprice = eval(myobj[i].vvprice)
-					var totaltime = eval(myobj[i].vtime)[0]
-					var piccc=imageCache(picc)
-				 
-						html += '<div onclick="openV(\'' + vurl + '\' ,\'' + vid + '\',\'' + varr + '\',\'' + title + '\',\'' + vbianhao + '\',\'' + pic + '\' ,\'' + vprice + '\',' + xu + ',\'' + fname + '\',\'' + vprice + '\')" class="H-display-table-cell H-theme-background-color-white H-float-left  H-box-sizing-border-box H-width-avg-3 H-padding-horizontal-right-4 H-margin-vertical-bottom-10   " style="margin-bottom: 10px; ">';
-						html += '<img src="../../image/default.jpg"    data-echo="' + piccc + '" class=" H-float-right H-margin-vertical-top-8 H-margin-horizontal-both-2 H-display-block" alt="" title="" style="width: 96%" ;height:200>';
-						html += '<img src="../../image/xia.png " class=" H-float-right  H-margin-vertical-top-8 H-margin-horizontal-both-2 H-display-block" style="margin-top: -200px; height: 200px ; width: 96%" alt="" title="">';
-						html += '<div  class="H-font-size-12 " style=" margin-right:8px; margin-top:-30px;line-height: 30px; float: right; color:white ;">' + totaltime + '</div>';
-						html += '<div class="H-padding-horizontal-left-5 H-font-size-12 H-padding-vertical-top-10    " style="line-height: 35px">' + ftitle.substr(0, 7) + '</div>';
-						html += ' </div>';
-				 
-				}
-				$api.html(list, html);
-				api.hideProgress();
-				api.refreshHeaderLoadDone();
-				echo.init({
-					offset : 0,
-					throttle : 150,
-					unload : false,
-					callback : function(element, op) {
-					}
-				});
+				mobanv(ret, 'list')
 			});
 		}
 
@@ -149,42 +109,43 @@
 				url : Api + 'indexoutimg.html',
 				method : 'post',
 			}, function(ret, err) {
-				var html = '';
-				var list = $api.byId('imglist');
-				var myobj = ret
-				for (var i = 0; i < myobj.length; i++) {
-					var title = myobj[i].vname;
-					var pic = myobj[i].pp
-					var pnum = myobj[i].pnum
-					var pid = myobj[i].p_id
-					var title = myobj[i].pname
-					var fname = myobj[i].fname;
-					var xu = myobj[i].xu
-					var freenum = myobj[i].freenum
-					var ftitle = myobj[i].ftitle
-					var vurll = myobj[i].purl
-					var img = pic.split(' ');
-					var zhang = img.length
-					 
-					var vurl= imageCache(vurll)
-					html += '<div onclick="openImg(\'' + pic + '\',' + pid + ',' + freenum + ',' + xu + ',\'' + fname + '\',\'' + pnum + '\')" class="H-display-table-cell H-theme-background-color-white H-float-left  H-box-sizing-border-box H-width-avg-3 H-padding-horizontal-right-4 H-margin-vertical-bottom-10   " style="margin-bottom: 10px; ">';
-					html += '<img  src="../../image/default.jpg"  data-echo="' + vurl + '" class=" H-float-right H-margin-vertical-top-8 H-margin-horizontal-both-2 H-display-block" alt="" title="" style="width: 96%" ;height:200>';
-					html += '<img src="../../image/xia.png " class=" H-float-right  H-margin-vertical-top-8 H-margin-horizontal-both-2 H-display-block" style="margin-top: -200px; height: 200px ; width: 96%" alt="" title="">';
-					html += '<div  class="H-font-size-12 " style=" margin-right:8px; margin-top:-30px;line-height: 30px; float: right; color:white ;">' + pnum + '<span>张</span></div>';
-					html += '<div class="H-padding-horizontal-left-5 H-font-size-12 H-padding-vertical-top-10    " style="line-height: 35px">' + ftitle.substr(0, 7) + '</div>';
-					html += '</div>';
-				}
-				$api.html(list, html);
-				api.hideProgress();
-				api.refreshHeaderLoadDone();
-				//				setTimeout($api.removeCls($api.byId('body'), 'H-display-none'), 400)
-				echo.init({
-					offset : 0,
-					throttle : 150,
-					unload : false,
-					callback : function(element, op) {
-					}
-				});
+				moban(ret, 'imglist')
+				//				var html = '';
+				//				var list = $api.byId('imglist');
+				//				var myobj = ret
+				//				for (var i = 0; i < myobj.length; i++) {
+				//					var title = myobj[i].vname;
+				//					var pic = myobj[i].pp
+				//					var pnum = myobj[i].pnum
+				//					var pid = myobj[i].p_id
+				//					var title = myobj[i].pname
+				//					var fname = myobj[i].fname;
+				//					var xu = myobj[i].xu
+				//					var freenum = myobj[i].freenum
+				//					var ftitle = myobj[i].ftitle
+				//					var vurll = myobj[i].purl
+				//					var img = pic.split(' ');
+				//					var zhang = img.length
+				//
+				//					var vurl= imageCache(vurll)
+				//					html += '<div onclick="openImg(\'' + pic + '\',' + pid + ',' + freenum + ',' + xu + ',\'' + fname + '\',\'' + pnum + '\')" class="H-display-table-cell H-theme-background-color-white H-float-left  H-box-sizing-border-box H-width-avg-3 H-padding-horizontal-right-4 H-margin-vertical-bottom-10   " style="margin-bottom: 10px; ">';
+				//					html += '<img  src="../../image/default.jpg"  data-echo="' + vurl + '" class=" H-float-right H-margin-vertical-top-8 H-margin-horizontal-both-2 H-display-block" alt="" title="" style="width: 96%" ;height:200>';
+				//					html += '<img src="../../image/xia.png " class=" H-float-right  H-margin-vertical-top-8 H-margin-horizontal-both-2 H-display-block" style="margin-top: -200px; height: 200px ; width: 96%" alt="" title="">';
+				//					html += '<div  class="H-font-size-12 " style=" margin-right:8px; margin-top:-30px;line-height: 30px; float: right; color:white ;">' + pnum + '<span>张</span></div>';
+				//					html += '<div class="H-padding-horizontal-left-5 H-font-size-12 H-padding-vertical-top-10    " style="line-height: 35px">' + ftitle.substr(0, 9) + '</div>';
+				//					html += '</div>';
+				//				}
+				//				$api.html(list, html);
+				//				api.hideProgress();
+				//				api.refreshHeaderLoadDone();
+				//				//				setTimeout($api.removeCls($api.byId('body'), 'H-display-none'), 400)
+				//				echo.init({
+				//					offset : 0,
+				//					throttle : 150,
+				//					unload : false,
+				//					callback : function(element, op) {
+				//					}
+				//				});
 			});
 		}
 

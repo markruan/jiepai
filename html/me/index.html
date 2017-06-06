@@ -44,7 +44,7 @@
 			</div>
 		</div>
 		</div>
-		<div class="H-text-list H-flexbox-horizontal  H-theme-background-color-white H-border-vertical-bottom-after H-vertical-middle H-touch-active "style="height: 40px;background-color: #e9ebee;" >
+		<div id="huiyuanfuwu" class="H-text-list H-flexbox-horizontal  H-theme-background-color-white H-border-vertical-bottom-after H-vertical-middle H-touch-active "style="height: 40px;background-color: #e9ebee;display: none" >
 			<div class="H-flex-item H-padding-horizontal-both-10 H-theme-font-color-hhh  H-font-size-15 H-padding-vertical-both-12  ">
 				会员服务
 			</div>
@@ -159,10 +159,11 @@
 						});
 						$api.text($api.byId('username'), userinfo.username);
 						$api.text($api.byId('grade'), userinfo.fname);
-						if (userinfo.weixin != 2) {
-							$api.attr($api.byId('img'), 'src', userinfo.icon)
+						if (ret.icon.substr(0, 7) == "http://") {
+							$api.attr($api.byId('img'), 'src', ret.icon)
+							//这部分是以http://为开头的处理
 						} else {
-							$api.attr($api.byId('img'), 'src', uploadUrl + userinfo.icon);
+							$api.attr($api.byId('img'), 'src', uploadUrl + ret.icon);
 						}
 						$api.removeCls($api.byId('body'), 'H-display-none');
 						var setgradetime = userinfo.setgradetime;
@@ -201,9 +202,17 @@
 				};
 			});
 			var wx = api.require('wx');
-			wx.isInstalled(function(ret, err) {
-				if (ret.installed) {
+			//			wx.isInstalled(function(ret, err) {
+			//				if (ret.installed) {
+			//					$api.attr($api.byId('zhifu'), 'style', ' ');
+			//				}
+			//			});
+			api.getPrefs({
+				key : 'user'
+			}, function(ret, err) {
+				if (ret.value && ret.value != '0571') {
 					$api.attr($api.byId('zhifu'), 'style', ' ');
+					$api.attr($api.byId('zhutifuwu'), 'style', 'height: 40px;background-color: #e9ebee; ');
 				}
 			});
 			api.hideProgress();
@@ -255,6 +264,21 @@
 			}, function(ret, err) {
 				int()
 			});
+			api.addEventListener({
+				name : 'reg_login_successEvent'
+			}, function(ret, err) {
+				int()
+			});
+			api.addEventListener({
+	            name:'login_s'
+            },function(ret,err){
+            	int()
+            });
+			api.addEventListener({
+				name : 'logout'
+			}, function(ret, err) {
+				int()
+			});
 		}
 	</script>
-</html>
+</html> 

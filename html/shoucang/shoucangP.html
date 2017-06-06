@@ -29,7 +29,7 @@
 	<script type="text/javascript" src="../../script/jie.js"></script>
 	<script type="text/javascript" src="../../script/echo.min.js"></script>
 	<script type="text/javascript">
-		function openImg(arr, pid, freenum, xu, fname,pnum) {
+		function openImg(arr, pid, freenum, xu, fname, pnum) {
 			api.openWin({
 				name : 'img1',
 				url : '../../html/img/index.html',
@@ -41,14 +41,13 @@
 					xu : xu,
 					fname : fname,
 					shoucang : 0,
-					pnum:pnum
+					pnum : pnum
 				}
 			});
 		}
 
 		function intimg() {
-			var html = '';
-			var list = $api.byId('imglist');
+			var list=$api.byId('imglist');
 			api.showProgress({
 				style : 'default',
 				animationType : 'fade',
@@ -56,6 +55,7 @@
 				text : '先喝杯茶...',
 				modal : false
 			});
+			setTimeout(api.hideProgress, 2000)
 			api.getPrefs({
 				key : 'user'
 			}, function(ret, err) {
@@ -71,39 +71,10 @@
 						}
 					}, function(ret, err) {
 						var myobj = ret
-						 
+						console.log(JSON.stringify(myobj))
+						console.log(JSON.stringify(user))
 						if (JSON.stringify(myobj)) {
-							for (var i = 0; i < myobj.length; i++) {
-								var title = myobj[i].vname;
-								var pic = myobj[i].pp
-								var pnum = myobj[i].pnum
-								var pid = myobj[i].p_id
-								var title = myobj[i].pname
-								var fname = myobj[i].fname;
-								var xu = myobj[i].xu
-								var freenum = myobj[i].freenum
-								var ftitle = myobj[i].ftitle
-								var vurll = myobj[i].purl
-								var img = pic.split(' ');
-								var zhang = img.length
-								var vurl = imageCache(vurll)
-								html += '<div onclick="openImg(\'' + pic + '\',' + pid + ',' + freenum + ',' + xu + ',\'' + fname + '\',\'' + pnum + '\')" class="H-display-table-cell H-theme-background-color-white H-float-left  H-box-sizing-border-box H-width-avg-3 H-padding-horizontal-right-4     "  >';
-								html += '<img  src="../../image/default.jpg"  data-echo="' + vurl + '" class=" H-float-right H-margin-vertical-top-8 H-margin-horizontal-both-2 H-display-block" alt="" title="" style="width: 96%" ;height:200>';
-								html += '<img src="../../image/xia.png " class=" H-float-right  H-margin-vertical-top-8 H-margin-horizontal-both-2 H-display-block" style="margin-top: -200px; height: 200px ; width: 96%" alt="" title="">';
-								html += '<div  class=" H-font-size-12" style=" margin-right:8px; margin-top:-30px;line-height: 30px; float: right; color:white ;">' + pnum + '<span>张</span></div>';
-								html += '<div class=" H-padding-horizontal-left-5 H-font-size-12 H-padding-vertical-top-10 H-theme-font-color-hhh    " style="line-height: 35px">' + ftitle.substr(0, 7) + '</div>';
-								html += '</div>';
-							}
-							$api.html(list, html);
-							api.hideProgress();
-							api.refreshHeaderLoadDone();
-							echo.init({
-								offset : 0,
-								throttle : 150,
-								unload : false,
-								callback : function(element, op) {
-								}
-							});
+							moban(myobj, 'imglist')
 						} else {
 							$api.html(list, '<div class="H-center-all H-margin-vertical-top-25"> 赶紧去收藏精彩内容吧！</div>');
 							api.hideProgress();
@@ -111,6 +82,7 @@
 						}
 					});
 				} else {
+			
 					$api.html(list, '<div  onclick="login()" class="H-center-all  H-auto-height  H-font-size-16 " style="color: #bcbcbc;margin-top:50%;"> 请先登录  </div>');
 					api.hideProgress();
 					api.refreshHeaderLoadDone();

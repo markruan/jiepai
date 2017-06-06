@@ -108,6 +108,7 @@
 									 var icon=ret.info.figureurl_qq_2;
 									 var nickname=ret.info.nickname
 									 reg1(nickname, openId, 3, icon)
+									 
 								} else {
 									api.alert({
 										msg : err.msg
@@ -135,6 +136,12 @@
 		}
 
 		apiready = function() {
+		
+		  api.addEventListener({
+	          name:'reg_login_successEvent'
+          },function(ret,err){
+          	api.hideProgress();
+          });
 		};
 	</script>
 </html>

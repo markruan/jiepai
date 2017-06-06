@@ -14,7 +14,7 @@
 	<script type="text/javascript" src="../../script/api.js"></script>
 	<script type="text/javascript" src="../../script/jie.js"></script>
 	<script type="text/javascript">
-	var url
+		var url
 		//		var mp4Url = 'http://7xi3r6.com1.z0.glb.clouddn.com/030008010052561F7E7FF5029E55E9832C5D2B-AEE3-8944-FF4C-9E778580E3E6.mp4';
 		$api.addEvt($api.byId('body'), 'click', function() {
 			api.bringFrameToFront({
@@ -55,8 +55,24 @@
 						script : jsfun11
 					});
 				} else {
-//					alert(JSON.stringify(err));
+					//					alert(JSON.stringify(err));
 				}
+			});
+		}
+
+		function full2() {
+			var videoPlayer = api.require('videoPlayer');
+			api.bringFrameToFront({
+				from : 'top'
+			});
+			videoPlayer.setRect({
+				rect : {
+					x : 0,
+					y : 0,
+					w : 'auto',
+					h : 'auto'
+				},
+				fullscreen : true
 			});
 		}
 
@@ -99,13 +115,14 @@
 					}
 				},
 				path : url,
+//				autorotation : false,
 				//在 android 平台上不支持 widget://
 				autoPlay : true, //（可选项）布尔类型；打开时是否自动播放；默认：true（自动播放）,
 			}, function(ret, err) {
 				if (ret) {
-					//					      alert(JSON.stringify(ret));
+					//					alert(JSON.stringify(ret));
 				} else {
-//					alert(JSON.stringify(err));
+					//					alert(JSON.stringify(err));
 				}
 			});
 			//		/
@@ -127,13 +144,12 @@
 				key : 'vurl',
 				value : vurl
 			});
-			if(url){
-			vurl=url
-			var videoPlayer = api.require('videoPlayer');
+			if (url) {
+				vurl = url
+				var videoPlayer = api.require('videoPlayer');
 				videoPlayer.setPath({
-				    path: url,
-				 });
-			
+					path : url,
+				});
 			}
 			var varr = api.pageParam.varr
 			var vlist = varr.split(',');
@@ -146,11 +162,10 @@
 					w : api.frameWidth,
 					h : 200
 				},
-				fixedOn : 'top'
+				fixedOn : api.frameName
 			}, function(ret, err) {
 				if (ret.status) {
 					var pro = ret.duration
-				 
 					api.sendEvent({
 						name : 'duration',
 						extra : {
@@ -158,11 +173,11 @@
 						}
 					});
 					if (ret.eventType = 'playing') {
-//						setTimeout('sendback()', 20000)
+						//						setTimeout('sendback()', 20000)
 					}
 					//					alert(JSON.stringify(ret));
 				} else {
-//					alert(JSON.stringify(err));
+					//					alert(JSON.stringify(err));
 				}
 			});
 			videoPlayer.addEventListener({
@@ -176,9 +191,8 @@
 							key1 : current,
 						}
 					});
-				 
 				} else {
-//					alert(JSON.stringify(err));
+					//					alert(JSON.stringify(err));
 				}
 			});
 			//			setTimeout('sendback()', 20000)
@@ -191,15 +205,14 @@
 			var vlist = varr.split(',');
 			player()
 			api.addEventListener({
-	            name:'stopvedio'
-            },function(ret,err){
-            	if(ret){
-            	var videoPlayer = api.require('videoPlayer');
-		    	videoPlayer.stop();
-		    	 player(ret.value.vurl)
-            	
-            	}
-            });
+				name : 'stopvedio'
+			}, function(ret, err) {
+				if (ret) {
+					var videoPlayer = api.require('videoPlayer');
+					videoPlayer.stop();
+					player(ret.value.vurl)
+				}
+			});
 		};
 	</script>
 </html>

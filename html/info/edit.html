@@ -99,7 +99,9 @@
 		}
 
 		function logout() {
-			 
+			api.sendEvent({
+				name : 'logout'
+			});
 			api.removePrefs({
 				key : 'weilogin'
 			});
@@ -155,7 +157,7 @@
 						},
 					}
 				}, function(ret, err) {
-				console.log(JSON.stringify(ret))
+					console.log(JSON.stringify(ret))
 					$api.text($api.byId('nickname'), ret.nickname);
 					$api.text($api.byId('grade'), ret.fname);
 					$api.text($api.byId('phone'), ret.phone);
@@ -165,9 +167,9 @@
 							msg : '请绑定手机认证否无法，否则密码丢失后将无法找回'
 						});
 					}
-					 $api.attr($api.byId('img'), 'src', uploadUrl + ret.icon);
-					if (ret.weixin!=2) {
+					if (ret.icon.substr(0, 7) == "http://") {
 						$api.attr($api.byId('img'), 'src', ret.icon)
+						//这部分是以http://为开头的处理
 					} else {
 						$api.attr($api.byId('img'), 'src', uploadUrl + ret.icon);
 					}
@@ -178,7 +180,58 @@
 			}
 		}
 
+		function openImageClipFrame(img_src) {
+			api.openFrame({
+				name : 'tu',
+				scrollToTop : true,
+				allowEdit : true,
+				url : 'tu.html',
+				rect : {
+					x : 0,
+					y : 0,
+					w : api.winWidth,
+					h : api.winHeight,
+				},
+				animation : {
+					type : "reveal", //动画类型（详见动画类型常量）
+					subType : "from_right", //动画子类型（详见动画子类型常量）
+					duration : 300
+				},
+				pageParam : {
+					img_src : img_src
+				},
+				vScrollBarEnabled : false,
+				hScrollBarEnabled : false,
+				//页面是否弹动 为了下拉刷新使用
+				bounces : false
+			});
+		}
+
+		function changePerson() {
+			api.getPicture({
+				sourceType : 'library',
+				encodingType : 'png',
+				mediaValue : 'pic',
+				destinationType : 'url',
+				allowEdit : true,
+				saveToPhotoAlbum : false,
+				quality : 35
+			}, function(ret, err) {
+				if (ret.data != '') {
+					openImageClipFrame(ret.data)
+				} else {
+					return api.alert({
+						msg : err.msg
+					});
+				} ;
+			});
+		}
+
 		apiready = function() {
+			var userName = api.getPrefs({
+				sync : true,
+				key : 'user'
+			});
 			api.setRefreshHeaderInfo({
 				visible : true,
 				bgColor : '#f2f2f2',
@@ -190,6 +243,54 @@
 				intt()
 			});
 			intt()
+			 
+			api.addEventListener({
+				name : 'iconupdata'
+			}, function(ret, err) {
+				if (ret) {
+					var img_url = ret.value.img_path
+					api.showProgress({
+						title : ' 上传中...',
+						text : '先喝杯茶...',
+						modal : false
+					}), api.ajax({
+						timeout : 300,
+						method : 'post',
+						url : Api + 'changIcon.html',
+						data : {
+							files : {
+								upfile : img_url
+							},
+							values : {
+								username : userName
+							},
+						},
+						dataType : 'text',
+					}, function(ret, err) {
+						if (ret != 1) {
+							var url = uploadUrl + ret;
+							$api.attr($api.byId('img'), 'src', url);
+							api.toast({
+								msg : '更新成功'
+							});
+							api.sendEvent({
+								name : 'payok',
+							})
+							api.hideProgress();
+							var jsfun = 'int()';
+							api.execScript({
+								name : 'root',
+								frameName : 'me',
+								script : jsfun
+							});
+						} else {
+							alert('图片尺寸太大请重新上传')
+							api.hideProgress();
+						}
+					});
+				}
+				//coding...
+			});
 		};
 	</script>
 </html>

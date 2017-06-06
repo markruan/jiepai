@@ -17,16 +17,14 @@
 				bottom: 0px;
 				width: 100%;
 			}
-			.H-font-size-22{
-			font-size:27px;
+			.H-font-size-22 {
+				font-size: 27px;
 			}
 		</style>
 	</head>
 	<body>
-	
 		<div id="share" class="single-menu bottom_footer H-display-none-important  H-background-color-red H-flexbox-vertical animated bounceIn  H-position-absolute H-vertical-top-0 H-horizontal-left-0 H-horizontal-right-0 H-vertical-bottom-0 H-height-100-percent H-width-100-percent H-z-index-1000000">
-			<div class="space H-flex-item">
-			</div>
+			<div class="space H-flex-item"></div>
 			<div class="share-menu">
 				<div class="H-flexbox-horizontal H-text-align-center H-theme-background-color-white H-padding-vertical-both-10">
 					<div class="H-flex-item">
@@ -46,7 +44,6 @@
 						<label class="H-display-block H-font-size-13 H-margin-vertical-top-5">关闭</label>
 					</div>
 				</div>
-				 
 			</div>
 		</div>
 		<div class="bottom_footer "style=" background-color: rgba(0, 0, 0, 0.45)" >
@@ -130,7 +127,9 @@
 						}
 					}, function(ret, err) {
 						if (ret == 0) {
-							alert('收藏成功')
+							api.toast({
+								msg : '收藏成功'
+							});
 						} else {
 							alert('已经收藏过了')
 						}
